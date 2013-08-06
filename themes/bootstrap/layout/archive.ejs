@@ -1,0 +1,14 @@
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+        <div class="span9">
+            <% page.posts.each(function(item){ %>
+            <%- partial('_component/common/list', {item: item, index: true}) %>
+            <% }); %>
+            <!-- 分页 -->
+			<%- partial('_component/bootstrap/pagination') %>
+        </div>
+        <div class="span3 hidden-phone">
+        </div>
+    </div>
+
+</div>

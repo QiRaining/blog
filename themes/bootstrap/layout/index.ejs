@@ -1,0 +1,20 @@
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+       <div class="span3">
+            <%- partial('_component/plugins/introduce') %>
+            <%- partial('_component/plugins/recent_posts') %>
+            <%- partial('_component/plugins/category') %>
+            <%- partial('_component/plugins/sns/weibo') %>
+        </div>
+        <div class="span9 panel">
+            <% page.posts.each(function(item){ %>
+            <%- partial('_component/common/list', {item: item, index: true}) %>
+            <% }); %>
+            <!-- 分页 -->
+            <%- partial('_component/bootstrap/pagination') %>
+        </div>
+    </div>
+
+</div>
+
+

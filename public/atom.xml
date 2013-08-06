@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[阿峰的技术窝窝]]></title>
+  <subtitle><![CDATA[专注于移动互联网]]></subtitle>
+  <link href="http://hufeng825.github.io/atom.xml" rel="self"/>
+  <link href="http://hufeng825.github.io"/>
+  <updated>2013-08-06T09:53:03.292Z</updated>
+  <id>http://hufeng825.github.io/</id>
+  <author>
+    <name><![CDATA[Jason Hu]]></name>
+    <email><![CDATA[hufeng@hufengvip.cn]]></email>
+  </author>
+  <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[测试]]></title>
+    <link href="http://hufeng825.github.io/2013/08/04/测试/"/>
+    <id>http://hufeng825.github.io/2013/08/04/测试/</id>
+    <published>2013-08-04T14:56:27.000Z</published>
+    <updated>2013-08-06T08:52:39.000Z</updated>
+    <content type="html"><![CDATA[<h3>Hello Word 1</h3>
+<h2>Hello Word 2<a name="more"></a></h2>
+<h1>Hello Word 3</h1>
+<p>Hello Word 4
+Hello Word 5</p>
+<h3>Hello Word 1</h3>
+<h2>Hello Word 2</h2>
+<h1>Hello Word 3</h1>
+<p>Hello Word 4
+Hello Word 5</p>
+<h3>Hello Word 1</h3>
+<h2>Hello Word 2</h2>
+<h1>Hello Word 3</h1>
+<p>Hello Word 4
+Hello Word 5</p>
+<h3>Hello Word 1</h3>
+<h2>Hello Word 2</h2>
+<h1>Hello Word 3</h1>
+<p>Hello Word 4
+Hello Word 5</p>
+]]></content>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://hufeng825.github.io/2013/08/02/hello-world/"/>
+    <id>http://hufeng825.github.io/2013/08/02/hello-world/</id>
+    <published>2013-08-02T06:45:57.000Z</published>
+    <updated>2013-08-06T06:32:13.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://zespia.tw/hexo">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs">documentation</a> to learn how to use.
+<a name="more"></a></p>
+]]></content>
+  </entry>
+</feed>

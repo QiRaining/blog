@@ -39,6 +39,7 @@
    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script src="/js/gotop.js"></script>
 
 
   <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
@@ -63,11 +64,11 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
-           <!-- <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>-->
+            </button>
             <a href="/" class="brand" >主页</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
@@ -188,8 +189,9 @@ var duoshuoQuery = {short_name:"hufeng825"};
 
 
 <footer id="footer" >
-<br />
- <div class="navbar navbar-inverse navbar-bottom" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
  <div class="row">
  <div class="span12">  
 
@@ -201,12 +203,15 @@ var duoshuoQuery = {short_name:"hufeng825"};
     
 </p>
  </center>
+ </div>
 
  </div>
  </div>
  </div>
 
 </footer>
+ <a href="#" onclick="goTop();return false;" class="backTop"><span class="badge badge-warning">⬆</span></a>
+
 
 
 

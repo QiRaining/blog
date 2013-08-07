@@ -7,7 +7,7 @@
     <title>undefined '2013/8' | 阿峰的技术窝窝</title>
     <meta name="author" content="Jason Hu">
     
-  <meta name="description" content="内功---C/C++/Linux/嵌入式/IOS/WEB/">
+  <meta name="description" content="C/C++/Linux/嵌入式/IOS/WEB/">
   
   
     
@@ -34,19 +34,24 @@
     <link href="/css/hf.css" rel="stylesheet" media="screen">
         <link href="/css/tab.css" rel="stylesheet" media="screen">
 
-
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen">
+   <script src="/fancybox/jquery.fancybox.pack.js"></script>
    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
     <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.easing.min.js"></script>
-    <script src="/js/jquery.scrollUp.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
 
+    
+ 
 
 
   <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
     
     <script type="text/javascript">
+
+
 $(function () {
       $.scrollUp({
             scrollName: 'scrollUp', // Element ID
@@ -148,7 +153,7 @@ $(function () {
 <!-- 内容 -->
 <div class="container-fluid" style="margin-top: 60px">
     <div class="row-fluid">
-        <div class="span9">
+        <div class="span9 panel">
             
             <div class="content">
     <header>
@@ -157,49 +162,23 @@ $(function () {
 
         
 
-<h1 class="title"><a href="/2013/08/04/测试/">测试</a></h1>
+<h1 class="title"><a href="/2013/08/04/测试/">测试博客</a></h1>
 
 
 
     </header>
     <div class="entry">
         
-        <h3>Hello Word 1</h3>
-<h2>Hello Word 2
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/04/测试/#more" class="more-link">点击查看详情</a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-02T06:45:57.000Z"><a href="/2013/08/02/hello-world/">8月 2 2013</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/02/hello-world/">Hello World</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <p>Welcome to <a href="http://zespia.tw/hexo">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs">documentation</a> to learn how to use.
+        <h2>理想是个奢侈的东西，</h2>
+<h3>理想是个奢侈的东西，</h3>
+<h4>我们却还是要不顾一切的去追寻</h4>
 
         
     </div>
     <footer>
         
         <div class="alignleft">
-            <a href="/2013/08/02/hello-world/#more" class="more-link">点击查看详情</a>
+            <a href="/2013/08/04/测试/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
         </div>
         
     </footer>
@@ -268,6 +247,39 @@ $(function () {
  </div>
 
 </footer>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/easing.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+    /* 最基本的，使用了默认配置 */
+     
+    $("a#single_image").fancybox();
+     
+    /* 使用了自定义配置 */
+     
+    $("a#inline").fancybox({
+        'hideOnContentClick': true
+    });
+ 
+    /* 一下配置支持组播放 */
+     
+    $("a.group").fancybox({
+        'transitionIn'  :   'elastic',
+        'transitionOut' :   'elastic',
+        'speedIn'       :   600, 
+        'speedOut'      :   200, 
+        'overlayShow'   :   false
+    });
+     
+});
+
+
 
 
 

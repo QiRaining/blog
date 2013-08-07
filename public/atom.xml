@@ -4,7 +4,7 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.io/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.io"/>
-  <updated>2013-08-07T02:29:00.361Z</updated>
+  <updated>2013-08-07T09:53:14.615Z</updated>
   <id>http://hufeng825.github.io/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
@@ -12,41 +12,35 @@
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
   <entry>
-    <title type="html"><![CDATA[测试]]></title>
+    <title type="html"><![CDATA[测试博客]]></title>
     <link href="http://hufeng825.github.io/2013/08/04/测试/"/>
     <id>http://hufeng825.github.io/2013/08/04/测试/</id>
     <published>2013-08-04T14:56:27.000Z</published>
-    <updated>2013-08-06T08:52:39.000Z</updated>
-    <content type="html"><![CDATA[<h3>Hello Word 1</h3>
-<h2>Hello Word 2<a name="more"></a></h2>
-<h1>Hello Word 3</h1>
-<p>Hello Word 4
-Hello Word 5</p>
-<h3>Hello Word 1</h3>
-<h2>Hello Word 2</h2>
-<h1>Hello Word 3</h1>
-<p>Hello Word 4
-Hello Word 5</p>
-<h3>Hello Word 1</h3>
-<h2>Hello Word 2</h2>
-<h1>Hello Word 3</h1>
-<p>Hello Word 4
-Hello Word 5</p>
-<h3>Hello Word 1</h3>
-<h2>Hello Word 2</h2>
-<h1>Hello Word 3</h1>
-<p>Hello Word 4
-Hello Word 5</p>
-]]></content>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://hufeng825.github.io/2013/08/02/hello-world/"/>
-    <id>http://hufeng825.github.io/2013/08/02/hello-world/</id>
-    <published>2013-08-02T06:45:57.000Z</published>
-    <updated>2013-08-06T06:32:13.000Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://zespia.tw/hexo">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs">documentation</a> to learn how to use.
-<a name="more"></a></p>
+    <updated>2013-08-07T08:13:19.000Z</updated>
+    <content type="html"><![CDATA[<h2>理想是个奢侈的东西，</h2>
+<h3>理想是个奢侈的东西，</h3>
+<h4>我们却还是要不顾一切的去追寻</h4>
+<a name="more"></a>
+
+<h5>by 海子</h5>
+<p>  很多时候我们总是在自己的世界中寻找这</p>
+<blockquote>
+<p>一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。</p>
+</blockquote>
+<p><img src="http://ww4.sinaimg.cn/bmiddle/aa397b7fjw1dzplsgpdw5j.jpg" alt=""></p>
+<figure class="highlight lang-javascript"><figcaption><span>foo</span><a href="http://foo.url/foo.js">下载</a></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>    <span class="keyword">var</span> foo;
+    foo=<span class="keyword">function</span>(){
+        console.log(<span class="string">'i\'m foo.'</span>);
+    };
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-objc"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>[rectangle <span class="method">setX:</span> <span class="number">10</span> <span class="method">y:</span> <span class="number">10</span> <span class="method">width:</span> <span class="number">20</span> <span class="method">height:</span> <span class="number">20</span>];
+</pre></td></tr></table></figure>
 ]]></content>
   </entry>
 </feed>

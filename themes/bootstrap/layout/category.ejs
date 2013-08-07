@@ -5,7 +5,7 @@
                     <%- partial('_component/plugins/recent_posts') %>
         </div>
 
-        <div class="span9">
+        <div class="span9 panel">
             <% page.posts.each(function(item){ %>
             <%- partial('_component/common/list', {item: item, index: true}) %>
             <% }); %>

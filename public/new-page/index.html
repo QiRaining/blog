@@ -7,7 +7,7 @@
     <title>New Page | 阿峰的技术窝窝</title>
     <meta name="author" content="Jason Hu">
     
-  <meta name="description" content="dddd">
+  <meta name="description" content="title: New Pagedate: 2013-08-04 18:24:33">
   
   
     
@@ -34,19 +34,24 @@
     <link href="/css/hf.css" rel="stylesheet" media="screen">
         <link href="/css/tab.css" rel="stylesheet" media="screen">
 
-
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen">
+   <script src="/fancybox/jquery.fancybox.pack.js"></script>
    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
     <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.easing.min.js"></script>
-    <script src="/js/jquery.scrollUp.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
 
+    
+ 
 
 
   <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
     
     <script type="text/javascript">
+
+
 $(function () {
       $.scrollUp({
             scrollName: 'scrollUp', // Element ID
@@ -151,7 +156,7 @@ $(function () {
         </div>
         <div class="span3 hidden-phone">
        </div>
-        <div class="span9">
+        <div class="span9 panel">
             <div class="content">
     <header class="page-header">
         
@@ -163,12 +168,13 @@ $(function () {
 
     </header>
     <div class="entry" id="page">
-        <p>dddd</p>
+        <p>title: New Page</p>
+<h2>date: 2013-08-04 18:24:33</h2>
 
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.io/new-page/index.html">http://hufeng825.github.io/new-page/index.html
     </div>
-
-
-
 </div>
         </div>
 </div>
@@ -196,6 +202,39 @@ $(function () {
  </div>
 
 </footer>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/easing.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+    /* 最基本的，使用了默认配置 */
+     
+    $("a#single_image").fancybox();
+     
+    /* 使用了自定义配置 */
+     
+    $("a#inline").fancybox({
+        'hideOnContentClick': true
+    });
+ 
+    /* 一下配置支持组播放 */
+     
+    $("a.group").fancybox({
+        'transitionIn'  :   'elastic',
+        'transitionOut' :   'elastic',
+        'speedIn'       :   600, 
+        'speedOut'      :   200, 
+        'overlayShow'   :   false
+    });
+     
+});
+
+
 
 
 

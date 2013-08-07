@@ -9,7 +9,7 @@ img, p {
     -webkit-touch-callout: none;
 }
 p {
-    font: 500 15px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+    font: 450 15px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
     cursor: default;
 }
 a:not(.btn) {
@@ -401,6 +401,12 @@ web {
         box-shadow: 0px 0px 2px 3px rgba(255, 255, 255, 0.7), 0px 0px 30px 8px rgba(0, 0, 0, 0.25);
 
 }
+ img {    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px 3px rgba(255, 255, 255, 0.7), 0px 0px 30px 8px rgba(0, 0, 0, 0.25);
+}
 
 a.thumbnail {
     color: #333;
@@ -432,11 +438,11 @@ a.thumbnail:hover img {
     transition: .5s;
 }
 a.thumbnail h3 {
-    font: 400 24.5px/1.0 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+    font: 300 24.5px/1.0 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
     -webkit-box-reflect: below -4px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.4, transparent), to(rgba(3,3,3,.2)));
 }
 a.thumbnail p {
-    font: 100 12px/1.6 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+    font: 90 12px/1.6 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
 }
 a.thumbnail small {
     font-size: 95%;
@@ -508,7 +514,7 @@ a.thumbnail small {
     box-shadow:         0px 1px 8px 1.5px rgba(0, 0, 0, 0.25), 0px 20px 70px 8px rgba(0, 0, 0, 0.05);
 }
 .panel-description h4 {
-    font: 500 18px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
+    font: 450 18px/1.8 'Optima','Songti SC','Verdana','Microsoft Yahei',simsun,serif;
 }
 .panel-description h5 {
     color: rgba(0, 0, 0, 0.6);

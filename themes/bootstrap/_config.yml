@@ -5,6 +5,7 @@ blogs:
   # cnblogs: http://www.cnblogs.com/youxilua/
   # 51cto: http://youxilua.blog.51cto.com/
   # oschina: http://my.oschina.net/youxiachai
+fancybox: yes
 
 duoshuo:
   enable: yes

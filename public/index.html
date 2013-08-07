@@ -32,17 +32,39 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
     <link href="/css/hf.css" rel="stylesheet" media="screen">
+        <link href="/css/tab.css" rel="stylesheet" media="screen">
+
 
    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/gotop.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/jquery.scrollUp.js"></script>
+
 
 
   <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
     
     <script type="text/javascript">
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: 'Scroll to top', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+    
         $(document).ready(function () {
 
             $('.dropdown-toggle').dropdown();
@@ -297,7 +319,7 @@
  </div>
 
 </footer>
- <a href="#" onclick="goTop();return false;" class="backTop"><span class="badge badge-warning">⬆</span></a>
+ <a href="#" onclick="goTop();return false;" class="scrollUp"><span class="badge badge-warning">⬆</span></a>
 
 
 

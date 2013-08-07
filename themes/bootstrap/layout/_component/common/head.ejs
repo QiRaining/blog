@@ -60,17 +60,39 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<%- config.root %>css/bootstrap-responsive.css" rel="stylesheet" media="screen">
     <link href="<%- config.root %>css/hf.css" rel="stylesheet" media="screen">
+        <link href="<%- config.root %>css/tab.css" rel="stylesheet" media="screen">
+
 
    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
     <script src="<%- config.root %>js/jquery.js"></script>
     <script src="<%- config.root %>js/bootstrap.js"></script>
-    <script src="<%- config.root %>js/gotop.js"></script>
+    <script src="<%- config.root %>js/jquery.easing.min.js"></script>
+    <script src="<%- config.root %>js/jquery.scrollUp.js"></script>
+
 
 
   <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
     
     <script type="text/javascript">
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: 'Scroll to top', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+    
         $(document).ready(function () {
 
             $('.dropdown-toggle').dropdown();

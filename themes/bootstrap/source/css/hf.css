@@ -75,7 +75,7 @@ hr.soften {
     transition: 500ms;
 }
 header {
-    margin-top: 10px;   
+    margin-top: 5px;   
 }
 .hero-unit {
     background: url(/profile/cover-5.jpg);
@@ -456,7 +456,7 @@ a.thumbnail small {
 }
 
 
-.panel {
+./*panel {
     display: none;
     background: #FFF url(img/patterns/white_wall_hash.png);
     padding: 0px;
@@ -523,7 +523,8 @@ a.thumbnail small {
 .button-text-panel a {
     position: relative;
     margin: 10px;
-}/* = 动画 Animations
+}
+/* = 动画 Animations*/
 ----------------------------------------------- */
 
 @-webkit-keyframes title-in {

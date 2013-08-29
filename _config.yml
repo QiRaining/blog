@@ -12,7 +12,7 @@ language: zh-CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://hufeng825.github.io
+url: http://hufeng825.github.com
 root: /
 permalink: :year/:month/:day/:title/
 tag_dir: tags
@@ -29,7 +29,8 @@ max_open_file: 100
 filename_case: 0
 highlight:
   enable: true
-  line_number: true
+  backtick_code_block: yes
+  line_number: false
   tab_replace:
 
 # Category & Tag

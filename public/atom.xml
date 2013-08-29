@@ -4,13 +4,215 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-08-23T03:00:53.055Z</updated>
+  <updated>2013-08-29T10:54:10.726Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
     <email><![CDATA[hufeng@hufengvip.cn]]></email>
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[快速清除subviews之 隐私循环]]></title>
+    <link href="http://hufeng825.github.com/2013/08/29/ios7/"/>
+    <id>http://hufeng825.github.com/2013/08/29/ios7/</id>
+    <published>2013-08-29T10:48:47.000Z</published>
+    <updated>2013-08-29T10:51:16.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>问：如何快速把当前view下的所有子view 及其子子view们删除掉
+<a name="more"></a>
+解答这个问题前先介绍下 NSArray </p>
+</blockquote>
+<p>NSArray 类定义的方法</p>
+<ol>
+<li>makeObjectsPerformSelector:@select（aMethod）</li>
+</ol>
+<p>简介：让数组中的每个元素 都调用 aMethod </p>
+<ol>
+<li><p>makeObjectsPerformSelector:@select（aMethod）</p>
+<p>　　　　              withObject:oneObject</p>
+</li>
+</ol>
+<p><strong>ps：让数组中的每个元素 都调用 aMethod  并把 withObject 后边的 oneObject 对象做为参数传给方法aMethod</strong></p>
+<p>因此可以利用隐私循环来快速清除subviews</p>
+<p>[[self.view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/hexo/" term="hexo"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[ios iphone5 适配 之 如何是app 适用不通分辨率]]></title>
+    <link href="http://hufeng825.github.com/2013/08/29/ios6/"/>
+    <id>http://hufeng825.github.com/2013/08/29/ios6/</id>
+    <published>2013-08-29T10:44:36.000Z</published>
+    <updated>2013-08-29T10:53:30.000Z</updated>
+    <content type="html"><![CDATA[<p>iphone5适配 有如下集中种思路</p>
+<a name="more"></a>
+
+<p>1：利用自身的autoresize 加上代码实现</p>
+<p>2：写两套xib</p>
+<p>3：利用ios5+ 以上的autolayout</p>
+<p>前两种方式应用比较广泛 ，因为毕竟国内还有部分应用ios4.3的用户</p>
+<p>下面给第二种方式应用下的部分代码</p>
+<figure class="highlight"><pre>- (<span class="keyword">id</span>)init
+{
+
+    <span class="built_in">NSString</span>    *clssName = NSStringFromClass([<span class="keyword">self</span> <span class="built_in">class</span>]);
+    <span class="built_in">NSString</span>    *xibName = is4InchScreen() ?[<span class="built_in">NSString</span> stringWithFormat:@<span class="string">"%@_4inch"</span>, clssName] : clssName;
+    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithNibName:xibName bundle:<span class="literal">nil</span>];
+    <span class="keyword">if</span> (<span class="keyword">self</span>) {}
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+
+}
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[ios 通过当前view得到所在的viewcontroller]]></title>
+    <link href="http://hufeng825.github.com/2013/08/29/ios5/"/>
+    <id>http://hufeng825.github.com/2013/08/29/ios5/</id>
+    <published>2013-08-29T10:35:01.000Z</published>
+    <updated>2013-08-29T10:54:04.000Z</updated>
+    <content type="html"><![CDATA[<p>long long ago ，带过的小弟遇到了一个问题，需要从当前的控件（一般是uiview）获取当前所在的viewcontroller
+<a name="more"></a>
+当时给出他的解决办法</p>
+<figure class="highlight"><pre>@<span class="class"><span class="keyword">implementation</span> <span class="id">UIView</span> (<span class="id">GetVCAdditions</span>)</span>
+- (<span class="built_in">UIViewController</span> *)GetiewController {
+    Class vcc = [<span class="built_in">UIViewController</span> <span class="built_in">class</span>];
+    UIResponder *responder = <span class="keyword">self</span>;
+    <span class="keyword">while</span> ((responder = [responder nextResponder]))
+        <span class="keyword">if</span> ([responder isKindOfClass: vcc])
+            <span class="keyword">return</span> (<span class="built_in">UIViewController</span> *)responder;
+    <span class="keyword">return</span> <span class="literal">nil</span>;
+}
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[removeFromSuperview添加动画使其更加高雅美观]]></title>
+    <link href="http://hufeng825.github.com/2013/08/29/ios4/"/>
+    <id>http://hufeng825.github.com/2013/08/29/ios4/</id>
+    <published>2013-08-29T10:29:40.000Z</published>
+    <updated>2013-08-29T10:34:09.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>程序中难免使用removeFromSuperview，但是view控件直接从界面突然消失会显得非常不友好，作为一个高端大气上档次的app细节处处应该注意，
+<a name="more"></a>
+添加一个简单的动画给用户的感觉立刻不一样了。废话不说直接上代码</p>
+<figure class="highlight"><pre>   [UIView animateWithDuration:<span class="number">0.2</span>
+
+                     animations:^{_logViewController<span class="preprocessor">.view</span><span class="preprocessor">.alpha</span> = <span class="number">0.0</span><span class="comment">;}</span>
+
+                     completion:^(BOOL finished)
+
+                                { [_logViewController<span class="preprocessor">.view</span> removeFromSuperview]<span class="comment">; }</span>
+
+     ]<span class="comment">;</span>
+</pre></figure>
+
+</blockquote>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[ios 清理工程中没有用到的图片]]></title>
+    <link href="http://hufeng825.github.com/2013/08/29/ios3/"/>
+    <id>http://hufeng825.github.com/2013/08/29/ios3/</id>
+    <published>2013-08-29T08:43:14.000Z</published>
+    <updated>2013-08-29T10:26:22.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>发布前往往需要清理工程中没有用到的图片，这些图片可能是测试图片也可能是以往版本中替换遗留下来的图片</p>
+</blockquote>
+<a name="more"></a>
+
+<h2>使用方法</h2>
+<ol>
+<li>将下面代码保存成**.sh 然后chomd 777 使其可执行</li>
+<li>将**.sh 拷贝到工程根目录下</li>
+<li>./执行**.sh </li>
+<li><p>再同级目录下会生成一个imge.txt 结果文件</p>
+<p>如下图  </p>
+</li>
+</ol>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e83pb1zvo7j215q0pq7bz.jpg" width="300" height="500">
+
+
+<h2>源码</h2>
+<figure class="highlight"><pre><span class="shebang">#!/bin/sh</span>
+
+<span class="keyword">echo</span> <span class="string">"删除有风险 下手需谨慎 如需再次确认图片是否被引用到"</span>
+
+<span class="keyword">echo</span> <span class="string">"Defult.png 和例如[UIImage imageNamed:@‘img.png'] 可能会误报"</span>
+
+
+read -n1 -p  <span class="string">"【Y】查阅如何确认 【N】直接进行图片检索"</span> 
+
+case <span class="variable">$answer</span> <span class="keyword">in</span> 
+
+<span class="string">"Y"</span>|<span class="string">"y"</span>) 
+
+open -a Safari <span class="string">"http://blog.csdn.net/hufeng825/article/details/8533647"</span>
+
+<span class="keyword">echo</span> -n <span class="string">"按任意键开始程序"</span>;
+
+read var
+
+;;
+
+<span class="string">"N"</span>|<span class="string">"n"</span>) 
+
+<span class="keyword">echo</span> <span class="string">"命令执行时终端会输入结果 搜索完毕后 会在当前路径下自动生成imag.txt的结果报告"</span>
+
+;;
+
+*) 
+
+;;
+
+esac
+
+
+
+
+PROJ=`find .  ! -name <span class="string">'*.xib'</span> -o -name <span class="string">'*.[mh]'</span> -o -name <span class="string">'*.storyboard'</span> -o -name <span class="string">'*.mm'</span> -o -name <span class="string">'*.html'</span> `
+
+
+<span class="keyword">echo</span> <span class="string">"~~~~~~~~~~~~开始搜索~~~~~~~~~~~~"</span> &gt;&gt;<span class="string">'./image.txt'</span>;
+
+<span class="keyword">for</span> png <span class="keyword">in</span> `find . -name <span class="string">'*.png'</span>`
+<span class="keyword">do</span>
+
+   name=`basename -s .png <span class="variable">$png</span>`
+   name=`basename -s @2x <span class="variable">$name</span>`
+   <span class="keyword">if</span> ! grep -qhs <span class="string">"<span class="variable">$name</span>"</span> <span class="string">"<span class="variable">$PROJ</span>"</span>; <span class="keyword">then</span>
+        <span class="keyword">echo</span> <span class="string">"<span class="variable">$png</span> 可能没引用"</span> 
+        <span class="keyword">echo</span> <span class="string">"<span class="variable">$png</span> 可能没引用"</span>  &gt;&gt;<span class="string">'./image.txt'</span> ;
+   <span class="keyword">fi</span>
+<span class="keyword">done</span>
+
+<span class="keyword">for</span> jpg <span class="keyword">in</span> `find . -name <span class="string">'*.jpg'</span>`
+<span class="keyword">do</span>
+   name=`basename -s .jpg <span class="variable">$jpg</span>`
+   name=`basename -s @2x <span class="variable">$name</span>`
+   <span class="keyword">if</span> ! grep -qhs <span class="string">"<span class="variable">$name</span>"</span> <span class="string">"<span class="variable">$PROJ</span>"</span>; <span class="keyword">then</span>
+        <span class="keyword">echo</span> <span class="string">"<span class="variable">$png</span> 可能没引用"</span> 
+        <span class="keyword">echo</span> <span class="string">"<span class="variable">$jpg</span> 可能没引用"</span>  &gt;&gt;<span class="string">'./image.txt'</span>;
+   <span class="keyword">fi</span>
+<span class="keyword">done</span>
+
+<span class="keyword">echo</span> <span class="string">"~~~~~~~~~~~~结束搜索~~~~~~~~~~~~"</span> &gt;&gt;<span class="string">'./image.txt'</span>;
+&lt;&lt;EOF
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
   <entry>
     <title type="html"><![CDATA[MQ 笔记之 发送接受实例]]></title>
     <link href="http://hufeng825.github.com/2013/08/23/mq5/"/>

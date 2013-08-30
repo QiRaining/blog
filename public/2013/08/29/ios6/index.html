@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>ios iphone5 适配 之 如何是app 适用不通分辨率 | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="iphone5适配 有如下集中种思路">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="ios iphone5 适配 之 如何是app 适用不通分辨率"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+        <link href="/css/tab.css" rel="stylesheet" media="screen">
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen">
+   <script src="/fancybox/jquery.fancybox.pack.js"></script>
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>16</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                    <form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8">
+                        <input type="text"   class="search-query" name="q" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                        <input type="hidden" name="q" value="site:hufeng825.github.com">
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-08-29T10:44:36.000Z"><a href="/2013/08/29/ios6/">2013 8月 29</a></time>
+        
+        
+
+<h1 class="title">ios iphone5 适配 之 如何是app 适用不通分辨率</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <p>iphone5适配 有如下集中种思路</p>
+<a name="more"></a>
+
+<p>1：利用自身的autoresize 加上代码实现</p>
+<p>2：写两套xib</p>
+<p>3：利用ios5+ 以上的autolayout</p>
+<p>前两种方式应用比较广泛 ，因为毕竟国内还有部分应用ios4.3的用户</p>
+<p>下面给第二种方式应用下的部分代码</p>
+<figure class="highlight"><pre>- (<span class="keyword">id</span>)init
+{
+
+    <span class="built_in">NSString</span>    *clssName = NSStringFromClass([<span class="keyword">self</span> <span class="built_in">class</span>]);
+    <span class="built_in">NSString</span>    *xibName = is4InchScreen() ?[<span class="built_in">NSString</span> stringWithFormat:@<span class="string">"%@_4inch"</span>, clssName] : clssName;
+    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithNibName:xibName bundle:<span class="literal">nil</span>];
+    <span class="keyword">if</span> (<span class="keyword">self</span>) {}
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+
+}
+</pre></figure>
+
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/29/ios6/">http://hufeng825.github.com/2013/08/29/ios6/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/easing.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+    /* 最基本的，使用了默认配置 */
+     
+    $("a#single_image").fancybox();
+     
+    /* 使用了自定义配置 */
+     
+    $("a#inline").fancybox({
+        'hideOnContentClick': true
+    });
+ 
+    /* 一下配置支持组播放 */
+     
+    $("a.group").fancybox({
+        'transitionIn'  :   'elastic',
+        'transitionOut' :   'elastic',
+        'speedIn'       :   600, 
+        'speedOut'      :   200, 
+        'overlayShow'   :   false
+    });
+     
+});
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>MQ 笔记之 消息持久化 | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。配置文件在config/jetty.xml">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="MQ 笔记之 消息持久化"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+        <link href="/css/tab.css" rel="stylesheet" media="screen">
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen">
+   <script src="/fancybox/jquery.fancybox.pack.js"></script>
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>16</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                    <form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8">
+                        <input type="text"   class="search-query" name="q" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                        <input type="hidden" name="q" value="site:hufeng825.github.com">
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-08-21T15:43:37.000Z"><a href="/2013/08/21/mq3/">2013 8月 21</a></time>
+        
+        
+
+<h1 class="title">MQ 笔记之 消息持久化</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <blockquote>
+<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。
+配置文件在config/jetty.xml
+<a name="more"></a></p>
+</blockquote>
+<h2>一、AMQ</h2>
+<p>AMQ是一种文件存储形式，它具有写入速度快和容易恢复的特点。消息存储在一个个文件中，文件的默认大小为32兆，如果一条消息的大小超过了32兆，那么这个值必须设置大点。当一个存储文件中的消息已经全部被消费，那么这个文件将被标识为可删除，在下一个清除阶段，这个文件被删除。默认配置如下：</p>
+<figure class="highlight"><pre><span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">amqPersistenceAdapter</span> <span class="attribute">directory</span>=<span class="value">"activemq-data"</span> <span class="attribute">maxFileLength</span>=<span class="value">"32mb"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span>
+</pre></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>directory</td>
+<td>activemq-data</td>
+<td>消息文件和日志的存储目录</td>
+</tr>
+<tr>
+<td>useNIO</td>
+<td>true</td>
+<td>使用NIO协议存储消息</td>
+</tr>
+<tr>
+<td>syncOnWrite</td>
+<td>false</td>
+<td>同步写到磁盘，这个选项对性能影响非常大</td>
+</tr>
+<tr>
+<td>maxFileLength</td>
+<td>32mb</td>
+<td>一个消息文件的大小</td>
+</tr>
+<tr>
+<td>persistentIndex</td>
+<td>true</td>
+<td>消息索引的持久化，如果为false，那么索引保存在内存中</td>
+</tr>
+<tr>
+<td>maxCheckpointMessageAddSize</td>
+<td>4kb</td>
+<td>一个事务允许的最大消息量</td>
+</tr>
+<tr>
+<td>cleanupInterval</td>
+<td>30000</td>
+<td>清除操作周期，单位ms</td>
+</tr>
+<tr>
+<td>indexBinSize</td>
+<td>1024</td>
+<td>索引文件缓存页面数，缺省为1024，当amq扩充或者缩减存储时，会锁定整个broker，导致一定时间的阻塞，所以这个值应该调整到比较大，但是代码中实现会动态伸缩，调整效果并不理想。</td>
+</tr>
+<tr>
+<td>indexKeySize</td>
+<td>96</td>
+<td>索引key的大小，key是消息ID</td>
+</tr>
+<tr>
+<td>indexPageSize</td>
+<td>16kb</td>
+<td>索引的页大小</td>
+</tr>
+<tr>
+<td>directoryArchive</td>
+<td>archive</td>
+<td>存储被归档的消息文件目录</td>
+</tr>
+<tr>
+<td>archiveDataLogs</td>
+<td>false</td>
+<td>当为true时，归档的消息文件被移到directoryArchive,而不是直接删除</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>二、 KahaDB</h2>
+<p>KahaDB是基于文件的本地数据库储存形式，虽然没有AMQ的速度快，但是它具有强扩展性，恢复的时间比AMQ短，从5.4版本之后KahaDB做为默认的持久化方式。默认配置如下</p>
+<figure class="highlight"><pre> <span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">kahaDB</span> <span class="attribute">directory</span>=<span class="value">"activemq-data"</span> <span class="attribute">journalMaxFileLength</span>=<span class="value">"32mb"</span>/&gt;</span>
+ <span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span>
+</pre></figure>
+
+<p>KahaDB的属性：</p>
+<table>
+<thead>
+<tr>
+<th>property name</th>
+<th>default value</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>directory</td>
+<td>activemq-data</td>
+<td>消息文件和日志的存储目录</td>
+</tr>
+<tr>
+<td>indexWriteBatchSize</td>
+<td>1000</td>
+<td>一批索引的大小，当要更新的索引量到达这个值时，更新到消息文件中</td>
+</tr>
+<tr>
+<td>indexCacheSize</td>
+<td>10000</td>
+<td>内存中，索引的页大小</td>
+</tr>
+<tr>
+<td>enableIndexWriteAsync</td>
+<td>false</td>
+<td>索引是否异步写到消息文件中</td>
+</tr>
+<tr>
+<td>journalMaxFileLength</td>
+<td>32mb</td>
+<td>一个消息文件的大小</td>
+</tr>
+<tr>
+<td>enableJournalDiskSyncs</td>
+<td>true</td>
+<td>是否讲非事务的消息同步写入到磁盘</td>
+</tr>
+<tr>
+<td>cleanupInterval</td>
+<td>30000</td>
+<td>清除操作周期，单位ms</td>
+</tr>
+<tr>
+<td>checkpointInterval</td>
+<td>5000</td>
+<td>索引写入到消息文件的周期，单位ms</td>
+</tr>
+<tr>
+<td>ignoreMissingJournalfiles</td>
+<td>false</td>
+<td>忽略丢失的消息文件，false，当丢失了消息文件，启动异常</td>
+</tr>
+<tr>
+<td>checkForCorruptJournalFiles</td>
+<td>false</td>
+<td>检查消息文件是否损坏，true，检查发现损坏会尝试修复</td>
+</tr>
+<tr>
+<td>checksumJournalFiles</td>
+<td>false</td>
+<td>产生一个checksum，以便能够检测journal文件是否损坏。</td>
+</tr>
+<tr>
+<td><code>5.4版本之后有效的属性:</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>archiveDataLogs</td>
+<td>false</td>
+<td>当为true时，归档的消息文件被移到directoryArchive,而不是直接删除</td>
+</tr>
+<tr>
+<td>directoryArchive</td>
+<td>null</td>
+<td>存储被归档的消息文件目录</td>
+</tr>
+<tr>
+<td>databaseLockedWaitDelay</td>
+<td>10000</td>
+<td>在使用负载时，等待获得文件锁的延迟时间，单位ms</td>
+</tr>
+<tr>
+<td>maxAsyncJobs</td>
+<td>10000</td>
+<td>同个生产者产生等待写入的异步消息最大量</td>
+</tr>
+<tr>
+<td>concurrentStoreAndDispatchTopics</td>
+<td>false</td>
+<td>当写入消息的时候，是否转发主题消息</td>
+</tr>
+<tr>
+<td>concurrentStoreAndDispatchQueues</td>
+<td>true</td>
+<td>当写入消息的时候，是否转发队列消息</td>
+</tr>
+<tr>
+<td>5.6版本之后有效的属性:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>archiveCorruptedIndex</td>
+<td>false</td>
+<td>是否归档错误的索引</td>
+</tr>
+</tbody>
+</table>
+<p>从5.6版本之后，有可能发布通过多个kahadb持久适配器来实现分布式目标队列存储。什么时候用呢？如果有一个快速的生产者和消费者，当某一个时刻生产者发生了不规范的消费，那么有可能产生一条消息被存储在两个消息文件中，同时，有些目标队列是危险的并且要求访问磁盘。在这种情况下，你应该用通配符来使用mKahaDB。如果目标队列是分布的，事务是可以跨越多个消息文件的。</p>
+<p>每个KahaDB的实例都可以配置单独的适配器，如果没有目标队列提交给filteredKahaDB，那么意味着对所有的队列有效。如果一个队列没有对应的适配器，那么将会抛出一个异常。配置如下：</p>
+<figure class="highlight"><pre><span class="xml"><span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">mKahaDB</span> <span class="attribute">directory</span>=<span class="value">"</span><span class="variable">${activemq.base}</span><span class="xml">/data/kahadb"&gt;
+    <span class="tag">&lt;<span class="title">filteredPersistenceAdapters</span>&gt;</span>
+      <span class="comment">&lt;!-- match all queues --&gt;</span>
+      <span class="tag">&lt;<span class="title">filteredKahaDB</span> <span class="attribute">queue</span>=<span class="value">"&gt;"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">kahaDB</span> <span class="attribute">journalMaxFileLength</span>=<span class="value">"</span><span class="number">32</span><span class="xml">mb"/&gt;
+        <span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">filteredKahaDB</span>&gt;</span>
+      
+      <span class="comment">&lt;!-- match all destinations --&gt;</span>
+      <span class="tag">&lt;<span class="title">filteredKahaDB</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">kahaDB</span> <span class="attribute">enableJournalDiskSyncs</span>=<span class="value">"false"</span>/&gt;</span>
+        <span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">filteredKahaDB</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">filteredPersistenceAdapters</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">mKahaDB</span>&gt;</span>
+ <span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span></span>
+</pre></figure>
+
+<p>如果filteredKahaDB的perDestination属性设置为true，那么匹配的目标队列将会得到自己对应的KahaDB实例。配置如下</p>
+<figure class="highlight"><pre><span class="xml"><span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">mKahaDB</span> <span class="attribute">directory</span>=<span class="value">"</span><span class="variable">${activemq.base}</span><span class="xml">/data/kahadb"&gt;
+    <span class="tag">&lt;<span class="title">filteredPersistenceAdapters</span>&gt;</span>
+      <span class="comment">&lt;!-- kahaDB per destinations --&gt;</span>
+      <span class="tag">&lt;<span class="title">filteredKahaDB</span> <span class="attribute">perDestination</span>=<span class="value">"true"</span> &gt;</span>
+        <span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">kahaDB</span> <span class="attribute">journalMaxFileLength</span>=<span class="value">"</span><span class="number">32</span><span class="xml">mb" /&gt;
+        <span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">filteredKahaDB</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">filteredPersistenceAdapters</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">mKahaDB</span>&gt;</span>
+ <span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span></span>
+</pre></figure>
+
+<h2>三、 JDBC</h2>
+<p>配置JDBC适配器</p>
+<figure class="highlight"><pre><span class="tag">&lt;<span class="title">persistenceAdapter</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">jdbcPersistenceAdapter</span> <span class="attribute">dataSource</span>=<span class="value">"#mysql-ds"</span> <span class="attribute">createTablesOnStartup</span>=<span class="value">"false"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">persistenceAdapter</span>&gt;</span>
+</pre></figure>
+
+<p>dataSource指定持久化数据库的bean，createTablesOnStartup是否在启动的时候创建数据表，默认值是true，这样每次启动都会去创建数据表了，一般是第一次启动的时候设置为true，之后改成false。</p>
+<p>MYSQL持久化bean</p>
+<figure class="highlight"><pre><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"mysql-ds"</span> <span class="attribute">class</span>=<span class="value">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attribute">destroy-method</span>=<span class="value">"close"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"driverClassName"</span> <span class="attribute">value</span>=<span class="value">"com.mysql.jdbc.Driver"</span>/&gt;</span>
+    <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"url"</span> <span class="attribute">value</span>=<span class="value">"jdbc:mysql://localhost/activemq?relaxAutoCommit=true"</span>/&gt;</span>
+    <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"username"</span> <span class="attribute">value</span>=<span class="value">"activemq"</span>/&gt;</span>
+    <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"password"</span> <span class="attribute">value</span>=<span class="value">"activemq"</span>/&gt;</span>
+    <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"poolPreparedStatements"</span> <span class="attribute">value</span>=<span class="value">"true"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">bean</span>&gt;</span>
+</pre></figure>
+
+<p>SQL Server持久化bean</p>
+<figure class="highlight"><pre> <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"mssql-ds"</span> <span class="attribute">class</span>=<span class="value">"net.sourceforge.jtds.jdbcx.JtdsDataSource"</span> <span class="attribute">destroy-method</span>=<span class="value">"close"</span>&gt;</span>
+   <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"serverName"</span> <span class="attribute">value</span>=<span class="value">"SERVERNAME"</span>/&gt;</span>
+   <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"portNumber"</span> <span class="attribute">value</span>=<span class="value">"PORTNUMBER"</span>/&gt;</span>
+   <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"databaseName"</span> <span class="attribute">value</span>=<span class="value">"DATABASENAME"</span>/&gt;</span>
+   <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"user"</span> <span class="attribute">value</span>=<span class="value">"USER"</span>/&gt;</span>
+   <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"password"</span> <span class="attribute">value</span>=<span class="value">"PASSWORD"</span>/&gt;</span>
+ <span class="tag">&lt;/<span class="title">bean</span>&gt;</span>
+</pre></figure>
+
+<p>Oracle持久化bean</p>
+<figure class="highlight"><pre><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"oracle-ds"</span> <span class="attribute">class</span>=<span class="value">"org.apache.commons.dbcp.BasicDataSource"</span> <span class="attribute">destroy-method</span>=<span class="value">"close"</span>&gt;</span>
+	<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"driverClassName"</span> <span class="attribute">value</span>=<span class="value">"oracle.jdbc.driver.OracleDriver"</span>/&gt;</span>
+	<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"url"</span> <span class="attribute">value</span>=<span class="value">"jdbc:oracle:thin:@10.53.132.47:1521:activemq"</span>/&gt;</span>
+	<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"username"</span> <span class="attribute">value</span>=<span class="value">"activemq"</span>/&gt;</span>
+	<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"password"</span> <span class="attribute">value</span>=<span class="value">"activemq"</span>/&gt;</span>
+	<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"maxActive"</span> <span class="attribute">value</span>=<span class="value">"200"</span>/&gt;</span>
+	<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"poolPreparedStatements"</span> <span class="attribute">value</span>=<span class="value">"true"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">bean</span>&gt;</span>
+</pre></figure>
+
+<p>DB2持久化bean</p>
+<figure class="highlight"><pre><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"db2-ds"</span> <span class="attribute">class</span>=<span class="value">"org.apache.commons.dbcp.BasicDataSource"</span>  <span class="attribute">destroy-method</span>=<span class="value">"close"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"driverClassName"</span> <span class="attribute">value</span>=<span class="value">"com.ibm.db2.jcc.DB2Driver"</span>/&gt;</span>
+      <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"url"</span> <span class="attribute">value</span>=<span class="value">"jdbc:db2://hndb02.bf.ctc.com:50002/activemq"</span>/&gt;</span>
+      <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"username"</span> <span class="attribute">value</span>=<span class="value">"activemq"</span>/&gt;</span>
+      <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"password"</span> <span class="attribute">value</span>=<span class="value">"activemq"</span>/&gt;</span>
+      <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"maxActive"</span> <span class="attribute">value</span>=<span class="value">"200"</span>/&gt;</span>
+      <span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"poolPreparedStatements"</span> <span class="attribute">value</span>=<span class="value">"true"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">bean</span>&gt;</span>
+</pre></figure>
+
+<hr>
+<blockquote>
+<p>本博文from 淮少吧</p>
+</blockquote>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/21/mq3/">http://hufeng825.github.com/2013/08/21/mq3/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/easing.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+    /* 最基本的，使用了默认配置 */
+     
+    $("a#single_image").fancybox();
+     
+    /* 使用了自定义配置 */
+     
+    $("a#inline").fancybox({
+        'hideOnContentClick': true
+    });
+ 
+    /* 一下配置支持组播放 */
+     
+    $("a.group").fancybox({
+        'transitionIn'  :   'elastic',
+        'transitionOut' :   'elastic',
+        'speedIn'       :   600, 
+        'speedOut'      :   200, 
+        'overlayShow'   :   false
+    });
+     
+});
+
+
+
+
+
+
+
+
+</body>
+</html>

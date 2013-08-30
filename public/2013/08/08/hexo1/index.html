@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>hexo教程1 如何安装hexo | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="hexo教程1 如何安装hexo"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+        <link href="/css/tab.css" rel="stylesheet" media="screen">
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen">
+   <script src="/fancybox/jquery.fancybox.pack.js"></script>
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>16</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                    <form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8">
+                        <input type="text"   class="search-query" name="q" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                        <input type="hidden" name="q" value="site:hufeng825.github.com">
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-08-08T06:21:33.000Z"><a href="/2013/08/08/hexo1/">2013 8月 8</a></time>
+        
+        
+
+<h1 class="title">hexo教程1 如何安装hexo</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <p><a name="more"></a></p>
+<h2>前言</h2>
+<blockquote>
+<p>很早之前就想自己搭建一个博客，但是无奈已没有时间 而没有银子购买服务器，把家里的mac 当做服务器搭建wordpress但是不能保证速度和访问时间。偶然间发现了octopress,于是兴冲冲的折腾起来，最后搭建成功了，废了很大的经历，最主要的原因是还是网络原因，octopress 安装需要下载大量的安装依赖非常繁琐，到处是坑。后来偶然间发现了hexo，发现要比octopress 好用的太多了。于是果断废弃octopress 转头hexo</p>
+</blockquote>
+<hr>
+<h2>概念理解</h2>
+<p>hexo 是基于node.js 的 和rails 差不多。再次使用前 需要安装两个插件</p>
+<ul>
+<li>nvm （版本控制）
+nodejs version manager,可以把它理解为 rails里面的rvm  </li>
+<li>npm （包管理机制 ）
+ nodejs package manager,可以把它理解为 rails 里面的bundle </li>
+</ul>
+<hr>
+<h3>安装步骤(mac)</h3>
+<blockquote>
+<p>只针对于mac 其他的请到官网查看相应平台的安装方法<a href="http://zespia.tw/hexo">http://zespia.tw/hexo</a> </p>
+</blockquote>
+<hr>
+<h4>npm</h4>
+<hr>
+<p>打开终端 执行一下命令</p>
+<figure class="highlight"><pre><span class="title">git</span> clone <span class="url">git://github.com/creationix/nvm.git</span> ~/nvm
+</pre></figure>
+
+<p>安装完毕后，在~/.bash_profile或~/.bashrc加入以下内容</p>
+<figure class="highlight"><pre>. ~<span class="regexp">/nvm/</span>nvm.sh`<span class="javascript"></span>
+</pre></figure>
+
+<p>执行</p>
+<figure class="highlight"><pre><span class="comment">source</span> <span class="string">.</span><span class="comment">bash_profile</span> <span class="comment">//或者</span> <span class="comment">source</span> <span class="string">.</span><span class="comment">bashrc
+</pre></figure>
+
+<p>之后即可使用 nvm 来安装 Node.js</p>
+<figure class="highlight"><pre>   nvm install v0<span class="number">.8</span><span class="number">.14</span>
+   nvm <span class="keyword">use</span> v0<span class="number">.8</span><span class="number">.14</span>
+   nvm <span class="keyword">alias</span> <span class="keyword">default</span> v0<span class="number">.8</span><span class="number">.14</span>
+</pre></figure>
+
+<hr>
+<h4>hexo</h4>
+<p>安装</p>
+<figure class="highlight"><pre><span class="title">npm</span> install -g hexo
+</pre></figure>
+
+<p>更新</p>
+<figure class="highlight"><pre>npm <span class="operator"><span class="keyword">update</span> -g
+</pre></figure>
+
+<hr>
+<h3>设定</h3>
+<p>编辑 _config.yml</p>
+<p>下面贴出我的配置 大家自行根据各自的配置进行相应修改</p>
+<pre><code><figure class="highlight"><pre>// <span class="class">Site</span>
+<span class="method">title:</span> 阿峰的技术窝窝
+<span class="method">subtitle:</span> 专注于移动互联网
+<span class="method">description:</span> <span class="class">C</span>/<span class="class">C</span>++/<span class="class">Linux</span>/嵌入式/<span class="class">IOS</span>/<span class="class">WEB</span>/
+<span class="method">author:</span> <span class="class">Jason</span> <span class="class">Hu</span>
+<span class="method">email:</span> hufeng@hufengvip.cn
+<span class="method">language:</span> zh-<span class="class">CN</span>
+
+// <span class="class">URL</span>
+// <span class="class">If</span> your site is put in a subdirectory, set url as <span class="string">'http://yoursite.com/child'</span> and root as <span class="string">'/child/'</span>
+<span class="method">url:</span> <span class="method">http:</span>//hufeng825.github.com
+<span class="method">root:</span> /
+<span class="method">permalink:</span> :year/:month/:day/:title/
+<span class="method">tag_dir:</span> tags
+<span class="method">archive_dir:</span> archives
+<span class="method">category_dir:</span> categories
+<span class="method">code_dir:</span> downloads/code
+
+// <span class="class">Writing</span>
+<span class="method">new_post_name:</span> :title.md # <span class="class">File</span> name of new posts
+<span class="method">default_layout:</span> post
+<span class="method">auto_spacing:</span> <span class="keyword">false</span> # <span class="class">Add</span> spaces between asian characters and western characters
+<span class="method">titlecase:</span> <span class="keyword">false</span> # <span class="class">Transform</span> title into titlecase
+<span class="method">max_open_file:</span> <span class="number">100</span>
+<span class="method">filename_case:</span> <span class="number">0</span>
+<span class="method">highlight:</span>
+  <span class="method">enable:</span> <span class="keyword">true</span>
+  <span class="method">line_number:</span> <span class="keyword">true</span>
+  <span class="method">tab_replace:</span>
+
+// <span class="class">Category</span> &amp; <span class="class">Tag</span>
+<span class="method">default_category:</span> <span class="class">IOS</span>
+<span class="method">category_map:</span>
+<span class="method">tag_map:</span>
+
+// <span class="class">Archives</span>
+// <span class="number">2</span>: <span class="class">Enable</span> pagination
+// <span class="number">1</span>: <span class="class">Disable</span> pagination
+// <span class="number">0</span>: <span class="class">Fully</span> <span class="class">Disable</span>
+<span class="method">archive:</span> <span class="number">2</span>
+<span class="method">category:</span> <span class="number">2</span>
+<span class="method">tag:</span> <span class="number">2</span>
+
+// <span class="class">Server</span>
+// <span class="class">Hexo</span> uses <span class="class">Connect</span> as a server
+// <span class="class">You</span> can customize the logger format as defined in
+// <span class="method">http:</span>//www.senchalabs.org/connect/logger.html
+<span class="method">port:</span> <span class="number">4000</span>
+<span class="method">logger:</span> <span class="keyword">false</span>
+<span class="method">logger_format:</span>
+
+// <span class="class">Date</span> / <span class="class">Time</span> format
+// <span class="class">Hexo</span> uses <span class="class">Moment</span>.js to parse and display date
+// <span class="class">You</span> can customize the date format as defined in
+// <span class="method">http:</span>//momentjs.com/docs/#/displaying/format/
+<span class="method">date_format:</span> <span class="class">YYYY</span> <span class="class">MMM</span> <span class="class">D</span>
+<span class="method">time_format:</span> <span class="class">H</span>:<span class="method">mm:</span>ss
+
+// <span class="class">Pagination</span>
+// <span class="class">Set</span> per_page to <span class="number">0</span> to disable pagination
+<span class="method">per_page:</span> <span class="number">10</span>
+<span class="method">pagination_dir:</span> page
+
+// <span class="class">Disqus</span>
+<span class="method">disqus_shortname:</span>
+
+// <span class="class">Extensions</span>
+// <span class="class">Plugins</span>: <span class="method">https:</span>//github.com/tommy351/hexo/wiki/<span class="class">Plugins</span>
+// <span class="class">Themes</span>: <span class="method">https:</span>//github.com/tommy351/hexo/wiki/<span class="class">Themes</span>
+
+<span class="method">plugins:</span>
+- hexo-generator-sitemap
+
+
+<span class="method">theme:</span> bootstrap
+<span class="method">exclude_generator:</span>
+
+// <span class="class">Deployment</span>
+// <span class="class">Docs</span>: <span class="method">http:</span>//zespia.tw/hexo/docs/deploy.html
+<span class="method">deploy:</span> 
+  <span class="method">type:</span> github
+  <span class="method">repository:</span> <span class="method">https:</span>//github.com/hufeng825/hufeng825.github.io.git
+  <span class="method">branch:</span> master
+</pre></figure></code></pre>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/08/hexo1/">http://hufeng825.github.com/2013/08/08/hexo1/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script src="/fancybox/easing.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+    /* 最基本的，使用了默认配置 */
+     
+    $("a#single_image").fancybox();
+     
+    /* 使用了自定义配置 */
+     
+    $("a#inline").fancybox({
+        'hideOnContentClick': true
+    });
+ 
+    /* 一下配置支持组播放 */
+     
+    $("a.group").fancybox({
+        'transitionIn'  :   'elastic',
+        'transitionOut' :   'elastic',
+        'speedIn'       :   600, 
+        'speedOut'      :   200, 
+        'overlayShow'   :   false
+    });
+     
+});
+
+
+
+
+
+
+
+
+</body>
+</html>

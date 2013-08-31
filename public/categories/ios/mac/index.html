@@ -4,14 +4,11 @@
     <link href="/favicon.ico" rel="icon">
     <meta charset="utf-8">
     
-    <title>阿峰的技术窝窝</title>
+    <title>mac | 阿峰的技术窝窝</title>
     <meta name="author" content="Jason Hu">
     
-  <meta name="description" content="title: hibernate 笔记之 date: 2013-08-15 09:45:01tags: [技术]categories: hibernate">
+  <meta name="description" content="C/C++/Linux/嵌入式/IOS/WEB/">
   
-  
-  
-    <meta name="keywords" content="">
   
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -134,7 +131,7 @@ $(function () {
                             </li>
                             
                             <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
-                                <small>16</small>
+                                <small>22</small>
                             </a>
 
                             </li>
@@ -162,65 +159,119 @@ $(function () {
 <!-- 内容 -->
 <div class="container-fluid" style="margin-top: 60px">
     <div class="row-fluid">
-            <div class="span9">
+        <div class="span3 hidden-phone">
+                    
+<div class="well">
+  <h4 class="title">分类</h4>
+  <ul class="entry">
+  
+    <li><a href="/categories/MQ/">MQ</a><small> (5)</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small> (6)</small></li>
+  
+    <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
+  
+    <li><a href="/categories/ios/">ios</a><small> (9)</small></li>
+  
+    <li><a href="/categories/ios/mac/">mac</a><small> (1)</small></li>
+  
+    <li><a href="/categories/情感/">情感</a><small> (1)</small></li>
+  
+  </ul>
+</div>
+
+                    
+<div class="well">
+  <h4 class="title">最近更新</h4>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2013/08/31/ios13/">复杂页面消退的一个简单实例</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/31/ios12/">ios 开发纸 序列化</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/31/ios11/">银行支付控件之 自动随机(shuffle)密码键盘的实现算法</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/31/ios10/">mac 下的默认配置</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/31/ios9/">Xcode的持续集成指南</a>
+      </li>
+    
+  </ul>
+</div>
+
+        </div>
+
+        <div class="span9 panel">
+            
             <div class="content">
-    <header class="page-header">
-        
+    <header>
         <div class="icon"></div>
-        <time datetime="2013-08-15T01:45:01.000Z"><a href="/2013/08/15/hibernate3/">2013 8月 15</a></time>
-        
+        <time datetime="2013-08-31T13:45:59.000Z"><a href="/2013/08/31/ios10/">2013 8月 31</a></time>
+
         
 
-<h1 class="title"></h1>
+<h1 class="title"><a href="/2013/08/31/ios10/">mac 下的默认配置</a></h1>
 
 
 
     </header>
-    <div class="entry" id="post">
-        <p>title: hibernate 笔记之 
-date: 2013-08-15 09:45:01
-tags: [技术]
-categories: hibernate</p>
-
-        <hr />
-        <span class="label label-warning">W</span>
-        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/15/hibernate3/">http://hufeng825.github.com/2013/08/15/hibernate3/
-         <hr />
+    <div class="entry">
+        
+        <p>请几天安装其他的shell 结果把默认的shell更改了  有没有快捷的方法更换会默认配置 
         
     </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/31/ios10/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
 </div>
-           <!--  -->
+
             
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+            <!-- 分页 -->
+			<script src="/js/jquery.pagination.js"></script>
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"hufeng825"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- Duoshuo Comment END -->
+    var fistRun = true;
+    function pageselectCallback(page_index, jq) {
+        if(fistRun){
+            fistRun = false;
+        }else{
+            if(page_index === 0){
+                window.location.href = "/";
+            }else{
+                window.location.href = "/page/" + (page_index + 1) + "/";
+            }
+            console.log("xxx-->" + page_index);
+        }
+    }
 
-
-        </div>
-        <div class="span3 hidden-phone">
-            <div id="menuIndex"></div>
-<script src="/js/jquery.menuindex.js"></script>
-<script type="text/javascript">
-
-    $('#menuIndex').menuIndex({content: '#post'
-        ,ulClass: "span3 nav nav-list widget affix"});
-    $('body').scrollspy({offset:100});
-
+    $(document).ready(function () {
+        var totalPage = 'undefined' * 'undefined';
+        var currentPage = 'undefined' - 1;
+        $("#Pagination").pagination(totalPage, {
+            items_per_page: 'undefined',
+            current_page: currentPage,
+            callback: pageselectCallback
+        });
+    });
 </script>
-            <div>
-        </div>
+<div class="pagination pagination-centered " id="Pagination" >
+</div>
 
+
+
+        </div>
     </div>
 
 </div>

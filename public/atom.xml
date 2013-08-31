@@ -4,7 +4,7 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-08-31T02:35:51.244Z</updated>
+  <updated>2013-08-31T14:48:49.373Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
@@ -12,13 +12,457 @@
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
   <entry>
-    <title type="html"><![CDATA[]]></title>
-    <link href="http://hufeng825.github.com/2013/08/31/hibernate3/"/>
-    <id>http://hufeng825.github.com/2013/08/31/hibernate3/</id>
-    <published>2013-08-31T01:38:02.000Z</published>
-    <updated>2013-08-31T01:38:02.000Z</updated>
-    <content type="html"><![CDATA[<p>title: hibernate 笔记之<br>date: 2013-08-15 09:45:01<br>tags: [技术]<br>categories: hibernate</p>
+    <title type="html"><![CDATA[复杂页面消退的一个简单实例]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/ios13/"/>
+    <id>http://hufeng825.github.com/2013/08/31/ios13/</id>
+    <published>2013-08-31T14:42:52.000Z</published>
+    <updated>2013-08-31T14:46:30.000Z</updated>
+    <content type="html"><![CDATA[<p>如图</p>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e8680v5hirj20df09qglv.jpg" class="left" height="400" title="600">
+
+
+<p><a id="more"></a><br>实现上面的这个又两种实现方式 </p>
+<ul>
+<li><p>一种是给页面1 发广播通知 </p>
+</li>
+<li><p>另外一种就是我要介绍的</p>
+</li>
+</ul>
+<figure class="highlight"><pre> [(<span class="built_in">UINavigationController</span>*)<span class="keyword">self</span><span class="variable">.parentViewController</span><span class="variable">.presentingViewController</span>
+
+     popToRootViewControllerAnimated:<span class="literal">YES</span>];
+
+    [<span class="keyword">self</span> dismissModalViewControllerAnimated:<span class="literal">YES</span>];
+</pre></figure>
+
 ]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/hexo/" term="hexo"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[ios 开发纸 序列化]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/ios12/"/>
+    <id>http://hufeng825.github.com/2013/08/31/ios12/</id>
+    <published>2013-08-31T14:26:47.000Z</published>
+    <updated>2013-08-31T14:48:04.000Z</updated>
+    <content type="html"><![CDATA[<p>序列化</p>
+<p>参考原始文档：</p>
+<p><a href="https://github.com/mystcolor/JTObjectMapping" target="_blank">https://github.com/mystcolor/JTObjectMapping</a></p>
+<p><a id="more"></a><br>使用方法</p>
+<p>========</p>
+<p>绝大多数情况下，需要用到的就是一个方法：</p>
+<p>[NSObject objectFromJSONObject:stateObject mapping:nil];</p>
+<p>其中，把NSObject换成我们想映射成的类的名字。</p>
+<p>稍微复杂一点，假设类的属性和JSON里的key名字不是一一对应的，那么就要写一个映射关系表作为mapping参数：</p>
+<pre><code>NSDictionary <span class="variable">*mapping</span> = [NSDictionary dictionaryWithObjectsAndKeys:
+
+                         <span class="variable">@"</span>myState<span class="string">", <span class="variable">@"</span>state"</span>,
+
+                         <span class="variable">@"</span>movieList<span class="string">", <span class="variable">@"</span>movie"</span>,
+
+                         nil];
+
+[NSObject objectFromJSONObject:stateObject mapping:mapping];</code></pre>
+<p>如果再复杂一点，我们需要映射一个数组，数组的每个元素映射到一个对象，那么就用到第2个方法：</p>
+<p>[NSObject mappingWithKey:@“responseState” mapping:nil]</p>
+<p>同样，把NSObject换成数组元素对应的类，key是用来存放整个数组的那个属性。</p>
+<p>注意</p>
+<p>====</p>
+<p>JSON里的字符串，是能自动映射成NSNumber或者int型的，不需要特别写代码。如果想把一个字符串日期，映射成NSDate型，请参考原始文档。</p>
+<p>具体举个例子</p>
+<p>===========</p>
+<p>假设我们有这样一段JSON：</p>
+<p> {</p>
+<p> “state”:[</p>
+<p> {</p>
+<p> “respCode”:“0000”,</p>
+<p> “respMsg”:“1”</p>
+<p> }</p>
+<p> ],</p>
+<p> “movie”:[</p>
+<p> {</p>
+<p> “body”:“    一开始，这只是叶问的故事他生于佛山”,</p>
+<p> “pics”:“/images/jz/4779-1-20121225133147.jpg,/images/jz/4779-2-20121225133147.jpg”,</p>
+<p> “name”:“一代宗师”,</p>
+<p> “movid”:“4779”,</p>
+<p> “length”:“120”,</p>
+<p> “hasplan”:“1”,</p>
+<p> “trailor”:“/4779.m4v”,</p>
+<p> “director”:“梁朝伟 章子怡 张震 ”,</p>
+<p> “type”:“动作/传记/剧情/IMAX”,</p>
+<p> “url”:&quot;<a href="http://img.fun-guide.mobi/show?src=http://zhaohang.fun-guide.mobi:8080/tm/images/hb/4779-20121225133147.jpg&amp;w=140" target="_blank">http://img.fun-guide.mobi/show?src=http://zhaohang.fun-guide.mobi:8080/tm/images/hb/4779-20121225133147.jpg&amp;w=140</a>&quot;,</p>
+<p> “popularity”:“6”</p>
+<p> },</p>
+<p> {</p>
+<p> …</p>
+<p> }</p>
+<p> ]</p>
+<p> }</p>
+<p>现在，想把它映射到自定义的对象中去。有几种情况：</p>
+<p>第一种情况，简单地把state数组里面的第一个元素映射成一个FGStateModel类</p>
+<p>那么就是，取出这个节点：</p>
+<pre><code>NSDictionary *stateObject = <span class="string">[[self.json objectForKey:@"state"] objectAtIndex:0];</code></pre>
+<p>然后，执行映射：</p>
+<pre><code><span class="keyword">self</span>.state = [<span class="class">FGStateModel</span> <span class="method">objectFromJSONObject:</span>stateObject <span class="method">mapping:</span><span class="keyword">nil</span>];</code></pre>
+<p>第二种情况，把movie这个字典数组映射成一个数组，数组的每个元素是FGMovieModel</p>
+<pre><code><span class="class">NSArray</span> *movieObject = [<span class="keyword">self</span>.json <span class="method">objectForKey:</span>@<span class="comment">"movie"</span>];
+
+<span class="keyword">self</span>.movieList = [<span class="class">FGMovieModel</span> <span class="method">objectFromJSONObject:</span>movieObject <span class="method">mapping:</span><span class="keyword">nil</span>];</code></pre>
+<p>第三种情况，如果对象的属性和JSON名字不一样，可以使用映射表，例如我们想把上面整个json对象映射成一个 FGResponseModel 对象，其中，state数组映射成 responseState 属性，movie 数组映射成 movieList 属性。那么，我们需要告诉映射器这个数组里的元素要映射成什么对象。</p>
+<p>所以，通过 mapping 这个参数告诉它：“请把 JSON 里的 state 数组里的每个元素映射成一个 FGStateModel 对象，并且把最终的数组放到responseState这个属性里。另外，把 movie 这个数组映射成一个 FGMovieModel 数组，并且保存到 movieList 这个属性中。“</p>
+<pre><code><span class="class">NSDictionary</span> *mapping = [<span class="class">NSDictionary</span> <span class="method">dictionaryWithObjectsAndKeys:</span>
+
+                         [<span class="class">FGStateModel</span> <span class="method">mappingWithKey:</span>@<span class="comment">"responseState"</span> <span class="method">mapping:</span><span class="keyword">nil</span>], @<span class="comment">"state"</span>,
+
+                         [<span class="class">FGMovieModel</span> <span class="method">mappingWithKey:</span>@<span class="comment">"movieList"</span> <span class="method">mapping:</span><span class="keyword">nil</span>], @<span class="comment">"movie"</span>,
+
+                         <span class="keyword">nil</span>];
+
+<span class="keyword">self</span>.response = [<span class="class">FGResponseModel</span> <span class="method">objectFromJSONObject:</span><span class="keyword">self</span>.json <span class="method">mapping:</span>mapping];</code></pre>
+<figure class="highlight"><pre><span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span>
+
+
+@<span class="class"><span class="keyword">interface</span> <span class="title">FGMovieModel</span> : <span class="title">NSObject</span>
+
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">body</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">pics</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">name</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">assign</span>) <span class="title">NSInteger</span> <span class="title">movid</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSNumber</span> *<span class="title">length</span>;
+
+
+@<span class="title">end</span>
+</pre></figure>
+
+<figure class="highlight"><pre><span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span>
+
+
+@<span class="class"><span class="keyword">interface</span> <span class="title">FGResponseModel</span> : <span class="title">NSObject</span>
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSArray</span> *<span class="title">responseState</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSArray</span> *<span class="title">movieList</span>;
+
+@<span class="title">end</span>
+
+ 
+#<span class="title">import</span> &lt;<span class="title">Foundation</span>/<span class="title">Foundation</span>.<span class="title">h</span>&gt;
+
+
+@<span class="title">interface</span> <span class="title">FGStateModel</span> : <span class="title">NSObject</span>
+
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">respCode</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">respMsg</span>;
+
+
+@<span class="title">end</span>
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/hexo/" term="hexo"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[银行支付控件之 自动随机(shuffle)密码键盘的实现算法]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/ios11/"/>
+    <id>http://hufeng825.github.com/2013/08/31/ios11/</id>
+    <published>2013-08-31T14:05:28.000Z</published>
+    <updated>2013-08-31T14:22:21.000Z</updated>
+    <content type="html"><![CDATA[<p>为了广大用户的支付安全,输入密码的页面密码键盘要用随机排序,因为有版权问题无法把自己写的代码全部贴出 所以下面只把关键的洗牌算法贴出来</p>
+<h2>算法一</h2>
+<figure class="highlight"><pre>NSMutableArray *randSequence = <span class="string">[[NSMutableArray alloc] initWithCapacity:8];
+for (int ii = 0; ii &lt; 10; ++ii)
+    [randSequence addObject:[NSNumber numberWithInt:ii]]</span>;
+
+<span class="keyword">for</span> (int ii = <span class="number">9</span>; ii &gt; -<span class="number">1</span>; <span class="comment">--ii) {</span>
+    int r = arc4random() % <span class="number">9</span>
+    [randSequence exchangeObjectAtIndex:ii withObjectAtIndex:r];
+</pre></figure>
+
+<h2>算法二</h2>
+<figure class="highlight"><pre>
+@<span class="class"><span class="keyword">interface</span> <span class="title">NSMutableArray</span> (<span class="title">Shuffling</span>)
+- (<span class="title">void</span>)<span class="title">shuffle</span>;
+@<span class="title">end</span>
+
+
+//  <span class="title">NSMutableArray_Shuffling</span>.<span class="title">m</span>
+
+#<span class="title">import</span> "<span class="title">NSMutableArray_Shuffling</span>.<span class="title">h</span>"
+
+@<span class="title">implementation</span> <span class="title">NSMutableArray</span> (<span class="title">Shuffling</span>)
+
+- (<span class="title">void</span>)<span class="title">shuffle</span>
+{</span>
+    NSUInteger <span class="keyword">count</span> = [self <span class="keyword">count</span>];
+    <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; <span class="keyword">count</span>; ++i) {
+        <span class="comment">// Select a random element between i and end of array to swap with.</span>
+        NSInteger nElements = <span class="keyword">count</span> - i;
+        NSInteger n = (arc4random() % nElements) + i;
+        [self exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+}
+
+@end
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[mac 下的默认配置]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/ios10/"/>
+    <id>http://hufeng825.github.com/2013/08/31/ios10/</id>
+    <published>2013-08-31T13:45:59.000Z</published>
+    <updated>2013-08-31T14:03:31.000Z</updated>
+    <content type="html"><![CDATA[<p>请几天安装其他的shell 结果把默认的shell更改了  有没有快捷的方法更换会默认配置 <a id="more"></a>其实mac 下 有一个很简单命令可以搞定这些用户默认设置<br>打开终端社着敲敲如下的命令</p>
+<pre><code><span class="attribute">chsh</code></pre>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e866tu4f66j20a107sq3i.jpg" class="left" title="运行效果 300  400">
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/mac/" term="mac"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Xcode的持续集成指南]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/ios9/"/>
+    <id>http://hufeng825.github.com/2013/08/31/ios9/</id>
+    <published>2013-08-31T13:11:39.000Z</published>
+    <updated>2013-08-31T13:44:09.000Z</updated>
+    <content type="html"><![CDATA[<h2>采用持续集成工作流</h2>
+<p>设置MAC作为服务器，在其上运行Xcode的服务。然后确保你的本地项目，发布源代码库。要完成设立一个持续集成的工作流程，配置的机器人，不知疲倦地进行集成和时间表。<br><a id="more"></a></p>
+<h2>OS X Server的安装和配置的Xcode服务</h2>
+<p>要运行的Xcode的服务，您必须先安装运行的是Mac OS X v10.9开发者预览版OS X Server的预览。您还必须在服务器上安装Xcode开发者预览。自动构建，分析，测试，和归档您的产品，您将使用Xcode的服务。</p>
+<h3>要安装和运行Xcode的服务</h3>
+<ol>
+<li><p>转到<a href="http://developer.apple.com/downloads的，并获得OS" target="_blank">http://developer.apple.com/downloads的，并获得OS</a> X v10.9开发者预览版，OS X Server的预览，和Xcode开发者预览版的预发布版本。</p>
+</li>
+<li><p>安装OS X v10.9开发者预览版，Mac OS X Server的预览，和Xcode开发者预览版的Mac上，你会运行Xcode的服务。</p>
+</li>
+<li><p>启动服务器应用程序/应用。</p>
+</li>
+<li><p>在服务器应用程序边栏中，选择的Xcode的服务。</p>
+</li>
+<li><p>当您第一次打开Xcode���服务在一个特定的服务器上，该服务会询问您确定的Xcode版本，它应该用来执行其任务。</p>
+</li>
+<li><p>点击选择的Xcode，并选择使用的Xcode版本。</p>
+</li>
+<li><p>点击On / Off开关打开服务</p>
+</li>
+</ol>
+<p>接下来，添加你的服务器允许访问Xcode的服务团队，如资产配置的配置文件和签名证书为iOS设备构建产品开发团队。你必须是一个管理员或开发团队的代理，这样才能把服务器加进来。</p>
+<h3>要添加您的服务器开发团队</h3>
+<ol>
+<li><p>在服务器应用程序边栏中，选择的Xcode的服务。</p>
+</li>
+<li><p>在“设置”窗格中，单击“添加”按钮，旁边的开发团队标签。</p>
+</li>
+<li><p>输入您的Apple开发者证书，并选择一个团队。</p>
+</li>
+</ol>
+<p>加入团队后，Xcode的服务，您可以添加iOS开发设备运行单元测试时使用。</p>
+<h3>要添加一个iOS开发设备的Xcode服务</h3>
+<ol>
+<li><p>在服务器应用程序边栏中，选择的Xcode的服务。</p>
+</li>
+<li><p>将设备连接到服务器，并等待，直到它出现在设备列表中。</p>
+</li>
+<li><p>点击“加入队伍”按钮旁边的列表中的设备。</p>
+</li>
+</ol>
+<p>添加帐户资料库和您的服务器配置开发的Mac。你会写你的Mac上的使用Xcode代码，你就会让OS X服务器进行持续集成。您还必须发布或您当地的项目转移到资料库，可通过Xcode的服务。</p>
+<h3>你开发的Mac OS X Server的帐户添加到Xcode</h3>
+<ol>
+<li><p>在Xcode的开发Mac上，单击“帐户”首选项“窗口。</p>
+</li>
+<li><p>点击添加按钮（+），并选择“添加服务器”。</p>
+</li>
+<li><p>从服务器列表中选择服务器，输入服务器地址，然后单击“下一步”按钮。</p>
+</li>
+<li><p>指定您的连接到服务器的凭据，然后单击“添加”。</p>
+</li>
+</ol>
+<p>您可以添加到您的帐户资料库，加快结帐操作。（你也可以添加库到您的清单后，当您检查的项目）。</p>
+<h3>要添加存储库到您的帐户</h3>
+<ol>
+<li><p>在Xcode的开发Mac上，单击“帐户”首选项“窗口。</p>
+</li>
+<li><p>点击添加按钮（+），并选择“添加库。</p>
+</li>
+<li><p>在文本字段中，输入库添加的地址，然后单击“完成”按钮。</p>
+</li>
+</ol>
+<h2>Xcode的服务和团队成员共享项目</h2>
+<p>对于Xcode的服务，您的项目进行集成，它必须包含这些项目的存储库的访问。启用访问托管Git仓库在服务器上运行的Xcode服务或Git或Subversion版本库，包含你的项目添加连接信息。</p>
+<p>如果同一个团队开发，持续集成涉及到整个团队。谁的作品在产品上的人都必须能够访问所有产品的资源，使任何人都可以引起谁都可能解决问题。如果你有一个不保持源代码库中的项目或工作区，你必须检查你的文件到存储库，让其他团队成员可以在这些产品上。</p>
+<p><strong>您可以在服务器上创建一个Xcode服务器，托管Git仓库</strong><br>开发团队可以共享更改产品OS X服务器托管在一个Git仓库。创建一个Xcode服务器托管Git仓库之前，你必须：</p>
+<ol>
+<li><p>确保都有谁应该能够访问存储库服务器上的用户帐户。</p>
+</li>
+<li><p>打开系统偏好设置中的服务器上的远程登录服务。</p>
+</li>
+</ol>
+<h3>要创建一个Xcode服务器托管您的服务器上的Git仓库</h3>
+<ol>
+<li><p>在服务器应用程序边栏中，选择Xcode的服务，然后单击“存储库”按钮。</p>
+</li>
+<li><p>点击添加按钮（+），并指定存储库的信息：</p>
+<ul>
+<li>选择“主机一个Git仓库。”</li>
+<li>名称：输入资料库的名称（例如，项目名称）。</li>
+<li>访问：确定允许用户访问存储库。</li>
+</ul>
+</li>
+<li><p>单击“创建”。</p>
+<p> 新的资料库资料库列表中出现。如果你有一个发展的Mac上现有的Git管理的项目，你可以把你的变化，这个新的储存库，将其配置为远程，如未来。</p>
+</li>
+</ol>
+<h3>从发展的Mac，您可以共享现有的Git管理项目</h3>
+<p>当您共享一个项目，其中包含一个Git仓库，是当地发展的Mac，Xcode的服务可以检查出来进行集成。共享一个项目之前，你必须：</p>
+<ol>
+<li>作为OS X服务器运行Xcode的服务的管理员进行身份验证。</li>
+<li>确保服务器和Xcode的服务的，允许远程登录访问，通过安全Shell（SSH），它承载的存储库。在OS X服务器，你可以配置远程登录，在“系统偏好设定”中的“共享”窗格中。</li>
+</ol>
+<h4>要共享项目</h4>
+<ol>
+<li><p>打开项目发展的Mac上，并选择源控制&gt; PROJECT_NAME &gt;配置PROJECT_NAME。</p>
+</li>
+<li><p>按一下远程控制。</p>
+</li>
+<li><p>点击“添加”按钮（+）。</p>
+</li>
+<li><p>选择“创建新的远程。</p>
+</li>
+<li><p>选择一台服务器。</p>
+</li>
+<li><p>输入远程名称。</p>
+</li>
+<li><p>单击“创建”。</p>
+</li>
+<li><p>单击“完成”。</p>
+</li>
+<li><p>这使得共享资源库的上游库项目存​​储库。</p>
+</li>
+</ol>
+<h3>您可以创建一个新项目开发的Mac OS X服务器和主机守则</h3>
+<p>当您创建您的开发Mac上的项目，你可以创建一个共享库。创建一个共享的项目之前，你必须：</p>
+<ol>
+<li>作为OS X服务器运行Xcode的服务的管理员进行身份验证。</li>
+<li>确保服务器和Xcode的服务的，允许远程登录访问，通过安全Shell（SSH），它承载的存储库。在OS X服务器，你可以配置远程登录，在“系统偏好设定”中的“共享”窗格中。</li>
+</ol>
+<h4>要创建共享项目</h4>
+<ol>
+<li><p>选择“文件”&gt;“新建”&gt;“项目。</p>
+</li>
+<li><p>为您的项目中选择一个模板。</p>
+</li>
+<li><p>指定项目的选项，并单击“下一步”。</p>
+</li>
+<li><p>指定的位置。</p>
+</li>
+<li><p>选择“创建git仓库”选项。</p>
+</li>
+<li><p>确定服务器。</p>
+</li>
+</ol>
+<p>单击“创建”。</p>
+<p>您可以使用Git来管理你的开发Mac上的非托管的工作区目录<br>当你创建一个Xcode的工作区或项目，你必须包括一个Git仓库中生成的工作区目录的选项。如果您没有选择该选项，您的工作区目录不包括一个Git仓库。与他人使用Git版本控制系统要共享工作区目录，在该目录中，你必须初始化一个Git仓库。</p>
+<p>您可以使用Subversion的管理项目<br>Xcode的服务可以连接你的Subversion版本库，并从它的检查项目。</p>
+<h2>使用搜索引擎来生成，运行静态分析，测试和存档</h2>
+<p>您可以运行一个项目的集成通过三个计划行动：</p>
+<ol>
+<li>分析，进行静态分析。</li>
+<li>测试，运行一组测试案例。</li>
+<li>存档，建立一个归档的产品，计划建成。</li>
+</ol>
+<p>您可以手动执行这些操作，为您做出更改产品。然而，手动集成可以是乏味且容易出错。例如，你可能会忘记发布一个小的变化，打破你的队友的单元测试之前进行测试操作。Xcode的服务提供了一个具有成本效益的方式自动执行集成：机器人。机器人会自动执行你的集成：</p>
+<ol>
+<li>每次更改发布到存储库。</li>
+<li>上定期（比如说，每天进行集成，需要很长的时间才能完成）。<br>Â 机器人运行通过Xcode的服务，以在资源库中的项目的当前版本进行集成，是一个过程。包括一个集成构建，分析，测试，归档产品上。可以是成功的积分（即，所有的整合动作传递没有问题）的或不成功的。计划中定义的集成自动化，您必须共享该方案，并创建一个或多个机器人来执行这些集成。</li>
+</ol>
+<p>要充分利用您的产品开发流程的持续集成环境中，遵循以下做法：</p>
+<ol>
+<li><p>制定适当的单元测试套件和测试用例，显影单元测试后，包括他们在你的机器人运行计划。要了解关于单元测试的更多信息，请参见Xcode的单元测试指南<br>为了帮助确保您所做的更改都破不了您或其他人后，你应​​该配合这些变化与单元测试，确定是否规定一种或一组序列功能的方法。有些球队在它的头把这种方法首先开发测试，通过测试的方法，然后执行。</p>
+</li>
+<li><p>执行静态分析，你应该在您的集成包括静态分析。<br>静态分析是深刻检查你的代码，下面的代码路径，您的应用程序可能不遵循正常的发展过程中。这个过程揭示难以发现的编码错误，还确定了在你的代码不遵循建议的API的用法，比如基金会和AppKit的成语。</p>
+</li>
+<li><p>确保您的产品建立和正确打包。您您的产品作出了重大变化，特别是结构性的变化，如添加或删除文件后，应归档。让你的机器人自动为您归档。<br>当您的产品中包含的结构性问题，Xcode可以创建一个归档它为你的团队成员之间共享或提交到App Store。建立和归档产品的能力是你的代码更改的正确性的主要指标。</p>
+</li>
+</ol>
+<h2>分享计划</h2>
+<p>共享的计划被确定为在一个项目中共享和发布共享资源库，以及与其他共享项目文件。你可以分享计划之前，你必须检查的项目。</p>
+<h3>要共享计划</h3>
+<ol>
+<li><p>开发的Mac上，打开的项目，其中包含共享的计划。</p>
+</li>
+<li><p>选择产品&gt;计划&gt;管理计划。</p>
+</li>
+<li><p>分享的计划，选择共享选项，并单击“确定”。</p>
+</li>
+<li><p>选择源控制&gt;提交。</p>
+</li>
+<li><p>选择共享的资料夹。</p>
+</li>
+<li><p>指定你提交的信息：</p>
+<ul>
+<li>在文本字段中输入你的提交信息。</li>
+<li>选择“推到远程”选项（如果您的项目使用Git管理）。</li>
+</ul>
+</li>
+<li><p>点击“提交文件”按钮。</p>
+</li>
+</ol>
+<h2>创建机器人</h2>
+<p>共享计划后，你可以创建一个机器人来执行持续集成。</p>
+<p>要创建一个僵尸</p>
+<p>开发的Mac上，打开的项目，其中包含计划，定义的行动，以自动化。</p>
+<p>选择产品&gt;创建BOT，指定机器人的标识属性，并单击“下一步”。</p>
+<p>与指定库凭据机器人，并单击“下一步”。</p>
+<p>指定的整合时间表，行动的机器人来执行，以及是否清洁产品前建设。</p>
+<p>附表：指定往往机器人集成。</p>
+<p>定期：整合每小时，每天或每周。<br>在提交更改时集成发布到存储库。<br>手册：机器人不会自动整合。<br>操作：选择机器人作为整合的一部分执行的行动。</p>
+<p>清洁：指定机器人是否重用以前的版本。</p>
+<p>单击“下一步”。</p>
+<p>如果您选择创建机器人执行第一次整合，整合的结果，出现在日志中的导航仪。</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/hexo/" term="hexo"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[xcode 5.0 的持续继承]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/ios8/"/>
+    <id>http://hufeng825.github.com/2013/08/31/ios8/</id>
+    <published>2013-08-31T12:41:27.000Z</published>
+    <updated>2013-08-31T13:42:46.000Z</updated>
+    <content type="html"><![CDATA[<p>&gt;<br>Xcode的支持持续集成通过Xcode的服务流程。Xcode的服务，可在OS X服务器，自动一体化建设过程中，您的应用程序的分析，测试和归档。<a id="more"></a>从开发的Mac，您可以创建机器人上运行一个单独的服务器，在那里他们执行这些集成。机器人可以帮助确保您的产品始终处于释放状态，当有故障时，服务会通知你的人或代码变化引起的故障。</p>
+<img src="http://img.blog.csdn.net/20130617220248765" class="left" width="400" height="600">
+
+
+<hr>
+<h2>概览</h2>
+<p>按照本文档中列出的步骤，建立一个持续集成的工作流程，使用Xcode和Xcode服务。<br>    注：持续集成工作流程通常依赖于一个或多个开发Mac上运行Xcode和一个独立的OS X服务器运行Xcode的服务。但是，您可以安装开发的Mac OS X Server的。这样的配置可以有助于评估如何采用持续集成。之后，你会发现它有一个专门的OSX服务器运行Xcode的托管服务，你的资料库，并远程执行集成更多有用的。</p>
+<hr>
+<h2>设置和自定义的Xcode服务</h2>
+<pre><code>即使你从来没有架设一台服务器，你会发现OSX服务器上设立了Xcode服务是简单的过程。后服务运行起来，你可以添加开发设备，配置机器人，并指定发布标准。</code></pre>
+<p><a href="https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/xcode_guide-continuous_integration/200-Adopting_a_Continuous_Integration_Workflow/adopt_continuous_integration.html#//apple_ref/doc/uid/TP40013292-CH3-SW1" target="_blank">有关章节： “采用持续集成工作流”</a></p>
+<hr>
+<h2>创建和运行僵尸</h2>
+<pre><code>机器人的自动化工作流程的心脏。机器人构建和测试产品与您选择的方案。随着Xcode的服务能够访问你的项目的源代码库中，您可以创建并安排定期运行或在每个源代码提交的机器人。您也可以设定机器人发送邮件通知其集成的成功或失败。</code></pre>
+<p><a href="https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/xcode_guide-continuous_integration/ConfigureBots/ConfigureBots.html#//apple_ref/doc/uid/TP40013292-CH9-SW1" target="_blank">有关章节： “配置机器人执行连续集成”</a></p>
+<h2>监控和​​管理集成</h2>
+<pre><code>机器人的自动化工作流程的心脏。机器人构建和测试您的产品，您所选择的计划。Xcode的服务提供了日志管理机器人，查看测试结果，并读取整合日志导航。该服务还提供了通过一个网页，在那里您可以查看bot活动的总结以及集成细节的结果。</code></pre>
+<p><a href="https://daw.apple.com/cgi-bin/WebObjects/DSAuthWeb.woa/wa/login?appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&amp;path=%2F%2Flibrary%2Fprerelease%2Fios%2Fdocumentation%2FIDEs%2FConceptual%2Fxcode_guide-continuous_integration%2F300-Working_with_Bots%2Fview_integration_results%2Ehtml#//apple_ref/doc/uid/TP40013292-CH4-SW1" target="_blank">有关章节： “工作与机器人”</a></p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
   </entry>
   <entry>
     <title type="html"><![CDATA[快速清除subviews之 隐私循环]]></title>
@@ -917,7 +1361,7 @@ Thread.sleep(30000);
 <ul>
 <li><p>主题Topic(Destination) – 一个提供者命名的主题对象，客户端将会使用这个命名的主题对象</p>
 </li>
-<li><p>主题链接工厂(TopciConnectionFactory) – 客户端使用主题链接工厂创建链接主题 ConnectionTopic来取得与JMS消息Pub/Sub提供者���链接</p>
+<li><p>主题链接工厂(TopciConnectionFactory) – 客户端使用主题链接工厂创建链接主题 ConnectionTopic来取得与JMS消息Pub/Sub提供者的链接</p>
 </li>
 <li><p>链接主题(ConnectionTopic) – 一个活动的链接主题存在发布者与订阅者之间</p>
 </li>
@@ -951,7 +1395,7 @@ Thread.sleep(30000);
 <p>昨晚同事拿了一个app 发现其app 内部页面打开了appstore  并没有唤起手机自带的appstore， 刚开始以为是用webview 加载的<br><a id="more"></a> ，可是自己些了一个demo 发现并不是那样一回事 用webview 加载appstore 地址 会被js 自动吊起本地的appstore，<br>下面是我的发给同事的邮件 直接贴下来</p>
 </blockquote>
 <p>我们都绕了弯路 一直以为是用webview 加载的。 我下班做了测试 发现用webview 加载appstore的地址 ，ios 会根据User-Agent 自动判断 唤起本地的app store，其效果跟用[[UIApplicationsharedApplication] openURL:[NSURL URLWithString:@“”]];是一样的。</p>
-<p>后来我尝试改写User-Agent  发现打开的页面是电脑打开的页面一样的 并不是我们通过手机 打开app store 看到的页面。</p>
+<p>后来我尝试改写User-Agent  发现打开的页面是���脑打开的页面一样的 并不是我们通过手机 打开app store 看到的页面。</p>
 <p>后来我看苹果的文档 发现 他们提供了一个类SKStoreProductViewController专门来干这个事情的</p>
 <p><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html" target="_blank"><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html">https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html</a></a></p>
 <p>实现效果如下图</p>
@@ -1701,481 +2145,5 @@ publick <span class="keyword">static</span> <span class="keyword">void</span> ma
 ]]></content>
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
     <category scheme="http://hufeng825.github.com/categories/hibernate/" term="hibernate"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[hibernate 笔记之 session]]></title>
-    <link href="http://hufeng825.github.com/2013/08/14/hibernate1/"/>
-    <id>http://hufeng825.github.com/2013/08/14/hibernate1/</id>
-    <published>2013-08-14T02:36:16.000Z</published>
-    <updated>2013-08-31T01:38:02.000Z</updated>
-    <content type="html"><![CDATA[<h2>session 的概述</h2>
-<a id="more"></a>
-
-<ol>
-<li><p>session 接口是hibernate 向应用程序提供操作数据库最主要的接口，他提供了基本的保存，更新，删除和加载java对象的方法</p>
-</li>
-<li><p>session 具有一个缓存对象，位于缓存中的对象成为持久化对象，它和数据库中的相关记录对应，session能够在某些时间点，按照缓存中的对象变化来执行相关的sql语句。来同步更新数据库，这一过程被称为清理缓存</p>
-</li>
-<li><p>站在持久化的角度，hibernate 把对象分成四种状态：持久化状态，临界状态，游流状态 删除状态 session的特定方法能使对象从一个状态转换成另一个状态</p>
-</li>
-</ol>
-<hr>
-<h2>Session 接口</h2>
-<p>Session 是应用程序与数据库之间交互操作的一个单线程对象,是 Hibernate 运作的中心,所有持久化对象必须在 session 的管理下才可以进 行持久化操作。此对象的生命周期很短。Session 对象有一个一级缓存,显 式执行 flush 之前,所有的持久层操作的数据都缓存在 session 对象处。相 当于 JDBC 中的 Connection。</p>
-<p>• 持久化类与 Session 关联起来后就具有了持久化的能力。</p>
-<p>• Session 类的方法:</p>
-<ul>
-<li><p>取得持久化对象的方法: get() load()</p>
-</li>
-<li><p>持久化对象都得保存,更新和删除: save(),update(),saveOrUpdate(),delete()</p>
-</li>
-<li><p>开启事务: beginTransaction().</p>
-</li>
-<li><p>管理 Session 的方法:isOpen(),flush(), clear(), evict(), close()等</p>
-</li>
-</ul>
-<figure class="highlight"><pre>import java<span class="preprocessor">.util</span><span class="preprocessor">.Date</span><span class="comment">;</span>
-import java<span class="preprocessor">.util</span><span class="preprocessor">.UUID</span><span class="comment">;</span>
-
-import org<span class="preprocessor">.hibernate</span><span class="preprocessor">.Hibernate</span><span class="comment">;</span>
-import org<span class="preprocessor">.hibernate</span><span class="preprocessor">.Session</span><span class="comment">;</span>
-import org<span class="preprocessor">.hibernate</span><span class="preprocessor">.Transaction</span><span class="comment">;</span>
-
-import <span class="keyword">com</span><span class="preprocessor">.vince</span><span class="preprocessor">.entity</span><span class="preprocessor">.User</span><span class="comment">;</span>
-import <span class="keyword">com</span><span class="preprocessor">.vince</span><span class="preprocessor">.util</span><span class="preprocessor">.HibernateUtil</span><span class="comment">;</span>
-
-
-public class Test {
-	
-	
-	public static void evict(){
-		
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		
-		User user = new User(<span class="string">"test-7"</span>,<span class="number">17</span>,new Date())<span class="comment">;</span>
-		session<span class="preprocessor">.save</span>(user)<span class="comment">;</span>
-		
-		session<span class="preprocessor">.evict</span>(user)<span class="comment">;//把对象从session中清除,在批量处理时，避免session中缓存的对象太多，会导致内存溢出</span>
-//		session<span class="preprocessor">.clear</span>()<span class="comment">;//清除session中所有的缓存对象</span>
-		User user2 = (User)session<span class="preprocessor">.load</span>(User<span class="preprocessor">.class</span>, user<span class="preprocessor">.getId</span>())<span class="comment">;</span>
-		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(user2)<span class="comment">;</span>
-		
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-	}
-	
-	
-	
-	<span class="comment">/**
-	 * merge方法：合并,保存或更新
-	 * 
-	 * 
-	 */</span>
-	public static void merge(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		
-		//情况一：临时对象(新创建的对象)
-		//<span class="number">1</span>)user1 的状态是瞬时对象时，创建一个新的对象user2,把user1对象的属性拷贝到新建的user2对象中,持久化这个user2对象,执行insert语句
-//		User user1 = new User()<span class="comment">;</span>
-//		user1<span class="preprocessor">.setAge</span>(<span class="number">22</span>)<span class="comment">;</span>
-//		user1<span class="preprocessor">.setName</span>(<span class="string">"test--3"</span>)<span class="comment">;</span>
-//		user1<span class="preprocessor">.setCreateDate</span>(new Date())<span class="comment">;</span>
-//		
-//		
-//		User user2 = (User)session<span class="preprocessor">.merge</span>(user1)<span class="comment">;</span>
-//		
-//		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(user1==user2)<span class="comment">;</span>
-		
-		//情况二：user1 的状态是游离对象时，Session缓存中是否存在ID为与user1相同的持久化对象
-		//(<span class="number">1</span>)如果有
-//		User user2 = (User)session<span class="preprocessor">.load</span>(User<span class="preprocessor">.class</span>, <span class="number">1</span>)<span class="comment">;</span>
-//		User user1 = new User()<span class="comment">;</span>
-//		user1<span class="preprocessor">.setAge</span>(<span class="number">20</span>)<span class="comment">;</span>
-//		user1<span class="preprocessor">.setCreateDate</span>(new Date())<span class="comment">;</span>
-//		user1<span class="preprocessor">.setId</span>(<span class="number">1</span>)<span class="comment">;</span>
-//		user1<span class="preprocessor">.setName</span>(<span class="string">"test---4"</span>)<span class="comment">;</span>
-//		session<span class="preprocessor">.merge</span>(user1)<span class="comment">;</span>
-		
-		
-		
-		//情况三：如果session中不存在该对象，那么去数据库中查询是否存在该ID的记录，
-		//如果存在，那么就加载这条记录到session中(user2)，比较两个对象属性是否一致，
-		//如果不一致，就把user1的属性拷贝到user2中，执行update语句
-		//如果一致，就不执行任何操作
-//		User user1 = new User()<span class="comment">;</span>
-//		user1<span class="preprocessor">.setAge</span>(<span class="number">22</span>)<span class="comment">;</span>
-////		user1<span class="preprocessor">.setCreateDate</span>(new Date())<span class="comment">;</span>
-//		user1<span class="preprocessor">.setId</span>(<span class="number">5</span>)<span class="comment">;</span>
-//		user1<span class="preprocessor">.setName</span>(<span class="string">"aaa"</span>)<span class="comment">;</span>
-//		session<span class="preprocessor">.merge</span>(user1)<span class="comment">;</span>
-		
-		//情况四：如果session中不存在该对象，那么去数据库中查询是否存在该ID的记录，
-		//如果不存在，创建一个新的对象user2,把user1对象的属性拷贝到新建的user2对象中,
-		//持久化这个user2对象,执行insert语句
-		User user1 = new User()<span class="comment">;</span>
-		user1<span class="preprocessor">.setAge</span>(<span class="number">22</span>)<span class="comment">;</span>
-		user1<span class="preprocessor">.setCreateDate</span>(new Date())<span class="comment">;</span>
-		user1<span class="preprocessor">.setId</span>(<span class="number">6</span>)<span class="comment">;</span>
-		user1<span class="preprocessor">.setName</span>(<span class="string">"bbb"</span>)<span class="comment">;</span>
-		User user2 = (User)session<span class="preprocessor">.merge</span>(user1)<span class="comment">;</span>
-		
-		
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-		
-	}
-	
-	<span class="comment">/**
-	 * saveOrUpdate 方法：执行保存或更新
-	 * 1、如果实体对象是临时状态（没有ID），那么该方法将执行保存操作
-	 * 2、如果实体对象是游离状态（有ID），那么该方法以将执行更新操作
-	 * 	如果数据库不存在该ID，那么更新将抛出异常
-	 * 3、判断ID是否为空（整型ID 0 空），根据映射文件中的unsaved-value
-	 * 	属性值来判断
-	 */</span>
-	public static void saveOrUpdate(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		
-		User user = new User()<span class="comment">;</span>
-		user<span class="preprocessor">.setAge</span>(<span class="number">21</span>)<span class="comment">;</span>
-		user<span class="preprocessor">.setName</span>(<span class="string">"test--1"</span>)<span class="comment">;</span>
-		user<span class="preprocessor">.setCreateDate</span>(new Date())<span class="comment">;</span>
-		user<span class="preprocessor">.setId</span>(<span class="number">3</span>)<span class="comment">;</span>
-		
-		session<span class="preprocessor">.saveOrUpdate</span>(user)<span class="comment">;</span>
-		
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-	}
-	
-	
-	public static void delete(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		
-//		User user = new User()<span class="comment">;</span>
-//		user<span class="preprocessor">.setId</span>(<span class="number">6</span>)<span class="comment">;</span>
-//		user<span class="preprocessor">.setName</span>(<span class="string">"xxx"</span>)<span class="comment">;</span>
-		
-		User user = (User)session<span class="preprocessor">.load</span>(User<span class="preprocessor">.class</span>, <span class="number">3</span>)<span class="comment">;</span>
-		
-		session<span class="preprocessor">.delete</span>(user)<span class="comment">;</span>
-		
-		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(user<span class="preprocessor">.getId</span>())<span class="comment">;</span>
-		
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-	}
-	
-	<span class="comment">/**
-	 * 更新对象:通过update方法
-	 * 1、如果数据库中不存在ID的记录，抛出异常
-	 * 2、默认生成的SQL语句会根据ID为条件更新所有字段，
-	 * 如果只更新发生变化的字段，那么在映射文件的class配置中添加 dynamic-update=true
-	 * 
-	 */</span>
-	public static void update2(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		
-//		User user = new User(<span class="string">"Tom-1"</span>,<span class="number">23</span>,new Date())<span class="comment">;</span>
-		User user = (User)session<span class="preprocessor">.get</span>(User<span class="preprocessor">.class</span>, <span class="number">1</span>)<span class="comment">;</span>
-		
-		user<span class="preprocessor">.setName</span>(<span class="string">"888"</span>)<span class="comment">;</span>
-		session<span class="preprocessor">.update</span>(user)<span class="comment">;</span>
-		
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-	}
-	<span class="comment">/**
-	 * 更新对象
-	 * 通过session 的脏数据机制
-	 */</span>
-	public static void update1(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		User user = (User)session<span class="preprocessor">.load</span>(User<span class="preprocessor">.class</span>, <span class="number">1</span>)<span class="comment">;</span>
-		user<span class="preprocessor">.setName</span>(<span class="string">"xxx"</span>)<span class="comment">;</span>
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-	}
-	
-	<span class="comment">/**
-	 * load方法：
-	 * 1、如果数据库不存在记录，那么将抛出异常
-	 * 2、load方法先执行延迟加载，返回代理对象，在真正使用到该对象时才会
-	 * 从数据库中查询
-	 * 3、初始化代理对象的方法：
-	 * （1）调用代理对象的非主键属性
-	 * （2）Hibernate.initialize()方法初始���代理对象
-	 */</span>
-	public static User load(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		User user = (User)session<span class="preprocessor">.load</span>(User<span class="preprocessor">.class</span>, <span class="number">5</span>)<span class="comment">;</span>
-		
-//		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(user<span class="preprocessor">.getName</span>())<span class="comment">;</span>
-		Hibernate<span class="preprocessor">.initialize</span>(user)<span class="comment">;//初始化代理对象</span>
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-		
-		return user<span class="comment">;</span>
-	}
-	
-	<span class="comment">/**
-	 * get方法：
-	 * 1、立即从数据库中查询数据
-	 * 2、如果数据库不存在记录，那么将返回null
-	 */</span>
-	public static void get(){
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		Class c = User<span class="preprocessor">.class</span><span class="comment">;</span>
-		User user = (User)session<span class="preprocessor">.get</span>(c, <span class="number">1</span>)<span class="comment">;</span>
-		if(user!=null){
-		//修改时间
-		user<span class="preprocessor">.setCreateDate</span>(new Date())<span class="comment">;</span>
-		}
-		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(user)<span class="comment">;</span>
-		
-//		session<span class="preprocessor">.flush</span>()<span class="comment">;//刷新缓冲</span>
-		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-	}
-	
-	<span class="comment">/**
-	 * save()方法以会立即为持久化对象设置主键，所有在任何时候会执行insert语句
-	 * persist()，如果在事务内部那么与save()一样，如果在事务外部，不会立即执行
-	 * insert语句
-	 */</span>
-	public static void save(){
-//		User user = new User(<span class="string">"jack"</span>,<span class="number">22</span>,new Date())<span class="comment">;</span>
-		User user = new User()<span class="comment">;</span>
-		user<span class="preprocessor">.setName</span>(<span class="string">"jack"</span>)<span class="comment">;</span>
-		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
-//		Transaction tx = session<span class="preprocessor">.beginTransaction</span>()<span class="comment">;</span>
-		session<span class="preprocessor">.save</span>(user)<span class="comment">;</span>
-//		session<span class="preprocessor">.persist</span>(user)<span class="comment">;</span>
-		
-//		tx<span class="preprocessor">.commit</span>()<span class="comment">;</span>
-		
-		session<span class="preprocessor">.close</span>()<span class="comment">;</span>
-		
-	}
-
-	public static void main(String[] args) {
-//		save()<span class="comment">;</span>
-//		get()<span class="comment">;</span>
-//		User user = load()<span class="comment">;</span>
-//		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(user)<span class="comment">;</span>
-		
-//		update1()<span class="comment">;</span>
-//		update2()<span class="comment">;</span>
-		
-//		delete()<span class="comment">;</span>
-//		saveOrUpdate()<span class="comment">;</span>
-//		merge()<span class="comment">;</span>
-//		evict()<span class="comment">;</span>
-		
-//		System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(UUID<span class="preprocessor">.randomUUID</span>()<span class="preprocessor">.toString</span>())<span class="comment">;</span>
-	}
-
-}
-</pre></figure>
-
-]]></content>
-    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
-    <category scheme="http://hufeng825.github.com/categories/hibernate/" term="hibernate"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[工作四年多了]]></title>
-    <link href="http://hufeng825.github.com/2013/08/08/mood/"/>
-    <id>http://hufeng825.github.com/2013/08/08/mood/</id>
-    <published>2013-08-08T09:16:03.000Z</published>
-    <updated>2013-08-31T01:38:02.000Z</updated>
-    <content type="html"><![CDATA[<h2>工作好几年了 谈谈自己的一些感想吧</h2>
-<p>最近几件事情触动挺大的，<br><a id="more"></a></p>
-<p>1：跟侯的差距越来越远了， 不到三年 侯做到了很多我没做到的事情1-)自考了北大计算机系 2-)结识了年薪几十万的漂亮嫂子 3-）拿到了驾照 4-）在燕郊买了房子</p>
-<p>虽然彼此间还是隔三差五的聚聚，但是间隔越来越长了，大家都在忙，而我是真的在瞎忙 忙的没有任何意义。</p>
-<p>2：家里的压力，家里的压力从催着找女朋友结婚 到现在的赶紧攒首付买房子，之前很天真的甚至有些自私的想 不结婚不要孩子，可是现在觉得真的很对不起两个老人的</p>
-<p>3：同事和朋友，现在还记得几年前 sally姐说的那句话 同事永远成不了朋友。 有一次跟周妈谈起旺哥为什么不喜欢带新人，周妈谈了一口气说 旺旺是被现在这个社会伤的太深了了。虽然不太清楚在旺哥身上发生过什么 但是 回想这几年发生在自己身上的事情 也能体会的到写。现在这年头 不要期待着知恩图报 祈求不要恩将仇报就好了。 </p>
-<p>4：多一事不如少一事。  自己的经历应该放到有价值的人和事上面。 </p>
-<p>5：金钱虽然不是唯一的判断标准 但是却是最有效的衡量一个人的办法。</p>
-<p>6：珍惜零散的时间 </p>
-<p>7：英语 very important</p>
-<p>8：一些事情心里明白就行了 不要说出来</p>
-<img src="http://img.my.csdn.net/uploads/201101/25/3619941_1295933551y8U4.jpg" class="right profile" width="300" height="500" title="昔日的小伙伴">
-]]></content>
-    <category scheme="http://hufeng825.github.com/tags/情感/" term="情感"/>
-    <category scheme="http://hufeng825.github.com/categories/情感/" term="情感"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[hexo教程1 如何安装hexo]]></title>
-    <link href="http://hufeng825.github.com/2013/08/08/hexo1/"/>
-    <id>http://hufeng825.github.com/2013/08/08/hexo1/</id>
-    <published>2013-08-08T06:21:33.000Z</published>
-    <updated>2013-08-31T01:38:02.000Z</updated>
-    <content type="html"><![CDATA[<p><a id="more"></a></p>
-<h2>前言</h2>
-<blockquote>
-<p>很早之前就想自己搭建一个博客，但是无奈已没有时间 而没有银子购买服务器，把家里的mac 当做服务器搭建wordpress但是不能保证速度和访问时间。偶然间发现了octopress,于是兴冲冲的折腾起来，最后搭建成功了，废了很大的经历，最主要的原因是还是网络原因，octopress 安装需要下载大量的安装依赖非常繁琐，到处是坑。后来偶然间发现了hexo，发现要比octopress 好用的太多了。于是果断废弃octopress 转头hexo</p>
-</blockquote>
-<hr>
-<h2>概念理解</h2>
-<p>hexo 是基于node.js 的 和rails 差不多。再次使用前 需要安装两个插件</p>
-<ul>
-<li>nvm （版本控制）<br>nodejs version manager,可以把它理解为 rails里面的rvm  </li>
-<li>npm （包管理机制 ）<br> nodejs package manager,可以把它理解为 rails 里面的bundle </li>
-</ul>
-<hr>
-<h3>安装步骤(mac)</h3>
-<blockquote>
-<p>只针对于mac 其他的请到官网查看相应平台的安装方法<a href="http://zespia.tw/hexo" target="_blank">http://zespia.tw/hexo</a> </p>
-</blockquote>
-<hr>
-<h4>npm</h4>
-<hr>
-<p>打开终端 执行一下命令</p>
-<figure class="highlight"><pre><span class="title">git</span> clone <span class="url">git://github.com/creationix/nvm.git</span> ~/nvm
-</pre></figure>
-
-<p>安装完毕后，在~/.bash_profile或~/.bashrc加入以下内容</p>
-<figure class="highlight"><pre>. ~<span class="regexp">/nvm/</span>nvm.sh`<span class="javascript"></span>
-</pre></figure>
-
-<p>执行</p>
-<figure class="highlight"><pre><span class="comment">source</span> <span class="string">.</span><span class="comment">bash_profile</span> <span class="comment">//或者</span> <span class="comment">source</span> <span class="string">.</span><span class="comment">bashrc
-</pre></figure>
-
-<p>之后即可使用 nvm 来安装 Node.js</p>
-<figure class="highlight"><pre>   nvm install v0<span class="number">.8</span><span class="number">.14</span>
-   nvm <span class="keyword">use</span> v0<span class="number">.8</span><span class="number">.14</span>
-   nvm <span class="keyword">alias</span> <span class="keyword">default</span> v0<span class="number">.8</span><span class="number">.14</span>
-</pre></figure>
-
-<hr>
-<h4>hexo</h4>
-<p>安装</p>
-<figure class="highlight"><pre><span class="title">npm</span> install -g hexo
-</pre></figure>
-
-<p>更新</p>
-<figure class="highlight"><pre>npm <span class="operator"><span class="keyword">update</span> -g
-</pre></figure>
-
-<hr>
-<h3>设定</h3>
-<p>编辑 _config.yml</p>
-<p>下面贴出我的配置 大家自行根据各自的配置进行相应修改</p>
-<pre><code>// <span class="class">Site</span>
-<span class="method">title:</span> 阿峰的技术窝窝
-<span class="method">subtitle:</span> 专注于移动互联网
-<span class="method">description:</span> <span class="class">C</span>/<span class="class">C</span>++/<span class="class">Linux</span>/嵌入式/<span class="class">IOS</span>/<span class="class">WEB</span>/
-<span class="method">author:</span> <span class="class">Jason</span> <span class="class">Hu</span>
-<span class="method">email:</span> hufeng@hufengvip.cn
-<span class="method">language:</span> zh-<span class="class">CN</span>
-
-// <span class="class">URL</span>
-// <span class="class">If</span> your site is put in a subdirectory, set url as <span class="string">'http://yoursite.com/child'</span> and root as <span class="string">'/child/'</span>
-<span class="method">url:</span> <span class="method">http:</span>//hufeng825.github.com
-<span class="method">root:</span> /
-<span class="method">permalink:</span> :year/:month/:day/:title/
-<span class="method">tag_dir:</span> tags
-<span class="method">archive_dir:</span> archives
-<span class="method">category_dir:</span> categories
-<span class="method">code_dir:</span> downloads/code
-
-// <span class="class">Writing</span>
-<span class="method">new_post_name:</span> :title.md # <span class="class">File</span> name of new posts
-<span class="method">default_layout:</span> post
-<span class="method">auto_spacing:</span> <span class="keyword">false</span> # <span class="class">Add</span> spaces between asian characters and western characters
-<span class="method">titlecase:</span> <span class="keyword">false</span> # <span class="class">Transform</span> title into titlecase
-<span class="method">max_open_file:</span> <span class="number">100</span>
-<span class="method">filename_case:</span> <span class="number">0</span>
-<span class="method">highlight:</span>
-  <span class="method">enable:</span> <span class="keyword">true</span>
-  <span class="method">line_number:</span> <span class="keyword">true</span>
-  <span class="method">tab_replace:</span>
-
-// <span class="class">Category</span> &amp; <span class="class">Tag</span>
-<span class="method">default_category:</span> <span class="class">IOS</span>
-<span class="method">category_map:</span>
-<span class="method">tag_map:</span>
-
-// <span class="class">Archives</span>
-// <span class="number">2</span>: <span class="class">Enable</span> pagination
-// <span class="number">1</span>: <span class="class">Disable</span> pagination
-// <span class="number">0</span>: <span class="class">Fully</span> <span class="class">Disable</span>
-<span class="method">archive:</span> <span class="number">2</span>
-<span class="method">category:</span> <span class="number">2</span>
-<span class="method">tag:</span> <span class="number">2</span>
-
-// <span class="class">Server</span>
-// <span class="class">Hexo</span> uses <span class="class">Connect</span> as a server
-// <span class="class">You</span> can customize the logger format as defined in
-// <span class="method">http:</span>//www.senchalabs.org/connect/logger.html
-<span class="method">port:</span> <span class="number">4000</span>
-<span class="method">logger:</span> <span class="keyword">false</span>
-<span class="method">logger_format:</span>
-
-// <span class="class">Date</span> / <span class="class">Time</span> format
-// <span class="class">Hexo</span> uses <span class="class">Moment</span>.js to parse and display date
-// <span class="class">You</span> can customize the date format as defined in
-// <span class="method">http:</span>//momentjs.com/docs/#/displaying/format/
-<span class="method">date_format:</span> <span class="class">YYYY</span> <span class="class">MMM</span> <span class="class">D</span>
-<span class="method">time_format:</span> <span class="class">H</span>:<span class="method">mm:</span>ss
-
-// <span class="class">Pagination</span>
-// <span class="class">Set</span> per_page to <span class="number">0</span> to disable pagination
-<span class="method">per_page:</span> <span class="number">10</span>
-<span class="method">pagination_dir:</span> page
-
-// <span class="class">Disqus</span>
-<span class="method">disqus_shortname:</span>
-
-// <span class="class">Extensions</span>
-// <span class="class">Plugins</span>: <span class="method">https:</span>//github.com/tommy351/hexo/wiki/<span class="class">Plugins</span>
-// <span class="class">Themes</span>: <span class="method">https:</span>//github.com/tommy351/hexo/wiki/<span class="class">Themes</span>
-
-<span class="method">plugins:</span>
-- hexo-generator-sitemap
-
-
-<span class="method">theme:</span> bootstrap
-<span class="method">exclude_generator:</span>
-
-// <span class="class">Deployment</span>
-// <span class="class">Docs</span>: <span class="method">http:</span>//zespia.tw/hexo/docs/deploy.html
-<span class="method">deploy:</span> 
-  <span class="method">type:</span> github
-  <span class="method">repository:</span> <span class="method">https:</span>//github.com/hufeng825/hufeng825.github.io.git
-  <span class="method">branch:</span> master</code></pre>
-]]></content>
-    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
-    <category scheme="http://hufeng825.github.com/categories/hexo/" term="hexo"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[散文]]></title>
-    <link href="http://hufeng825.github.com/2013/08/08/散文/"/>
-    <id>http://hufeng825.github.com/2013/08/08/散文/</id>
-    <published>2013-08-08T02:29:16.000Z</published>
-    <updated>2013-08-31T01:38:02.000Z</updated>
-    <content type="html"><![CDATA[<h2>浮华过后，心若沉浮浅笑安然</h2>
-<p>生活或许是一件艺术品，需懂得欣赏，意中细品，学会经受。<a id="more"></a>人生似一场追梦，那就是无数个美丽的梦而创造。人生常在繁华中等待，只不过每个人都在等待一个自己想要的未来。人生的迁徙，沉重着你的步履，有些感怀让你沉浸。曾让你迷失了方向，繁华落幕后，空山流���静其身，花开似无情，花落去留意，放眼望去，世间的喜悲离合聚散相依，匆匆如尘埃里的一颗沙粒，生命的深度，靠心去我体悟，生命的宽度，需魅力去赞颂。</p>
-<p>浮华沉寂陌生的城市，穿越年华的酸楚，风停了，雨骤了，心倦了，等待与思念的相互侵蚀，生命的前行，梦的边缘，思绪舞动一隅的嗔怨。行走的日光倾城，常伴有风的抚慰，雨的湿浸，山水的同路，莲的独隅，红尘碾转，自断不了纷争，待过忘川时，不过淡似轻风，花开催人老，纵马须恣意，清浅仲夏煮一壶清茶，待坐而品茗，静看花开花落，笑看云卷亦舒。</p>
-<p>今夕何夕，尘缘路上的回眸一笑，注定了浅笑安然。流年似水，生命的时光中，因为有缘相识，荒草丛生的原野上，没有早一步，晚一步，这就是缘。夏雨微凉，一袭雨过，岁月氤氲了一帘幽梦，芬芳轻盈着一执而念的光阴，生活缱绻起了风景，流年浮华过后，“此情可待成追忆，只是当时已惘然”.</p>
-<p>心最柔软的地方，穿过了心刺的屏障，曾为一朵玫瑰而绽放，蜿蜒寂寞的藤，月光隐约着浪漫的惆怅，穿越横亘的流浪，时间煮雨，回忆终究会让年华淡泊，活着也许是一种修行，时光静好，品一茗清茶，落花无言，人淡如菊，润一份心境，携一缕阳光，让芳华依旧绽放。字里行间的缠绵，泪痕迭起了四季的轮回，愿得一个人，白守不分离，铺满诗意的路径，夜如此静谧，带伤的诗句常娇嗔着粉饰，步伐太急，却忘了缓缓停下来让心安祥。</p>
-<p>山与水的缠绵，任流音乐的浮想，清寂时常敲碎夜的散漫，凄迷的烟雨里，水滴的顺势而滑，水声伴风雨的飘渺芳飞，无垠的夜空，静静的聆听，繁琐打搅，细密的疏雨，意境的恰入，飘散的雨滴，透过肌肤直抵心深处，奈何雨的朦胧，相思成林泪千行。无情的冷风常拔弄着心弦，溅湿的思愁，陌路的不在相见，这个季，风儿依柔，雨儿心醉，满目的寒殇，素色时光的轻狂，喧哗背后的沉静，简单的真谛，心若沉浮，此事不关山与月。</p>
-<p>浮华掠影后，静静的听雨，感风的倾诉，世界太喧闹，已至于背离了自己，沉静中的超脱，不常泛滥，无意的碰触，深知心里的冬天时常接伴，甚至盛夏炎炎，那份落韵的雪，也会勾画着伤感的景致。卑微轻触着虚无，平淡晕染着凄冷。如若没有那么多牵扯，也不会有那么多眷念，不用去刻意与深究，这个世界本就复杂，盼一份温暖，守一份静染，只愿在高山流水间吟诵，世间最难识是情，最难诉的是痴。</p>
-<p>生命总有尽头，心灵总需要出口，每个人身上都有一把锁，有人说寂寞是种狂欢，但真正的寂寞是无法用热闹来填埋，只有你为心灵找到了决口，上锁的心慢慢绽放，才能真正的释怀，人之所以挣扎与纠结，是把钥匙丢了，但希望总在远方起航心若沉浮，浅笑安然。</p>
-<!-- ![](http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg)--><br><!-- <img src="http://placekitten.com/890/280">
---><br><img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" class="right" width="300" height="400" title="壮壮"><br><br><!-- <img src="http://placekitten.com/300/500" class="right" width="150" height="250" title="Place Kitten #3">
-
-<img src="http://placekitten.com/300/500" class="right" width="150" height="250" title="Place Kitten #4" alt="An image of a very cute kitten">
- -->]]></content>
-    <category scheme="http://hufeng825.github.com/tags/情感/" term="情感"/>
   </entry>
 </feed>

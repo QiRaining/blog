@@ -131,7 +131,7 @@ $(function () {
                             </li>
                             
                             <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
-                                <small>16</small>
+                                <small>22</small>
                             </a>
 
                             </li>
@@ -178,23 +178,23 @@ $(function () {
   <ul class="entry">
     
       <li>
-        <a href="/2013/08/31/hibernate3/"></a>
+        <a href="/2013/08/31/ios13/">复杂页面消退的一个简单实例</a>
       </li>
     
       <li>
-        <a href="/2013/08/29/ios7/">快速清除subviews之 隐私循环</a>
+        <a href="/2013/08/31/ios12/">ios 开发纸 序列化</a>
       </li>
     
       <li>
-        <a href="/2013/08/29/ios6/">ios iphone5 适配 之 如何是app 适用不通分辨率</a>
+        <a href="/2013/08/31/ios11/">银行支付控件之 自动随机(shuffle)密码键盘的实现算法</a>
       </li>
     
       <li>
-        <a href="/2013/08/29/ios5/">ios 通过当前view得到所在的viewcontroller</a>
+        <a href="/2013/08/31/ios10/">mac 下的默认配置</a>
       </li>
     
       <li>
-        <a href="/2013/08/29/ios4/">removeFromSuperview添加动画使其更加高雅美观</a>
+        <a href="/2013/08/31/ios9/">Xcode的持续集成指南</a>
       </li>
     
   </ul>
@@ -207,13 +207,15 @@ $(function () {
   
     <li><a href="/categories/MQ/">MQ</a><small> (5)</small></li>
   
-    <li><a href="/categories/hexo/">hexo</a><small> (3)</small></li>
+    <li><a href="/categories/hexo/">hexo</a><small> (6)</small></li>
   
     <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
   
-    <li><a href="/categories/ios/">ios</a><small> (6)</small></li>
+    <li><a href="/categories/ios/">ios</a><small> (9)</small></li>
   
-    <li><a href="/categories/情感/">情感</a><small> (1)</small></li>
+    <li><a href="/categories/ios/mac/">mac</a><small> (1)</small></li>
+  
+    <li><a href="/categories/情感/">���感</a><small> (1)</small></li>
   
   </ul>
 </div>
@@ -231,22 +233,202 @@ $(function () {
             <div class="content">
     <header>
         <div class="icon"></div>
-        <time datetime="2013-08-31T01:38:02.000Z"><a href="/2013/08/31/hibernate3/">2013 8月 31</a></time>
+        <time datetime="2013-08-31T14:42:52.000Z"><a href="/2013/08/31/ios13/">2013 8月 31</a></time>
 
         
 
-<h1 class="title"><a href="/2013/08/31/hibernate3/"></a></h1>
+<h1 class="title"><a href="/2013/08/31/ios13/">复杂页面消退的一个简单实例</a></h1>
 
 
 
     </header>
     <div class="entry">
         
-        <p>title: hibernate 笔记之<br>date: 2013-08-15 09:45:01<br>tags: [技术]<br>categories: hibernate</p>
+        <p>如图</p>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e8680v5hirj20df09qglv.jpg" class="left" height="400" title="600">
+
+
+<p>
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/31/ios13/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
+            
+            <div class="content">
+    <header>
+        <div class="icon"></div>
+        <time datetime="2013-08-31T14:26:47.000Z"><a href="/2013/08/31/ios12/">2013 8月 31</a></time>
+
+        
+
+<h1 class="title"><a href="/2013/08/31/ios12/">ios 开发纸 序列化</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>序列化</p>
+<p>参考原始文档：</p>
+<p><a href="https://github.com/mystcolor/JTObjectMapping" target="_blank">https://github.com/mystcolor/JTObjectMapping</a></p>
+<p>
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/31/ios12/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
+            
+            <div class="content">
+    <header>
+        <div class="icon"></div>
+        <time datetime="2013-08-31T14:05:28.000Z"><a href="/2013/08/31/ios11/">2013 8月 31</a></time>
+
+        
+
+<h1 class="title"><a href="/2013/08/31/ios11/">银行支付控件之 自动随机(shuffle)密码键盘的实现算法</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>为了广大用户的支付安全,输入密码的页面密码键盘要用随机排序,因为有版权问题无法把自己写的代码全部贴出 所以下面只把关键的洗牌算法贴出来</p>
+<h2>算法一</h2>
+<figure class="highlight"><pre>NSMutableArray *randSequence = <span class="string">[[NSMutableArray alloc] initWithCapacity:8];
+for (int ii = 0; ii &lt; 10; ++ii)
+    [randSequence addObject:[NSNumber numberWithInt:ii]]</span>;
+
+<span class="keyword">for</span> (int ii = <span class="number">9</span>; ii &gt; -<span class="number">1</span>; <span class="comment">--ii) {</span>
+    int r = arc4random() % <span class="number">9</span>
+    [randSequence exchangeObjectAtIndex:ii withObjectAtIndex:r];
+</pre></figure>
+
+<h2>算法二</h2>
+<figure class="highlight"><pre>
+@<span class="class"><span class="keyword">interface</span> <span class="title">NSMutableArray</span> (<span class="title">Shuffling</span>)
+- (<span class="title">void</span>)<span class="title">shuffle</span>;
+@<span class="title">end</span>
+
+
+//  <span class="title">NSMutableArray_Shuffling</span>.<span class="title">m</span>
+
+#<span class="title">import</span> "<span class="title">NSMutableArray_Shuffling</span>.<span class="title">h</span>"
+
+@<span class="title">implementation</span> <span class="title">NSMutableArray</span> (<span class="title">Shuffling</span>)
+
+- (<span class="title">void</span>)<span class="title">shuffle</span>
+{</span>
+    NSUInteger <span class="keyword">count</span> = [self <span class="keyword">count</span>];
+    <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; <span class="keyword">count</span>; ++i) {
+        <span class="comment">// Select a random element between i and end of array to swap with.</span>
+        NSInteger nElements = <span class="keyword">count</span> - i;
+        NSInteger n = (arc4random() % nElements) + i;
+        [self exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+}
+
+@end
+</pre></figure>
+
 
         
     </div>
     <footer>
+        
+    </footer>
+</div>
+
+            
+            <div class="content">
+    <header>
+        <div class="icon"></div>
+        <time datetime="2013-08-31T13:45:59.000Z"><a href="/2013/08/31/ios10/">2013 8月 31</a></time>
+
+        
+
+<h1 class="title"><a href="/2013/08/31/ios10/">mac 下的默认配置</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>请几天安装其他的shell 结果把默认的shell更改了  有没有快捷的方法更换会默认配置 
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/31/ios10/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
+            
+            <div class="content">
+    <header>
+        <div class="icon"></div>
+        <time datetime="2013-08-31T13:11:39.000Z"><a href="/2013/08/31/ios9/">2013 8月 31</a></time>
+
+        
+
+<h1 class="title"><a href="/2013/08/31/ios9/">Xcode的持续集成指南</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <h2>采用持续集成工作流</h2>
+<p>设置MAC作为服务器，在其上运行Xcode的服务。然后确保你的本地项目，发布源代码库。要完成设立一个持续集成的工作流程，配置的机器人，不知疲倦地进行集成和时间表。<br>
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/31/ios9/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
+            
+            <div class="content">
+    <header>
+        <div class="icon"></div>
+        <time datetime="2013-08-31T12:41:27.000Z"><a href="/2013/08/31/ios8/">2013 8月 31</a></time>
+
+        
+
+<h1 class="title"><a href="/2013/08/31/ios8/">xcode 5.0 的持续继承</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>&gt;<br>Xcode的支持持续集成通过Xcode的服务流程。Xcode的服务，可在OS X服务器，自动一体化建设过程中，您的应用程序的分析，测试和归档。
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/31/ios8/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
         
     </footer>
 </div>
@@ -287,7 +469,7 @@ $(function () {
 
         
 
-<h1 class="title"><a href="/2013/08/29/ios6/">ios iphone5 适配 之 如何是app 适用不通分辨率</a></h1>
+<h1 class="title"><a href="/2013/08/29/ios6/">ios iphone5 适配 之 如何是app ���用不通分辨率</a></h1>
 
 
 
@@ -363,150 +545,6 @@ $(function () {
 </div>
 
             
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-29T08:43:14.000Z"><a href="/2013/08/29/ios3/">2013 8月 29</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/29/ios3/">ios 清理工程中没有用到的图片</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <blockquote>
-<p>发布前往往需要清理工程中没有用到的图片，这些图片可能是测试图片也可能是以往版本中替换遗留下来的图片</p>
-</blockquote>
-
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/29/ios3/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-23T02:27:45.000Z"><a href="/2013/08/23/mq5/">2013 8月 23</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/23/mq5/">MQ 笔记之 发送接受实例</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <blockquote>
-<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/23/mq5/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-22T01:38:51.000Z"><a href="/2013/08/22/mq4/">2013 8月 22</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/22/mq4/">MQ 笔记之 游标 及其游标优化</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <h2>概观</h2>
-<blockquote>
-<p>在ActiveMQ的Broker中，光标用来持有一批在内存等待发送目标地址的消息。默认情况下这小消息被从存储器取出只想一个cursor(存储光标)<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/22/mq4/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-21T15:43:37.000Z"><a href="/2013/08/21/mq3/">2013 8月 21</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/21/mq3/">MQ 笔记之 消息持久化</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <blockquote>
-<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。<br>配置文件在config/jetty.xml<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/21/mq3/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-21T13:22:00.000Z"><a href="/2013/08/21/mq2/">2013 8月 21</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/21/mq2/">MQ 笔记之 JMS 简介 （什么是JMS）</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <h2>一：JMS基本概念</h2>
-<h3>1.      JMS的目标</h3>
-<p>为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/21/mq2/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
             <!-- 分页 -->
             <script src="/js/jquery.pagination.js"></script>
 <script type="text/javascript">
@@ -525,7 +563,7 @@ $(function () {
     }
 
     $(document).ready(function () {
-        var totalPage = '2' * '10';
+        var totalPage = '3' * '10';
         var currentPage = '1' - 1;
         $("#Pagination").pagination(totalPage, {
             items_per_page: '10',

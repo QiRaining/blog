@@ -167,7 +167,7 @@ $(function () {
   
     <li><a href="/categories/MQ/">MQ</a><small> (5)</small></li>
   
-    <li><a href="/categories/hexo/">hexo</a><small> (4)</small></li>
+    <li><a href="/categories/hexo/">hexo</a><small> (3)</small></li>
   
     <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
   
@@ -184,6 +184,10 @@ $(function () {
   <ul class="entry">
     
       <li>
+        <a href="/2013/08/31/hibernate3/"></a>
+      </li>
+    
+      <li>
         <a href="/2013/08/29/ios7/">快速清除subviews之 隐私循环</a>
       </li>
     
@@ -197,10 +201,6 @@ $(function () {
     
       <li>
         <a href="/2013/08/29/ios4/">removeFromSuperview添加动画使其更加高雅美观</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/29/ios3/">ios 清理工程中没有用到的图片</a>
       </li>
     
   </ul>
@@ -225,43 +225,13 @@ $(function () {
     <div class="entry">
         
         <blockquote>
-<p>问：如何快速把当前view下的所有子view 及其子子view们删除掉
-
+<p>问：如何快速把当前view下的所有子view 及其子子view们删除掉<br>
         
     </div>
     <footer>
         
         <div class="alignleft">
             <a href="/2013/08/29/ios7/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <div class="icon"></div>
-        <time datetime="2013-08-22T01:38:51.000Z"><a href="/2013/08/22/mq4/">2013 8月 22</a></time>
-
-        
-
-<h1 class="title"><a href="/2013/08/22/mq4/">MQ 笔记之 游标 及其游标优化</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <h2>概观</h2>
-<blockquote>
-<p>在ActiveMQ的Broker中，光标用来持有一批在内存等待发送目标地址的消息。默认情况下这小消息被从存储器取出只想一个cursor(存储光标)<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/22/mq4/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
         </div>
         
     </footer>
@@ -282,8 +252,7 @@ $(function () {
     </header>
     <div class="entry">
         
-        <p>本文简单介绍下 Markdown 语法
-
+        <p>本文简单介绍下 Markdown 语法<br>
         
     </div>
     <footer>
@@ -341,10 +310,10 @@ $(function () {
     }
 
     $(document).ready(function () {
-        var totalPage = '1' * '10';
-        var currentPage = '1' - 1;
+        var totalPage = 'undefined' * 'undefined';
+        var currentPage = 'undefined' - 1;
         $("#Pagination").pagination(totalPage, {
-            items_per_page: '10',
+            items_per_page: 'undefined',
             current_page: currentPage,
             callback: pageselectCallback
         });

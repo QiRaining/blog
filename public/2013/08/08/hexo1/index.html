@@ -177,7 +177,7 @@ $(function () {
 
     </header>
     <div class="entry" id="post">
-        <p><a name="more"></a></p>
+        <p><a id="more"></a></p>
 <h2>前言</h2>
 <blockquote>
 <p>很早之前就想自己搭建一个博客，但是无奈已没有时间 而没有银子购买服务器，把家里的mac 当做服务器搭建wordpress但是不能保证速度和访问时间。偶然间发现了octopress,于是兴冲冲的折腾起来，最后搭建成功了，废了很大的经历，最主要的原因是还是网络原因，octopress 安装需要下载大量的安装依赖非常繁琐，到处是坑。后来偶然间发现了hexo，发现要比octopress 好用的太多了。于是果断废弃octopress 转头hexo</p>
@@ -186,15 +186,13 @@ $(function () {
 <h2>概念理解</h2>
 <p>hexo 是基于node.js 的 和rails 差不多。再次使用前 需要安装两个插件</p>
 <ul>
-<li>nvm （版本控制）
-nodejs version manager,可以把它理解为 rails里面的rvm  </li>
-<li>npm （包管理机制 ）
- nodejs package manager,可以把它理解为 rails 里面的bundle </li>
+<li>nvm （版本控制）<br>nodejs version manager,可以把它理解为 rails里面的rvm  </li>
+<li>npm （包管理机制 ）<br> nodejs package manager,可以把它理解为 rails 里面的bundle </li>
 </ul>
 <hr>
 <h3>安装步骤(mac)</h3>
 <blockquote>
-<p>只针对于mac 其他的请到官网查看相应平台的安装方法<a href="http://zespia.tw/hexo">http://zespia.tw/hexo</a> </p>
+<p>只针对于mac 其他的请到官网查看相应平台的安装方法<a href="http://zespia.tw/hexo" target="_blank">http://zespia.tw/hexo</a> </p>
 </blockquote>
 <hr>
 <h4>npm</h4>
@@ -231,7 +229,7 @@ nodejs version manager,可以把它理解为 rails里面的rvm  </li>
 <h3>设定</h3>
 <p>编辑 _config.yml</p>
 <p>下面贴出我的配置 大家自行根据各自的配置进行相应修改</p>
-<pre><code><figure class="highlight"><pre>// <span class="class">Site</span>
+<pre><code>// <span class="class">Site</span>
 <span class="method">title:</span> 阿峰的技术窝窝
 <span class="method">subtitle:</span> 专注于移动互联网
 <span class="method">description:</span> <span class="class">C</span>/<span class="class">C</span>++/<span class="class">Linux</span>/嵌入式/<span class="class">IOS</span>/<span class="class">WEB</span>/
@@ -313,8 +311,7 @@ nodejs version manager,可以把它理解为 rails里面的rvm  </li>
 <span class="method">deploy:</span> 
   <span class="method">type:</span> github
   <span class="method">repository:</span> <span class="method">https:</span>//github.com/hufeng825/hufeng825.github.io.git
-  <span class="method">branch:</span> master
-</pre></figure></code></pre>
+  <span class="method">branch:</span> master</code></pre>
 
         <hr />
         <span class="label label-warning">W</span>

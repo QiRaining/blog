@@ -177,8 +177,7 @@ $(function () {
 
     </header>
     <div class="entry" id="post">
-        <p>本文简单介绍下 Markdown 语法
-<a name="more"></a></p>
+        <p>本文简单介绍下 Markdown 语法<br><a id="more"></a></p>
 <h3>什么是Markdown</h3>
 <p>Markdown是一个将文本转化为HTML的工具。简单来说，Markdown是一个兼顾可读性与易用性的轻量级标记体系。Markdown并不追求大而全，它只关心HTML里最常用的几个标记，对于一些不常用的标记它允许直接将HTML标记插入文本。</p>
 <hr>
@@ -264,8 +263,7 @@ $(function () {
 
 <hr>
 <h2>代码区域</h2>
-<p>行内代码使用反斜杠`表示。 
-代码段落则是在每行文字前加4个空格或者1个缩进符表示。</p>
+<p>行内代码使用反斜杠`表示。<br>代码段落则是在每行文字前加4个空格或者1个缩进符表示。</p>
 <hr>
 <h2>强调</h2>
 <p>Markdown使用*或_表示强调。</p>
@@ -280,9 +278,7 @@ $(function () {
 <p>链接</p>
 <p>Markdown支持两种风格的链接：Inline和Reference。</p>
 <p>语法：</p>
-<p>Inline：以中括号标记显示的链接文本，后面紧跟用小括号包围的链接。如果链接有title属性，则在链接中使用空格加“title属性”。
-Reference：一般应用于多个不同位置使用相同链接。通常分为两个部分，调用部分为[链接文本][ref]；定义部分可以出现在文本中的其他位置，格式为[ref]: <a href="http://some/link/address">http://some/link/address</a> (可选的标题)。 
-注：ref中不区分大小写。</p>
+<p>Inline：以中括号标记显示的链接文本，后面紧跟用小括号包围的链接。如果链接有title属性，则在链接中使用空格加“title属性”。<br>Reference：一般应用于多个不同位置使用相同链接。通常分为两个部分，调用部分为[链接文本][ref]；定义部分可以出现在文本中的其他位置，格式为[ref]: <a href="http://some/link/address" target="_blank">http://some/link/address</a> (可选的标题)。<br>注：ref中不区分大小写。</p>
 <p>代码如下 </p>
 <figure class="highlight"><pre>
 这是一个Inline[示例](http:<span class="comment">//www.baidu.com "可选的title")。</span>
@@ -292,8 +288,7 @@ Reference：一般应用于多个不同位置使用相同链接。通常分为�
 
 <hr>
 <h2>图片</h2>
-<p>图片的使用方法基本上和链接类似，只是在中括号前加叹号。 
-注：Markdown不能设置图片大小，如果必须设置则应使用HTML标记<img>。</p>
+<p>图片的使用方法基本上和链接类似，只是在中括号前加叹号。<br>注：Markdown不能设置图片大小，如果必须设置则应使用HTML标记<img>。</p>
 <p>代码如下 </p>
 <figure class="highlight"><pre><span class="tag">&lt;<span class="title">notextile</span>&gt;</span>0<span class="tag">&lt;/<span class="title">notextile</span>&gt;</span>
 
@@ -306,8 +301,7 @@ HTML示例：<span class="tag">&lt;<span class="title">img</span> <span class="a
 <p>效果</p>
 <img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" class="right" width="300" height="400" title="可选的title">
 
-<p>Inline示例：<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" alt="替代文本" title="可选的title">
-Reference示例：![替代文本][<a href="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg">http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg</a>]</p>
+<p>Inline示例：<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" alt="替代文本" title="可选的title"><br>Reference示例：![替代文本][<a href="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" target="_blank">http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg</a>]</p>
 <p>HTML示例：<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" alt="替代文本" title="标题文本" width="200" /></p>
 <hr>
 <h2>自动链接</h2>

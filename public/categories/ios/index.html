@@ -167,7 +167,7 @@ $(function () {
   
     <li><a href="/categories/MQ/">MQ</a><small> (5)</small></li>
   
-    <li><a href="/categories/hexo/">hexo</a><small> (4)</small></li>
+    <li><a href="/categories/hexo/">hexo</a><small> (3)</small></li>
   
     <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
   
@@ -184,6 +184,10 @@ $(function () {
   <ul class="entry">
     
       <li>
+        <a href="/2013/08/31/hibernate3/"></a>
+      </li>
+    
+      <li>
         <a href="/2013/08/29/ios7/">快速清除subviews之 隐私循环</a>
       </li>
     
@@ -197,10 +201,6 @@ $(function () {
     
       <li>
         <a href="/2013/08/29/ios4/">removeFromSuperview添加动画使其更加高雅美观</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/29/ios3/">ios 清理工程中没有用到的图片</a>
       </li>
     
   </ul>
@@ -252,8 +252,7 @@ $(function () {
     </header>
     <div class="entry">
         
-        <p>long long ago ，带过的小弟遇到了一个问题，需要从当前的控件（一般是uiview）获取当前所在的viewcontroller
-
+        <p>long long ago ，带过的小弟遇到了一个问题，需要从当前的控件（一般是uiview）获取当前所在的viewcontroller<br>
         
     </div>
     <footer>
@@ -281,8 +280,7 @@ $(function () {
     <div class="entry">
         
         <blockquote>
-<p>程序中难免使用removeFromSuperview，但是view控件直接从界面突然消失会显得非常不友好，作为一个高端大气上档次的app细节处处应该注意，
-
+<p>程序中难免使用removeFromSuperview，但是view控件直接从界面突然消失会显得非常不友好，作为一个高端大气上档次的app细节处处应该注意，<br>
         
     </div>
     <footer>
@@ -340,8 +338,7 @@ $(function () {
     <div class="entry">
         
         <blockquote>
-<p>昨晚同事拿了一个app 发现其app 内部页面打开了appstore  并没有唤起手机自带的appstore， 刚开始以为是用webview 加载的
-
+<p>昨晚同事拿了一个app 发现其app 内部页面打开了appstore  并没有唤起手机自带的appstore， 刚开始以为是用webview 加载的<br>
         
     </div>
     <footer>
@@ -369,8 +366,7 @@ $(function () {
     <div class="entry">
         
         <h2>关于图片资源</h2>
-<p>ios 程序会把图片资源编译成二进制文件，程序运行时会把这些图片从磁盘加载直接到内存，如果图片很大，加载速度就会很慢。
-
+<p>ios 程序会把图片资源编译成二进制文件，程序运行时会把这些图片从磁盘加载直接到内存，如果图片很大，加载速度就会很慢。<br>
         
     </div>
     <footer>
@@ -401,10 +397,10 @@ $(function () {
     }
 
     $(document).ready(function () {
-        var totalPage = '1' * '10';
-        var currentPage = '1' - 1;
+        var totalPage = 'undefined' * 'undefined';
+        var currentPage = 'undefined' - 1;
         $("#Pagination").pagination(totalPage, {
-            items_per_page: '10',
+            items_per_page: 'undefined',
             current_page: currentPage,
             callback: pageselectCallback
         });

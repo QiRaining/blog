@@ -178,9 +178,7 @@ $(function () {
     </header>
     <div class="entry" id="post">
         <blockquote>
-<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。
-配置文件在config/jetty.xml
-<a name="more"></a></p>
+<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。<br>配置文件在config/jetty.xml<br><a id="more"></a></p>
 </blockquote>
 <h2>一、AMQ</h2>
 <p>AMQ是一种文件存储形式，它具有写入速度快和容易恢复的特点。消息存储在一个个文件中，文件的默认大小为32兆，如果一条消息的大小超过了32兆，那么这个值必须设置大点。当一个存储文件中的消息已经全部被消费，那么这个文件将被标识为可删除，在下一个清除阶段，这个文件被删除。默认配置如下：</p>

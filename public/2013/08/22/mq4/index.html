@@ -179,8 +179,7 @@ $(function () {
     <div class="entry" id="post">
         <h2>概观</h2>
 <blockquote>
-<p>在ActiveMQ的Broker中，光标用来持有一批在内存等待发送目标地址的消息。默认情况下这小消息被从存储器取出只想一个cursor(存储光标)<br><a name="more"></a>
-5.0.0版本后，Activemq实现了一种新的内存模型来防止慢消费者阻塞快速生产者。通常消息在未消费或者发送后未收到消费者的确认信息时都会持久保存消息到存储中。当有消费者来消费消息时，broker会分页一批一批的从存储中取出消息，放入消息处理队列。游标就是指向下次批量获取消息时的存储位置。   </p>
+<p>在ActiveMQ的Broker中，光标用来持有一批在内存等待发送目标地址的消息。默认情况下这小消息被从存储器取出只想一个cursor(存储光标)<br><a id="more"></a><br>5.0.0版本后，Activemq实现了一种新的内存模型来防止慢消费者阻塞快速生产者。通常消息在未消费或者发送后未收到消费者的确认信息时都会持久保存消息到存储中。当有消费者来消费消息时，broker会分页一批一批的从存储中取出消息，放入消息处理队列。游标就是指向下次批量获取消息时的存储位置。   </p>
 </blockquote>
 <p>ctiveMQ有另一种游标实现，VM cursor，在某些情境下非常快。VM cursor是，进入的消息直接关联cursor，同时存储到消息存储器中。（关联cursor的同时存储到消息存储器中）。如果消费者（consumer）非常快，可以跟的上消息流的话，VM cursor会工作的非常好。但是，对于慢消费者，这个策略就不是那么有效了。VMcursor被积压的消息填满，同时它可能会去调用流控制去抑制producer生产message。</p>
 <h2>根据游标的保存方式不同，可分为三种类型：</h2>
@@ -189,23 +188,18 @@ $(function () {
 <img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e7v81y31hnj20ip04qaaj.jpg" class="center" title="Store-based实现原理图 300 200">
 
 <p> <strong>图一：</strong></p>
-<pre><code><figure class="highlight"><pre> 消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedHashMap，如果没有可用内存，则走路径2，当需要消息的时候，直接从消息存储的介质里每次读取一批消息，然后存入LinkedHashMap。
-</pre></figure></code></pre>
+<pre><code> 消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedHashMap，如果没有可用内存，则走路径2，当需要消息的时候，直接从消息存储的介质里每次读取一批消息，然后存入LinkedHashMap。</code></pre>
 <h3>VM cursors</h3>
-<p>若消费者能跟上生产者生产的速度，这时持久存储中消息虽然不是很多，但是若能也能在内存中保存一些游标，对获取存储中的消息的性能会有很大的提升。 
-那么VM Cursors在ActiveMQ4.x中是如何工作的呢？发送消息保存在内存中，并在需要的时候传递给调度队列。这可以是非常快的，但也有不利的一面，不能够处理非常缓慢的消费者或消费者已经很长一段时间处于非活动状态：   </p>
+<p>若消费者能跟上生产者生产的速度，这时持久存储中消息虽然不是很多，但是若能也能在内存中保存一些游标，对获取存储中的消息的性能会有很大的提升。<br>那么VM Cursors在ActiveMQ4.x中是如何工作的呢？发送消息保存在内存中，并在需要的时候传递给调度队列。这可以是非常快的，但也有不利的一面，不能够处理非常缓慢的消费者或消费者已经很长一段时间处于非活动状态：   </p>
 <img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e7v878r0ahj20iu04tjrr.jpg" class="center" title="file实现原理图 300 200">
 
 <p>  <strong>图二：</strong></p>
-<pre><code><figure class="highlight"><pre>消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedList，如果没有可用内存，则走路径2，把消息写入临时文件中，当需要消息的时候，直接从临时文件中读写一批，然后送入LinkedList。
-</pre></figure></code></pre>
+<pre><code>消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedList，如果没有可用内存，则走路径2，把消息写入临时文件中，当需要消息的时候，直接从临时文件中读写一批，然后送入LinkedList。</code></pre>
 <h3>File-based cursors</h3>
-<p>对VM cursors 的一种改进。当内存中的游标达到一定限额后，就会将一些游标存储到磁盘上的临时文件中。使用这种类型的游标时，消息储存可能会变慢，但消费者处理一般都会更快。通过缓冲到磁盘，它可以让消息代理来处理不受内存限制的大量消息，而生产者发送消息的速度会受到影响：
- <strong>图三</strong></p>
+<p>对VM cursors 的一种改进。当内存中的游标达到一定限额后，就会将一些游标存储到磁盘上的临时文件中。使用这种类型的游标时，消息储存可能会变慢，但消费者处理一般都会更快。通过缓冲到磁盘，它可以让消息代理来处理不受内存限制的大量消息，而生产者发送消息的速度会受到影响：<br> <strong>图三</strong></p>
  <img src="http://ww1.sinaimg.cn/mw690/a43af4ffjw1e7v8airx6dj20it04sjrl.jpg" class="center" title="vm 实现原理 300 200">
 
-<pre><code><figure class="highlight"><pre> 消息接收后，首先完成消息存储的工作，如(1)所示，然后直接把消息存放在内存中的LinkedList。
-</pre></figure></code></pre>
+<pre><code> 消息接收后，首先完成消息存储的工作，如(1)所示，然后直接把消息存放在内存中的LinkedList。</code></pre>
 <h3>Paging for Non-Persistent Messages（非持久性的消息分页调度）</h3>
 <p>Store based cursor也可以处理非持久性的消息，也就是没有存储在磁盘中的消息，非持久性消息被直接传递给游标，所以Store based cursor也只是嵌入了File based cursor的功能。</p>
 <h2>3种消息cursor的比较</h2>
@@ -297,8 +291,7 @@ $(function () {
 </table>
 <hr>
 <h2>Configuring Cursors</h2>
-<p>Activemq默认使用store-based游标。当然也可为不同的Destination修改游标策略。通过修改destinationPolicy节点来更改默认配置。<br>destinationPolicy节点包含多ge policyMap节点。<br>policyMap包含一个policyEntries节点，policyEntries节点包含多个policyEntry 节点。policyEntry就是具体的一个游标策略了。<br>Topics的消费者分为持久订阅者和临时订阅者，所以有两套配置。Queues只有一类消费者，所以只有一套配置。
-对于持久订阅者可以使用PendingDurableSubscriberMessageStoragePolicy来指定游标策略。可配置的策略有vmDurableCursor和fileDurableSubscriberCursor. </p>
+<p>Activemq默认使用store-based游标。当然也可为不同的Destination修改游标策略。通过修改destinationPolicy节点来更改默认配置。<br>destinationPolicy节点包含多ge policyMap节点。<br>policyMap包含一个policyEntries节点，policyEntries节点包含多个policyEntry 节点。policyEntry就是具体的一个游标策略了。<br>Topics的消费者分为持久订阅者和临时订阅者，所以有两套配置。Queues只有一类消费者，所以只有一套配置。<br>对于持久订阅者可以使用PendingDurableSubscriberMessageStoragePolicy来指定游标策略。可配置的策略有vmDurableCursor和fileDurableSubscriberCursor. </p>
 <p><strong>对于临时订阅者可以使用pendingSubscriberPolicy 来指定。可配置的策略有vmCursor和fileCursor。下面是关于Topics的一些xml配置：</strong></p>
 <figure class="highlight"><pre>&lt;beans <span class="keyword">...</span> &gt;
 &lt;broker <span class="keyword">...</span>&gt;
@@ -376,8 +369,7 @@ $(function () {
 
 <p>topic和queue都使用了通配符【&gt;】,这个匹配所有的目标名称。你可以根据情况指定一些选择目标的模式。但是VM Cursor仅仅适用于那些消费者可以跟得上目标消息节奏的这种情况。</p>
 <hr>
-<p><a href="http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html">http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html</a>
-<a href="http://netcomm.iteye.com/blog/470585">http://netcomm.iteye.com/blog/470585</a></p>
+<p><a href="http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html" target="_blank">http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html</a><br><a href="http://netcomm.iteye.com/blog/470585" target="_blank">http://netcomm.iteye.com/blog/470585</a></p>
 
         <hr />
         <span class="label label-warning">W</span>

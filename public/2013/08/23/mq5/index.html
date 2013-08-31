@@ -178,8 +178,7 @@ $(function () {
     </header>
     <div class="entry" id="post">
         <blockquote>
-<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等
-<a name="more"></a></p>
+<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等<br><a id="more"></a></p>
 </blockquote>
 <p>本文章以 MapMessage 和 ObjectMessage 为例</p>
 <p><strong>注意 发送ObjectMessage时  接受实例必须相同类名</strong></p>
@@ -187,32 +186,16 @@ $(function () {
 <p>import org.apache.activemq.ActiveMQConnectionFactory;</p>
 <p>import javax.jms.*;</p>
 <p>public class Send {</p>
-<p> public static void main(String[] args) throws Exception {
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();</p>
-<pre><code><figure class="highlight"><pre>    Connection connection = connectionFactory<span class="preprocessor">.createConnection</span>()<span class="comment">;</span>
+<p> public static void main(String[] args) throws Exception {<br>        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();</p>
+<pre><code>    Connection connection = connectionFactory<span class="preprocessor">.createConnection</span>()<span class="comment">;</span>
     connection<span class="preprocessor">.start</span>()<span class="comment">;</span>
 
     Session session = connection<span class="preprocessor">.createSession</span>(Boolean<span class="preprocessor">.TRUE</span>, Session<span class="preprocessor">.AUTO</span>_ACKNOWLEDGE)<span class="comment">;</span>
     Destination destination = session<span class="preprocessor">.createQueue</span>(<span class="string">"hf"</span>)<span class="comment">;</span>
 
     MessageProducer producer = session<span class="preprocessor">.createProducer</span>(destination)<span class="comment">;</span>
-   for(int i=<span class="number">0</span><span class="comment">; i&lt;3; i++) {</span>
-</pre></figure></code></pre>
-<p>//            MapMessage message = session.createMapMessage();
-//           message.setLong(&quot;count&quot;, new Date().getTime());
-//            message.setObject(&quot;hf&quot;,new SendData());
-      ObjectMessage message = session.createObjectMessage();
-      message.setObject(new SendData());
-//           message.setBytes(&quot;count&quot;, getTestData(1));
-            Thread.sleep(1);
-            //通过消息生产者发出消息
-            producer.send(message);
-        }
-        session.commit();
-        session.close();
-        connection.close();
-    }
-}</p>
+   for(int i=<span class="number">0</span><span class="comment">; i&lt;3; i++) {</span></code></pre>
+<p>//            MapMessage message = session.createMapMessage();<br>//           message.setLong(“count”, new Date().getTime());<br>//            message.setObject(“hf”,new SendData());<br>      ObjectMessage message = session.createObjectMessage();<br>      message.setObject(new SendData());<br>//           message.setBytes(“count”, getTestData(1));<br>            Thread.sleep(1);<br>            //通过消息生产者发出消息<br>            producer.send(message);<br>        }<br>        session.commit();<br>        session.close();<br>        connection.close();<br>    }<br>}</p>
 <h2>接收实例</h2>
 <figure class="highlight"><pre>import org<span class="preprocessor">.apache</span><span class="preprocessor">.activemq</span><span class="preprocessor">.ActiveMQConnectionFactory</span><span class="comment">;</span>
 
@@ -274,18 +257,13 @@ Thread.sleep(30000);
 </pre></figure>
 
 <h2>传递参数</h2>
-<p>import java.io.Serializable;
-import java.util.Date;</p>
+<p>import java.io.Serializable;<br>import java.util.Date;</p>
 <p>/<em>*
- </em> Created with IntelliJ IDEA.
- <em> User: jason
- </em> Date: 13-8-22
- <em> Time: 下午5:21
- </em> To change this template use File | Settings | File Templates.
- */
-public class SendData  implements Serializable {</p>
+ </em> Created with IntelliJ IDEA.<br> <em> User: jason
+ </em> Date: 13-8-22<br> <em> Time: 下午5:21
+ </em> To change this template use File | Settings | File Templates.<br> */<br>public class SendData  implements Serializable {</p>
 <p>//    private  static  final  long serialVersionUID = -23235245213533L;</p>
-<pre><code><figure class="highlight"><pre><span class="keyword">private</span>  <span class="keyword">byte</span>[] buffer;
+<pre><code><span class="keyword">private</span>  <span class="keyword">byte</span>[] buffer;
 
 <span class="keyword">private</span> String dateStr;
 
@@ -313,8 +291,7 @@ public class SendData  implements Serializable {</p>
         buffers[i] = Byte.parseByte(<span class="string">"2"</span>);
     System.<span class="keyword">out</span>.print(<span class="string">"end \n"</span>);
     <span class="keyword">this</span>.buffer = buffers;
-}
-</pre></figure></code></pre>
+}</code></pre>
 <p>}</p>
 
         <hr />

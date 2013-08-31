@@ -178,7 +178,7 @@ $(function () {
     </header>
     <div class="entry" id="post">
         <h2>session 的概述</h2>
-<a name="more"></a>
+<a id="more"></a>
 
 <ol>
 <li><p>session 接口是hibernate 向应用程序提供操作数据库最主要的接口，他提供了基本的保存，更新，删除和加载java对象的方法</p>
@@ -190,7 +190,7 @@ $(function () {
 </ol>
 <hr>
 <h2>Session 接口</h2>
-<p>Session 是应用程序与数据库之间交互操作的一个单线程对象,是 Hibernate 运作的中心,所有持久化对象必须在 session 的管理下才可以进 行持久化操作。此对象的生命周期很短。Session 对象有一个一级缓存,显 式执行 flush 之前,所有的持久层操作的数据都缓存在 session 对象处。相 当于 JDBC 中的 Connection。</p>
+<p>Session 是应用程序与数据库之间交互操作的一个单线程对象,是 Hibernate 运作的中心,所有持久化对象必须在 session 的管理下才可以进 行持久化操���。此对象的生命周期很短。Session 对象有一个一级缓存,显 式执行 flush 之前,所有的持久层操作的数据都缓存在 session 对象处。相 当于 JDBC 中的 Connection。</p>
 <p>• 持久化类与 Session 关联起来后就具有了持久化的能力。</p>
 <p>• Session 类的方法:</p>
 <ul>

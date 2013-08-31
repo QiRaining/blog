@@ -4,7 +4,7 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-08-29T10:54:10.726Z</updated>
+  <updated>2013-08-31T02:35:51.244Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
@@ -12,15 +12,22 @@
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
   <entry>
+    <title type="html"><![CDATA[]]></title>
+    <link href="http://hufeng825.github.com/2013/08/31/hibernate3/"/>
+    <id>http://hufeng825.github.com/2013/08/31/hibernate3/</id>
+    <published>2013-08-31T01:38:02.000Z</published>
+    <updated>2013-08-31T01:38:02.000Z</updated>
+    <content type="html"><![CDATA[<p>title: hibernate 笔记之<br>date: 2013-08-15 09:45:01<br>tags: [技术]<br>categories: hibernate</p>
+]]></content>
+  </entry>
+  <entry>
     <title type="html"><![CDATA[快速清除subviews之 隐私循环]]></title>
     <link href="http://hufeng825.github.com/2013/08/29/ios7/"/>
     <id>http://hufeng825.github.com/2013/08/29/ios7/</id>
     <published>2013-08-29T10:48:47.000Z</published>
-    <updated>2013-08-29T10:51:16.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
-<p>问：如何快速把当前view下的所有子view 及其子子view们删除掉
-<a name="more"></a>
-解答这个问题前先介绍下 NSArray </p>
+<p>问：如何快速把当前view下的所有子view 及其子子view们删除掉<br><a id="more"></a><br>解答这个问题前先介绍下 NSArray </p>
 </blockquote>
 <p>NSArray 类定义的方法</p>
 <ol>
@@ -44,9 +51,9 @@
     <link href="http://hufeng825.github.com/2013/08/29/ios6/"/>
     <id>http://hufeng825.github.com/2013/08/29/ios6/</id>
     <published>2013-08-29T10:44:36.000Z</published>
-    <updated>2013-08-29T10:53:30.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<p>iphone5适配 有如下集中种思路</p>
-<a name="more"></a>
+<a id="more"></a>
 
 <p>1：利用自身的autoresize 加上代码实现</p>
 <p>2：写两套xib</p>
@@ -74,10 +81,8 @@
     <link href="http://hufeng825.github.com/2013/08/29/ios5/"/>
     <id>http://hufeng825.github.com/2013/08/29/ios5/</id>
     <published>2013-08-29T10:35:01.000Z</published>
-    <updated>2013-08-29T10:54:04.000Z</updated>
-    <content type="html"><![CDATA[<p>long long ago ，带过的小弟遇到了一个问题，需要从当前的控件（一般是uiview）获取当前所在的viewcontroller
-<a name="more"></a>
-当时给出他的解决办法</p>
+    <updated>2013-08-31T01:38:02.000Z</updated>
+    <content type="html"><![CDATA[<p>long long ago ，带过的小弟遇到了一个问题，需要从当前的控件（一般是uiview）获取当前所在的viewcontroller<br><a id="more"></a><br>当时给出他的解决办法</p>
 <figure class="highlight"><pre>@<span class="class"><span class="keyword">implementation</span> <span class="id">UIView</span> (<span class="id">GetVCAdditions</span>)</span>
 - (<span class="built_in">UIViewController</span> *)GetiewController {
     Class vcc = [<span class="built_in">UIViewController</span> <span class="built_in">class</span>];
@@ -98,11 +103,9 @@
     <link href="http://hufeng825.github.com/2013/08/29/ios4/"/>
     <id>http://hufeng825.github.com/2013/08/29/ios4/</id>
     <published>2013-08-29T10:29:40.000Z</published>
-    <updated>2013-08-29T10:34:09.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
-<p>程序中难免使用removeFromSuperview，但是view控件直接从界面突然消失会显得非常不友好，作为一个高端大气上档次的app细节处处应该注意，
-<a name="more"></a>
-添加一个简单的动画给用户的感觉立刻不一样了。废话不说直接上代码</p>
+<p>程序中难免使用removeFromSuperview，但是view控件直接从界面突然消失会显得非常不友好，作为一个高端大气上档次的app细节处处应该注意，<br><a id="more"></a><br>添加一个简单的动画给用户的感觉立刻不一样了。废话不说直接上代码</p>
 <figure class="highlight"><pre>   [UIView animateWithDuration:<span class="number">0.2</span>
 
                      animations:^{_logViewController<span class="preprocessor">.view</span><span class="preprocessor">.alpha</span> = <span class="number">0.0</span><span class="comment">;}</span>
@@ -124,11 +127,11 @@
     <link href="http://hufeng825.github.com/2013/08/29/ios3/"/>
     <id>http://hufeng825.github.com/2013/08/29/ios3/</id>
     <published>2013-08-29T08:43:14.000Z</published>
-    <updated>2013-08-29T10:26:22.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>发布前往往需要清理工程中没有用到的图片，这些图片可能是测试图片也可能是以往版本中替换遗留下来的图片</p>
 </blockquote>
-<a name="more"></a>
+<a id="more"></a>
 
 <h2>使用方法</h2>
 <ol>
@@ -218,10 +221,9 @@ PROJ=`find .  ! -name <span class="string">'*.xib'</span> -o -name <span class="
     <link href="http://hufeng825.github.com/2013/08/23/mq5/"/>
     <id>http://hufeng825.github.com/2013/08/23/mq5/</id>
     <published>2013-08-23T02:27:45.000Z</published>
-    <updated>2013-08-23T02:35:49.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
-<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等
-<a name="more"></a></p>
+<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等<br><a id="more"></a></p>
 </blockquote>
 <p>本文章以 MapMessage 和 ObjectMessage 为例</p>
 <p><strong>注意 发送ObjectMessage时  接受实例必须相同类名</strong></p>
@@ -229,32 +231,16 @@ PROJ=`find .  ! -name <span class="string">'*.xib'</span> -o -name <span class="
 <p>import org.apache.activemq.ActiveMQConnectionFactory;</p>
 <p>import javax.jms.*;</p>
 <p>public class Send {</p>
-<p> public static void main(String[] args) throws Exception {
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();</p>
-<pre><code><figure class="highlight"><pre>    Connection connection = connectionFactory<span class="preprocessor">.createConnection</span>()<span class="comment">;</span>
+<p> public static void main(String[] args) throws Exception {<br>        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory();</p>
+<pre><code>    Connection connection = connectionFactory<span class="preprocessor">.createConnection</span>()<span class="comment">;</span>
     connection<span class="preprocessor">.start</span>()<span class="comment">;</span>
 
     Session session = connection<span class="preprocessor">.createSession</span>(Boolean<span class="preprocessor">.TRUE</span>, Session<span class="preprocessor">.AUTO</span>_ACKNOWLEDGE)<span class="comment">;</span>
     Destination destination = session<span class="preprocessor">.createQueue</span>(<span class="string">"hf"</span>)<span class="comment">;</span>
 
     MessageProducer producer = session<span class="preprocessor">.createProducer</span>(destination)<span class="comment">;</span>
-   for(int i=<span class="number">0</span><span class="comment">; i&lt;3; i++) {</span>
-</pre></figure></code></pre>
-<p>//            MapMessage message = session.createMapMessage();
-//           message.setLong(&quot;count&quot;, new Date().getTime());
-//            message.setObject(&quot;hf&quot;,new SendData());
-      ObjectMessage message = session.createObjectMessage();
-      message.setObject(new SendData());
-//           message.setBytes(&quot;count&quot;, getTestData(1));
-            Thread.sleep(1);
-            //通过消息生产者发出消息
-            producer.send(message);
-        }
-        session.commit();
-        session.close();
-        connection.close();
-    }
-}</p>
+   for(int i=<span class="number">0</span><span class="comment">; i&lt;3; i++) {</span></code></pre>
+<p>//            MapMessage message = session.createMapMessage();<br>//           message.setLong(“count”, new Date().getTime());<br>//            message.setObject(“hf”,new SendData());<br>      ObjectMessage message = session.createObjectMessage();<br>      message.setObject(new SendData());<br>//           message.setBytes(“count”, getTestData(1));<br>            Thread.sleep(1);<br>            //通过消息生产者发出消息<br>            producer.send(message);<br>        }<br>        session.commit();<br>        session.close();<br>        connection.close();<br>    }<br>}</p>
 <h2>接收实例</h2>
 <figure class="highlight"><pre>import org<span class="preprocessor">.apache</span><span class="preprocessor">.activemq</span><span class="preprocessor">.ActiveMQConnectionFactory</span><span class="comment">;</span>
 
@@ -316,18 +302,13 @@ Thread.sleep(30000);
 </pre></figure>
 
 <h2>传递参数</h2>
-<p>import java.io.Serializable;
-import java.util.Date;</p>
+<p>import java.io.Serializable;<br>import java.util.Date;</p>
 <p>/<em>*
- </em> Created with IntelliJ IDEA.
- <em> User: jason
- </em> Date: 13-8-22
- <em> Time: 下午5:21
- </em> To change this template use File | Settings | File Templates.
- */
-public class SendData  implements Serializable {</p>
+ </em> Created with IntelliJ IDEA.<br> <em> User: jason
+ </em> Date: 13-8-22<br> <em> Time: 下午5:21
+ </em> To change this template use File | Settings | File Templates.<br> */<br>public class SendData  implements Serializable {</p>
 <p>//    private  static  final  long serialVersionUID = -23235245213533L;</p>
-<pre><code><figure class="highlight"><pre><span class="keyword">private</span>  <span class="keyword">byte</span>[] buffer;
+<pre><code><span class="keyword">private</span>  <span class="keyword">byte</span>[] buffer;
 
 <span class="keyword">private</span> String dateStr;
 
@@ -355,8 +336,7 @@ public class SendData  implements Serializable {</p>
         buffers[i] = Byte.parseByte(<span class="string">"2"</span>);
     System.<span class="keyword">out</span>.print(<span class="string">"end \n"</span>);
     <span class="keyword">this</span>.buffer = buffers;
-}
-</pre></figure></code></pre>
+}</code></pre>
 <p>}</p>
 ]]></content>
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
@@ -367,11 +347,10 @@ public class SendData  implements Serializable {</p>
     <link href="http://hufeng825.github.com/2013/08/22/mq4/"/>
     <id>http://hufeng825.github.com/2013/08/22/mq4/</id>
     <published>2013-08-22T01:38:51.000Z</published>
-    <updated>2013-08-22T02:53:57.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>概观</h2>
 <blockquote>
-<p>在ActiveMQ的Broker中，光标用来持有一批在内存等待发送目标地址的消息。默认情况下这小消息被从存储器取出只想一个cursor(存储光标)<br><a name="more"></a>
-5.0.0版本后，Activemq实现了一种新的内存模型来防止慢消费者阻塞快速生产者。通常消息在未消费或者发送后未收到消费者的确认信息时都会持久保存消息到存储中。当有消费者来消费消息时，broker会分页一批一批的从存储中取出消息，放入消息处理队列。游标就是指向下次批量获取消息时的存储位置。   </p>
+<p>在ActiveMQ的Broker中，光标用来持有一批在内存等待发送目标地址的消息。默认情况下这小消息被从存储器取出只想一个cursor(存储光标)<br><a id="more"></a><br>5.0.0版本后，Activemq实现了一种新的内存模型来防止慢消费者阻塞快速生产者。通常消息在未消费或者发送后未收到消费者的确认信息时都会持久保存消息到存储中。当有消费者来消费消息时，broker会分页一批一批的从存储中取出消息，放入消息处理队列。游标就是指向下次批量获取消息时的存储位置。   </p>
 </blockquote>
 <p>ctiveMQ有另一种游标实现，VM cursor，在某些情境下非常快。VM cursor是，进入的消息直接关联cursor，同时存储到消息存储器中。（关联cursor的同时存储到消息存储器中）。如果消费者（consumer）非常快，可以跟的上消息流的话，VM cursor会工作的非常好。但是，对于慢消费者，这个策略就不是那么有效了。VMcursor被积压的消息填满，同时它可能会去调用流控制去抑制producer生产message。</p>
 <h2>根据游标的保存方式不同，可分为三种类型：</h2>
@@ -380,23 +359,18 @@ public class SendData  implements Serializable {</p>
 <img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e7v81y31hnj20ip04qaaj.jpg" class="center" title="Store-based实现原理图 300 200">
 
 <p> <strong>图一：</strong></p>
-<pre><code><figure class="highlight"><pre> 消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedHashMap，如果没有可用内存，则走路径2，当需要消息的时候，直接从消息存储的介质里每次读取一批消息，然后存入LinkedHashMap。
-</pre></figure></code></pre>
+<pre><code> 消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedHashMap，如果没有可用内存，则走路径2，当需要消息的时候，直接从消息存储的介质里每次读取一批消息，然后存入LinkedHashMap。</code></pre>
 <h3>VM cursors</h3>
-<p>若消费者能跟上生产者生产的速度，这时持久存储中消息虽然不是很多，但是若能也能在内存中保存一些游标，对获取存储中的消息的性能会有很大的提升。 
-那么VM Cursors在ActiveMQ4.x中是如何工作的呢？发送消息保存在内存中，并在需要的时候传递给调度队列。这可以是非常快的，但也有不利的一面，不能够处理非常缓慢的消费者或消费者已经很长一段时间处于非活动状态：   </p>
+<p>若消费者能跟上生产者生产的速度，这时持久存储中消息虽然不是很多，但是若能也能在内存中保存一些游标，对获取存储中的消息的性能会有很大的提升。<br>那么VM Cursors在ActiveMQ4.x中是如何工作的呢？发送消息保存在内存中，并在需要的时候传递给调度队列。这可以是非常快的，但也有不利的一面，不能够处理非常缓慢的消费者或消费者已经很长一段时间处于非活动状态：   </p>
 <img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e7v878r0ahj20iu04tjrr.jpg" class="center" title="file实现原理图 300 200">
 
 <p>  <strong>图二：</strong></p>
-<pre><code><figure class="highlight"><pre>消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedList，如果没有可用内存，则走路径2，把消息写入临时文件中，当需要消息的时候，直接从临时文件中读写一批，然后送入LinkedList。
-</pre></figure></code></pre>
+<pre><code>消息接收后，首先完成消息存储的工作，如(1)所示，然后会判断是否有空闲的内存可用，如果有的话，就走路径1，直接把消息存放在内存中的LinkedList，如果没有可用内存，则走路径2，把消息写入临时文件中，当需要消息的时候，直接从临时文件中读写一批，然后送入LinkedList。</code></pre>
 <h3>File-based cursors</h3>
-<p>对VM cursors 的一种改进。当内存中的游标达到一定限额后，就会将一些游标存储到磁盘上的临时文件中。使用这种类型的游标时，消息储存可能会变慢，但消费者处理一般都会更快。通过缓冲到磁盘，它可以让消息代理来处理不受内存限制的大量消息，而生产者发送消息的速度会受到影响：
- <strong>图三</strong></p>
+<p>对VM cursors 的一种改进。当内存中的游标达到一定限额后，就会将一些游标存储到磁盘上的临时文件中。使用这种类型的游标时，消息储存可能会变慢，但消费者处理一般都会更快。通过缓冲到磁盘，它可以让消息代理来处理不受内存限制的大量消息，而生产者发送消息的速度会受到影响：<br> <strong>图三</strong></p>
  <img src="http://ww1.sinaimg.cn/mw690/a43af4ffjw1e7v8airx6dj20it04sjrl.jpg" class="center" title="vm 实现原理 300 200">
 
-<pre><code><figure class="highlight"><pre> 消息接收后，首先完成消息存储的工作，如(1)所示，然后直接把消息存放在内存中的LinkedList。
-</pre></figure></code></pre>
+<pre><code> 消息接收后，首先完成消息存储的工作，如(1)所示，然后直接把消息存放在内存中的LinkedList。</code></pre>
 <h3>Paging for Non-Persistent Messages（非持久性的消息分页调度）</h3>
 <p>Store based cursor也可以处理非持久性的消息，也就是没有存储在磁盘中的消息，非持久性消息被直接传递给游标，所以Store based cursor也只是嵌入了File based cursor的功能。</p>
 <h2>3种消息cursor的比较</h2>
@@ -488,8 +462,7 @@ public class SendData  implements Serializable {</p>
 </table>
 <hr>
 <h2>Configuring Cursors</h2>
-<p>Activemq默认使用store-based游标。当然也可为不同的Destination修改游标策略。通过修改destinationPolicy节点来更改默认配置。<br>destinationPolicy节点包含多ge policyMap节点。<br>policyMap包含一个policyEntries节点，policyEntries节点包含多个policyEntry 节点。policyEntry就是具体的一个游标策略了。<br>Topics的消费者分为持久订阅者和临时订阅者，所以有两套配置。Queues只有一类消费者，所以只有一套配置。
-对于持久订阅者可以使用PendingDurableSubscriberMessageStoragePolicy来指定游标策略。可配置的策略有vmDurableCursor和fileDurableSubscriberCursor. </p>
+<p>Activemq默认使用store-based游标。当然也可为不同的Destination修改游标策略。通过修改destinationPolicy节点来更改默认配置。<br>destinationPolicy节点包含多ge policyMap节点。<br>policyMap包含一个policyEntries节点，policyEntries节点包含多个policyEntry 节点。policyEntry就是具体的一个游标策略了。<br>Topics的消费者分为持久订阅者和临时订阅者，所以有两套配置。Queues只有一类消费者，所以只有一套配置。<br>对于持久订阅者可以使用PendingDurableSubscriberMessageStoragePolicy来指定游标策略。可配置的策略有vmDurableCursor和fileDurableSubscriberCursor. </p>
 <p><strong>对于临时订阅者可以使用pendingSubscriberPolicy 来指定。可配置的策略有vmCursor和fileCursor。下面是关于Topics的一些xml配置：</strong></p>
 <figure class="highlight"><pre>&lt;beans <span class="keyword">...</span> &gt;
 &lt;broker <span class="keyword">...</span>&gt;
@@ -567,8 +540,7 @@ public class SendData  implements Serializable {</p>
 
 <p>topic和queue都使用了通配符【&gt;】,这个匹配所有的目标名称。你可以根据情况指定一些选择目标的模式。但是VM Cursor仅仅适用于那些消费者可以跟得上目标消息节奏的这种情况。</p>
 <hr>
-<p><a href="http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html">http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html</a>
-<a href="http://netcomm.iteye.com/blog/470585">http://netcomm.iteye.com/blog/470585</a></p>
+<p><a href="http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html" target="_blank">http://www.cnblogs.com/kaka/archive/2012/07/24/2606699.html</a><br><a href="http://netcomm.iteye.com/blog/470585" target="_blank">http://netcomm.iteye.com/blog/470585</a></p>
 ]]></content>
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
     <category scheme="http://hufeng825.github.com/categories/MQ/" term="MQ"/>
@@ -578,11 +550,9 @@ public class SendData  implements Serializable {</p>
     <link href="http://hufeng825.github.com/2013/08/21/mq3/"/>
     <id>http://hufeng825.github.com/2013/08/21/mq3/</id>
     <published>2013-08-21T15:43:37.000Z</published>
-    <updated>2013-08-22T02:55:49.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
-<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。
-配置文件在config/jetty.xml
-<a name="more"></a></p>
+<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。<br>配置文件在config/jetty.xml<br><a id="more"></a></p>
 </blockquote>
 <h2>一、AMQ</h2>
 <p>AMQ是一种文件存储形式，它具有写入速度快和容易恢复的特点。消息存储在一个个文件中，文件的默认大小为32兆，如果一条消息的大小超过了32兆，那么这个值必须设置大点。当一个存储文件中的消息已经全部被消费，那么这个文件将被标识为可删除，在下一个清除阶段，这个文件被删除。默认配置如下：</p>
@@ -883,11 +853,10 @@ public class SendData  implements Serializable {</p>
     <link href="http://hufeng825.github.com/2013/08/21/mq2/"/>
     <id>http://hufeng825.github.com/2013/08/21/mq2/</id>
     <published>2013-08-21T13:22:00.000Z</published>
-    <updated>2013-08-22T02:40:27.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>一：JMS基本概念</h2>
 <h3>1.      JMS的目标</h3>
-<p>为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，
-<a name="more"></a></p>
+<p>为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，<br><a id="more"></a></p>
 <p>尽可能最小化的Java语言概念去构建最大化企业消息应用。统一已经存在的企业级消息系</p>
 <p>统功能。</p>
 <h3>2.      JMS提供者</h3>
@@ -948,7 +917,7 @@ public class SendData  implements Serializable {</p>
 <ul>
 <li><p>主题Topic(Destination) – 一个提供者命名的主题对象，客户端将会使用这个命名的主题对象</p>
 </li>
-<li><p>主题链接工厂(TopciConnectionFactory) – 客户端使用主题链接工厂创建链接主题 ConnectionTopic来取得与JMS消息Pub/Sub提供者的链接</p>
+<li><p>主题链接工厂(TopciConnectionFactory) – 客户端使用主题链接工厂创建链接主题 ConnectionTopic来取得与JMS消息Pub/Sub提供者���链接</p>
 </li>
 <li><p>链接主题(ConnectionTopic) – 一个活动的链接主题存在发布者与订阅者之间</p>
 </li>
@@ -977,16 +946,14 @@ public class SendData  implements Serializable {</p>
     <link href="http://hufeng825.github.com/2013/08/21/appstore/"/>
     <id>http://hufeng825.github.com/2013/08/21/appstore/</id>
     <published>2013-08-21T01:18:13.000Z</published>
-    <updated>2013-08-21T07:10:16.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
-<p>昨晚同事拿了一个app 发现其app 内部页面打开了appstore  并没有唤起手机自带的appstore， 刚开始以为是用webview 加载的
-<a name="more"></a> ，可是自己些了一个demo 发现并不是那样一回事 用webview 加载appstore 地址 会被js 自动吊起本地的appstore，
-下面是我的发给同事的邮件 直接贴下来</p>
+<p>昨晚同事拿了一个app 发现其app 内部页面打开了appstore  并没有唤起手机自带的appstore， 刚开始以为是用webview 加载的<br><a id="more"></a> ，可是自己些了一个demo 发现并不是那样一回事 用webview 加载appstore 地址 会被js 自动吊起本地的appstore，<br>下面是我的发给同事的邮件 直接贴下来</p>
 </blockquote>
-<p>我们都绕了弯路 一直以为是用webview 加载的。 我下班做了测试 发现用webview 加载appstore的地址 ，ios 会根据User-Agent 自动判断 唤起本地的app store，其效果跟用[[UIApplicationsharedApplication] openURL:[NSURL URLWithString:@&quot;&quot;]];是一样的。</p>
+<p>我们都绕了弯路 一直以为是用webview 加载的。 我下班做了测试 发现用webview 加载appstore的地址 ，ios 会根据User-Agent 自动判断 唤起本地的app store，其效果跟用[[UIApplicationsharedApplication] openURL:[NSURL URLWithString:@“”]];是一样的。</p>
 <p>后来我尝试改写User-Agent  发现打开的页面是电脑打开的页面一样的 并不是我们通过手机 打开app store 看到的页面。</p>
 <p>后来我看苹果的文档 发现 他们提供了一个类SKStoreProductViewController专门来干这个事情的</p>
-<p><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html"><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html">https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html</a></a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html" target="_blank"><a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html">https://developer.apple.com/library/ios/documentation/StoreKit/Reference/SKITunesProductViewController_Ref/Introduction/Introduction.html</a></a></p>
 <p>实现效果如下图</p>
 <img src="http://ww4.sinaimg.cn/mw690/a43af4ffjw1e7u10xs9nwj20m015c0x9.jpg" class="center" width="250" height="600">
 
@@ -1035,12 +1002,9 @@ public class SendData  implements Serializable {</p>
     <link href="http://hufeng825.github.com/2013/08/20/mq1/"/>
     <id>http://hufeng825.github.com/2013/08/20/mq1/</id>
     <published>2013-08-20T09:47:34.000Z</published>
-    <updated>2013-08-22T01:33:06.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>下载</h2>
-<p><a href="http://www.apache.org/dyn/closer.cgi?path=/activemq/apache-activemq/5.8.0/apache-activemq-5.8.0-bin.tar.gz">从下载地址中下载包</a>
-解压包然后把包放到一个自己不会手一抖就删掉的位置，此处我放到了本地的document下
-如下图
-<a name="more"></a></p>
+<p><a href="http://www.apache.org/dyn/closer.cgi?path=/activemq/apache-activemq/5.8.0/apache-activemq-5.8.0-bin.tar.gz" target="_blank">从下载地址中下载包</a><br>解压包然后把包放到一个自己不会手一抖就删掉的位置，此处我放到了本地的document下<br>如下图<br><a id="more"></a></p>
 <img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e7uav8h7lbj20o80gkjtw.jpg" class="left" width="200" height="300" title="图片">
 
 <h2>添加环境到path</h2>
@@ -1054,8 +1018,7 @@ public class SendData  implements Serializable {</p>
 <li>source .profile</li>
 </ol>
 <h2>启动mq</h2>
-<p>$Mq start
-输入账号 admin 密码  admin</p>
+<p>$Mq start<br>输入账号 admin 密码  admin</p>
 <p><strong>注意</strong> 如果用代理上网 请把网络环境设置下 如下图</p>
 <img src="http://ww1.sinaimg.cn/mw690/a43af4ffjw1e7ubcv9nx0j20oa08egmc.jpg" width="200" height="300" title="网络配置">
 
@@ -1097,26 +1060,17 @@ public class SendData  implements Serializable {</p>
     <link href="http://hufeng825.github.com/2013/08/20/iosimage/"/>
     <id>http://hufeng825.github.com/2013/08/20/iosimage/</id>
     <published>2013-08-20T01:29:39.000Z</published>
-    <updated>2013-08-20T01:35:08.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>关于图片资源</h2>
-<p>ios 程序会把图片资源编译成二进制文件，程序运行时会把这些图片从磁盘加载直接到内存，如果图片很大，加载速度就会很慢。
-<a name="more"></a>
-为了优化提高性能，需要尽量压缩图片资源。（ps 苹果公司的UIKit 开发者Andy Matuschak指出：使用resizable image是最快的方法。）</p>
+<p>ios 程序会把图片资源编译成二进制文件，程序运行时会把这些图片从磁盘加载直接到内存，如果图片很大，加载速度就会很慢。<br><a id="more"></a><br>为了优化提高性能，需要尽量压缩图片资源。（ps 苹果公司的UIKit 开发者Andy Matuschak指出：使用resizable image是最快的方法。）</p>
 <h2>关于图片资源的压缩</h2>
 <p>如果不需要用半透明的图片 则尽量不要用png 格式的图片。相应的可以用jpg格式的。另外谷歌最新推出的一种格式webp</p>
 <h3>1 WebP是什么</h3>
-<p>WebP是Google推出的一种同时提供了有损压缩与无损压缩的图片格式。目前互联网上传输的数据有65%都是图片，WebP就是出于减少数据量、加速网络传输的目的而开发的。WebP希望能够达到和JPEG同水平的图片质量，但是更小的文件，以减少图片的传送时间。
-在有损压缩的状况下，WebP比同样画质的JPEG少了25% ～ 34%的文件大小 。而在无损压缩的情形中，比起用libpng产生的PNG图片，WebP少了34%的文件大小，也比用pngout再处理过的PNG图片少了26%的文件大小。</p>
+<p>WebP是Google推出的一种同时提供了有损压缩与无损压缩的图片格式。目前互联网上传输的数据有65%都是图片，WebP就是出于减少数据量、加速网络传输的目的而开发的。WebP希望能够达到和JPEG同水平的图片质量，但是更小的文件，以减少图片的传送时间。<br>在有损压缩的状况下，WebP比同样画质的JPEG少了25% ～ 34%的文件大小 。而在无损压缩的情形中，比起用libpng产生的PNG图片，WebP少了34%的文件大小，也比用pngout再处理过的PNG图片少了26%的文件大小。</p>
 <h3>2 WebP的使用</h3>
-<p>webp图片压缩率会比jpeg、png更高，因此下载图片会更省流量，特别适合在mobile app上使用。 比如iOS app上，可以把webp编译生成framework，然后加入引用就可以是使用了。强烈推荐。
-这iOS解析时，可以直接使用 WebPImage。
-NSData <em>imageData = [NSData dataWithContentsOfURL:url];
-UIImage </em>tmpImage = [[WebPImage alloc] loadWebPFromData:imageData];
-SDWebImage最近也提供了对webp的支持，起先不支持自己写了一个分类，现在可以直接用他的UIImage+WebP</p>
+<p>webp图片压缩率会比jpeg、png更高，因此下载图片会更省流量，特别适合在mobile app上使用。 比如iOS app上，可以把webp编译生成framework，然后加入引用就可以是使用了。强烈推荐。<br>这iOS解析时，可以直接使用 WebPImage。<br>NSData <em>imageData = [NSData dataWithContentsOfURL:url];<br>UIImage </em>tmpImage = [[WebPImage alloc] loadWebPFromData:imageData];<br>SDWebImage最近也提供了对webp的支持，起先不支持自己写了一个分类，现在可以直接用他的UIImage+WebP</p>
 <h2>关于加载方式</h2>
-<p>  imageNamed每次都读图片到缓存中，只适合频繁使用的图片，
-initWithContentsOfFile的方法加载图片后，不缓存，适合加载不常使用的图片。 
-引导图片一般情况下只会启动一次而且图片也一般情况下比较大所以用imageNamed 会非常， 如果用initWithContentsOfFile:，这些图片所占用内存可以很快被释放</p>
+<p>  imageNamed每次都读图片到缓存中，只适合频繁使用的图片，<br>initWithContentsOfFile的方法加载图片后，不缓存，适合加载不常使用的图片。<br>引导图片一般情况下只会启动一次而且图片也一般情况下比较大所以用imageNamed 会非常， 如果用initWithContentsOfFile:，这些图片所占用内存可以很快被释放</p>
 <blockquote>
 <p>资料参考by wufawei stackoverflow</p>
 </blockquote>
@@ -1125,25 +1079,12 @@ initWithContentsOfFile的方法加载图片后，不缓存，适合加载不常�
     <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
   </entry>
   <entry>
-    <title type="html"><![CDATA[]]></title>
-    <link href="http://hufeng825.github.com/2013/08/15/hibernate3/"/>
-    <id>http://hufeng825.github.com/2013/08/15/hibernate3/</id>
-    <published>2013-08-15T01:45:01.000Z</published>
-    <updated>2013-08-15T02:20:14.000Z</updated>
-    <content type="html"><![CDATA[<p>title: hibernate 笔记之 
-date: 2013-08-15 09:45:01
-tags: [技术]
-categories: hibernate</p>
-]]></content>
-  </entry>
-  <entry>
     <title type="html"><![CDATA[Markdown]]></title>
     <link href="http://hufeng825.github.com/2013/08/14/markdown/"/>
     <id>http://hufeng825.github.com/2013/08/14/markdown/</id>
     <published>2013-08-14T08:13:21.000Z</published>
-    <updated>2013-08-21T08:45:16.000Z</updated>
-    <content type="html"><![CDATA[<p>本文简单介绍下 Markdown 语法
-<a name="more"></a></p>
+    <updated>2013-08-31T01:38:02.000Z</updated>
+    <content type="html"><![CDATA[<p>本文简单介绍下 Markdown 语法<br><a id="more"></a></p>
 <h3>什么是Markdown</h3>
 <p>Markdown是一个将文本转化为HTML的工具。简单来说，Markdown是一个兼顾可读性与易用性的轻量级标记体系。Markdown并不追求大而全，它只关心HTML里最常用的几个标记，对于一些不常用的标记它允许直接将HTML标记插入文本。</p>
 <hr>
@@ -1229,8 +1170,7 @@ categories: hibernate</p>
 
 <hr>
 <h2>代码区域</h2>
-<p>行内代码使用反斜杠`表示。 
-代码段落则是在每行文字前加4个空格或者1个缩进符表示。</p>
+<p>行内代码使用反斜杠`表示。<br>代码段落则是在每行文字前加4个空格或者1个缩进符表示。</p>
 <hr>
 <h2>强调</h2>
 <p>Markdown使用*或_表示强调。</p>
@@ -1245,9 +1185,7 @@ categories: hibernate</p>
 <p>链接</p>
 <p>Markdown支持两种风格的链接：Inline和Reference。</p>
 <p>语法：</p>
-<p>Inline：以中括号标记显示的链接文本，后面紧跟用小括号包围的链接。如果链接有title属性，则在链接中使用空格加“title属性”。
-Reference：一般应用于多个不同位置使用相同链接。通常分为两个部分，调用部分为[链接文本][ref]；定义部分可以出现在文本中的其他位置，格式为[ref]: <a href="http://some/link/address">http://some/link/address</a> (可选的标题)。 
-注：ref中不区分大小写。</p>
+<p>Inline：以中括号标记显示的链接文本，后面紧跟用小括号包围的链接。如果链接有title属性，则在链接中使用空格加“title属性”。<br>Reference：一般应用于多个不同位置使用相同链接。通常分为两个部分，调用部分为[链接文本][ref]；定义部分可以出现在文本中的其他位置，格式为[ref]: <a href="http://some/link/address" target="_blank">http://some/link/address</a> (可选的标题)。<br>注：ref中不区分大小写。</p>
 <p>代码如下 </p>
 <figure class="highlight"><pre>
 这是一个Inline[示例](http:<span class="comment">//www.baidu.com "可选的title")。</span>
@@ -1257,8 +1195,7 @@ Reference：一般应用于多个不同位置使用相同链接。通常分为�
 
 <hr>
 <h2>图片</h2>
-<p>图片的使用方法基本上和链接类似，只是在中括号前加叹号。 
-注：Markdown不能设置图片大小，如果必须设置则应使用HTML标记<img>。</p>
+<p>图片的使用方法基本上和链接类似，只是在中括号前加叹号。<br>注：Markdown不能设置图片大小，如果必须设置则应使用HTML标记<img>。</p>
 <p>代码如下 </p>
 <figure class="highlight"><pre><span class="tag">&lt;<span class="title">notextile</span>&gt;</span>0<span class="tag">&lt;/<span class="title">notextile</span>&gt;</span>
 
@@ -1271,8 +1208,7 @@ HTML示例：<span class="tag">&lt;<span class="title">img</span> <span class="a
 <p>效果</p>
 <img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" class="right" width="300" height="400" title="可选的title">
 
-<p>Inline示例：<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" alt="替代文本" title="可选的title">
-Reference示例：![替代文本][<a href="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg">http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg</a>]</p>
+<p>Inline示例：<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" alt="替代文本" title="可选的title"><br>Reference示例：![替代文本][<a href="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" target="_blank">http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg</a>]</p>
 <p>HTML示例：<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" alt="替代文本" title="标题文本" width="200" /></p>
 <hr>
 <h2>自动链接</h2>
@@ -1304,12 +1240,12 @@ Reference示例：![替代文本][<a href="http://ww4.sinaimg.cn/large/a43af4ffj
     <link href="http://hufeng825.github.com/2013/08/14/hibernate0/"/>
     <id>http://hufeng825.github.com/2013/08/14/hibernate0/</id>
     <published>2013-08-14T07:56:58.000Z</published>
-    <updated>2013-08-15T04:25:27.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>ORM 概念</h2>
 <blockquote>
-<p>ORM 解决主要的问题是对象-- 关系映射， 域模型是面向对象的，而关系模型数据是面向关系的，一般情况下，一个持久化类和一个表对应，类的每个实例对应表中的一条记录。</p>
+<p>ORM 解决主要的问题是对象— 关系映射， 域模型是面向对象的，而关系模型数据是面向关系的，一般情况下，一个持久化类和一个表对应，类的每个实例对应表中的一条记录。</p>
 </blockquote>
-<a name="more"></a>
+<a id="more"></a>
 
 <h3>对象的持久化</h3>
 <p>• 狭义的理解,“持久化”仅仅指把对象永久保存到数据库中</p>
@@ -1325,7 +1261,7 @@ Reference示例：![替代文本][<a href="http://ww4.sinaimg.cn/large/a43af4ffj
 </li>
 <li><p>加载:根据特定的OID,把一个对象从数据库加载到内 </p>
 <blockquote>
-<p>&#39; OID ---&gt;为了在系统中能够找到所需对象,需要为每一个对象分配一个唯一的标识号。 在关系数据库中称之为主键,而在对象术语中,则叫做对象标识(Object identifier-OID). &#39;</p>
+<p>‘ OID —-&gt;为了在系统中能够找到所需对象,需要为每一个对象分配一个唯一的标识号。 在关系数据库中称之为主键,而在对象术语中,则叫做对象标识(Object identifier-OID). ’</p>
 </blockquote>
 </li>
 </ul>
@@ -1771,9 +1707,9 @@ publick <span class="keyword">static</span> <span class="keyword">void</span> ma
     <link href="http://hufeng825.github.com/2013/08/14/hibernate1/"/>
     <id>http://hufeng825.github.com/2013/08/14/hibernate1/</id>
     <published>2013-08-14T02:36:16.000Z</published>
-    <updated>2013-08-15T03:06:02.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>session 的概述</h2>
-<a name="more"></a>
+<a id="more"></a>
 
 <ol>
 <li><p>session 接口是hibernate 向应用程序提供操作数据库最主要的接口，他提供了基本的保存，更新，删除和加载java对象的方法</p>
@@ -1974,7 +1910,7 @@ public class Test {
 	 * 从数据库中查询
 	 * 3、初始化代理对象的方法：
 	 * （1）调用代理对象的非主键属性
-	 * （2）Hibernate.initialize()方法初始化代理对象
+	 * （2）Hibernate.initialize()方法初始���代理对象
 	 */</span>
 	public static User load(){
 		Session session = HibernateUtil<span class="preprocessor">.getSession</span>()<span class="comment">;</span>
@@ -2059,10 +1995,9 @@ public class Test {
     <link href="http://hufeng825.github.com/2013/08/08/mood/"/>
     <id>http://hufeng825.github.com/2013/08/08/mood/</id>
     <published>2013-08-08T09:16:03.000Z</published>
-    <updated>2013-08-21T01:47:10.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>工作好几年了 谈谈自己的一些感想吧</h2>
-<p>最近几件事情触动挺大的，
-<a name="more"></a></p>
+<p>最近几件事情触动挺大的，<br><a id="more"></a></p>
 <p>1：跟侯的差距越来越远了， 不到三年 侯做到了很多我没做到的事情1-)自考了北大计算机系 2-)结识了年薪几十万的漂亮嫂子 3-）拿到了驾照 4-）在燕郊买了房子</p>
 <p>虽然彼此间还是隔三差五的聚聚，但是间隔越来越长了，大家都在忙，而我是真的在瞎忙 忙的没有任何意义。</p>
 <p>2：家里的压力，家里的压力从催着找女朋友结婚 到现在的赶紧攒首付买房子，之前很天真的甚至有些自私的想 不结婚不要孩子，可是现在觉得真的很对不起两个老人的</p>
@@ -2082,8 +2017,8 @@ public class Test {
     <link href="http://hufeng825.github.com/2013/08/08/hexo1/"/>
     <id>http://hufeng825.github.com/2013/08/08/hexo1/</id>
     <published>2013-08-08T06:21:33.000Z</published>
-    <updated>2013-08-08T07:54:34.000Z</updated>
-    <content type="html"><![CDATA[<p><a name="more"></a></p>
+    <updated>2013-08-31T01:38:02.000Z</updated>
+    <content type="html"><![CDATA[<p><a id="more"></a></p>
 <h2>前言</h2>
 <blockquote>
 <p>很早之前就想自己搭建一个博客，但是无奈已没有时间 而没有银子购买服务器，把家里的mac 当做服务器搭建wordpress但是不能保证速度和访问时间。偶然间发现了octopress,于是兴冲冲的折腾起来，最后搭建成功了，废了很大的经历，最主要的原因是还是网络原因，octopress 安装需要下载大量的安装依赖非常繁琐，到处是坑。后来偶然间发现了hexo，发现要比octopress 好用的太多了。于是果断废弃octopress 转头hexo</p>
@@ -2092,15 +2027,13 @@ public class Test {
 <h2>概念理解</h2>
 <p>hexo 是基于node.js 的 和rails 差不多。再次使用前 需要安装两个插件</p>
 <ul>
-<li>nvm （版本控制）
-nodejs version manager,可以把它理解为 rails里面的rvm  </li>
-<li>npm （包管理机制 ）
- nodejs package manager,可以把它理解为 rails 里面的bundle </li>
+<li>nvm （版本控制）<br>nodejs version manager,可以把它理解为 rails里面的rvm  </li>
+<li>npm （包管理机制 ）<br> nodejs package manager,可以把它理解为 rails 里面的bundle </li>
 </ul>
 <hr>
 <h3>安装步骤(mac)</h3>
 <blockquote>
-<p>只针对于mac 其他的请到官网查看相应平台的安装方法<a href="http://zespia.tw/hexo">http://zespia.tw/hexo</a> </p>
+<p>只针对于mac 其他的请到官网查看相应平台的安装方法<a href="http://zespia.tw/hexo" target="_blank">http://zespia.tw/hexo</a> </p>
 </blockquote>
 <hr>
 <h4>npm</h4>
@@ -2137,7 +2070,7 @@ nodejs version manager,可以把它理解为 rails里面的rvm  </li>
 <h3>设定</h3>
 <p>编辑 _config.yml</p>
 <p>下面贴出我的配置 大家自行根据各自的配置进行相应修改</p>
-<pre><code><figure class="highlight"><pre>// <span class="class">Site</span>
+<pre><code>// <span class="class">Site</span>
 <span class="method">title:</span> 阿峰的技术窝窝
 <span class="method">subtitle:</span> 专注于移动互联网
 <span class="method">description:</span> <span class="class">C</span>/<span class="class">C</span>++/<span class="class">Linux</span>/嵌入式/<span class="class">IOS</span>/<span class="class">WEB</span>/
@@ -2219,8 +2152,7 @@ nodejs version manager,可以把它理解为 rails里面的rvm  </li>
 <span class="method">deploy:</span> 
   <span class="method">type:</span> github
   <span class="method">repository:</span> <span class="method">https:</span>//github.com/hufeng825/hufeng825.github.io.git
-  <span class="method">branch:</span> master
-</pre></figure></code></pre>
+  <span class="method">branch:</span> master</code></pre>
 ]]></content>
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
     <category scheme="http://hufeng825.github.com/categories/hexo/" term="hexo"/>
@@ -2230,21 +2162,17 @@ nodejs version manager,可以把它理解为 rails里面的rvm  </li>
     <link href="http://hufeng825.github.com/2013/08/08/散文/"/>
     <id>http://hufeng825.github.com/2013/08/08/散文/</id>
     <published>2013-08-08T02:29:16.000Z</published>
-    <updated>2013-08-08T06:27:52.000Z</updated>
+    <updated>2013-08-31T01:38:02.000Z</updated>
     <content type="html"><![CDATA[<h2>浮华过后，心若沉浮浅笑安然</h2>
-<p>生活或许是一件艺术品，需懂得欣赏，意中细品，学会经受。<a name="more"></a>人生似一场追梦，那就是无数个美丽的梦而创造。人生常在繁华中等待，只不过每个人都在等待一个自己想要的未来。人生的迁徙，沉重着你的步履，有些感怀让你沉浸。曾让你迷失了方向，繁华落幕后，空山流水静其身，花开似无情，花落去留意，放眼望去，世间的喜悲离合聚散相依，匆匆如尘埃里的一颗沙粒，生命的深度，靠心去我体悟，生命的宽度，需魅力去赞颂。</p>
+<p>生活或许是一件艺术品，需懂得欣赏，意中细品，学会经受。<a id="more"></a>人生似一场追梦，那就是无数个美丽的梦而创造。人生常在繁华中等待，只不过每个人都在等待一个自己想要的未来。人生的迁徙，沉重着你的步履，有些感怀让你沉浸。曾让你迷失了方向，繁华落幕后，空山流���静其身，花开似无情，花落去留意，放眼望去，世间的喜悲离合聚散相依，匆匆如尘埃里的一颗沙粒，生命的深度，靠心去我体悟，生命的宽度，需魅力去赞颂。</p>
 <p>浮华沉寂陌生的城市，穿越年华的酸楚，风停了，雨骤了，心倦了，等待与思念的相互侵蚀，生命的前行，梦的边缘，思绪舞动一隅的嗔怨。行走的日光倾城，常伴有风的抚慰，雨的湿浸，山水的同路，莲的独隅，红尘碾转，自断不了纷争，待过忘川时，不过淡似轻风，花开催人老，纵马须恣意，清浅仲夏煮一壶清茶，待坐而品茗，静看花开花落，笑看云卷亦舒。</p>
-<p>今夕何夕，尘缘路上的回眸一笑，注定了浅笑安然。流年似水，生命的时光中，因为有缘相识，荒草丛生的原野上，没有早一步，晚一步，这就是缘。夏雨微凉，一袭雨过，岁月氤氲了一帘幽梦，芬芳轻盈着一执而念的光阴，生活缱绻起了风景，流年浮华过后，&quot;此情可待成追忆，只是当时已惘然&quot;.</p>
+<p>今夕何夕，尘缘路上的回眸一笑，注定了浅笑安然。流年似水，生命的时光中，因为有缘相识，荒草丛生的原野上，没有早一步，晚一步，这就是缘。夏雨微凉，一袭雨过，岁月氤氲了一帘幽梦，芬芳轻盈着一执而念的光阴，生活缱绻起了风景，流年浮华过后，“此情可待成追忆，只是当时已惘然”.</p>
 <p>心最柔软的地方，穿过了心刺的屏障，曾为一朵玫瑰而绽放，蜿蜒寂寞的藤，月光隐约着浪漫的惆怅，穿越横亘的流浪，时间煮雨，回忆终究会让年华淡泊，活着也许是一种修行，时光静好，品一茗清茶，落花无言，人淡如菊，润一份心境，携一缕阳光，让芳华依旧绽放。字里行间的缠绵，泪痕迭起了四季的轮回，愿得一个人，白守不分离，铺满诗意的路径，夜如此静谧，带伤的诗句常娇嗔着粉饰，步伐太急，却忘了缓缓停下来让心安祥。</p>
 <p>山与水的缠绵，任流音乐的浮想，清寂时常敲碎夜的散漫，凄迷的烟雨里，水滴的顺势而滑，水声伴风雨的飘渺芳飞，无垠的夜空，静静的聆听，繁琐打搅，细密的疏雨，意境的恰入，飘散的雨滴，透过肌肤直抵心深处，奈何雨的朦胧，相思成林泪千行。无情的冷风常拔弄着心弦，溅湿的思愁，陌路的不在相见，这个季，风儿依柔，雨儿心醉，满目的寒殇，素色时光的轻狂，喧哗背后的沉静，简单的真谛，心若沉浮，此事不关山与月。</p>
 <p>浮华掠影后，静静的听雨，感风的倾诉，世界太喧闹，已至于背离了自己，沉静中的超脱，不常泛滥，无意的碰触，深知心里的冬天时常接伴，甚至盛夏炎炎，那份落韵的雪，也会勾画着伤感的景致。卑微轻触着虚无，平淡晕染着凄冷。如若没有那么多牵扯，也不会有那么多眷念，不用去刻意与深究，这个世界本就复杂，盼一份温暖，守一份静染，只愿在高山流水间吟诵，世间最难识是情，最难诉的是痴。</p>
 <p>生命总有尽头，心灵总需要出口，每个人身上都有一把锁，有人说寂寞是种狂欢，但真正的寂寞是无法用热闹来填埋，只有你为心灵找到了决口，上锁的心慢慢绽放，才能真正的释怀，人之所以挣扎与纠结，是把钥匙丢了，但希望总在远方起航心若沉浮，浅笑安然。</p>
-<!-- ![](http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg)-->
-<!-- <img src="http://placekitten.com/890/280">
--->
-<img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" class="right" width="300" height="400" title="壮壮">
-
-<!-- <img src="http://placekitten.com/300/500" class="right" width="150" height="250" title="Place Kitten #3">
+<!-- ![](http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg)--><br><!-- <img src="http://placekitten.com/890/280">
+--><br><img src="http://ww4.sinaimg.cn/large/a43af4ffjw1e3nomotys9j.jpg" class="right" width="300" height="400" title="壮壮"><br><br><!-- <img src="http://placekitten.com/300/500" class="right" width="150" height="250" title="Place Kitten #3">
 
 <img src="http://placekitten.com/300/500" class="right" width="150" height="250" title="Place Kitten #4" alt="An image of a very cute kitten">
  -->]]></content>

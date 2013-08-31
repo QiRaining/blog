@@ -167,7 +167,7 @@ $(function () {
   
     <li><a href="/categories/MQ/">MQ</a><small> (5)</small></li>
   
-    <li><a href="/categories/hexo/">hexo</a><small> (4)</small></li>
+    <li><a href="/categories/hexo/">hexo</a><small> (3)</small></li>
   
     <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
   
@@ -184,6 +184,10 @@ $(function () {
   <ul class="entry">
     
       <li>
+        <a href="/2013/08/31/hibernate3/"></a>
+      </li>
+    
+      <li>
         <a href="/2013/08/29/ios7/">快速清除subviews之 隐私循环</a>
       </li>
     
@@ -197,10 +201,6 @@ $(function () {
     
       <li>
         <a href="/2013/08/29/ios4/">removeFromSuperview添加动画使其更加高雅美观</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/29/ios3/">ios 清理工程中没有用到的图片</a>
       </li>
     
   </ul>
@@ -225,8 +225,7 @@ $(function () {
     <div class="entry">
         
         <blockquote>
-<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等
-
+<p>mq 支持多种发送格式  BytesMessage  MapMessage ObjectMessage TextMessage StreamMessage等<br>
         
     </div>
     <footer>
@@ -283,9 +282,7 @@ $(function () {
     <div class="entry">
         
         <blockquote>
-<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。
-配置文件在config/jetty.xml
-
+<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。<br>配置文件在config/jetty.xml<br>
         
     </div>
     <footer>
@@ -314,8 +311,7 @@ $(function () {
         
         <h2>一：JMS基本概念</h2>
 <h3>1.      JMS的目标</h3>
-<p>为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，
-
+<p>为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，<br>
         
     </div>
     <footer>
@@ -343,10 +339,7 @@ $(function () {
     <div class="entry">
         
         <h2>下载</h2>
-<p><a href="http://www.apache.org/dyn/closer.cgi?path=/activemq/apache-activemq/5.8.0/apache-activemq-5.8.0-bin.tar.gz">从下载地址中下载包</a>
-解压包然后把包放到一个自己不会手一抖就删掉的位置，此处我放到了本地的document下
-如下图
-
+<p><a href="http://www.apache.org/dyn/closer.cgi?path=/activemq/apache-activemq/5.8.0/apache-activemq-5.8.0-bin.tar.gz" target="_blank">从下载地址中下载包</a><br>解压包然后把包放到一个自己不会手一抖就删掉的位置，此处我放到了本地的document下<br>如下图<br>
         
     </div>
     <footer>
@@ -377,10 +370,10 @@ $(function () {
     }
 
     $(document).ready(function () {
-        var totalPage = '1' * '10';
-        var currentPage = '1' - 1;
+        var totalPage = 'undefined' * 'undefined';
+        var currentPage = 'undefined' - 1;
         $("#Pagination").pagination(totalPage, {
-            items_per_page: '10',
+            items_per_page: 'undefined',
             current_page: currentPage,
             callback: pageselectCallback
         });

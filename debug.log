@@ -1,0 +1,80 @@
+date: 2013-09-02 18:27:21.557
+argv: node /Users/jason/nvm/v0.8.14/bin/hexo server
+os: Darwin 12.4.0 darwin x64
+version:
+  hexo: 2.0.6
+  http_parser: 1.0
+  node: 0.8.14
+  v8: 3.11.10.25
+  ares: 1.7.5-DEV
+  uv: 0.8
+  zlib: 1.2.3
+  openssl: 1.0.0f
+---
+
+[debug] 18:25:12.204 Configuration file load successfully
+[debug] 18:25:12.204 Version info checked successfully
+[debug] 18:25:12.206 Plugin loaded successfully: hexo-generator-feed
+[debug] 18:25:12.211 Plugin loaded successfully: hexo-generator-sitemap
+[debug] 18:25:12.211 Loading the database...
+[debug] 18:25:12.431 Theme layout loaded
+[debug] 18:25:12.457 Processed: favicon.ico
+[debug] 18:25:12.465 Theme source loaded
+[debug] 18:25:12.465 Start watching theme source...
+[debug] 18:25:12.465 Start watching theme layout...
+[debug] 18:25:13.036 Processed: _posts/appstore.md
+[debug] 18:25:13.038 Processed: _posts/git2.md
+[debug] 18:25:13.049 Processed: _posts/git3.md
+[debug] 18:25:13.050 Processed: _posts/git4.md
+[debug] 18:25:13.077 Processed: _posts/hexo1.md
+[debug] 18:25:13.079 Processed: _posts/hibernate0.md
+[debug] 18:25:13.081 Processed: _posts/hibernate1.md
+[debug] 18:25:13.086 Processed: _posts/ios10.md
+[debug] 18:25:13.087 Processed: _posts/ios11.md
+[debug] 18:25:13.106 Processed: _posts/ios12.md
+[debug] 18:25:13.107 Processed: _posts/ios13.md
+[debug] 18:25:13.109 Processed: _posts/ios14.md
+[debug] 18:25:13.113 Processed: _posts/ios15.md
+[debug] 18:25:13.122 Processed: _posts/ios16.md
+[debug] 18:25:13.123 Processed: _posts/ios17.md
+[debug] 18:25:13.125 Processed: _posts/ios18.md
+[debug] 18:25:13.136 Processed: _posts/ios19.md
+[debug] 18:25:13.142 Processed: _posts/ios20.md
+[debug] 18:25:13.145 Processed: _posts/ios21.md
+[debug] 18:25:13.147 Processed: _posts/ios3.md
+[debug] 18:25:13.148 Processed: _posts/ios4.md
+[debug] 18:25:13.149 Processed: _posts/ios5.md
+[debug] 18:25:13.150 Processed: _posts/ios6.md
+[debug] 18:25:13.152 Processed: _posts/ios7.md
+[debug] 18:25:13.155 Processed: _posts/ios8.md
+[debug] 18:25:13.164 Processed: _posts/ios9.md
+[debug] 18:25:13.165 Processed: _posts/iosimage.md
+[debug] 18:25:13.174 Processed: _posts/mac1.md
+[debug] 18:25:13.176 Processed: _posts/markdown.md
+[debug] 18:25:13.178 Processed: _posts/mood.md
+[debug] 18:25:13.180 Processed: _posts/mq1.md
+[debug] 18:25:13.182 Processed: _posts/mq2.md
+[debug] 18:25:13.186 Processed: _posts/mq3.md
+[debug] 18:25:13.192 Processed: _posts/mq4.md
+[debug] 18:25:13.212 Processed: _posts/mq5.md
+[debug] 18:25:13.214 Processed: _posts/散文.md
+[debug] 18:25:13.215 Processed: new-page/index.md
+[debug] 18:25:13.216 Theme configuration loaded
+[debug] 18:25:13.217 Theme i18n loaded
+[debug] 18:25:13.348 Cache saved
+[info] 18:25:13.354 Hexo is running at localhost:4000/. Press Ctrl+C to stop.
+[debug] 18:25:13.654 Render category: categories/git/
+[debug] 18:25:20.776 Render category: categories/git/
+[update] 18:27:21.452 Source: _posts/git4.md
+[error] 18:27:21.556 { rawMessage: 'Unable to parse.',
+  parsedLine: 4,
+  snippet: 'categories:[git] ',
+  parsedFile: null,
+  message: 'Unable to parse.',
+  domain_thrown: true,
+  domain: 
+   { domain: null,
+     _events: { error: [Function] },
+     _maxListeners: 10,
+     members: [],
+     _disposed: true } }

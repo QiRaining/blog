@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+ <div class="container">
+
+<h2 class="entry-title"><center>搜索结果</center></h2>
+<hr>
+<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery.imagesloaded.min.js"></script>
+<script type="text/javascript" src="js/jquery.scrollUp.min.js"></script>
+<script type="text/javascript" src="/js/jquery-tapir.js"></script>
+   <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+<!--   <link href="/css/hf.css" rel="stylesheet" media="screen">
+ -->
+<div id="search_loading" style="margin: 40px 0">
+    <center><img src="/img/loading.gif"></center>
+</div>
+  <div id="search_results">
+<br>
+</div>
+
+</div>
+
+<script type="text/javascript">
+  $(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+  $('#search_results').tapir({'token': '52248294c03c8a0000000000',
+   'complete' : function() { document.getElementById('search_loading').style.display="none"; }
+
+});
+
+
+
+</script>

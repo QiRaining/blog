@@ -1,9 +1,10 @@
 <div class="content">
     <header>
-        <div class="icon"></div>
+        <!--div class="icon"></div-->
+        <span class="badge badge-warning">
         <time datetime="<%= item.date.toDate().toISOString() %>"><a href="<%- config.root %><%- item.path %>"><%=
             item.date.format(config.date_format) %></a></time>
-
+        </span>
         <%- partial('./title') %>
     </header>
     <div class="entry">

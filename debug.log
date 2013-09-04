@@ -1,4 +1,4 @@
-date: 2013-09-02 18:27:21.557
+date: 2013-09-03 17:08:09.923
 argv: node /Users/jason/nvm/v0.8.14/bin/hexo server
 os: Darwin 12.4.0 darwin x64
 version:
@@ -12,69 +12,82 @@ version:
   openssl: 1.0.0f
 ---
 
-[debug] 18:25:12.204 Configuration file load successfully
-[debug] 18:25:12.204 Version info checked successfully
-[debug] 18:25:12.206 Plugin loaded successfully: hexo-generator-feed
-[debug] 18:25:12.211 Plugin loaded successfully: hexo-generator-sitemap
-[debug] 18:25:12.211 Loading the database...
-[debug] 18:25:12.431 Theme layout loaded
-[debug] 18:25:12.457 Processed: favicon.ico
-[debug] 18:25:12.465 Theme source loaded
-[debug] 18:25:12.465 Start watching theme source...
-[debug] 18:25:12.465 Start watching theme layout...
-[debug] 18:25:13.036 Processed: _posts/appstore.md
-[debug] 18:25:13.038 Processed: _posts/git2.md
-[debug] 18:25:13.049 Processed: _posts/git3.md
-[debug] 18:25:13.050 Processed: _posts/git4.md
-[debug] 18:25:13.077 Processed: _posts/hexo1.md
-[debug] 18:25:13.079 Processed: _posts/hibernate0.md
-[debug] 18:25:13.081 Processed: _posts/hibernate1.md
-[debug] 18:25:13.086 Processed: _posts/ios10.md
-[debug] 18:25:13.087 Processed: _posts/ios11.md
-[debug] 18:25:13.106 Processed: _posts/ios12.md
-[debug] 18:25:13.107 Processed: _posts/ios13.md
-[debug] 18:25:13.109 Processed: _posts/ios14.md
-[debug] 18:25:13.113 Processed: _posts/ios15.md
-[debug] 18:25:13.122 Processed: _posts/ios16.md
-[debug] 18:25:13.123 Processed: _posts/ios17.md
-[debug] 18:25:13.125 Processed: _posts/ios18.md
-[debug] 18:25:13.136 Processed: _posts/ios19.md
-[debug] 18:25:13.142 Processed: _posts/ios20.md
-[debug] 18:25:13.145 Processed: _posts/ios21.md
-[debug] 18:25:13.147 Processed: _posts/ios3.md
-[debug] 18:25:13.148 Processed: _posts/ios4.md
-[debug] 18:25:13.149 Processed: _posts/ios5.md
-[debug] 18:25:13.150 Processed: _posts/ios6.md
-[debug] 18:25:13.152 Processed: _posts/ios7.md
-[debug] 18:25:13.155 Processed: _posts/ios8.md
-[debug] 18:25:13.164 Processed: _posts/ios9.md
-[debug] 18:25:13.165 Processed: _posts/iosimage.md
-[debug] 18:25:13.174 Processed: _posts/mac1.md
-[debug] 18:25:13.176 Processed: _posts/markdown.md
-[debug] 18:25:13.178 Processed: _posts/mood.md
-[debug] 18:25:13.180 Processed: _posts/mq1.md
-[debug] 18:25:13.182 Processed: _posts/mq2.md
-[debug] 18:25:13.186 Processed: _posts/mq3.md
-[debug] 18:25:13.192 Processed: _posts/mq4.md
-[debug] 18:25:13.212 Processed: _posts/mq5.md
-[debug] 18:25:13.214 Processed: _posts/散文.md
-[debug] 18:25:13.215 Processed: new-page/index.md
-[debug] 18:25:13.216 Theme configuration loaded
-[debug] 18:25:13.217 Theme i18n loaded
-[debug] 18:25:13.348 Cache saved
-[info] 18:25:13.354 Hexo is running at localhost:4000/. Press Ctrl+C to stop.
-[debug] 18:25:13.654 Render category: categories/git/
-[debug] 18:25:20.776 Render category: categories/git/
-[update] 18:27:21.452 Source: _posts/git4.md
-[error] 18:27:21.556 { rawMessage: 'Unable to parse.',
-  parsedLine: 4,
-  snippet: 'categories:[git] ',
-  parsedFile: null,
-  message: 'Unable to parse.',
-  domain_thrown: true,
-  domain: 
-   { domain: null,
-     _events: { error: [Function] },
-     _maxListeners: 10,
-     members: [],
-     _disposed: true } }
+[debug] 17:08:08.660 Configuration file load successfully
+[debug] 17:08:08.661 Version info checked successfully
+[debug] 17:08:08.663 Plugin loaded successfully: hexo-generator-feed
+[debug] 17:08:08.664 Plugin loaded successfully: hexo-generator-sitemap
+[debug] 17:08:08.665 Loading the database...
+[debug] 17:08:08.894 Theme layout loaded
+[debug] 17:08:08.933 Processed: favicon.ico
+[debug] 17:08:08.945 Theme source loaded
+[debug] 17:08:08.945 Start watching theme source...
+[debug] 17:08:08.945 Start watching theme layout...
+[debug] 17:08:09.687 Processed: _posts/22.md
+[debug] 17:08:09.689 Processed: _posts/appstore.md
+[debug] 17:08:09.690 Processed: _posts/git10.md
+[debug] 17:08:09.693 Processed: _posts/git11.md
+[debug] 17:08:09.694 Processed: _posts/git12.md
+[debug] 17:08:09.698 Processed: _posts/git13.md
+[debug] 17:08:09.699 Processed: _posts/git2.md
+[debug] 17:08:09.711 Processed: _posts/git3.md
+[debug] 17:08:09.712 Processed: _posts/git4.md
+[debug] 17:08:09.713 Processed: _posts/git5.md
+[debug] 17:08:09.716 Processed: _posts/git6.md
+[debug] 17:08:09.718 Processed: _posts/git7.md
+[debug] 17:08:09.721 Processed: _posts/git8.md
+[debug] 17:08:09.725 Processed: _posts/git9.md
+[debug] 17:08:09.751 Processed: _posts/hexo1.md
+[debug] 17:08:09.754 Processed: _posts/hibernate0.md
+[debug] 17:08:09.755 Processed: _posts/hibernate1.md
+[debug] 17:08:09.757 Processed: _posts/ios10.md
+[debug] 17:08:09.759 Processed: _posts/ios11.md
+[debug] 17:08:09.776 Processed: _posts/ios12.md
+[debug] 17:08:09.778 Processed: _posts/ios13.md
+[debug] 17:08:09.780 Processed: _posts/ios14.md
+[debug] 17:08:09.789 Processed: _posts/ios15.md
+[debug] 17:08:09.799 Processed: _posts/ios16.md
+[debug] 17:08:09.800 Processed: _posts/ios17.md
+[debug] 17:08:09.802 Processed: _posts/ios18.md
+[debug] 17:08:09.811 Processed: _posts/ios19.md
+[debug] 17:08:09.817 Processed: _posts/ios20.md
+[debug] 17:08:09.820 Processed: _posts/ios21.md
+[debug] 17:08:09.822 Processed: _posts/ios3.md
+[debug] 17:08:09.827 Processed: _posts/ios4.md
+[debug] 17:08:09.830 Processed: _posts/ios5.md
+[debug] 17:08:09.832 Processed: _posts/ios6.md
+[debug] 17:08:09.834 Processed: _posts/ios7.md
+[debug] 17:08:09.837 Processed: _posts/ios8.md
+[debug] 17:08:09.846 Processed: _posts/ios9.md
+[debug] 17:08:09.849 Processed: _posts/iosimage.md
+[debug] 17:08:09.857 Processed: _posts/mac1.md
+[debug] 17:08:09.862 Processed: _posts/mac3.md
+[debug] 17:08:09.864 Processed: _posts/markdown.md
+[debug] 17:08:09.866 Processed: _posts/mood.md
+[debug] 17:08:09.868 Processed: _posts/mq1.md
+[debug] 17:08:09.877 Processed: _posts/mq2.md
+[debug] 17:08:09.879 Processed: _posts/mq3.md
+[debug] 17:08:09.886 Processed: _posts/mq4.md
+[debug] 17:08:09.904 Processed: _posts/mq5.md
+[debug] 17:08:09.905 Processed: _posts/svn3.md
+[debug] 17:08:09.907 Processed: _posts/svn4.md
+[debug] 17:08:09.909 Processed: _posts/svn5.md
+[debug] 17:08:09.910 Processed: _posts/svn6.md
+[debug] 17:08:09.911 Processed: _posts/svn7.md
+[debug] 17:08:09.913 Processed: _posts/svn8.md
+[debug] 17:08:09.915 Processed: _posts/svn9.md
+[debug] 17:08:09.916 Processed: _posts/散文.md
+[debug] 17:08:09.916 Processed: new-page/index.md
+[debug] 17:08:09.919 Theme configuration loaded
+[debug] 17:08:09.920 Theme i18n loaded
+[error] 17:08:09.920 TypeError: Cannot read property '1' of undefined
+TypeError: Cannot read property '1' of undefined
+    at /Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/plugins/filter/backtick_code_block.js:32:27
+    at String.replace (native)
+    at module.exports (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/plugins/filter/backtick_code_block.js:13:31)
+    at module.exports.async.series.data.content.data.content.replace.tabs (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/post/render.js:73:9)
+    at async.eachSeries.iterate (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:131:13)
+    at Object.async.eachSeries (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:147:9)
+    at module.exports.async.series.data.content.data.content.replace.tabs (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/post/render.js:72:13)
+    at async.series.results (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:548:21)
+    at _asyncMap (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:224:13)
+    at async.eachSeries.iterate (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:131:13)

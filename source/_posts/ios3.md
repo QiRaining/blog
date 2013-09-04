@@ -1,7 +1,9 @@
 title: ios 清理工程中没有用到的图片
 date: 2013-08-29 16:43:14
 tags: [技术]
-categories: ios
+categories: 
+- ios
+- mac
 ---
 >发布前往往需要清理工程中没有用到的图片，这些图片可能是测试图片也可能是以往版本中替换遗留下来的图片
 
@@ -15,7 +17,7 @@ categories: ios
 
  如下图  
 
-{%img http://ww3.sinaimg.cn/mw690/a43af4ffjw1e83pb1zvo7j215q0pq7bz.jpg 300 500%}
+{% img http://ww3.sinaimg.cn/mw690/a43af4ffjw1e83pb1zvo7j215q0pq7bz.jpg 300 500 %}
 
 ##源码 
 

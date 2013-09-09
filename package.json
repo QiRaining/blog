@@ -1,10 +1,12 @@
 {
   "name": "hexo",
-  "version": "2.0.6",
+  "version": "1.2.4",
   "private": true,
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "hexo-tag-vimhighlight": "~0.1.2"
+  }
 }

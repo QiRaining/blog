@@ -2,7 +2,7 @@
     <header>
         <!--div class="icon"></div-->
         <span class="badge badge-warning">
-        <time datetime="<%= item.date.toDate().toISOString() %>"><a href="<%- config.root %><%- item.path %>"><%=
+        <time datetime="<%= item.date.toDate().toISOString() %>"><a href="<%- config.root %><%- item.path %>" style="color:#FFFFFF"><%=
             item.date.format(config.date_format) %></a></time>
         </span>
         <%- partial('./title') %>

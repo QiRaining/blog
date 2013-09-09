@@ -13,6 +13,7 @@ categories: git
 ##方法二 交互式修改
 
 ###步骤一
+   
 	git rebase -i master~1 //最
 	git rebase -i master~5 //最后五次
 

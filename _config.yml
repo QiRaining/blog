@@ -74,6 +74,7 @@ disqus_shortname:
 
 plugins:
 - hexo-generator-sitemap
+- hexo-generator-feed
 
 
 theme: bootstrap

@@ -1,4 +1,4 @@
-title: ios iphone5 适配 之 如何是app 适用不通分辨率
+title: ios iphone5 适配 之 如何使app 适用不通分辨率
 date: 2013-08-29 18:44:36
 tags: [技术]
 categories: ios

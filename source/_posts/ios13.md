@@ -1,7 +1,7 @@
 title: 复杂页面消退的一个简单实例
 date: 2013-08-31 22:42:52
 tags: [技术]
-categories: hexo
+categories: ios
 ---
 
 如图

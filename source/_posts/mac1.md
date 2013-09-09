@@ -1,9 +1,7 @@
 title: mac 下 git svn 的代理设置
 date: 2013-09-02 08:10:34
 tags: [技术]
-categories: 
-- git
-- svn
+categories: [git, svn]
 ---
 所干的工作 因为涉及到金融行业网络安全性比较高 公司的网络设置了代理 这导致了git svn 双双挂了。 
 <!-- more -->

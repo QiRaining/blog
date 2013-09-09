@@ -1,7 +1,7 @@
 title: Block 定时器 让我们解放了
 date: 2013-09-02 09:28:52
 tags: [技术]
-categories: hexo
+categories: ios
 ---
 Block 没有出现前 ios写个定时器太麻烦了,好在Block的让我们小爽了一把,以后写timer 简单的要命了
 <!-- more -->

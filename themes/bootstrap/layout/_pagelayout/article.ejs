@@ -18,9 +18,14 @@
   item.tags.forEach(function(tag){
     tags.push('<a  href="' + config.root + tag.path + '">' + tag.name + '</a>');
   });
+   var categories = [];
+  item.categories.forEach(function(category){
+    categories.push('<a  href="' + config.root + category.path + '">' + category.name + '</a>');
+  });
   %>
   <div class="tags">
-    <%- tags.join(', ') %>
+    <%- tags.join(', ') %> ----
+    <%- categories.join(', ') %>
   </div>
 <% } %>
     </div>

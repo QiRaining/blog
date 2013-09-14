@@ -1,4 +1,4 @@
-title: ios开发--block应该知道的那几件事
+title: ios笔记--block应该知道的那几件事
 date: 2013-09-11 23:32:18
 tags: [技术]
 categories: ios

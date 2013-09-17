@@ -143,7 +143,7 @@ $(function () {
                             </li>
                             
                             <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
-                                <small>58</small>
+                                <small>59</small>
                             </a>
 
                             </li>
@@ -191,6 +191,10 @@ $(function () {
   <ul class="entry">
     
       <li>
+        <a href="/2013/09/17/ios25/">再谈涉及模式</a>
+      </li>
+    
+      <li>
         <a href="/2013/09/15/ios24/">What is the difference between Category and Class Extension?</a>
       </li>
     
@@ -204,10 +208,6 @@ $(function () {
     
       <li>
         <a href="/2013/09/09/project0/">读 林锐博士的项目管理 笔记1</a>
-      </li>
-    
-      <li>
-        <a href="/2013/09/03/mac4/">mac 下更新DNS 缓存</a>
       </li>
     
   </ul>
@@ -226,7 +226,7 @@ $(function () {
   
     <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
   
-    <li><a href="/categories/ios/">ios</a><small> (26)</small></li>
+    <li><a href="/categories/ios/">ios</a><small> (27)</small></li>
   
     <li><a href="/categories/ios/mac/">mac</a><small> (5)</small></li>
   
@@ -250,6 +250,35 @@ $(function () {
 
         </div>
         <div class="span9 panel">
+            
+            <div class="content">
+    <header>
+        <!--div class="icon"></div-->
+        <span class="badge badge-warning">
+        <time datetime="2013-09-03T03:00:12.000Z"><a href="/2013/09/03/git9/" style="color:#FFFFFF">2013 9月 3</a></time>
+        </span>
+        
+
+<h1 class="title"><a href="/2013/09/03/git9/">git与SVN协同的工作流程</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>git可以和SVN服务器一起使用，即，中央服务器采用svn，本地代码库使用git。这样的好处是，可以兼容以前的项目，同时本地有一套完整的版本控制系统，可以随时查看代码修改历史，随时提交，不需要网络。合适的时候再提交到SVN服务器。git-svn的工作流程也有很多，我们推荐使用下面这种方式。</p>
+
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/09/03/git9/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
             
             <div class="content">
     <header>
@@ -409,7 +438,7 @@ $(function () {
     </header>
     <div class="entry">
         
-        <p>有没有提交过“修改bug” “上传代码” 等等类似脑残的提交信息. code review 时看到这样的提交信息 每个team leader 肯定不会容忍的. 下面要介绍的是如何修改之前提交的历史信息<br>
+        <p>有没有提交过“修改bug” “上传代码” 等等���似脑残的提交信息. code review 时看到这样的提交信息 每个team leader 肯定不会容忍的. 下面要介绍的是如何修改之前提交的历史信息<br>
         
     </div>
     <footer>
@@ -505,34 +534,6 @@ $(function () {
 </div>
 
             
-            <div class="content">
-    <header>
-        <!--div class="icon"></div-->
-        <span class="badge badge-warning">
-        <time datetime="2013-09-02T01:21:21.000Z"><a href="/2013/09/02/ios19/" style="color:#FFFFFF">2013 9月 2</a></time>
-        </span>
-        
-
-<h1 class="title"><a href="/2013/09/02/ios19/">如何得到中英文混合下的NSString的长度?</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <p>这个貌似很简单但却是把我跟招行的兄弟难为了好久,为毛?还不是因为招行信用卡中心的网络无法连接外网无法谷歌度娘最后我们只能查看文档写test<br>下面是最后我们得到的两个方法<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/09/02/ios19/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
             <!-- 分页 -->
             <script src="/js/jquery.pagination.js"></script>
 <script type="text/javascript">
@@ -551,7 +552,7 @@ $(function () {
     }
 
     $(document).ready(function () {
-        var totalPage = '6' * '10';
+        var totalPage = '7' * '10';
         var currentPage = '3' - 1;
         $("#Pagination").pagination(totalPage, {
             items_per_page: '10',

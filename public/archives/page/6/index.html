@@ -143,7 +143,7 @@ $(function () {
                             </li>
                             
                             <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
-                                <small>58</small>
+                                <small>59</small>
                             </a>
 
                             </li>
@@ -173,6 +173,35 @@ $(function () {
 <div class="container-fluid" style="margin-top: 60px">
     <div class="row-fluid">
         <div class="span9 panel">
+            
+            <div class="content">
+    <header>
+        <!--div class="icon"></div-->
+        <span class="badge badge-warning">
+        <time datetime="2013-08-21T15:43:37.000Z"><a href="/2013/08/21/mq3/" style="color:#FFFFFF">2013 8月 21</a></time>
+        </span>
+        
+
+<h1 class="title"><a href="/2013/08/21/mq3/">MQ 笔记之 消息持久化</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <blockquote>
+<p>在broker中设置属性persistent=”true”(默认是true)，同时发送的消息也应该是persitent类型的。ActiveMQ消息持久化有三种方式：AMQ、KahaDB、JDBC。<br>配置文件在config/jetty.xml<br>
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/08/21/mq3/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
             
             <div class="content">
     <header>
@@ -437,35 +466,6 @@ $(function () {
 </div>
 
             
-            <div class="content">
-    <header>
-        <!--div class="icon"></div-->
-        <span class="badge badge-warning">
-        <time datetime="2013-08-08T02:29:16.000Z"><a href="/2013/08/08/散文/" style="color:#FFFFFF">2013 8月 8</a></time>
-        </span>
-        
-
-<h1 class="title"><a href="/2013/08/08/散文/">散文</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <h2>浮华过后，心若沉浮浅笑安然</h2>
-<p>生活或许是一件艺术品，需懂得欣赏，意中细品，学会经受。
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/08/08/散文/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
             <!-- 分页 -->
 			<script src="/js/jquery.pagination.js"></script>
 <script type="text/javascript">
@@ -484,7 +484,7 @@ $(function () {
     }
 
     $(document).ready(function () {
-        var totalPage = '6' * '10';
+        var totalPage = '7' * '10';
         var currentPage = '6' - 1;
         $("#Pagination").pagination(totalPage, {
             items_per_page: '10',

@@ -1,0 +1,471 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>Xcode的持续集成指南 | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="采用持续集成工作流设置MAC作为服务器，在其上运行Xcode的服务。然后确保你的本地项目，发布源代码库。要完成设立一个持续集成的工作流程，配置的机器人，不知疲倦地进行集成和时间表。">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Xcode的持续集成指南"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+    <link href="/css/tab.css" rel="stylesheet" media="screen">
+    <link href="/css/xcode.css" rel="stylesheet" media="screen">
+
+  <!--link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen"-->
+   <!--script src="/fancybox/jquery.fancybox.pack.js"></script>-->
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+<!--[if lt IE 9]>
+    <div class="alert alert-block ie-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>浏览器版本过低</h4>
+        <br>
+        <p style="text-align:center">你知道不？你还在用几年前的浏览器！这个网页上的有很多好看的东西和动画效果都显示不了！</p>
+        <p style="text-align:center">建议赶快<a href="http://windows.microsoft.com/zh-cn/internet-explorer/downloads/ie-10/worldwide-languages" target="_blank">升级</a>你的浏览器版本或使用 <a href="http://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 或 <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> 等高级浏览器。</p>
+    </div>
+<![endif]-->
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <a href="/Jianli.html" class="brand" >简历</a>
+
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>58</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                   <!--form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8"-->
+                  <form class="navbar-search " action="/search.html" method="get" accept-charset="utf-8">
+
+                        <input type="text"   class="search-query" name="query" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-08-31T13:11:39.000Z"><a href="/2013/08/31/ios9/">2013 8月 31</a></time>
+        
+        
+
+<h1 class="title">Xcode的持续集成指南</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <h2>采用持续集成工作流</h2>
+<p>设置MAC作为服务器，在其上运行Xcode的服务。然后确保你的本地项目，发布源代码库。要完成设立一个持续集成的工作流程，配置的机器人，不知疲倦地进行集成和时间表。<br><a id="more"></a></p>
+<h2>OS X Server的安装和配置的Xcode服务</h2>
+<p>要运行的Xcode的服务，您必须先安装运行的是Mac OS X v10.9开发者预览版OS X Server的预览。您还必须在服务器上安装Xcode开发者预览。自动构建，分析，测试，和归档您的产品，您将使用Xcode的服务。</p>
+<h3>要安装和运行Xcode的服务</h3>
+<ol>
+<li><p>转到<a href="http://developer.apple.com/downloads的，并获得OS" target="_blank">http://developer.apple.com/downloads的，并获得OS</a> X v10.9开发者预览版，OS X Server的预览，和Xcode开发者预览版的预发布版本。</p>
+</li>
+<li><p>安装OS X v10.9开发者预览版，Mac OS X Server的预览，和Xcode开发者预览版的Mac上，你会运行Xcode的服务。</p>
+</li>
+<li><p>启动服务器应用程序/应用。</p>
+</li>
+<li><p>在服务器应用程序边栏中，选择的Xcode的服务。</p>
+</li>
+<li><p>当您第一次打开Xcode的服务在一个特定的服务器上，该服务会询问您确定的Xcode版本，它应该用来执行其任务。</p>
+</li>
+<li><p>点击选择的Xcode，并选择使用的Xcode版本。</p>
+</li>
+<li><p>点击On / Off开关打开服务</p>
+</li>
+</ol>
+<p>接下来，添加你的服务器允许访问Xcode的服务团队，如资产配置的配置文件和签名证书为iOS设备构建产品开发团队。你必须是一个管理员或开发团队的代理，这样才能把服务器加进来。</p>
+<h3>要添加您的服务器开发团队</h3>
+<ol>
+<li><p>在服务器应用程序边栏中，选择的Xcode的服务。</p>
+</li>
+<li><p>在“设置”窗格中，单击“添加”按钮，旁边的开发团队标签。</p>
+</li>
+<li><p>输入您的Apple开发者证书，并选择一个团队。</p>
+</li>
+</ol>
+<p>加入团队后，Xcode的服务，您可以添加iOS开发设备运行单元测试时使用。</p>
+<h3>要添加一个iOS开发设备的Xcode服务</h3>
+<ol>
+<li><p>在服务器应用程序边栏中，选择的Xcode的服务。</p>
+</li>
+<li><p>将设备连接到服务器，并等待，直到它出现在设备列表中。</p>
+</li>
+<li><p>点击“加入队伍”按钮旁边的列表中的设备。</p>
+</li>
+</ol>
+<p>添加帐户资料库和您的服务器配置开发的Mac。你会写你的Mac上的使用Xcode代码，你就会让OS X服务器进行持续集成。您还必须发布或您当地的项目转移到资料库，可通过Xcode的服务。</p>
+<h3>你开发的Mac OS X Server的帐户添加到Xcode</h3>
+<ol>
+<li><p>在Xcode的开发Mac上，单击“帐户”首选项“窗口。</p>
+</li>
+<li><p>点击添加按钮（+），并选择“添加服务器”。</p>
+</li>
+<li><p>从服务器列表中选择服务器，输入服务器地址，然后单击“下一步”按钮。</p>
+</li>
+<li><p>指定您的连接到服务器的凭据，然后单击“添加”。</p>
+</li>
+</ol>
+<p>您可以添加到您的帐户资料库，加快结帐操作。（你也可以添加库到您的清单后，当您检查的项目）。</p>
+<h3>要添加存储库到您的帐户</h3>
+<ol>
+<li><p>在Xcode的开发Mac上，单击“帐户”首选项“窗口。</p>
+</li>
+<li><p>点击添加按钮（+），并选择“添加库。</p>
+</li>
+<li><p>在文本字段中，输入库添加的地址，然后单击“完成”按钮。</p>
+</li>
+</ol>
+<h2>Xcode的服务和团队成员共享项目</h2>
+<p>对于Xcode的服务，您的项目进行集成，它必须包含这些项目的存储库的访问。启用访问托管Git仓库在服务器上运行的Xcode服务或Git或Subversion版本库，包含你的项目添加连接信息。</p>
+<p>如果同一个团队开发，持续集成涉及到整个团队。谁的作品在产品上的人都必须能够访问所有产品的资源，使任何人都可以引起谁都可能解决问题。如果你有一个不保持源代码库中的项目或工作区，你必须检查你的文件到存储库，让其他团队成员可以在这些产品上。</p>
+<p><strong>您可以在服务器上创建一个Xcode服务器，托管Git仓库</strong><br>开发团队可以共享更改产品OS X服务器托管在一个Git仓库。创建一个Xcode服务器托管Git仓库之前，你必须：</p>
+<ol>
+<li><p>确保都有谁应该能够访问存储库服务器上的用户帐户。</p>
+</li>
+<li><p>打开系统偏好设置中的服务器上的远程登录服务。</p>
+</li>
+</ol>
+<h3>要创建一个Xcode服务器托管您的服务器上的Git仓库</h3>
+<ol>
+<li><p>在服务器应用程序边栏中，选择Xcode的服务，然后单击“存储库”按钮。</p>
+</li>
+<li><p>点击添加按钮（+），并指定存储库的信息：</p>
+<ul>
+<li>选择“主机一个Git仓库。”</li>
+<li>名称：输入资料库的名称（例如，项目名称）。</li>
+<li>访问：确定允许用户访问存储库。</li>
+</ul>
+</li>
+<li><p>单击“创建”。</p>
+<p> 新的资料库资料库列表中出现。如果你有一个发展的Mac上现有的Git管理的项目，你可以把你的变化，这个新的储存库，将其配置为远程，如未来。</p>
+</li>
+</ol>
+<h3>从发展的Mac，您可以共享现有的Git管理项目</h3>
+<p>当您共享一个项目，其中包含一个Git仓库，是当地发展的Mac，Xcode的服务可以检查出来进行集成。共享一个项目之前，你必须：</p>
+<ol>
+<li>作为OS X服务器运行Xcode的服务的管理员进行身份验证。</li>
+<li>确保服务器和Xcode的服务的，允许远程登录访问，通过安全Shell（SSH），它承载的存储库。在OS X服务器，你可以配置远程登录，在“系统偏好设定”中的“共享”窗格中。</li>
+</ol>
+<h4>要共享项目</h4>
+<ol>
+<li><p>打开项目发展的Mac上，并选择源控制&gt; PROJECT_NAME &gt;配置PROJECT_NAME。</p>
+</li>
+<li><p>按一下远程控制。</p>
+</li>
+<li><p>点击“添加”按钮（+）。</p>
+</li>
+<li><p>选择“创建新的远程。</p>
+</li>
+<li><p>选择一台服务器。</p>
+</li>
+<li><p>输入远程名称。</p>
+</li>
+<li><p>单击“创建”。</p>
+</li>
+<li><p>单击“完成”。</p>
+</li>
+<li><p>这使得共享资源库的上游库项目存​​储库。</p>
+</li>
+</ol>
+<h3>您可以创建一个新项目开发的Mac OS X服务器和主机守则</h3>
+<p>当您创建您的开发Mac上的项目，你可以创建一个共享库。创建一个共享的项目之前，你必须：</p>
+<ol>
+<li>作为OS X服务器运行Xcode的服务的管理员进行身份验证。</li>
+<li>确保服务器和Xcode的服务的，允许远程登录访问，通过安全Shell（SSH），它承载的存储库。在OS X服务器，你可以配置远程登录，在“系统偏好设定”中的“共享”窗格中。</li>
+</ol>
+<h4>要创建共享项目</h4>
+<ol>
+<li><p>选择“文件”&gt;“新建”&gt;“项目。</p>
+</li>
+<li><p>为您的项目中选择一个模板。</p>
+</li>
+<li><p>指定项目的选项，并单击“下一步”。</p>
+</li>
+<li><p>指定的位置。</p>
+</li>
+<li><p>选择“创建git仓库”选项。</p>
+</li>
+<li><p>确定服务器。</p>
+</li>
+</ol>
+<p>单击“创建”。</p>
+<p>您可以使用Git来管理你的开发Mac上的非托管的工作区目录<br>当你创建一个Xcode的工作区或项目，你必须包括一个Git仓库中生成的工作区目录的选项。如果您没有选择该选项，您的工作区目录不包括一个Git仓库。与他人使用Git版本控制系统要共享工作区目录，在该目录中，你必须初始化一个Git仓库。</p>
+<p>您可以���用Subversion的管理项目<br>Xcode的服务可以连接你的Subversion版本库，并从它的检查项目。</p>
+<h2>使用搜索引擎来生成，运行静态分析，测试和存档</h2>
+<p>您可以运行一个项目的集成通过三个计划行动：</p>
+<ol>
+<li>分析，进行静态分析。</li>
+<li>测试，运行一组测试案例。</li>
+<li>存档，建立一个归档的产品，计划建成。</li>
+</ol>
+<p>您可以手动执行这些操作，为您做出更改产品。然而，手动集成可以是乏味且容易出错。例如，你可能会忘记发布一个小的变化，打破你的队友的单元测试之前进行测试操作。Xcode的服务提供了一个具有成本效益的方式自动执行集成：机器人。机器人会自动执行你的集成：</p>
+<ol>
+<li>每次更改发布到存储库。</li>
+<li>上定期（比如说，每天进行集成，需要很长的时间才能完成）。<br>Â 机器人运行通过Xcode的服务，以在资源库中的项目的当前版本进行集成，是一个过程。包括一个集成构建，分析，测试，归档产品上。可以是成功的积分（即，所有的整合动作传递没有问题）的或不成功的。计划中定义的集成自动化，您必须共享该方案，并创建一个或多个机器人来执行这些集成。</li>
+</ol>
+<p>要充分利用您的产品开发流程的持续集成环境中，遵循以下做法：</p>
+<ol>
+<li><p>制定适当的单元测试套件和测试用例，显影单元测试后，包括他们在你的机器人运行计划。要了解关于单元测试的更多信息，请参见Xcode的单元测试指南<br>为了帮助确保您所做的更改都破不了您或其他人后，你应​​该配合这些变化与单元测试，确定是否规定一种或一组序列功能的方法。有些球队在它的头把这种方法首先开发测试，通过测试的方法，然后执行。</p>
+</li>
+<li><p>执行静态分析，你应该在您的集成包括静态分析。<br>静态分析是深刻检查你的代码，下面的代码路径，您的应用程序可能不遵循正常的发展过程中。这个过程揭示难以发现的编码错误，还确定了在你的代码不遵循建议的API的用法，比如基金会和AppKit的成语。</p>
+</li>
+<li><p>确保您的产品建立和正确打包。您您的产品作出了重大变化，特别是结构性的变化，如添加或删除文件后，应归档。让你的机器人自动为您归档。<br>当您的产品中包含的结构性问题，Xcode可以创建一个归档它为你的团队成员之间共享或提交到App Store。建立和归档产品的能力是你的代码更改的正确性的主要指标。</p>
+</li>
+</ol>
+<h2>分享计划</h2>
+<p>共享的计划被确定为在一个项目中共享和发布共享资源库，以及与其他共享项目文件。你可以分享计划之前，你必须检查的项目。</p>
+<h3>要共享计划</h3>
+<ol>
+<li><p>开发的Mac上，打开的项目，其中包含共享的计划。</p>
+</li>
+<li><p>选择产品&gt;计划&gt;管理计划。</p>
+</li>
+<li><p>分享的计划，选择共享选项，并单击“确定”。</p>
+</li>
+<li><p>选择源控制&gt;提交。</p>
+</li>
+<li><p>选择共享的资料夹。</p>
+</li>
+<li><p>指定你提交的信息：</p>
+<ul>
+<li>在文本字段中输入你的提交信息。</li>
+<li>选择“推到远程”选项（如果您的项目使用Git管理）。</li>
+</ul>
+</li>
+<li><p>点击“提交文件”按钮。</p>
+</li>
+</ol>
+<h2>创建机器人</h2>
+<p>共享计划后，你可以创建一个机器人来执行持续集成。</p>
+<p>要创建一个僵尸</p>
+<p>开发的Mac上，打开的项目，其中包含计划，定义的行动，以自动化。</p>
+<p>选择产品&gt;创建BOT，指定机器人的标识属性，并单击“下一步”。</p>
+<p>与指定库凭据机器人，并单击“下一步”。</p>
+<p>指定的整合时间表，行动的机器人来执行，以及是否清洁产品前建设。</p>
+<p>附表：指定往往机器人集成。</p>
+<p>定期：整合每小时，每天或每周。<br>在提交更改时集成发布到存储库。<br>手册：机器人不会自动整合。<br>操作：选择机器人作为整合的一部分执行的行动。</p>
+<p>清洁：指定机器人是否重用以前的版本。</p>
+<p>单击“下一步”。</p>
+<p>如果您选择创建机器人执行第一次整合，整合的结果，出现在日志中的导航仪。</p>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/31/ios9/">http://hufeng825.github.com/2013/08/31/ios9/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a> ----
+    <a  href="/categories/hexo/">hexo</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

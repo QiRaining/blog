@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[阿峰的技术窝窝]]></title>
+  <subtitle><![CDATA[专注于移动互联网]]></subtitle>
+  <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
+  <link href="http://hufeng825.github.com"/>
+  <updated>2013-09-17T04:34:23.173Z</updated>
+  <id>http://hufeng825.github.com/</id>
+  <author>
+    <name><![CDATA[Jason Hu]]></name>
+    <email><![CDATA[hufeng@hufengvip.cn]]></email>
+  </author>
+  <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[What is the difference between Category and Class Extension?]]></title>
+    <link href="http://hufeng825.github.com/2013/09/15/ios24/"/>
+    <id>http://hufeng825.github.com/2013/09/15/ios24/</id>
+    <published>2013-09-15T05:39:07.000Z</published>
+    <updated>2013-09-15T06:21:06.000Z</updated>
+    <content type="html"><![CDATA[<p>细心的人会发现当我们new 一个文件的时候会发现下图的部分.</p>
+<img src="http://ww4.sinaimg.cn/mw690/a43af4ffjw1e8n5s8yocrj20km0e1766.jpg" width="400" height="300">
+
+<p>但是这个问题来了Category 和 Extension 就近又什么区别呢?<br><a id="more"></a></p>
+<h2>1:什么是Category?</h2>
+<p>实现这样一种场景,当我们用我们用NSArray的时候经常会遇到要去重的操作,可是自带的NSArray并没有这个方法,想要用你第一印象是自己写个类继承他,OC 给我们提供了一个方法可以直接在原有的基础上进行扩展.这就Category.分类能够做到的事情主要是：即使在你不知道一个类的源码情况下，向这个类添加扩展的方法。一个类可以有n+个分类,这些分类的实现可以在不同的文件中.</p>
+<p>下面是我写的一个分类</p>
+<p>NSArray+Unique.h</p>
+<pre><code>@<span class="class"><span class="keyword">interface</span> <span class="title">NSArray</span> (<span class="title">Unique</span>)
+- (<span class="title">NSArray</span> *) <span class="title">uniqueMembers</span>;
+- (<span class="title">NSArray</span> *) <span class="title">unionWithArray</span>: (<span class="title">NSArray</span> *) <span class="title">array</span>;
+@<span class="title">end</span></code></pre>
+<p>NSArray+Unique.m</p>
+<pre><code>@<span class="class"><span class="keyword">implementation</span> <span class="id">NSArray</span> (<span class="id">Unique</span>)</span>
+- (<span class="built_in">NSArray</span> *) uniqueMembers
+{
+    <span class="built_in">NSMutableArray</span> *copy = [<span class="keyword">self</span> mutableCopy];
+    <span class="keyword">for</span> (<span class="keyword">id</span> object in <span class="keyword">self</span>)
+    {
+        [copy removeObjectIdenticalTo:object];
+        [copy addObject:object];
+    }
+    <span class="keyword">return</span> [copy autorelease];
+}
+
+- (<span class="built_in">NSArray</span> *) unionWithArray: (<span class="built_in">NSArray</span> *) anArray
+{
+    <span class="keyword">if</span> (!anArray) <span class="keyword">return</span> <span class="keyword">self</span>;
+    <span class="keyword">return</span> [[<span class="keyword">self</span> arrayByAddingObjectsFromArray:anArray] uniqueMembers];
+}
+
+@<span class="keyword">end</span></code></pre>
+<p>是不是很简单.但是应用Category还有如下</p>
+<h3>需要注意的问题：</h3>
+<ol>
+<li><p>Category可以访问原始类的实例变量，但不能添加实例变量，如果想添加变量，那就通过继承创建子类来实现。  </p>
+</li>
+<li><p>Category的优先级要高,当类中的方法跟原使类中的方法重名的时候是会重载原始类的方法. </p>
+</li>
+<li><p>和普通接口有所区别的是，在Category的实现文件中的实例方法只要你不去调用它你可以不用实现所有声明的所有方法。</p>
+</li>
+<li><p>不要在Category 调用 Super方法</p>
+</li>
+</ol>
+<h2>2:什么是 Extension</h2>
+<p> 扩展(Extension)人们往往以为就是匿名分类,因为他的语法看起来很像</p>
+<p>下面是一个Extension</p>
+<pre><code>@<span class="class"><span class="keyword">interface</span> <span class="id">ExtensionClass</span> : <span class="id">NSObject</span>  </span>
+@<span class="keyword">property</span> (retain, <span class="keyword">readonly</span>) <span class="keyword">float</span> value;
+@<span class="keyword">end</span>  
+
+
+@<span class="class"><span class="keyword">interface</span> <span class="id">ExtensionClass</span> () {</span> <span class="comment">//注意此处：扩展  </span>
+
+}  
+@<span class="keyword">property</span> (retain, readwrite) <span class="keyword">float</span> value; 
+- (<span class="keyword">void</span>)setValue:(<span class="keyword">float</span>)newValue;  
+@<span class="keyword">end</span>  
+
+@<span class="class"><span class="keyword">implementation</span> <span class="id">ExtensionClass</span>  </span>
+
+- (<span class="keyword">float</span>)value {  
+    <span class="keyword">return</span> value;  
+}  
+
+- (<span class="keyword">void</span>)setValue:(<span class="keyword">float</span>)newValue {  
+    value = newValue;  
+}  
+
+@<span class="keyword">end</span> </code></pre>
+<p><strong>虽然它们的语法的确很相似。虽然都可以用来为一个现有的类添加方法和属性，但它们的目的和行为却是不同的。</strong></p>
+<h2>Class extensions注意事项:</h2>
+<ol>
+<li><p>可以定义属性(实例变量)</p>
+</li>
+<li><p>在公共接口(类的声明中)中,开发者可以声明一个属性(实例变量)是只读的,随后在类扩展中声明为可写。这样，对外部代码而言,该属性(实例变量)将是只读的,而内部代码却可以使用它setter方法。</p>
+</li>
+<li><p>分类必须在第一个@interface中声明方法，并且在@implementation中提供实现，不然运行时出错。而类扩展的声明可以不在第一个@interface中去声明</p>
+</li>
+</ol>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[ios笔记-- 多线程应该知道的那几件事 GCD NSThread NSOperation]]></title>
+    <link href="http://hufeng825.github.com/2013/09/14/ios23/"/>
+    <id>http://hufeng825.github.com/2013/09/14/ios23/</id>
+    <published>2013-09-14T05:58:20.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>iphone5s 出来了，CPU 升级到了64位 可以应用到更大的内存了，同时对多线程的处理吞吐能力也教之前提升了十几倍。下面着中总结下ios 下多线程的知识点<br><a id="more"></a></p>
+</blockquote>
+<img src="http://image.techweb.com.cn/edit/2013/0911/37841378870639.jpg" class="left" width="400" height="200">
+
+
+
+<h2>1：现有的几种多线程</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> NSThread</td>
+<td>苹果公司的Cocoa框架共支持三种多线程机制，分别为NSThread、GCD（Grand Central Dispatch）、Cocoa NSOperatio。NSThree是官方推荐的线程处理方式，它在处理机制上，需要开发者负责手动管理Thread的生命周期，包括子线程与主线程之间的同步等。线程共享同一应用程序的部分内存空间，它们拥有对数据相同的访问权限。你得协调多个线程 对同一数据的访问，一般做法是在访问之前加锁，这会导致一定的性能开销。在 iOS 中我们可以使用多种形式的 thread。 比其他两个轻量级 需要自己管理线程的生命周期，线程同步。 线程同步对数据的加锁会有一定的系统开销</td>
+</tr>
+<tr>
+<td> NSOperation</td>
+<td>如果需要让线程同时并行运行多个，可���将线程加入队列（Queue）中，NSOperationQueue类就是一个线程队列管理类，他提供了线程并行、队列的管理。可以认为NSOperationQueue就是一个线程管理器，通过addOperations方法，我们可以一次性把多个（数组形式）线程添加到队列中。同时，NSOperationQueue允许通过setMaxConcurrentOperationCount方法设置队列的并行（同一时间）运行数量  </td>
+</tr>
+<tr>
+<td> GCD</td>
+<td>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。该方法在Mac OS X 10.6雪豹中首次推出，并随后被引入到了iOS4.0中。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术，它看起来象就其它语言的闭包(Closure)一样，但苹果把它叫做blocks。</td>
+</tr>
+</tbody>
+</table>
+<p>一般移动平台上系统都会有一个专门的检查机制，看程序有没有很长时间被阻塞住，没有回来检查主消息队列。发现这种情况一般都是把程 序作为“无响应”干掉。iOS一般情况下是10秒为上限。10秒内程序没有回到主消息循环就被干掉。在前台后台切换时更严格，大概是5秒左右。<a href="http://www.cnblogs.com/linyawen/archive/2012/07/24/2606709.html" target="_blank">注释1</a></p>
+<h2>2:简单的Demo</h2>
+<p>因为GCD 是应用最广的 而且也是苹果现在极力鼓动开发者应用的 所以NSThread NSOperation 只做简单应用</p>
+<h3>1:NSThread</h3>
+<h3>1.1 NSThread 有两种直接创建方式：</h3>
+<p>第一个是实例方法—直接创建线程并且开始运行线程</p>
+<ul>
+<li>(id)initWithTarget:(id)target selector:(SEL)selector object:(id)</li>
+</ul>
+<p>第二个是类方法—先创建线程对象，然后再运行线程操作，在运行线程操作前可以设置线程的优先级等线程信息</p>
+<ul>
+<li>(void)detachNewThreadSelector:(SEL)aSelector toTarget:(id)aTarget withObject:(id)anArgument</li>
+</ul>
+<p><em>selector</em> :线程执行的方法，这个selector只能有一个参数，而且不能有返回值。<br><em>target</em>  :selector消息发送的对象<br><em>argument</em> :传输给target的唯一参数，也可以是nil    </p>
+<h3>1.2线程间通信</h3>
+<p>a 在应用程序主线程中做事情： </p>
+<figure class="highlight"><pre><span class="method">performSelectorOnMainThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span> <span class="method">performSelectorOnMainThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span><span class="method">modes:</span>
+</pre></figure>
+
+<p>b 在指定线程中做事情：</p>
+<figure class="highlight"><pre><span class="method">performSelector:</span><span class="method">onThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span> <span class="method">performSelector:</span><span class="method">onThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span><span class="method">modes:</span>
+</pre></figure>
+
+<p>c 在当前线程中做事情：</p>
+<figure class="highlight"><pre><span class="method">performSelector:</span><span class="method">withObject:</span><span class="method">afterDelay:</span>
+<span class="method">performSelector:</span><span class="method">withObject:</span><span class="method">afterDelay:</span><span class="method">inModes:</span>
+</pre></figure>
+
+<p>d 取消发送给当前线程的某个消息</p>
+<figure class="highlight"><pre><span class="method">cancelPreviousPerformRequestsWithTarget:</span> 
+<span class="method">cancelPreviousPerformRequestsWithTarget:</span><span class="method">selector:</span><span class="method">object:</span>
+</pre></figure>
+
+<h3>2:NSOperation</h3>
+<p>首先是建立NSOperationQueue和NSOperations。NSOperationQueue会建立一个线程管理器，每个加入到线程operation会有序的执行。  </p>
+<figure class="highlight"><pre>
+NSOperationQueue *queue = [NSOperationQueue new];
+NSInvocationOperation *operation = <span class="string">[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(doWork:) object:someObject]; 
+[queue addObject:operation]; 
+[operation release];
+</pre></figure>
+
+<p>使用NSOperationQueue的过程：<br>    1.  建立一个NSOperationQueue的对象<br>    2.  建立一个NSOperation的对象<br>    3.  将operation加入到NSOperationQueue中<br>    4.  release掉operation  </p>
+<p>NSInvocationOperation，NSInvocationOperation是NSOperation的子类，允许运行在operation中的targer和selector</p>
+<h3>3：多线程互斥同步问题</h3>
+<p><a href="http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html" target="_blank">注释2</a></p>
+<p>在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题：</p>
+<ul>
+<li>方法一，@synchronized(id anObject),(最简单的方法)<br>会自动对参数对象加锁，保证临界区内的代码线程安全</li>
+</ul>
+<figure class="highlight"><pre>@<span class="keyword">synchronized</span>(<span class="keyword">self</span>) {
+        <span class="comment">// 这段代码对其他 @synchronized(self) 都是互斥的</span>
+        <span class="comment">// self 指向同一个对象</span>
+}
+</pre></figure>
+
+<ul>
+<li>方法二，NSLock</li>
+</ul>
+<p>NSLock对象实现了NSLocking protocol，包含几个方法：<br>lock，加锁<br>unlock，解锁<br>tryLock，尝试加锁，如果失败了，并不会阻塞线程，只是立即返回NO<br>lockBeforeDate:，在指定的date之前暂时阻塞线程（如果没有获取锁的话），如果到期还没有获取锁，则线程被唤醒，函数立即返回NO<br>比如<br>：<br>    NSLock *theLock = [[NSLock alloc] init]; </p>
+<pre><code>if ([the<span class="operator"><span class="keyword">Lock</span> <span class="keyword">lock</span>]) {
+
+//<span class="keyword">do</span> something here
+
+[theLock unlock];</span> 
+
+} </code></pre>
+<ul>
+<li>方法三，NSRecursiveLock，递归锁</li>
+</ul>
+<p>NSRecursiveLock，多次调用不会阻塞已获取该锁的线程。</p>
+<pre><code>NSRecursiveLock *theLock = <span class="string">[[NSRecursiveLock alloc] init]; 
+void MyRecursiveFunction(int value) { 
+    [theLock lock]; 
+    if (value != 0) { 
+        –value; 
+        MyRecursiveFunction(value); 
+    }
+    [theLock unlock]; 
+} 
+MyRecursiveFunction(5);</code></pre>
+<ul>
+<li>方法四，NSConditionLock，条件锁</li>
+</ul>
+<p>NSConditionLock，条件锁，可以设置条件</p>
+<pre><code>//公共部分
+id condLock = <span class="string">[[NSConditionLock alloc] initWithCondition:NO_DATA]; 
+
+//线程一，生产者
+while(true) { 
+
+[condLock lockWhenCondition:NO_DATA]; 
+
+//生产数据
+[condLock unlockWithCondition:HAS_DATA];
+
+}
+
+//线程二，消费者
+while (true) { 
+
+[condLock lockWhenCondition:HAS_DATA
+
+//消费
+[condLock unlockWithCondition:NO_DATA]; 
+}</code></pre>
+<ul>
+<li>方法五，NSDistributedLock，分布锁</li>
+</ul>
+<p>NSDistributedLock，分布锁，文件方式实现，可以跨进程<br>用tryLock方法获取锁。<br>用unlock方法释放锁。<br>如果一个获取锁的进程在释放锁之前挂了，那么锁就一直得不到释放了，此时可以通过breakLock强行获取锁。</p>
+<p><strong>本章节(多线程互斥同步问题)参考自:<a href="http://blog.sina.com.cn/s/blog_72819b170101590n.html" target="_blank">http://blog.sina.com.cn/s/blog_72819b170101590n.html</a></strong></p>
+<h2>3:GCD多线程互斥同步问题(阻塞线程的方式去实现同步)</h2>
+<p><a href="http://blog.devtang.com/blog/2012/02/22/use-gcd/" target="_blank">注释3</a></p>
+<h3>1.串行队列</h3>
+<p>(1)GCD下的dispatch_queue队列都是FIFO队列,都会按照提交到队列的顺序执行.<br>只是根据队列的性质,分为  </p>
+<p><1>串行队列:用户队列、主线程队列 </p>
+<p><2>并行队列. </p>
+<p>(2)同步(dispatch_sync)、异步方式(dispatch_async). 配合串行队列和并行队列使用.<br>同步队列直接提交两个任务就可以.<br>// 串形队列<br>    dispatch_queue_t serilQueue = dispatch_queue_create(“com.quains.myQueue”, 0);</p>
+<pre><code><span class="comment">//开始时间</span>
+<span class="built_in">NSDate</span> *startTime = [<span class="built_in">NSDate</span> date];
+
+
+__block <span class="built_in">UIImage</span> *image = <span class="literal">nil</span>;
+
+<span class="comment">//1.先去网上下载图片</span>
+<span class="built_in">dispatch_async</span>(serilQueue, ^{
+   <span class="comment">//下载图片</span>
+});
+
+<span class="comment">//2.在主线程展示到界面里</span>
+<span class="built_in">dispatch_async</span>(serilQueue, ^{
+
+    <span class="built_in">NSLog</span>(@<span class="string">"%@"</span>,[<span class="built_in">NSThread</span> currentThread]);
+
+    <span class="comment">// 在主线程展示</span>
+    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+      <span class="comment">//显示图片</span>
+});
+
+<span class="comment">//3.清理</span>
+dispatch_release(serilQueue);
+[image release];</code></pre>
+<p><strong>注意:</strong></p>
+<p>(1) __block变量分配在栈,retain下,防止被回收. </p>
+<p>(2)dispatch要手动create和release. </p>
+<p>(3)提交到主线程队列的时候,慎用同步dispatch_sync方法,有可能造成死锁.  因为主线程队列是串行队列,要等队列里的任务一个一个执行.所以提交一个任务到队列,如果用同步方法就会阻塞住主线程,而主线程又要等主线程队列里的任务都执行完才能执行那个刚提交的,所以主线程队列里还有其他的任务的话,但他已经被阻塞住了,没法先完成队列里的其他任务,即,最后一个任务也没机会执行到,于是造成死锁.</p>
+<p>(4)提交到串行队列可以用同步方式,也可以用异步方式. </p>
+<h3>2.并行队列</h3>
+<p>采用并行队列的时候,可以采用同步的方式把任务提交到队列里去,即可以实现同步的方式</p>
+<p>//新建一个队列<br>    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</p>
+<pre><code><span class="comment">//记时</span>
+<span class="built_in">NSDate</span> *startTime = [<span class="built_in">NSDate</span> date];
+
+<span class="comment">//加入队列</span>
+<span class="built_in">dispatch_async</span>(concurrentQueue, ^{
+    __block <span class="built_in">UIImage</span> *image = <span class="literal">nil</span>;
+
+    <span class="comment">//1.先去网上下载图片</span>
+    <span class="built_in">dispatch_sync</span>(concurrentQueue, ^{
+        <span class="comment">//下载图片</span>
+    });
+
+    <span class="comment">//2.在主线程展示到界面里</span>
+    <span class="built_in">dispatch_sync</span>(dispatch_get_main_queue(), ^{
+        <span class="comment">//显示图片</span>
+    });
+});</code></pre>
+<p>两个同步的任务用一个异步的包起来,提交到并行队列里去,即可实现同步的方式.</p>
+<h3>3.使用分组方式</h3>
+<p>group本身是将几个有关联的任务组合起来,然后提供给开发者一个知道这个group结束的点.<br>虽然这个只有一个任务,但是可以利用group的结束点,去阻塞线程,从而来实现同步方式.</p>
+<p>例如让后台2个线程并行执行，然后等2个线程都结束后，再汇总执行结果。这个可以用dispatch_group, dispatch_group_async 和 dispatch_group_notify来实现，示例如下：</p>
+<figure class="highlight"><pre> dispatch_group_t <span class="keyword">group</span> = dispatch_group_create();
+ dispatch_group_async(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
+      <span class="comment">// 并行执行的线程一</span>
+ });
+ dispatch_group_async(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
+      <span class="comment">// 并行执行的线程二</span>
+ });
+ dispatch_group_notify(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
+      <span class="comment">// 汇总结果</span>
+ });
+</pre></figure>
+
+<pre><code>dispatch_group_t <span class="keyword">group</span> = dispatch_group_create();
+
+dispatch_queue_t queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);
+
+NSDate <span class="variable">*startTime</span> = [NSDate <span class="keyword">date</span>];
+
+__block UIImage <span class="variable">*image</span> = nil;
+
+dispatch_group_async(<span class="keyword">group</span>, queue, ^{
+    <span class="comment">//1.先去网上下载图片</span>
+    });
+
+<span class="comment">// 2.等下载好了再在刷新主线程</span>
+dispatch_group_notify(<span class="keyword">group</span>, queue, ^{
+
+    <span class="comment">//在主线程展示到界面里</span>
+    dispatch_async(dispatch_get_main_queue(), ^{
+     <span class="comment">//显示图片</span>
+    });
+
+});
+
+<span class="comment">// 释放掉</span>
+dispatch_release(<span class="keyword">group</span>);</code></pre>
+<p>dispatch_group 也要手动创建和释放.<br>dispatch_notify()提供了一个知道group什么时候结束的点. 当然也可以使用dispatch_wait()去阻塞</p>
+<h3>4.信号量</h3>
+<p>信号量 和 琐 的作用差不多,可以用来实现同步的方式.<br>但是信号量通常用在 允许几个线程同时访问一个资源,通过信号量来控制访问的线程个数.</p>
+<p>// 信号量初始化为1<br>    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);</p>
+<pre><code><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);
+
+<span class="built_in">NSDate</span> *startTime = [<span class="built_in">NSDate</span> date];
+
+__block <span class="built_in">UIImage</span> *image = <span class="literal">nil</span>;
+
+
+<span class="comment">//1.先去网上下载图片</span>
+<span class="built_in">dispatch_async</span>(queue, ^{
+
+    <span class="comment">// wait操作-1</span>
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    <span class="comment">// 开始下载</span>
+    <span class="comment">// signal操作+1</span>
+    dispatch_semaphore_signal(semaphore);
+});
+
+
+<span class="comment">// 2.等下载好了再在刷新主线程</span>
+<span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+
+    <span class="comment">// wait操作-1</span>
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    <span class="comment">//显示图片</span>
+    <span class="comment">// signal操作+1</span>
+    dispatch_semaphore_signal(semaphore);
+});</code></pre>
+<p>dispatch_wait会阻塞线程并且检测信号量的值,直到信号量值大于0才会开始往下执行,同时对信号量执行-1操作.<br>dispatch_signal则是+1操作.</p>
+<h3>3.后台运行</h3>
+<p>GCD的另一个用处是可以让程序在后台较长久的运行。在没有使用GCD时，当app被按home键退出后，app仅有最多5秒钟的时候做一些保存或清理资源的工作。但是在使用GCD后，app最多有10分钟的时间在后台长久运行。这个时间可以用来做清理本地缓存，发送统计数据等工作。</p>
+<p>让程序在后台长久运行的示例代码如下：</p>
+<figure class="highlight"><pre><span class="comment">// AppDelegate.h文件</span>
+@<span class="keyword">property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) UIBackgroundTaskIdentifier backgroundUpdateTask;
+
+<span class="comment">// AppDelegate.m文件</span>
+- (<span class="keyword">void</span>)applicationDidEnterBackground:(<span class="built_in">UIApplication</span> *)application
+{
+    [<span class="keyword">self</span> beingBackgroundUpdateTask];
+    <span class="comment">// 在这里加上你需要长久运行的代码</span>
+    [<span class="keyword">self</span> endBackgroundUpdateTask];
+}
+
+- (<span class="keyword">void</span>)beingBackgroundUpdateTask
+{
+    <span class="keyword">self</span><span class="variable">.backgroundUpdateTask</span> = [[<span class="built_in">UIApplication</span> sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [<span class="keyword">self</span> endBackgroundUpdateTask];
+    }];
+}
+
+- (<span class="keyword">void</span>)endBackgroundUpdateTask
+{
+    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask: <span class="keyword">self</span><span class="variable">.backgroundUpdateTask</span>];
+    <span class="keyword">self</span><span class="variable">.backgroundUpdateTask</span> = UIBackgroundTaskInvalid;
+}
+</pre></figure>
+
+<hr>
+<p>[1] <a href="http://www.cnblogs.com/linyawen/archive/2012/07/24/2606709.html" target="_blank">http://www.cnblogs.com/linyawen/archive/2012/07/24/2606709.html</a></p>
+<p>[2] <a href="http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html" target="_blank">http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html</a></p>
+<p>[3] <a href="http://blog.devtang.com/blog/2012/02/22/use-gcd/" target="_blank">http://blog.devtang.com/blog/2012/02/22/use-gcd/</a></p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[ios笔记--block应该知道的那几件事]]></title>
+    <link href="http://hufeng825.github.com/2013/09/11/ios22/"/>
+    <id>http://hufeng825.github.com/2013/09/11/ios22/</id>
+    <published>2013-09-11T15:32:18.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>block 现在已经基本上已经使用非常普遍了,在引用中也又很多坑,下面把block开发中应该知道的那几件事总结下.<br><a id="more"></a></p>
+<h2>:内联(inline)Block</h2>
+<blockquote>
+<p>内联block 说白了就是block被嵌入到一个函数中<br>例如:</p>
+</blockquote>
+<p><strong>typedef void (^HelloBlock)(void);</strong></p>
+<figure class="highlight"><pre><span class="pp">- <span class="params">(void)</span> BlockTest{
+HelloBlock myBlock= ^<span class="params">(void)</span>{
+NSLog<span class="params">(@<span class="string">"Hello Block"</span>)</span>;
+};
+myBlock<span class="params">()</span>;
+}
+</pre></figure>
+
+<h2>注意事项</h2>
+<h3>1.内联的block中内部定义的变量 自己本身有读写权限</h3>
+<h3>2.block内部要修改外部变量 需要将外部变量声明__block</h3>
+<h3>3.Block retain是无效的，要想保留block生命周期，可以通过copy来实现，记得release</h3>
+<h3>4.被block的应用的对象，retainCount会自动加一，为了打破这种 retain circle，可以在对象前加__block，这样block块就不会维护这个对象了</h3>
+<p> 下面的写法如果不加上_block a无法dealloc</p>
+<figure class="highlight"><pre>
+__block A  a =[ <span class="string">[[A alloc] init] withBlock:^{
+
+ [a action];
+
+ [ a release];
+
+}]; //这样A的dealloc方法就会调用
+</pre></figure>
+
+<figure class="highlight"><pre>
+@<span class="class"><span class="keyword">interface</span> <span class="id">ViewController</span> ： <span class="id">UIViewViewController</span> </span>
+ {
+        <span class="built_in">NSString</span> *_string;
+ }
+
+ __block ViewController *controller = <span class="keyword">self</span>;   
+    _block = ^{
+         <span class="built_in">NSLog</span>(@<span class="string">"string %@"</span>,controller-&gt;_string);
+    };
+</pre></figure>
+
+<h3>5.在独立的block中不能引用self，如果需要访问可以使用参数传递的方法(可以把其考虑成c+中参数传入函数指针对应copy)**</h3>
+<h3>6.不要随便用.语法</h3>
+<figure class="highlight"><pre><span class="preprocessor">#import &lt;UIKit/UIKit.h&gt;   </span>
+@<span class="class"><span class="keyword">interface</span> <span class="title">AppDelegate</span> : <span class="title">NSObject</span> &lt;<span class="title">UIApplicationDelegate</span>&gt;
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">strong</span>) <span class="title">NSString</span> *<span class="title">stringProperty</span>;  
+@<span class="title">end</span>
+</pre></figure>
+
+<figure class="highlight"><pre><span class="preprocessor">#import <span class="title">"GCDAppDelegate.h"</span> </span>
+@<span class="class"><span class="keyword">implementation</span> <span class="id">AppDelegate</span> </span>
+@<span class="keyword">synthesize</span> stringProperty;  
+- (<span class="keyword">void</span>) BlockTestError{
+HelloBlock myBlock= ^(<span class="keyword">void</span>){
+	<span class="keyword">self</span><span class="variable">.stringProperty</span> = @<span class="string">"Block Objects"</span>; 
+	<span class="built_in">NSLog</span>(@<span class="string">"String property = %@"</span>, <span class="keyword">self</span><span class="variable">.stringProperty</span>);<span class="comment">//运行错误</span>
+};
+myBlock();
+}}  
+
+- (<span class="keyword">void</span>) BlockTestCorrect{
+	HelloBlock myBlock= ^(<span class="keyword">void</span>){
+		[<span class="keyword">self</span> setStringProperty:@<span class="string">"Block Objects"</span>];
+	    <span class="built_in">NSLog</span>(@<span class="string">"self.stringProperty = %@"</span>, [<span class="keyword">self</span> stringProperty]); <span class="comment">//运行ok</span>
+	};
+myBlock();
+}}  
+@<span class="keyword">end</span>
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[读 林锐博士的项目管理 笔记1]]></title>
+    <link href="http://hufeng825.github.com/2013/09/09/project0/"/>
+    <id>http://hufeng825.github.com/2013/09/09/project0/</id>
+    <published>2013-09-09T08:07:57.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<h2>软件挣钱难的问题</h2>
+<p><a id="more"></a></p>
+<h3>一、承接合同项目，为甲方开发软件系统。</h3>
+<ol>
+<li><p>市场上能够承接到的合同项目，利润很小。而高利润的项目则被有权势的人或机构掌控。 </p>
+</li>
+<li><p>项目需求和验收受制于客户。开发过程中，客户会不断变更需求，导致开发方不断修改软件，项目验收被不断地延后，开发方成本（包括机会成本）越来越高。</p>
+</li>
+<li><p>缺乏规模复制效益。由于合同项目都是针对特定客户（甲方）的特定需求而签订的，即使做成功了一个合同项目，也很难“复制这个项目”直接卖给下一个客户。</p>
+</li>
+</ol>
+<h3>二、开发并销售通用软件产品</h3>
+<ol>
+<li><p>凡是面向个人的通用软件产品，由于盗版原因，几乎无法靠卖软件来挣钱。</p>
+</li>
+<li><p>只有企业级软件产品不容易被大量盗版，可以走“通用软件产品盈利模式”，难度非常高。开发方必须把自己打造成为“企业级应用的领导者”，否则客户不信任你的方法和产品，产品就无法通用。于是客户提出的个性化需求越来越多，回到了“合同项目盈利模式”。 </p>
+</li>
+</ol>
+<h3>三、运营模式</h3>
+<ol>
+<li><p>互联网公司的业务太容易被模仿，同质化竞争严重。每个领域都死掉了成千上万的相同���务的互联网公司，最终只有少数几家可以活下来，极大地浪费社会财富。</p>
+</li>
+<li><p>互联网公司的另一个大缺点是太浮躁，过分追求快而导致根基不扎实，国内绝大多数互联网公司的软件研发管理，要比传统软件公司混乱得多。</p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>软件企业要想多挣钱，靠“开源节流”。“开源”主要靠优化盈利模式，使得现有的技术和资源产生更高的效益。“节流”主要靠改进管理，使企业的所有经营环节更加合理，减少不必要的成本，省下来的钱也就成了利润</p>
+</blockquote>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/项目管理/" term="项目管理"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[mac 下更新DNS 缓存]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/mac4/"/>
+    <id>http://hufeng825.github.com/2013/09/03/mac4/</id>
+    <published>2013-09-03T09:14:30.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>开始的时候难免遇到修改host的时候，但是host后没有即刻生效，可使用终端命令手动清除DNS缓存：</p>
+<figure class="highlight"><pre><span class="title">dscacheutil</span> -flushcache
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/mac/" term="mac"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[判断地图坐标是否在区域内]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/23/"/>
+    <id>http://hufeng825.github.com/2013/09/03/23/</id>
+    <published>2013-09-03T08:51:48.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>此方法与前一篇文章中的得到UIView某点的色值达到的效果一直，通常为了保持精度 两个方法一起使用。</p>
+</blockquote>
+<p><a id="more"></a></p>
+<figure class="highlight"><pre>-(<span class="keyword">IBAction</span>)foundTap:(UITapGestureRecognizer *)recognizer
+{
+    <span class="built_in">CGPoint</span> point = [recognizer locationInView:<span class="keyword">self</span><span class="variable">.mapView</span>];
+
+    CLLocationCoordinate2D tapPoint = [<span class="keyword">self</span><span class="variable">.mapView</span> convertPoint:point toCoordinateFromView:<span class="keyword">self</span><span class="variable">.view</span>];
+
+    [<span class="keyword">self</span> pointInsideOverlay:tapPoint];
+
+    <span class="keyword">if</span> (isInside) 
+     {
+       ....
+     }
+}
+</pre></figure>
+
+<p>Here is a method to call from the previous to check if the point is inside the overlay:</p>
+<figure class="highlight"><pre>-(<span class="keyword">void</span>)pointInsideOverlay:(CLLocationCoordinate2D )tapPoint 
+{
+    isInside = <span class="literal">FALSE</span>; 
+
+    MKPolygonView *polygonView = (MKPolygonView *)[mapView viewForOverlay:polygonOverlay];
+
+    MKMapPoint mapPoint = MKMapPointForCoordinate(tapPoint);
+
+    <span class="built_in">CGPoint</span> polygonViewPoint = [polygonView pointForMapPoint:mapPoint];
+
+    <span class="built_in">BOOL</span> mapCoordinateIsInPolygon = CGPathContainsPoint(polygonView<span class="variable">.path</span>, <span class="literal">NULL</span>, polygonViewPoint, <span class="literal">NO</span>);
+
+        <span class="keyword">if</span> ( !mapCoordinateIsInPolygon )
+
+            <span class="comment">//we are finding points that are inside the overlay</span>
+        {
+            isInside = <span class="literal">TRUE</span>;
+        }
+}
+</pre></figure>
+
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e89eyhiwqbj20hs0qo769.jpg" class="center" width="300" height="600">
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[How to get the color of a pixel in an UIView?]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/22/"/>
+    <id>http://hufeng825.github.com/2013/09/03/22/</id>
+    <published>2013-09-03T08:33:35.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>记得一年前做招行掌上生活M+的时候 其中有个需求是画一画功能，就是在地图上用手指画个圈 然后得到这个圈里面所有指定商户。<br>当时为了精度 除了利用 </p>
+<figure class="highlight"><pre><span class="built_in">BOOL</span> mapCoordinateIsInPolygon = CGPathContainsPoint(polygonView<span class="variable">.path</span>, <span class="literal">NULL</span>, polygonViewPoint, <span class="literal">NO</span>);
+</pre></figure>
+
+<p>来验证此点是否在画的区域内 同时为了精度 还用到了点位的颜色色值进行校验。</p>
+<p>无法把全部代码给出 下面把 如何得到uiview 某点的函数给出</p>
+<p> UIView+ColorOfPoint.h</p>
+<figure class="highlight"><pre>@<span class="class"><span class="keyword">interface</span> <span class="title">UIView</span> (<span class="title">ColorOfPoint</span>)
+- (<span class="title">UIColor</span> *) <span class="title">colorOfPoint</span>:(<span class="title">CGPoint</span>)<span class="title">point</span>;
+@<span class="title">end</span>
+</pre></figure>
+
+<p> UIView+ColorOfPoint.m</p>
+<figure class="highlight"><pre><span class="preprocessor">#import <span class="title">"UIView+ColorOfPoint.h"</span></span>
+<span class="preprocessor">#import <span class="title">&lt;QuartzCore/QuartzCore.h&gt;</span></span>
+
+@<span class="class"><span class="keyword">implementation</span> <span class="id">UIView</span> (<span class="id">ColorOfPoint</span>)</span>
+
+- (<span class="built_in">UIColor</span> *) colorOfPoint:(<span class="built_in">CGPoint</span>)point
+{
+    <span class="keyword">unsigned</span> <span class="keyword">char</span> pixel[<span class="number">4</span>] = {<span class="number">0</span>};
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(pixel, <span class="number">1</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">4</span>, colorSpace, kCGImageAlphaPremultipliedLast);
+
+    CGContextTranslateCTM(context, -point<span class="variable">.x</span>, -point<span class="variable">.y</span>);
+
+    [<span class="keyword">self</span><span class="variable">.layer</span> renderInContext:context];
+
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+
+    <span class="comment">//NSLog(@"pixel: %d %d %d %d", pixel[0], pixel[1], pixel[2], pixel[3]);</span>
+
+    <span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithRed:pixel[<span class="number">0</span>]/<span class="number">255.0</span> green:pixel[<span class="number">1</span>]/<span class="number">255.0</span> blue:pixel[<span class="number">2</span>]/<span class="number">255.0</span> alpha:pixel[<span class="number">3</span>]/<span class="number">255.0</span>];
+
+    <span class="keyword">return</span> color;
+}
+</pre></figure>
+
+<p>@end</p>
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e89eyhiwqbj20hs0qo769.jpg" class="center" width="300" height="600" title="模拟器">
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn命令总结]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn9/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn9/</id>
+    <published>2013-09-03T06:08:30.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<h2>1. 创建分支</h2>
+<p>svn cp <a href="http://svn.trunk/" target="_blank">http://svn.trunk/</a> <a href="http://svn.branches/" target="_blank">http://svn.branches/</a>  –m “create a branch”<br><a id="more"></a></p>
+<h2>2. 合并分支</h2>
+<h3>1、在某个branch里合并trunk上的修改，</h3>
+<p>进入分支目录，然后执行：</p>
+<figure class="highlight"><pre><span class="title">svn</span> merge <span class="url">http://svn/repo/trunk
+</pre></figure>
+
+<h3>2、在trunk上合并branch的修改。</h3>
+<p>进入trunk目录，然后执行</p>
+<figure class="highlight"><pre><span class="title">svn</span> merge --reintegrate <span class="url">http://svn/repo/branches/branch1
+</pre></figure>
+
+<h2>3. 将文件checkout到本地目录</h2>
+<p>svn checkout path（path是服务器上的目录）</p>
+<figure class="highlight"><pre>例如：svn checkout svn:<span class="regexp">//</span><span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span><span class="regexp">/pro/</span>domain
+简写：svn co
+</pre></figure>
+
+<h2>4. 往版本库中添加新的文件</h2>
+<p>svn add file</p>
+<figure class="highlight"><pre>例如：svn addtest<span class="preprocessor">.php</span>(添加test<span class="preprocessor">.php</span>)
+svn <span class="keyword">add</span> *<span class="preprocessor">.php</span>(添加当前目录下所有的php文件)
+</pre></figure>
+
+<h2>5. 将改动的文件提交到版本库</h2>
+<p>svn commit -m “LogMessage“ [-N] [—no-unlock] PATH(如果选择了保持锁，就使用–no-unlock开关)</p>
+<figure class="highlight"><pre>例如：svn <span class="operator"><span class="keyword">commit</span> -m “<span class="keyword">add</span> test file <span class="keyword">for</span> my test“ test.php
+简写：svn ci
+</pre></figure>
+
+<h2>6. 加锁/解锁</h2>
+<p>svn lock -m “LockMessage“ [—force] PATH</p>
+<figure class="highlight"><pre>例如：svn <span class="operator"><span class="keyword">lock</span> -m “<span class="keyword">lock</span> test file“ test.php
+svn unlock PATH
+</pre></figure>
+
+<h2>7. 更新到某个版本</h2>
+<p>svn update -r m path</p>
+<p>例如：</p>
+<figure class="highlight"><pre>svn <span class="operator"><span class="keyword">update</span>如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
+svn <span class="keyword">update</span> -r <span class="number">200</span> test.php(将版本库中的文件test.php还原到版本<span class="number">200</span>)
+svn <span class="keyword">update</span> test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先<span class="keyword">update</span>，修改文件，然后清除svn resolved，最后再提交<span class="keyword">commit</span>)
+</pre></figure>
+
+<p>简写：svn up</p>
+<h2>8.查看文件或者目录状态</h2>
+<ol>
+<li>svn status path（目录下的文件和子目录的状态，正常状态不显示）</li>
+</ol>
+<p>【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】</p>
+<ol>
+<li>svn status -v path(显示文件和子目录状态)<br>第一列保持相同，第二列显示工作版本号，第三和第四列显示最后一次修改的版本号和修改人。<br><strong>注：</strong> svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。<br>简写：svn st</li>
+</ol>
+<h2>9.删除文件</h2>
+<p>svn delete path -m “delete test fle“</p>
+<p>例如：</p>
+<figure class="highlight"><pre>svn <span class="operator"><span class="keyword">delete</span> svn://<span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>/pro/<span class="keyword">domain</span>/test.php -m “<span class="keyword">delete</span> test file”
+或者直接svn <span class="keyword">delete</span> test.php 然后再svn ci -m ‘<span class="keyword">delete</span> test file‘，
+</pre></figure>
+
+<p>推荐使用这种简写：svn (del, remove, rm)</p>
+<h2>10.查看日志</h2>
+<p>svn log path<br>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> log test.php 显示这个文件的所有修改记录，及其版本号的变化
+</pre></figure>
+
+<h2>11.查看文件详细信息</h2>
+<p>svn info path</p>
+<p>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> <span class="built_in">info</span> test.php
+</pre></figure>
+
+<h2>12.比较差异</h2>
+<p>svn diff path(将修改的文件与基础版本比较)</p>
+<p>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> diff test.php
+</pre></figure>
+
+<p>svn diff -r m:n path(对版本m和版本n比较差异)</p>
+<p>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> diff -r <span class="number">200</span>:<span class="number">201</span> test.php
+</pre></figure>
+
+<p>简写：svn di</p>
+<h2>13.将两个版本之间的差异合并到当前文件</h2>
+<p>svn merge -r m:n path<br>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> merge -r <span class="number">200</span>:<span class="number">205</span> test.php（将版本<span class="number">200</span>与<span class="number">205</span>之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
+</pre></figure>
+
+<h2>14.SVN 帮助</h2>
+<p>svn help<br>svn help ci  </p>
+<h2>15.版本库下的文件和目录列表</h2>
+<p>svn list path<br>显示path目录下的所有属于版本库的文件和目录<br>简写：svn ls</p>
+<h2>16.创建纳入版本控制下的新目录</h2>
+<p>svn mkdir: 创建纳入版本控制下的新目录。</p>
+<p>用法: </p>
+<ol>
+<li>mkdir PATH…</li>
+<li>mkdir URL…</li>
+</ol>
+<p>创建版本控制的目录。</p>
+<ol>
+<li>每一个以工作副本 PATH 指定的目录，都会创建在本地端，并且加入新增调度，以待下一次的提交。</li>
+<li>每个以URL指定的目录，都会透过立即提交于仓库中创建。在这两个情况下，所有的中间目录都必须事先存在。</li>
+</ol>
+<h2>17.恢复本地修改</h2>
+<p>svn revert: 恢复原始未改变的工作副本文件 (恢复大部份的本地修改)。revert:<br>用法: revert PATH…<br>注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复被删除的目录</p>
+<h2>18.代码库URL变更</h2>
+<p>svn switch (sw): 更新工作副本至不同的URL。</p>
+<p>用法: </p>
+<ol>
+<li>switch URL [PATH]</li>
+<li><p>switch –relocate FROM TO [PATH…]</p>
+<ul>
+<li><p>更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。</p>
+</li>
+<li><p>改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比如方案名或是主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2>19.解决冲突</h2>
+<p>svn resolved: 移除工作副本的目录或文件的“冲突”状态。 </p>
+<p>用法: resolved PATH…</p>
+<p><strong>注意:</strong> 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的<br>相关文件，然后让 PATH 可以再次提交。</p>
+<h2>20.输出指定文件或URL的内容。</h2>
+<p>svn cat 目标[@版本]…如果指定了版本，将从指定的版���开始查找。  </p>
+<p>svn cat -r PREV filename &gt; filename (PREV 是上一版本,也可以写具体版本号,这样输出结果是可以提交的)</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn错误local add incoming add upon merge]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn8/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn8/</id>
+    <published>2013-09-03T06:06:15.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>在svn命令行merge之后文件经常会出现local add, incoming add upon merge问题，导致无法提交，可以通过以下命令解决冲突<br>Summarizing to resolve the tree conflict committing your working dir with svn client 1.6.x you can use:<br><a id="more"></a></p>
+<figure class="highlight"><pre><span class="comment">svn</span> <span class="comment">resolve</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">accept</span> <span class="comment">working</span> <span class="literal">-</span><span class="comment">R</span> <span class="string">.</span>
+</pre></figure>
+
+<p>where . is the directory in conflict.</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn 打 tag]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn7/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn7/</id>
+    <published>2013-09-03T06:04:29.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight"><pre>svn cp . <span class="symbol">http:</span>/<span class="regexp">/svnserver/svn</span><span class="regexp">/pingan/client</span><span class="regexp">/iPhone2/tags</span><span class="regexp">/appstore_v1.010_rc01  -m "1.010"
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn 回退版本]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn6/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn6/</id>
+    <published>2013-09-03T06:02:35.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight"><pre>svn merge -r <span class="symbol">rHEAD:</span><span class="number">4367</span> <span class="symbol">http:</span>/<span class="regexp">/svnserver/svn</span><span class="regexp">/pingan/client</span><span class="regexp">/iPhone2/trunk</span><span class="regexp">/
+</pre></figure>
+
+<p>本地回退</p>
+<figure class="highlight"><pre><span class="title">svn</span> ci -m <span class="string">"提交"</span>
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn  临时 切换用户 命令]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn5/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn5/</id>
+    <published>2013-09-03T05:56:11.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>作为team leader  有时候需要帮别人解决技术问题，尝尝再别人的电脑上改了某些代码，提交的时候遇到了问题，就是怎样临时用自己的账户提交，提交完后 用不影响同事的电脑原有的svn账号<br><a id="more"></a></p>
+<p>下面的可以解决这个问题</p>
+<p>在所有命令下强制加上—username 和—password选项。 </p>
+<p>例如：</p>
+<p>l<figure class="highlight"><pre><span class="comment">svn</span> <span class="comment">ci</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">username</span> <span class="comment">hufeng</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">password</span> <span class="comment">####
+</pre></figure></p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn 版本恢复命令行操作（转）]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn4/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn4/</id>
+    <published>2013-09-03T05:51:18.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>svn没有恢复旧版本的直接功能，不过可以使用svn merge命令恢复。<br>比如说当前HEAD为14，而我要恢复成10版本，怎么做？用svn merge：<br><a id="more"></a></p>
+<figure class="highlight"><pre><span class="title">svn</span> update
+<span class="title">svn</span> merge <span class="comment">--revision 14:10</span>
+<span class="title">svn</span> commit -m <span class="string">"restore to revision 10"</span>
+</pre></figure>
+
+<p>可能会很奇怪，因为不理解为什么合并能恢复旧版本。</p>
+<p>这里要理解一个关键点，就是svn merge的原理。merge是比较指定版本的差异，然后把这些差异应用到本地工作副本，而-r后的14:10，是指相对于版本14来说版本10的变化（注意，这个版本的次序很重要。），也就是相对版本14，我版本10添加了哪些文件或目录，以及哪些文件添加了哪些行删除了哪些行。</p>
+<p>由于在客户端提交应用程序时的误操作，导致修改了基线版本，此处利用两个命令来进行恢复：</p>
+<ol>
+<li>将客户端恢复合并到指定版本：</li>
+</ol>
+<figure class="highlight"><pre><span class="title">svn</span> merge -r <span class="number">112</span>:<span class="number">111</span> <span class="url">svn://192.168.0.119/UBoot/trunk/u-boot-1.3.3
+</pre></figure>
+
+<p>此步骤将下位机由112恢复到111版本：</p>
+<ol>
+<li>重新修订基线版本</li>
+</ol>
+<figure class="highlight"><pre>svn <span class="operator"><span class="keyword">commit</span> -m <span class="string">"Undoing change committed in r111."</span>
+</pre></figure>
+
+<p>此步骤将恢复后的111版本提交，但是此时的版本号为113</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[svn错误：SVN remains in conflict?]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/svn3/"/>
+    <id>http://hufeng825.github.com/2013/09/03/svn3/</id>
+    <published>2013-09-03T05:49:56.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>解决如下:</p>
+<figure class="highlight"><pre><span class="comment">svn</span> <span class="comment">remove</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span> <span class="comment">yourfilename</span>
+<span class="comment">svn</span> <span class="comment">resolve</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">accept=working</span>  <span class="comment">yourfilename</span>
+<span class="comment">svn</span> <span class="comment">commit</span> <span class="literal">-</span><span class="comment">m</span> <span class="comment">""
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[mac 开发 git svn 应该添加那些忽略列表]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/git13/"/>
+    <id>http://hufeng825.github.com/2013/09/03/git13/</id>
+    <published>2013-09-03T05:45:11.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>如题，git svn 应该添加那些忽略列表?<br><a id="more"></a></p>
+</blockquote>
+<ol>
+<li>.DS_Store</li>
+<li>build</li>
+<li>*~.nib</li>
+<li>*.so</li>
+<li>*.pbxuser</li>
+<li>*.mode</li>
+<li><em>.perspective</em></li>
+</ol>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
+    <category scheme="http://hufeng825.github.com/categories/git/svn/" term="svn"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[git错误 git rebase master First, rewinding head to replay your work on top of it... error: The following unt]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/git12/"/>
+    <id>http://hufeng825.github.com/2013/09/03/git12/</id>
+    <published>2013-09-03T05:39:50.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>git rebase master<br>First, rewinding head to replay your work on top of it…<br>error: The following untracked working tree files would be overwritten by checkout:<br><a id="more"></a><br>HFFrame.xcodeproj/project.xcworkspace/xcuserdata/apple.xcuserdatad/UserInterfaceState.xcuserstate<br>Please move or remove them before you can switch branches.<br>Aborting<br>could not detach HEAD</p>
+<p>执行</p>
+<figure class="highlight"><pre><span class="comment">~/Desktop/HFFrame(example)</span> <span class="comment">$</span> <span class="comment">git</span> <span class="comment">clean</span> <span class="literal">-</span><span class="comment">d</span> <span class="literal">-</span><span class="comment">fx</span> <span class="comment">""
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[git错误 fatal: remote origin already exists.]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/git11/"/>
+    <id>http://hufeng825.github.com/2013/09/03/git11/</id>
+    <published>2013-09-03T05:37:59.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>当执行 git remote addorigin git@github.com:hufeng825/test.git</p>
+</blockquote>
+<p>错误提示：fatal: remote origin already exists.<br><a id="more"></a><br>解决办法</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git remote rm origin
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[MAC OS X 下快速切换代理]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/mac3/"/>
+    <id>http://hufeng825.github.com/2013/09/03/mac3/</id>
+    <published>2013-09-03T05:20:05.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>因为行业原因 在公司上网必须通过代理安装，所以每天上下班开电脑第一件事 就是开关代理。于是做了一个软件 利用shell进行切换代理。</p>
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e898v6vmwdj20dk06bwep.jpg" class="left " width="300" height="400" title="运行效果图">
+
+
+  <a id="more"></a>
+
+<img src="http://ww4.sinaimg.cn/mw690/a43af4ffjw1e898wixkiej207q020dfu.jpg" class="left" width="200" height="300" title="软件">
+
+
+
+
+<p>下面是主要源码</p>
+<figure class="highlight"><pre><span class="keyword">tell</span> <span class="type">application</span> <span class="string">"System Events"</span>
+
+<span class="keyword">set</span> proxy_dialog <span class="keyword">to</span> <span class="command">display dialog</span> <span class="string">"代理模块(Ethernet版本):"</span> buttons {<span class="string">"打开代理模式1"</span>, <span class="string">"打开代理模式2"</span>, <span class="string">"关闭代理"</span>} default button <span class="string">"打开代理模式1"</span> <span class="keyword">with</span> title <span class="string">"华夏基金开发环境快速切换代理App"</span>
+
+<span class="keyword">set</span> proxy_interface <span class="keyword">to</span> button returned <span class="keyword">of</span> proxy_dialog
+
+<span class="keyword">end</span> <span class="keyword">tell</span>
+
+
+<span class="keyword">if</span> proxy_interface <span class="keyword">is</span> <span class="string">"打开代理模式1"</span> <span class="keyword">then</span>
+
+<span class="command">do shell script</span> <span class="string">"networksetup -setwebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setsecurewebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setwebproxystate Ethernet on&&networksetup -setsecurewebproxystate Ethernet on"</span> <span class="keyword">with</span> administrator privileges
+
+<span class="keyword">end</span> <span class="keyword">if</span>
+
+
+<span class="keyword">if</span> proxy_interface <span class="keyword">is</span> <span class="string">"打开代理模式2"</span> <span class="keyword">then</span>
+
+<span class="command">do shell script</span> <span class="string">"networksetup -setwebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setsecurewebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setwebproxystate Ethernet on&&networksetup -setsecurewebproxystate Ethernet on"</span> <span class="keyword">with</span> administrator privileges
+
+<span class="keyword">end</span> <span class="keyword">if</span>
+
+
+<span class="keyword">if</span> proxy_interface <span class="keyword">is</span> <span class="string">"关闭代理"</span> <span class="keyword">then</span>
+
+<span class="command">do shell script</span> <span class="string">"networksetup -setwebproxystate Ethernet off&&networksetup -setsecurewebproxystate Ethernet off"</span> <span class="keyword">with</span> administrator privileges
+
+<span class="keyword">end</span> <span class="keyword">if</span>
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/mac/" term="mac"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[git系类教程之 找出最懒的程序员]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/git10/"/>
+    <id>http://hufeng825.github.com/2013/09/03/git10/</id>
+    <published>2013-09-03T03:19:34.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>场景假设:⼀一个开发⼩小组有10个程序员,他们⽤用 Git 做版本控制,某⼀一天程序员A push了当天的⼏几个 commit之后,突然在想“我在这个项⺫⽬目到底⼀一共进⾏行过多少次commit?谁⽐比我commit更多?多多少?谁是 组⾥里⾯面进⾏行最多commit的?谁是最少的?”<br><a id="more"></a></p>
+</blockquote>
+<p>Git ⾮非常⼈人性化地⽀支持这样⼀一个命令:$ git shortlog<br>这个命令会返回这个 git repository 底下每个⽤用户进⾏行 commit 的次数,以及每次 commit 的注释。 -s 参数省略每次 commit 的注释,仅仅返回⼀一个简单的统计。<br>-n 参数按照 commit 数量从多到少的顺利对⽤用户进⾏行排序</p>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">shortlog</span> <span class="literal">-</span><span class="comment">s</span> <span class="literal">-</span><span class="comment">n</span>
+  <span class="comment">135</span>  <span class="comment">Tom</span> <span class="comment">Preston</span>-<span class="comment">Werner</span>
+  <span class="comment">6</span>  <span class="comment">remi</span>
+  <span class="comment">3</span>  <span class="comment">Mikael</span> <span class="comment">Lind</span>
+  <span class="comment">3</span>  <span class="comment">Toby</span> <span class="comment">DiPasquale</span>
+  <span class="comment">2</span>  <span class="comment">Aristotle</span> <span class="comment">Pagaltzis</span>
+  <span class="comment">2</span>  <span class="comment">Basil</span> <span class="comment">Shkara</span>
+  <span class="comment">1</span>  <span class="comment">Marc</span> <span class="comment">Chung</span>
+  <span class="comment">1</span>  <span class="comment">Nick</span> <span class="comment">Gerakines
+</pre></figure>
+
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[git与SVN协同的工作流程]]></title>
+    <link href="http://hufeng825.github.com/2013/09/03/git9/"/>
+    <id>http://hufeng825.github.com/2013/09/03/git9/</id>
+    <published>2013-09-03T03:00:12.000Z</published>
+    <updated>2013-09-15T05:04:07.000Z</updated>
+    <content type="html"><![CDATA[<p>git可以和SVN服务器一起使用，即，中央服务器采用svn，本地代码库使用git。这样的好处是，可以兼容以前的项目，同时本地有一套完整的版本控制系统，可以随时查看代码修改历史，随时提交，不需要网络。合适的时候再提交到SVN服务器。git-svn的工作流程也有很多，我们推荐使用下面这种方式。</p>
+<a id="more"></a>
+
+
+<h2>一.git-svn初始化</h2>
+<figure class="highlight"><pre><span class="title">git</span> svn init SVNREMOTEURL
+</pre></figure>
+
+<p>-s 参数是表面使用的是svn标准命名方法,即 trunk,tags,branches,这个参数有时很重要,建议使用,命 令后面还可以加个文件夹名字作为clone后的目录</p>
+<figure class="highlight"><pre><span class="title">git</span> svn fetch
+</pre></figure>
+
+<p>可能碰到只想从某个版本开始进行fetch,那么请需要 –r 参数。 例如:</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git svn fetch -r <span class="number">1342</span><span class="symbol">:HEAD</span>
+
+<span class="variable">$ </span>git remote add origin <span class="constant">GITREMOTEURL</span> 初始化远程git 地址 
+
+这⼀一步可以省略 如果没必要提交到远程git 服务器中
+</pre></figure>
+
+<h2>二.git-svn基本⽤用法</h2>
+<h3>本地修改代码后提交</h3>
+<figure class="highlight"><pre><span class="comment">git</span> <span class="comment">commit</span> <span class="literal">-</span><span class="comment">a</span> <span class="literal">-</span><span class="comment">m</span> <span class="comment">“”
+</pre></figure>
+
+<h3>同步远程svn 服务器</h3>
+<figure class="highlight"><pre><span class="title">git</span> svn rebase
+</pre></figure>
+
+<h3>推送到远程svn服务器</h3>
+<figure class="highlight"><pre>git svn d<span class="operator"><span class="keyword">commit</span>
+</pre></figure>
+
+<h3>推送到远程git 服务器</h3>
+<figure class="highlight"><pre><span class="title">git</span> push
+</pre></figure>
+
+<h3>从SVN服务器获取代码</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git svn clone <span class="symbol">http:</span>/<span class="regexp">/svnserver/project</span><span class="regexp">/trunk
+</pre></figure>
+
+<h3>创建一个本地分支</h3>
+<figure class="highlight"><pre>为了方便合并，减少不必要的麻烦，最好保持主分支master不变，在一个新的分支进行日常工作
+
+<span class="title">git</span> branch workA
+</pre></figure>
+
+<h3>日常修改和提交</h3>
+<p>与git的工作流程完全一样</p>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">checkout</span> <span class="literal">-</span><span class="comment">b</span> <span class="comment">work</span>
+<span class="comment">$</span> <span class="comment">git</span> <span class="comment">commit</span> <span class="literal">-</span><span class="comment">a
+</pre></figure>
+
+<h3>切回master从SVN获取最新代码</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git checkout master
+<span class="variable">$ </span>git svn rebase
+</pre></figure>
+
+<h3>master同步后，与工作分支合并</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git checkout work
+<span class="variable">$ </span>git rebase master     <span class="comment">## 手工解决可能的冲突</span>
+</pre></figure>
+
+<h3>合并主分支</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git checkout master <span class="variable">$ </span>git merge work
+</pre></figure>
+
+<h3>git-svn 解决冲突</h3>
+<ul>
+<li><p>⼿动打开冲突的⽂文件 找到冲突的地⽅方修改完成后保存</p>
+</li>
+<li><p>执⾏行 git add 冲突⽂文件</p>
+</li>
+<li><p>git rebase —continue </p>
+</li>
+<li><p>git svn dcommit</p>
+</li>
+</ul>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
+    <category scheme="http://hufeng825.github.com/categories/git/svn/" term="svn"/>
+  </entry>
+</feed>

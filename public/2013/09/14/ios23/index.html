@@ -1,0 +1,577 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>ios笔记-- 多线程应该知道的那几件事 GCD NSThread NSOperation | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="iphone5s 出来了，CPU 升级到了64位 可以应用到更大的内存了，同时对多线程的处理吞吐能力也教之前提升了十几倍。下面着中总结下ios 下多线程的知识点">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="ios笔记-- 多线程应该知道的那几件事 GCD NSThread NSOperation"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+    <link href="/css/tab.css" rel="stylesheet" media="screen">
+    <link href="/css/xcode.css" rel="stylesheet" media="screen">
+
+  <!--link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen"-->
+   <!--script src="/fancybox/jquery.fancybox.pack.js"></script>-->
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+<!--[if lt IE 9]>
+    <div class="alert alert-block ie-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>浏览器版本过低</h4>
+        <br>
+        <p style="text-align:center">你知道不？你还在用几年前的浏览器！这个网页上的有很多好看的东西和动画效果都显示不了！</p>
+        <p style="text-align:center">建议赶快<a href="http://windows.microsoft.com/zh-cn/internet-explorer/downloads/ie-10/worldwide-languages" target="_blank">升级</a>你的浏览器版本或使用 <a href="http://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 或 <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> 等高级浏览器。</p>
+    </div>
+<![endif]-->
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <a href="/Jianli.html" class="brand" >简历</a>
+
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>58</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                   <!--form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8"-->
+                  <form class="navbar-search " action="/search.html" method="get" accept-charset="utf-8">
+
+                        <input type="text"   class="search-query" name="query" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-09-14T05:58:20.000Z"><a href="/2013/09/14/ios23/">2013 9月 14</a></time>
+        
+        
+
+<h1 class="title">ios笔记-- 多线程应该知道的那几件事 GCD NSThread NSOperation</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <blockquote>
+<p>iphone5s 出来了，CPU 升级到了64位 可以应用到更大的内存了，同时对多线程的处理吞吐能力也教之前提升了十几倍。下面着中总结下ios 下多线程的知识点<br><a id="more"></a></p>
+</blockquote>
+<img src="http://image.techweb.com.cn/edit/2013/0911/37841378870639.jpg" class="left" width="400" height="200">
+
+
+
+<h2>1：现有的几种多线程</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> NSThread</td>
+<td>苹果公司的Cocoa框架共支持三种多线程机制，分别为NSThread、GCD（Grand Central Dispatch）、Cocoa NSOperatio。NSThree是官方推荐的线程处理方式，它在处理机制上，需要开发者负责手动管理Thread的生命周期，包括子线程与主线程之间的同步等。线程共享同一应用程序的部分内存空间，它们拥有对数据相同的访问权限。你得协调多个线程 对同一数据的访问，一般做法是在访问之前加锁，这会导致一定的性能开销。在 iOS 中我们可以使用多种形式的 thread。 比其他两个轻量级 需要自己管理线程的生命周期，线程同步。 线程同步对数据的加锁会有一定的系统开销</td>
+</tr>
+<tr>
+<td> NSOperation</td>
+<td>如果需要让线程同时并行运行多个，可以将线程加入队列（Queue）中，NSOperationQueue类就是一个线程队列管理类，他提供了线程并行、队列的管理。可以认为NSOperationQueue就是一个线程管理器，通过addOperations方法，我们可以一次性把多个（数组形式）线程添加到队列中。同时，NSOperationQueue允许通过setMaxConcurrentOperationCount方法设置队列的并行（同一时间）运行数量  </td>
+</tr>
+<tr>
+<td> GCD</td>
+<td>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。该方法在Mac OS X 10.6雪豹中首次推出，并随后被引入到了iOS4.0中。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术，它看起来象就其它语言的闭包(Closure)一样，但苹果把它叫做blocks。</td>
+</tr>
+</tbody>
+</table>
+<p>一般移动平台上系统都会有一个专门的检查机制，看程序有没有很长时间被阻塞住，没有回来检查主消息队列。发现这种情况一般都是把程 序作为“无响应”干掉。iOS一般情况下是10秒为上限。10秒内程序没有回到主消息循环就被干掉。在前台后台切换时更严格，大概是5秒左右。<a href="http://www.cnblogs.com/linyawen/archive/2012/07/24/2606709.html" target="_blank">注释1</a></p>
+<h2>2:简单的Demo</h2>
+<p>因为GCD 是应用最广的 而且也是苹果现在极力鼓动开发者应用的 所以NSThread NSOperation 只做简单应用</p>
+<h3>1:NSThread</h3>
+<h3>1.1 NSThread 有两种直接创建方式：</h3>
+<p>第一个是实例方法—直接创建线程并且开始运行线程</p>
+<ul>
+<li>(id)initWithTarget:(id)target selector:(SEL)selector object:(id)</li>
+</ul>
+<p>第二个是类方法—先创建线程对象，然后再运行线程操作，在运行线程操作前可以设置线程的优先级等线程信息</p>
+<ul>
+<li>(void)detachNewThreadSelector:(SEL)aSelector toTarget:(id)aTarget withObject:(id)anArgument</li>
+</ul>
+<p><em>selector</em> :线程执行的方法，这个selector只能有一个参数，而且不能有返回值。<br><em>target</em>  :selector消息发送的对象<br><em>argument</em> :传输给target的唯一参数，也可以是nil    </p>
+<h3>1.2线程间通信</h3>
+<p>a 在应用程序主线程中做事情： </p>
+<figure class="highlight"><pre><span class="method">performSelectorOnMainThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span> <span class="method">performSelectorOnMainThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span><span class="method">modes:</span>
+</pre></figure>
+
+<p>b 在指定线程中做事情：</p>
+<figure class="highlight"><pre><span class="method">performSelector:</span><span class="method">onThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span> <span class="method">performSelector:</span><span class="method">onThread:</span><span class="method">withObject:</span><span class="method">waitUntilDone:</span><span class="method">modes:</span>
+</pre></figure>
+
+<p>c 在当前线程中做事情：</p>
+<figure class="highlight"><pre><span class="method">performSelector:</span><span class="method">withObject:</span><span class="method">afterDelay:</span>
+<span class="method">performSelector:</span><span class="method">withObject:</span><span class="method">afterDelay:</span><span class="method">inModes:</span>
+</pre></figure>
+
+<p>d 取消发送给当前线程的某个消息</p>
+<figure class="highlight"><pre><span class="method">cancelPreviousPerformRequestsWithTarget:</span> 
+<span class="method">cancelPreviousPerformRequestsWithTarget:</span><span class="method">selector:</span><span class="method">object:</span>
+</pre></figure>
+
+<h3>2:NSOperation</h3>
+<p>首先是建立NSOperationQueue和NSOperations。NSOperationQueue会建立一个线程管理器，每个加入到线程operation会有序的执行。  </p>
+<figure class="highlight"><pre>
+NSOperationQueue *queue = [NSOperationQueue new];
+NSInvocationOperation *operation = <span class="string">[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(doWork:) object:someObject]; 
+[queue addObject:operation]; 
+[operation release];
+</pre></figure>
+
+<p>使用NSOperationQueue的过程：<br>    1.  建立一个NSOperationQueue的对象<br>    2.  建立一个NSOperation的对象<br>    3.  将operation加入到NSOperationQueue中<br>    4.  release掉operation  </p>
+<p>NSInvocationOperation，NSInvocationOperation是NSOperation的子类，允许运行在operation中的targer和selector</p>
+<h3>3：多线程互斥同步问题</h3>
+<p><a href="http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html" target="_blank">注释2</a></p>
+<p>在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题：</p>
+<ul>
+<li>方法一，@synchronized(id anObject),(最简单的方法)<br>会自动对参数对象加锁，保证临界区内的代码线程安全</li>
+</ul>
+<figure class="highlight"><pre>@<span class="keyword">synchronized</span>(<span class="keyword">self</span>) {
+        <span class="comment">// 这段代码对其他 @synchronized(self) 都是互斥的</span>
+        <span class="comment">// self 指向同一个对象</span>
+}
+</pre></figure>
+
+<ul>
+<li>方法二，NSLock</li>
+</ul>
+<p>NSLock对象实现了NSLocking protocol，包含几个方法：<br>lock，加锁<br>unlock，解锁<br>tryLock，尝试加锁，如果失败了，并不会阻塞线程，只是立即返回NO<br>lockBeforeDate:，在指定的date之前暂时阻塞线程（如果没有获取锁的话），如果到期还没有获取锁，则线程被唤醒，函数立即返回NO<br>比如<br>：<br>    NSLock *theLock = [[NSLock alloc] init]; </p>
+<pre><code>if ([the<span class="operator"><span class="keyword">Lock</span> <span class="keyword">lock</span>]) {
+
+//<span class="keyword">do</span> something here
+
+[theLock unlock];</span> 
+
+} </code></pre>
+<ul>
+<li>方法三，NSRecursiveLock，递归锁</li>
+</ul>
+<p>NSRecursiveLock，多次调用不会阻塞已获取该锁的线程。</p>
+<pre><code>NSRecursiveLock *theLock = <span class="string">[[NSRecursiveLock alloc] init]; 
+void MyRecursiveFunction(int value) { 
+    [theLock lock]; 
+    if (value != 0) { 
+        –value; 
+        MyRecursiveFunction(value); 
+    }
+    [theLock unlock]; 
+} 
+MyRecursiveFunction(5);</code></pre>
+<ul>
+<li>方法四，NSConditionLock，条件锁</li>
+</ul>
+<p>NSConditionLock，条件锁，可以设置条件</p>
+<pre><code>//公共部分
+id condLock = <span class="string">[[NSConditionLock alloc] initWithCondition:NO_DATA]; 
+
+//线程一，生产者
+while(true) { 
+
+[condLock lockWhenCondition:NO_DATA]; 
+
+//生产数据
+[condLock unlockWithCondition:HAS_DATA];
+
+}
+
+//线程二，消费者
+while (true) { 
+
+[condLock lockWhenCondition:HAS_DATA
+
+//消费
+[condLock unlockWithCondition:NO_DATA]; 
+}</code></pre>
+<ul>
+<li>方法五，NSDistributedLock，分布锁</li>
+</ul>
+<p>NSDistributedLock，分布锁，文件方式实现，可以跨进程<br>用tryLock方法获取锁。<br>用unlock方法释放锁。<br>如果一个获取锁的进程在释放锁之前挂了，那么锁就一直得不到释放了，此时可以通过breakLock强行获取锁。</p>
+<p><strong>本章节(多线程互斥同步问题)参考自:<a href="http://blog.sina.com.cn/s/blog_72819b170101590n.html" target="_blank">http://blog.sina.com.cn/s/blog_72819b170101590n.html</a></strong></p>
+<h2>3:GCD多线程互斥同步问题(阻塞线程的方式去实现同步)</h2>
+<p><a href="http://blog.devtang.com/blog/2012/02/22/use-gcd/" target="_blank">注释3</a></p>
+<h3>1.串行队列</h3>
+<p>(1)GCD下的dispatch_queue队列都是FIFO队列,都会按照提交到队列的顺序执行.<br>只是根据队列的性质,分为  </p>
+<p><1>串行队列:用户队列、主线程队列 </p>
+<p><2>并行队列. </p>
+<p>(2)同步(dispatch_sync)、异步方式(dispatch_async). 配合串行队列和并行队列使用.<br>同步队列直接提交两个任务就可以.<br>// 串形队列<br>    dispatch_queue_t serilQueue = dispatch_queue_create(“com.quains.myQueue”, 0);</p>
+<pre><code><span class="comment">//开始时间</span>
+<span class="built_in">NSDate</span> *startTime = [<span class="built_in">NSDate</span> date];
+
+
+__block <span class="built_in">UIImage</span> *image = <span class="literal">nil</span>;
+
+<span class="comment">//1.先去网上下载图片</span>
+<span class="built_in">dispatch_async</span>(serilQueue, ^{
+   <span class="comment">//下载图片</span>
+});
+
+<span class="comment">//2.在主线程展示到界面里</span>
+<span class="built_in">dispatch_async</span>(serilQueue, ^{
+
+    <span class="built_in">NSLog</span>(@<span class="string">"%@"</span>,[<span class="built_in">NSThread</span> currentThread]);
+
+    <span class="comment">// 在主线程展示</span>
+    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+      <span class="comment">//显示图片</span>
+});
+
+<span class="comment">//3.清理</span>
+dispatch_release(serilQueue);
+[image release];</code></pre>
+<p><strong>注意:</strong></p>
+<p>(1) __block变量分配在栈,retain下,防止被回收. </p>
+<p>(2)dispatch要手动create和release. </p>
+<p>(3)提交到主线程队列的时候,慎用同步dispatch_sync方法,有可能造成死锁.  因为主线程队列是串行队列,要等队列里的任务一个一个执行.所以提交一个任务到队列,如果用同步方法就会阻塞住主线程,而主线程又要等主线程队列里的任务都执行完才能执行那个刚提交的,所以主线程队列里还有其他的任务的话,但他已经被阻塞住了,没法先完成队列里的其他任务,即,最后一个任务也没机会执行到,于是造成死锁.</p>
+<p>(4)提交到串行队列可以用同步方式,也可以用异步方式. </p>
+<h3>2.并行队列</h3>
+<p>采用并行队列的时候,可以采用同步的方式把任务提交到队列里去,即可以实现同步的方式</p>
+<p>//新建一个队列<br>    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</p>
+<pre><code><span class="comment">//记时</span>
+<span class="built_in">NSDate</span> *startTime = [<span class="built_in">NSDate</span> date];
+
+<span class="comment">//加入队列</span>
+<span class="built_in">dispatch_async</span>(concurrentQueue, ^{
+    __block <span class="built_in">UIImage</span> *image = <span class="literal">nil</span>;
+
+    <span class="comment">//1.先去网上下载图片</span>
+    <span class="built_in">dispatch_sync</span>(concurrentQueue, ^{
+        <span class="comment">//下载图片</span>
+    });
+
+    <span class="comment">//2.在主线程展示到界面里</span>
+    <span class="built_in">dispatch_sync</span>(dispatch_get_main_queue(), ^{
+        <span class="comment">//显示图片</span>
+    });
+});</code></pre>
+<p>两个同步的任务用一个异步的包起来,提交到并行队列里去,即可实现同步的方式.</p>
+<h3>3.使用分组方式</h3>
+<p>group本身是将几个有关联的任务组合起来,然后提供给开发者一个知道这个group结束的点.<br>虽然这个只有一个任务,但是可以利用group的结束点,去阻塞线程,从而来实现同步方式.</p>
+<p>例如让后台2个线程并行执行，然后等2个线程都结束后，再汇总执行结果。这个可以用dispatch_group, dispatch_group_async 和 dispatch_group_notify来实现，示例如下：</p>
+<figure class="highlight"><pre> dispatch_group_t <span class="keyword">group</span> = dispatch_group_create();
+ dispatch_group_async(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
+      <span class="comment">// 并行执行的线程一</span>
+ });
+ dispatch_group_async(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
+      <span class="comment">// 并行执行的线程二</span>
+ });
+ dispatch_group_notify(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
+      <span class="comment">// 汇总结果</span>
+ });
+</pre></figure>
+
+<pre><code>dispatch_group_t <span class="keyword">group</span> = dispatch_group_create();
+
+dispatch_queue_t queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);
+
+NSDate <span class="variable">*startTime</span> = [NSDate <span class="keyword">date</span>];
+
+__block UIImage <span class="variable">*image</span> = nil;
+
+dispatch_group_async(<span class="keyword">group</span>, queue, ^{
+    <span class="comment">//1.先去网上下载图片</span>
+    });
+
+<span class="comment">// 2.等下载好了再在刷新主线程</span>
+dispatch_group_notify(<span class="keyword">group</span>, queue, ^{
+
+    <span class="comment">//在主线程展示到界面里</span>
+    dispatch_async(dispatch_get_main_queue(), ^{
+     <span class="comment">//显示图片</span>
+    });
+
+});
+
+<span class="comment">// 释放掉</span>
+dispatch_release(<span class="keyword">group</span>);</code></pre>
+<p>dispatch_group 也要手动创建和释放.<br>dispatch_notify()提供了一个知道group什么时候结束的点. 当然也可以使用dispatch_wait()去阻塞</p>
+<h3>4.信号量</h3>
+<p>信号量 和 琐 的作用差不多,可以用来实现同步的方式.<br>但是信号量通常用在 允许几个线程同时访问一个资源,通过信号量来控制访问的线程个数.</p>
+<p>// 信号量初始化为1<br>    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);</p>
+<pre><code><span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);
+
+<span class="built_in">NSDate</span> *startTime = [<span class="built_in">NSDate</span> date];
+
+__block <span class="built_in">UIImage</span> *image = <span class="literal">nil</span>;
+
+
+<span class="comment">//1.先去网上下载图片</span>
+<span class="built_in">dispatch_async</span>(queue, ^{
+
+    <span class="comment">// wait操作-1</span>
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    <span class="comment">// 开始下载</span>
+    <span class="comment">// signal操作+1</span>
+    dispatch_semaphore_signal(semaphore);
+});
+
+
+<span class="comment">// 2.等下载好了再在刷新主线程</span>
+<span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+
+    <span class="comment">// wait操作-1</span>
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    <span class="comment">//显示图片</span>
+    <span class="comment">// signal操作+1</span>
+    dispatch_semaphore_signal(semaphore);
+});</code></pre>
+<p>dispatch_wait会阻塞线程并且检测信号量的值,直到信号量值大于0才会开始往下执行,同时对信号量执行-1操作.<br>dispatch_signal则是+1操作.</p>
+<h3>3.后台运行</h3>
+<p>GCD的另一个用处是可以让程序在后台较长久的运行。在没有使用GCD时，当app被按home键退出后，app仅有最多5秒钟的时候做一些保存或清理资源的工作。但是在使用GCD后，app最多有10分钟的时间在后台长久运行。这个时间可以用来做清理本地缓存，发送统计数据等工作。</p>
+<p>让程序在后台长久运行的示例代码如下：</p>
+<figure class="highlight"><pre><span class="comment">// AppDelegate.h文件</span>
+@<span class="keyword">property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) UIBackgroundTaskIdentifier backgroundUpdateTask;
+
+<span class="comment">// AppDelegate.m文件</span>
+- (<span class="keyword">void</span>)applicationDidEnterBackground:(<span class="built_in">UIApplication</span> *)application
+{
+    [<span class="keyword">self</span> beingBackgroundUpdateTask];
+    <span class="comment">// 在这里加上你需要长久运行的代码</span>
+    [<span class="keyword">self</span> endBackgroundUpdateTask];
+}
+
+- (<span class="keyword">void</span>)beingBackgroundUpdateTask
+{
+    <span class="keyword">self</span><span class="variable">.backgroundUpdateTask</span> = [[<span class="built_in">UIApplication</span> sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [<span class="keyword">self</span> endBackgroundUpdateTask];
+    }];
+}
+
+- (<span class="keyword">void</span>)endBackgroundUpdateTask
+{
+    [[<span class="built_in">UIApplication</span> sharedApplication] endBackgroundTask: <span class="keyword">self</span><span class="variable">.backgroundUpdateTask</span>];
+    <span class="keyword">self</span><span class="variable">.backgroundUpdateTask</span> = UIBackgroundTaskInvalid;
+}
+</pre></figure>
+
+<hr>
+<p>[1] <a href="http://www.cnblogs.com/linyawen/archive/2012/07/24/2606709.html" target="_blank">http://www.cnblogs.com/linyawen/archive/2012/07/24/2606709.html</a></p>
+<p>[2] <a href="http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html" target="_blank">http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html</a></p>
+<p>[3] <a href="http://blog.devtang.com/blog/2012/02/22/use-gcd/" target="_blank">http://blog.devtang.com/blog/2012/02/22/use-gcd/</a></p>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/09/14/ios23/">http://hufeng825.github.com/2013/09/14/ios23/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a> ----
+    <a  href="/categories/ios/">ios</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

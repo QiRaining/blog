@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>ios 开发之 序列化 | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="序列化参考原始文档：https://github.com/mystcolor/JTObjectMapping">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="ios 开发之 序列化"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+    <link href="/css/tab.css" rel="stylesheet" media="screen">
+    <link href="/css/xcode.css" rel="stylesheet" media="screen">
+
+  <!--link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen"-->
+   <!--script src="/fancybox/jquery.fancybox.pack.js"></script>-->
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+<!--[if lt IE 9]>
+    <div class="alert alert-block ie-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>浏览器版本过低</h4>
+        <br>
+        <p style="text-align:center">你知道不？你还在用几年前的浏览器！这个网页上的有很多好看的东西和动画效果都显示不了！</p>
+        <p style="text-align:center">建议赶快<a href="http://windows.microsoft.com/zh-cn/internet-explorer/downloads/ie-10/worldwide-languages" target="_blank">升级</a>你的浏览器版本或使用 <a href="http://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 或 <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> 等高级浏览器。</p>
+    </div>
+<![endif]-->
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <a href="/Jianli.html" class="brand" >简历</a>
+
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>58</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                   <!--form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8"-->
+                  <form class="navbar-search " action="/search.html" method="get" accept-charset="utf-8">
+
+                        <input type="text"   class="search-query" name="query" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-08-31T14:26:47.000Z"><a href="/2013/08/31/ios12/">2013 8月 31</a></time>
+        
+        
+
+<h1 class="title">ios 开发之 序列化</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <p>序列化</p>
+<p>参考原始文档：</p>
+<p><a href="https://github.com/mystcolor/JTObjectMapping" target="_blank">https://github.com/mystcolor/JTObjectMapping</a></p>
+<p><a id="more"></a><br>使用方法</p>
+<p>========</p>
+<p>绝大多数情况下，需要用到的就是一个方法：</p>
+<p>[NSObject objectFromJSONObject:stateObject mapping:nil];</p>
+<p>其中，把NSObject换成我们想映射成的类的名字。</p>
+<p>稍微复杂一点，假设类的属性和JSON里的key名字不是一一对应的，那么就要写一个映射关系表作为mapping参数：</p>
+<pre><code>NSDictionary <span class="variable">*mapping</span> = [NSDictionary dictionaryWithObjectsAndKeys:
+
+                         <span class="variable">@"</span>myState<span class="string">", <span class="variable">@"</span>state"</span>,
+
+                         <span class="variable">@"</span>movieList<span class="string">", <span class="variable">@"</span>movie"</span>,
+
+                         nil];
+
+[NSObject objectFromJSONObject:stateObject mapping:mapping];</code></pre>
+<p>如果再复杂一点，我们需要映射一个数组，数组的每个元素映射到一个对象，那么就用到第2个方法：</p>
+<p>[NSObject mappingWithKey:@“responseState” mapping:nil]</p>
+<p>同样，把NSObject换成数组元素对应的类，key是用来存放整个数组的那个属性。</p>
+<p>注意</p>
+<p>====</p>
+<p>JSON里的字符串，是能自动映射成NSNumber或者int型的，不需要特别写代码。如果想把一个字符串日期，映射成NSDate型，请参考原始文档。</p>
+<p>具体举个例子</p>
+<p>===========</p>
+<p>假设我们有这样一段JSON：</p>
+<p> {</p>
+<p> “state”:[</p>
+<p> {</p>
+<p> “respCode”:“0000”,</p>
+<p> “respMsg”:“1”</p>
+<p> }</p>
+<p> ],</p>
+<p> “movie”:[</p>
+<p> {</p>
+<p> “body”:“    一开始，这只是叶问的故事他生于佛山”,</p>
+<p> “pics”:“/images/jz/4779-1-20121225133147.jpg,/images/jz/4779-2-20121225133147.jpg”,</p>
+<p> “name”:“一代宗师”,</p>
+<p> “movid”:“4779”,</p>
+<p> “length”:“120”,</p>
+<p> “hasplan”:“1”,</p>
+<p> “trailor”:“/4779.m4v”,</p>
+<p> “director”:“梁朝伟 章子怡 张震 ”,</p>
+<p> “type”:“动作/传记/剧情/IMAX”,</p>
+<p> “url”:&quot;<a href="http://img.fun-guide.mobi/show?src=http://zhaohang.fun-guide.mobi:8080/tm/images/hb/4779-20121225133147.jpg&amp;w=140" target="_blank">http://img.fun-guide.mobi/show?src=http://zhaohang.fun-guide.mobi:8080/tm/images/hb/4779-20121225133147.jpg&amp;w=140</a>&quot;,</p>
+<p> “popularity”:“6”</p>
+<p> },</p>
+<p> {</p>
+<p> …</p>
+<p> }</p>
+<p> ]</p>
+<p> }</p>
+<p>现在，想把它映射到自定义的对象中去。有几种情况：</p>
+<p>第一种情况，简单地把state数组里面的第一个元素映射成一个FGStateModel类</p>
+<p>那么就是，取出这个节点：</p>
+<pre><code>NSDictionary *stateObject = <span class="string">[[self.json objectForKey:@"state"] objectAtIndex:0];</code></pre>
+<p>然后，执行映射：</p>
+<pre><code><span class="keyword">self</span>.state = [<span class="class">FGStateModel</span> <span class="method">objectFromJSONObject:</span>stateObject <span class="method">mapping:</span><span class="keyword">nil</span>];</code></pre>
+<p>第二种情况，把movie这个字典数组映射成一个数组，数组的每个元素是FGMovieModel</p>
+<pre><code><span class="class">NSArray</span> *movieObject = [<span class="keyword">self</span>.json <span class="method">objectForKey:</span>@<span class="comment">"movie"</span>];
+
+<span class="keyword">self</span>.movieList = [<span class="class">FGMovieModel</span> <span class="method">objectFromJSONObject:</span>movieObject <span class="method">mapping:</span><span class="keyword">nil</span>];</code></pre>
+<p>第三种情况，如果对象的属性和JSON名字不一样，可以使用映射表，例如我们想把上面整个json对象映射成一个 FGResponseModel 对象，其中，state数组映射成 responseState 属性，movie 数组映射成 movieList 属性。那么，我们需要告诉映射器这个数组里的元素要映射成什么对象。</p>
+<p>所以，通过 mapping 这个参数告诉它：“请把 JSON 里的 state 数组里的每个元素映射成一个 FGStateModel 对象，并且把最终的数组放到responseState这个属性里。另外，把 movie 这个数组映射成一个 FGMovieModel 数组，并且保存到 movieList 这个属性中。“</p>
+<pre><code><span class="class">NSDictionary</span> *mapping = [<span class="class">NSDictionary</span> <span class="method">dictionaryWithObjectsAndKeys:</span>
+
+                         [<span class="class">FGStateModel</span> <span class="method">mappingWithKey:</span>@<span class="comment">"responseState"</span> <span class="method">mapping:</span><span class="keyword">nil</span>], @<span class="comment">"state"</span>,
+
+                         [<span class="class">FGMovieModel</span> <span class="method">mappingWithKey:</span>@<span class="comment">"movieList"</span> <span class="method">mapping:</span><span class="keyword">nil</span>], @<span class="comment">"movie"</span>,
+
+                         <span class="keyword">nil</span>];
+
+<span class="keyword">self</span>.response = [<span class="class">FGResponseModel</span> <span class="method">objectFromJSONObject:</span><span class="keyword">self</span>.json <span class="method">mapping:</span>mapping];</code></pre>
+<figure class="highlight"><pre><span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span>
+
+
+@<span class="class"><span class="keyword">interface</span> <span class="title">FGMovieModel</span> : <span class="title">NSObject</span>
+
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">body</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">pics</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">name</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">assign</span>) <span class="title">NSInteger</span> <span class="title">movid</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSNumber</span> *<span class="title">length</span>;
+
+
+@<span class="title">end</span>
+</pre></figure>
+
+<figure class="highlight"><pre><span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span>
+
+
+@<span class="class"><span class="keyword">interface</span> <span class="title">FGResponseModel</span> : <span class="title">NSObject</span>
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSArray</span> *<span class="title">responseState</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSArray</span> *<span class="title">movieList</span>;
+
+@<span class="title">end</span>
+
+ 
+#<span class="title">import</span> &lt;<span class="title">Foundation</span>/<span class="title">Foundation</span>.<span class="title">h</span>&gt;
+
+
+@<span class="title">interface</span> <span class="title">FGStateModel</span> : <span class="title">NSObject</span>
+
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">respCode</span>;
+
+@<span class="title">property</span> (<span class="title">nonatomic</span>, <span class="title">retain</span>) <span class="title">NSString</span> *<span class="title">respMsg</span>;
+
+
+@<span class="title">end</span>
+</pre></figure>
+
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/31/ios12/">http://hufeng825.github.com/2013/08/31/ios12/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a> ----
+    <a  href="/categories/hexo/">hexo</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

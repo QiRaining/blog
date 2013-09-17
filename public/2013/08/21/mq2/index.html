@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>MQ 笔记之 JMS 简介 （什么是JMS） | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="一：JMS基本概念1.      JMS的目标为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="MQ 笔记之 JMS 简介 （什么是JMS）"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+    <link href="/css/tab.css" rel="stylesheet" media="screen">
+    <link href="/css/xcode.css" rel="stylesheet" media="screen">
+
+  <!--link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen"-->
+   <!--script src="/fancybox/jquery.fancybox.pack.js"></script>-->
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+<!--[if lt IE 9]>
+    <div class="alert alert-block ie-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>浏览器版本过低</h4>
+        <br>
+        <p style="text-align:center">你知道不？你还在用几年前的浏览器！这个网页上的有很多好看的东西和动画效果都显示不了！</p>
+        <p style="text-align:center">建议赶快<a href="http://windows.microsoft.com/zh-cn/internet-explorer/downloads/ie-10/worldwide-languages" target="_blank">升级</a>你的浏览器版本或使用 <a href="http://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 或 <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> 等高级浏览器。</p>
+    </div>
+<![endif]-->
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <a href="/Jianli.html" class="brand" >简历</a>
+
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>58</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                   <!--form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8"-->
+                  <form class="navbar-search " action="/search.html" method="get" accept-charset="utf-8">
+
+                        <input type="text"   class="search-query" name="query" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-08-21T13:22:00.000Z"><a href="/2013/08/21/mq2/">2013 8月 21</a></time>
+        
+        
+
+<h1 class="title">MQ 笔记之 JMS 简介 （什么是JMS）</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <h2>一：JMS基本概念</h2>
+<h3>1.      JMS的目标</h3>
+<p>为企业级的应用提供一种智能的消息系统，JMS定义了一整套的企业级的消息概念与工具，<br><a id="more"></a></p>
+<p>尽可能最小化的Java语言概念去构建最大化企业消息应用。统一已经存在的企业级消息系</p>
+<p>统功能。</p>
+<h3>2.      JMS提供者</h3>
+<p>JMS提供者是指那些完全完成JMS功能与管理功能的JMS消息厂商，理论上JMS提供者完成 </p>
+<p>JMS消息产品必须是100%的纯Java语言实现，可以运行在跨平台的架构与操作系统上，当前</p>
+<p>一些JMS厂商包括IBM,Oracle, JBoss社区 (JBoss Community), Apache 社区(ApacheCommunity)。</p>
+<h3>3.      JMS应用程序, 一个完整的JMS应用应该实现以下功能：</h3>
+<ul>
+<li><p>JMS 客户端 – Java语言开发的接受与发送消息的程序</p>
+</li>
+<li><p>非JMS客户端 – 基于消息系统的本地API实现而不是JMS</p>
+</li>
+<li><p>消息 – 应用程序用来相互交流信息的载体</p>
+</li>
+<li><p>被管理对象–预先配置的JMS对象，JMS管理员创建，被客户端运用。如链接工厂，主题等</p>
+</li>
+<li><p>JMS提供者–完成JMS功能与管理功能的消息系统</p>
+</li>
+</ul>
+<h2>二: JMS 规范</h2>
+<h3>连接工厂</h3>
+<p>连接工厂是GUST用来创建连接的对象，例如ActiveMQ提供的ActiveMQConnectionFactory。</p>
+<h3>连接</h3>
+<p>JMS Connection封装了客户与JMS提供者之间的一个虚拟的连接。</p>
+<h3>会话</h3>
+<p>MS Session是生产和消费消息的一个单线程上下文。会话用于创建消息生产者（producer）、消息消费者（consumer）和消息（message）等。会话提供了一个事务性的上下文，在这个上下文中，一组发送和接收被组合到了一个原子操作中。</p>
+<h3>目的地</h3>
+<p>目的地是客户用来指定它生产的消息的目标和它消费的消息的来源的对象。JMS1.0.2 规范中定义了两种消息传递域</p>
+<h4>点对点的消息模式(Point to Point Messaging)</h4>
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e7umekfemwj20is06o0tb.jpg" height="300" title=" 200 点对点">
+
+
+<hr>
+<p>下面的JMS对象在点对点消息模式中是必须的：</p>
+<ul>
+<li><p>队列(Queue) – 一个提供者命名的队列对象，客户端将会使用这个命名的队列对象</p>
+</li>
+<li><p>队列链接工厂(QueueConnectionFactory) – 客户端使用队列链接工厂创建链接队列ConnectionQueue来取得与JMS点对点消息提供者的链接。</p>
+</li>
+<li><p>链接队列(ConnectionQueue) – 一个活动的链接队列存在在客户端与点对点消息提供者之间，客户用它创建一个或者多个JMS队列会话(QueueSession)</p>
+</li>
+<li><p>队列会话(QueueSession) – 用来创建队列消息的发送者与接受者(QueueSenderandQueueReceiver)</p>
+</li>
+<li><p>消息发送者(QueueSender 或者MessageProducer)– 发送消息到已经声明的队列</p>
+</li>
+<li><p>消息接受者(QueueReceiver或者MessageConsumer) – 接受已经被发送到指定队列的消息</p>
+</li>
+</ul>
+<p><strong>注意如下：</strong></p>
+<ul>
+<li>每个消息只能有一个消费者。</li>
+<li>消息的生产者和消费者之间没有时间上的相关性。无论消费者在生产者发送消息的时候是否处于运行状态，它都可以提取消息。</li>
+</ul>
+<h4>发布订阅模式(publish – subscribe Mode)</h4>
+<img src="http://ww1.sinaimg.cn/mw690/a43af4ffjw1e7umpp9onwj20is0ayjsk.jpg" class="center" height="200" title=" 300 发布者">
+
+<hr>
+<ul>
+<li><p>主题Topic(Destination) – 一个提供者命名的主题对象，客户端将会使用这个命名的主题对象</p>
+</li>
+<li><p>主题链接工厂(TopciConnectionFactory) – 客户端使用主题链接工厂创建链接主题 ConnectionTopic来取得与JMS消息Pub/Sub提供者的链接</p>
+</li>
+<li><p>链接主题(ConnectionTopic) – 一个活动的链接主题存在发布者与订阅者之间</p>
+</li>
+<li><p>会话(TopicSession) – 用来创建主题消息的发布者与订阅者 (TopicPublisher  and TopicSubscribers)</p>
+</li>
+<li><p>消息发送者MessageProducer) – 发送消息到已经声明的主题</p>
+</li>
+<li><p>消息接受者(MessageConsumer) – 接受已经被发送到指定主题的消息</p>
+</li>
+</ul>
+<p><strong>注意如下：</strong></p>
+<ul>
+<li>每个消息可以有多个消费者。</li>
+<li>生产者和消费者之间有时间上的相关性。订阅一个主题的消费者只能消费自它订阅之后发布的消息。JMS规范允许客户创建持久订阅，这在一定程度上放松了时间上的相关性要求。持久订阅允许消费者消费它在未处于激活状态时发送的消息。</li>
+</ul>
+<hr>
+<blockquote>
+<p>本系列博文参考自whitesock  淮少吧 贾志刚</p>
+</blockquote>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/08/21/mq2/">http://hufeng825.github.com/2013/08/21/mq2/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a> ----
+    <a  href="/categories/MQ/">MQ</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

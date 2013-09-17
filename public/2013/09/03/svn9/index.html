@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>svn命令总结 | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="1. 创建分支svn cp http://svn.trunk/ http://svn.branches/  –m “create a branch”">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="svn命令总结"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+    <link href="/css/tab.css" rel="stylesheet" media="screen">
+    <link href="/css/xcode.css" rel="stylesheet" media="screen">
+
+  <!--link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen"-->
+   <!--script src="/fancybox/jquery.fancybox.pack.js"></script>-->
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+<!--[if lt IE 9]>
+    <div class="alert alert-block ie-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>浏览器版本过低</h4>
+        <br>
+        <p style="text-align:center">你知道不？你还在用几年前的浏览器！这个网页上的有很多好看的东西和动画效果都显示不了！</p>
+        <p style="text-align:center">建议赶快<a href="http://windows.microsoft.com/zh-cn/internet-explorer/downloads/ie-10/worldwide-languages" target="_blank">升级</a>你的浏览器版本或使用 <a href="http://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 或 <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> 等高级浏览器。</p>
+    </div>
+<![endif]-->
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <a href="/Jianli.html" class="brand" >简历</a>
+
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>58</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                   <!--form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8"-->
+                  <form class="navbar-search " action="/search.html" method="get" accept-charset="utf-8">
+
+                        <input type="text"   class="search-query" name="query" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-09-03T06:08:30.000Z"><a href="/2013/09/03/svn9/">2013 9月 3</a></time>
+        
+        
+
+<h1 class="title">svn命令总结</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <h2>1. 创建分支</h2>
+<p>svn cp <a href="http://svn.trunk/" target="_blank">http://svn.trunk/</a> <a href="http://svn.branches/" target="_blank">http://svn.branches/</a>  –m “create a branch”<br><a id="more"></a></p>
+<h2>2. 合并分支</h2>
+<h3>1、在某个branch里合并trunk上的修改，</h3>
+<p>进入分支目录，然后执行：</p>
+<figure class="highlight"><pre><span class="title">svn</span> merge <span class="url">http://svn/repo/trunk
+</pre></figure>
+
+<h3>2、在trunk上合并branch的修改。</h3>
+<p>进入trunk目录，然后执行</p>
+<figure class="highlight"><pre><span class="title">svn</span> merge --reintegrate <span class="url">http://svn/repo/branches/branch1
+</pre></figure>
+
+<h2>3. 将文件checkout到本地目录</h2>
+<p>svn checkout path（path是服务器上的目录）</p>
+<figure class="highlight"><pre>例如：svn checkout svn:<span class="regexp">//</span><span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span><span class="regexp">/pro/</span>domain
+简写：svn co
+</pre></figure>
+
+<h2>4. 往版本库中添加新的文件</h2>
+<p>svn add file</p>
+<figure class="highlight"><pre>例如：svn addtest<span class="preprocessor">.php</span>(添加test<span class="preprocessor">.php</span>)
+svn <span class="keyword">add</span> *<span class="preprocessor">.php</span>(添加当前目录下所有的php文件)
+</pre></figure>
+
+<h2>5. 将改动的文件提交到版本库</h2>
+<p>svn commit -m “LogMessage“ [-N] [—no-unlock] PATH(如果选择了保持锁，就使用–no-unlock开关)</p>
+<figure class="highlight"><pre>例如：svn <span class="operator"><span class="keyword">commit</span> -m “<span class="keyword">add</span> test file <span class="keyword">for</span> my test“ test.php
+简写：svn ci
+</pre></figure>
+
+<h2>6. 加锁/解锁</h2>
+<p>svn lock -m “LockMessage“ [—force] PATH</p>
+<figure class="highlight"><pre>例如：svn <span class="operator"><span class="keyword">lock</span> -m “<span class="keyword">lock</span> test file“ test.php
+svn unlock PATH
+</pre></figure>
+
+<h2>7. 更新到某个版本</h2>
+<p>svn update -r m path</p>
+<p>例如：</p>
+<figure class="highlight"><pre>svn <span class="operator"><span class="keyword">update</span>如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
+svn <span class="keyword">update</span> -r <span class="number">200</span> test.php(将版本库中的文件test.php还原到版本<span class="number">200</span>)
+svn <span class="keyword">update</span> test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先<span class="keyword">update</span>，修改文件，然后清除svn resolved，最后再提交<span class="keyword">commit</span>)
+</pre></figure>
+
+<p>简写：svn up</p>
+<h2>8.查看文件或者目录状态</h2>
+<ol>
+<li>svn status path（目录下的文件和子目录的状态，正常状态不显示）</li>
+</ol>
+<p>【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】</p>
+<ol>
+<li>svn status -v path(显示文件和子目录状态)<br>第一列保持相同，第二列显示工作版本号，第三和第四列显示最后一次修改的版本号和修改人。<br><strong>注：</strong> svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。<br>简写：svn st</li>
+</ol>
+<h2>9.删除文件</h2>
+<p>svn delete path -m “delete test fle“</p>
+<p>例如：</p>
+<figure class="highlight"><pre>svn <span class="operator"><span class="keyword">delete</span> svn://<span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>/pro/<span class="keyword">domain</span>/test.php -m “<span class="keyword">delete</span> test file”
+或者直接svn <span class="keyword">delete</span> test.php 然后再svn ci -m ‘<span class="keyword">delete</span> test file‘，
+</pre></figure>
+
+<p>推荐使用这种简写：svn (del, remove, rm)</p>
+<h2>10.查看日志</h2>
+<p>svn log path<br>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> log test.php 显示这个文件的所有修改记录，及其版本号的变化
+</pre></figure>
+
+<h2>11.查看文件详细信息</h2>
+<p>svn info path</p>
+<p>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> <span class="built_in">info</span> test.php
+</pre></figure>
+
+<h2>12.比较差异</h2>
+<p>svn diff path(将修改的文件与基础版本比较)</p>
+<p>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> diff test.php
+</pre></figure>
+
+<p>svn diff -r m:n path(对版本m和版本n比较差异)</p>
+<p>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> diff -r <span class="number">200</span>:<span class="number">201</span> test.php
+</pre></figure>
+
+<p>简写：svn di</p>
+<h2>13.将两个版本之间的差异合并到当前文件</h2>
+<p>svn merge -r m:n path<br>例如：</p>
+<figure class="highlight"><pre><span class="title">svn</span> merge -r <span class="number">200</span>:<span class="number">205</span> test.php（将版本<span class="number">200</span>与<span class="number">205</span>之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
+</pre></figure>
+
+<h2>14.SVN 帮助</h2>
+<p>svn help<br>svn help ci  </p>
+<h2>15.版本库下的文件和目录列表</h2>
+<p>svn list path<br>显示path目录下的所有属于版本库的文件和目录<br>简写：svn ls</p>
+<h2>16.创建纳入版本控制下的新目录</h2>
+<p>svn mkdir: 创建纳入版本控制下的新目录。</p>
+<p>用法: </p>
+<ol>
+<li>mkdir PATH…</li>
+<li>mkdir URL…</li>
+</ol>
+<p>创建版本控制的目录。</p>
+<ol>
+<li>每一个以工作副本 PATH 指定的目录，都会创建在本地端，并且加入新增调度，以待下一次的提交。</li>
+<li>每个以URL指定的目录，都会透过立即提交于仓库中创建。在这两个情况下，所有的中间目录都必须事先存在。</li>
+</ol>
+<h2>17.恢复本地修改</h2>
+<p>svn revert: 恢复原始未改变的工作副本文件 (恢复大部份的本地修改)。revert:<br>用法: revert PATH…<br>注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复被删除的目录</p>
+<h2>18.代码库URL变更</h2>
+<p>svn switch (sw): 更新工作副本至不同的URL。</p>
+<p>用法: </p>
+<ol>
+<li>switch URL [PATH]</li>
+<li><p>switch –relocate FROM TO [PATH…]</p>
+<ul>
+<li><p>更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。</p>
+</li>
+<li><p>改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比如方案名或是主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2>19.解决冲突</h2>
+<p>svn resolved: 移除工作副本的目录或文件的“冲突”状态。 </p>
+<p>用法: resolved PATH…</p>
+<p><strong>注意:</strong> 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的<br>相关文件，然后让 PATH 可以再次提交。</p>
+<h2>20.输出指定文件或URL的内容。</h2>
+<p>svn cat 目标[@版本]…如果指定了版本，将从指定的版本开始查找。  </p>
+<p>svn cat -r PREV filename &gt; filename (PREV 是上一版本,也可以写具体版本号,这样输出结果是可以提交的)</p>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本���文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/09/03/svn9/">http://hufeng825.github.com/2013/09/03/svn9/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a> ----
+    <a  href="/categories/svn/">svn</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

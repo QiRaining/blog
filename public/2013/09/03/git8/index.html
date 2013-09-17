@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="/favicon.ico" rel="icon">
+    <meta charset="utf-8">
+    
+    <title>git系类教程之 综合篇 | 阿峰的技术窝窝</title>
+    <meta name="author" content="Jason Hu">
+    
+  <meta name="description" content="不敢说这是git常用操作最全的教程，这是本人再前人的基础上加上应用了三年多git总结的，应该是比较全的，后续我还会把git 常见的错误总结出来。">
+  
+  
+  
+    <meta name="keywords" content="技术">
+  
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="git系类教程之 综合篇"/>
+    <meta property="og:site_name" content="阿峰的技术窝窝"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link href="/favicon.png" rel="icon">
+    <link rel="alternate" href="/atom.xml" title="阿峰的技术窝窝" type="application/atom+xml">
+
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/hexobootstrapcss.css" rel="stylesheet" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <link href="/css/hf.css" rel="stylesheet" media="screen">
+    <link href="/css/tab.css" rel="stylesheet" media="screen">
+    <link href="/css/xcode.css" rel="stylesheet" media="screen">
+
+  <!--link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen"-->
+   <!--script src="/fancybox/jquery.fancybox.pack.js"></script>-->
+   <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script> -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.imagesloaded.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.scrollUp.min.js"></script>
+
+    
+ 
+
+
+  <!--  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> -->
+    
+    <script type="text/javascript">
+
+
+$(function () {
+      $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            scrollDistance: 300, // Distance from top/bottom before showing element (px)
+            scrollFrom: 'top', // 'top' or 'bottom'
+            scrollSpeed: 300, // Speed back to top (ms)
+            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            scrollText: '▲', // Text for element, can contain HTML
+            scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+            scrollImg: false, // Set true to use image
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            zIndex: 2147483647 // Z-Index for the overlay
+      });
+    });
+
+        $(document).ready(function () {
+
+            $('.dropdown-toggle').dropdown();
+
+//            $('[data-spy="scroll"]').each(function () {
+//                var $spy = $(this).scrollspy('refresh')
+//            });
+        });
+
+    </script>
+</head>
+<!--[if lt IE 9]>
+    <div class="alert alert-block ie-alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>浏览器版本过低</h4>
+        <br>
+        <p style="text-align:center">你知道不？你还在用几年前的浏览器！这个网页上的有很多好看的东西和动画效果都显示不了！</p>
+        <p style="text-align:center">建议赶快<a href="http://windows.microsoft.com/zh-cn/internet-explorer/downloads/ie-10/worldwide-languages" target="_blank">升级</a>你的浏览器版本或使用 <a href="http://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">Chrome</a> 或 <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> 等高级浏览器。</p>
+    </div>
+<![endif]-->
+
+
+<body>
+<!--导航 -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+           <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="brand" >主页</a>
+            <a href="/Jianli.html" class="brand" >简历</a>
+
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                </p>
+                <ul class="nav">
+                    <!--
+                    <li><a href="/">主页</a></li>
+                     -->
+
+                    <li>
+                    </li>
+                     <li>  <a href="http://blog.csdn.net/hufeng825">CSDN</a>  </li>
+                    <!--
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">其他窝<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="http://blog.csdn.net/hufeng825"><i class="icon-tags"></i>csdn
+                            </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    -->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">标签(2)<b
+                                    class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            
+                            <li><a href="/tags/情感/"><i class="icon-book"></i> 情感
+                                <small>2</small>
+                            </a>
+
+                            </li>
+                            
+                            <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
+                                <small>58</small>
+                            </a>
+
+                            </li>
+                            
+                            
+
+                        </ul>
+                    </li>
+                </ul>
+                
+                <ul class="nav pull-right">
+                   <!--form class="navbar-search " action="//google.com/search" method="get" accept-charset="utf-8"-->
+                  <form class="navbar-search " action="/search.html" method="get" accept-charset="utf-8">
+
+                        <input type="text"   class="search-query" name="query" results="0" placeholder="键入你感兴趣的内容吧"  speech=”speech” x-webkit-speech=”x-webkit-speech” x-webkit-grammar=”builtin:translate”>
+                    </form>
+                    <li> 
+                    <a href="/atom.xml">RSS</a> 
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container-fluid" style="margin-top: 60px">
+    <div class="row-fluid">
+            <div class="span9">
+            <div class="content">
+    <header class="page-header">
+        
+        <div class="icon"></div>
+        <time datetime="2013-09-03T02:18:19.000Z"><a href="/2013/09/03/git8/">2013 9月 3</a></time>
+        
+        
+
+<h1 class="title">git系类教程之 综合篇</h1>
+
+
+
+    </header>
+    <div class="entry" id="post">
+        <p>不敢说这是git常用操作最全的教程，这是本人再前人的基础上加上应用了三年多git总结的，应该是比较全的，后续我还会把git 常见的错误总结出来。<br><a id="more"></a></p>
+<h2>git基本工作流程</h2>
+<p>git支持很多种不同的工作流程，我们采用的是与SVN接近的模拟中央服务器流程。即，有一个公用的代码库放在服务器上，开发者从这个共享的服务器克隆后，在本地开发，然后提交到服务器，并且从服务器获取其他用户提交的内容。</p>
+<p><strong>注意</strong> git是分布式的代码控制系统，所以每个代码库都是平等的，这里只是在逻辑上划分了一个中央服务器而已，在物理结构上，中央代码库与本地代码库没有什么不同。<br>[编辑]创建帐号<br>git可以使用多种协议在代码库之间通信。我们目前采用ssh协议，需要用户在服务器上有一个ssh帐号才能访问代码库。用户需要在本机创建一个ssh密钥对，把公钥发给管理员，密钥保存在自己本机。这样，就可以使用密钥连接服务器。</p>
+<h2>开始工作</h2>
+<p>开始工作之前，需要复制一套中央服务器的代码库：</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git clone /server/repo/project
+</pre></figure>
+
+<h3>本地修改和提交</h3>
+<p>git的提交操作是在本地完成的，不需要网络连接。</p>
+<figure class="highlight"><pre>$ git checkout branch
+--- 编辑现有文件或者添加新文件 <span class="keyword">...</span>
+</pre></figure>
+
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">add</span> <span class="comment">newfile</span>
+<span class="comment">$</span> <span class="comment">git</span> <span class="comment">commit</span> <span class="literal">-</span><span class="comment">a</span>
+<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">填写此次提交的备注
+</pre></figure>
+
+<h3>从中央服务器获取其他人的更新</h3>
+<p>这个操作实际是执行了获取更新，并且与本地代码合并两个操作。因为有可能2人改了同一个地方，所以这里有可能会出现冲突的情况。出现冲突时，需要手工合并代码。</p>
+<figure class="highlight"><pre>$ git pull
+向中央服务器发送本地的修改
+这个操作是把本地的所有新的<span class="operator"><span class="keyword">commit</span>历史都提交到服务器
+</pre></figure>
+
+<figure class="highlight"><pre><span class="variable">$ </span>git push
+</pre></figure>
+
+<h2>一：版本控制守则</h2>
+<ol>
+<li><p>不要提交垃圾文件。包括临时文件，编译产生的二进制文件，个人设置文件，系统cache，与项目无关的文件等等。使用.gitignore文件来告诉git哪些文件应该忽略掉。  </p>
+</li>
+<li><p>不要提交不能编译运行的代码到master分支。平时创建临时分支来工作，可以随时提交，当告一段落之后再合并到master分支。保证master分支的代码是可运行的，这样不会给团队中的其他人带来不必要的影响。 </p>
+</li>
+<li><p>善用分支。可以每开始一个新功能时就创建一个新分支，改完后合并到master。每个新版本也要用一个新分支，这样如果需要改老版本的bug，那么可以很轻松地切换到老分支，改完后再切回新分支。 </p>
+</li>
+<li><p>多提交，及时提交。每当改动达到可以用一句话描述的时候，就提交。 </p>
+</li>
+<li><p>一定要写清楚提交注释，写明做了哪些修改，不要用笼统的一句话例如“改bug”，而是要写具体的说明例如，“按钮文字从转发改成分享”。<br>每个准备提交上线的版本要打tag，命名成v1.0.0_rc1这种格式，第一次提交就是rc1，第二次提交就是rc2等等 </p>
+</li>
+</ol>
+<hr>
+<h2>二：git仓库</h2>
+<h3>请求代码</h3>
+<figure class="highlight"><pre>$ git clone ssh:<span class="regexp">//</span><span class="variable">%%</span><span class="variable">%%</span>.git
+$ git clone ssh:<span class="regexp">//</span><span class="variable">%%</span><span class="variable">%%</span><span class="variable">%%</span>.git
+</pre></figure>
+
+<h2>三： 本地代码库管理</h2>
+<h3>1.让git使用你的用户名来标记每次commit</h3>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">config</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">global</span> <span class="comment">user</span>.<span class="comment">name</span> <span class="comment">"hufeng"</span>
+<span class="comment">$</span> <span class="comment">git</span> <span class="comment">config</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">global</span> <span class="comment">user</span>.<span class="comment">email</span> <span class="comment">hufeng@hufengvip</span>.<span class="comment">cn
+</pre></figure>
+
+<h3>2.在当前目录初始化一个代码库</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git init
+</pre></figure>
+
+<h3>3.把所有文件加入版本控制</h3>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">add</span> <span class="string">.</span>
+</pre></figure>
+
+<h3>4.commit所有修改过的文件</h3>
+<figure class="highlight"><pre>$ git <span class="operator"><span class="keyword">commit</span> -a
+</pre></figure>
+
+<h3>5.扔掉对代码库所做的修改，恢复到HEAD版本</h3>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">checkout</span> <span class="literal">-</span><span class="comment">f</span>
+<span class="comment">或</span>
+<span class="comment">$</span> <span class="comment">git</span> <span class="comment">reset</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">hard
+</pre></figure>
+
+<h3>6.优化log显示</h3>
+<figure class="highlight"><pre><span class="comment">git</span> <span class="comment">log</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">color</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">graph</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">pretty=format:'%Cred%h%Creset</span> <span class="literal">-</span><span class="comment">%C(yellow)%d%Creset</span> <span class="comment">%s</span> <span class="comment">%Cgreen(%cr)</span> <span class="comment">%C(bold</span> <span class="comment">blue)</span>&lt;<span class="comment">%an</span>&gt;<span class="comment">%Creset'</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">abbrev</span>-<span class="comment">commit
+</pre></figure>
+
+<h3>7.创建一个分支</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git branch test
+</pre></figure>
+
+<h3>8.切换到一个分支</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git checkout test
+</pre></figure>
+
+<h3>9.切换回主分支</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git checkout master
+</pre></figure>
+
+<h3>10.命令行提示符脚本</h3>
+<p><em>把下面的脚本放到 ~/.profile 或者 ~/.bashrc 里，命令行的提示符即会显示出当前的git分支名称。例如：~/Projects/cmb (master) $</em></p>
+<figure class="highlight"><pre><span class="function"><span class="keyword">function</span> <span class="title">parse_git_branch</span> {</span>
+      ref=$(git symbolic-ref HEAD <span class="number">2</span>&gt; /dev/<span class="keyword">null</span>) || <span class="keyword">return</span>
+        <span class="keyword">echo</span> <span class="string">"("</span>${ref<span class="comment">#refs/heads/}")"</span>
+}
+
+PS1=<span class="string">"\w \$(parse_git_branch)\$ "</span>
+</pre></figure>
+
+<hr>
+<h2>三. 操作远程代码库</h2>
+<h3>1.使用git协议共享本地代码库</h3>
+<p>git本身带了一个服务器命令，启动后，其他机器可以用git协议访问本机的代码库</p>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">daemon</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">export</span>-<span class="comment">all</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">base</span>-<span class="comment">path=/home/pub/projects/</span> <span class="comment">test</span>.<span class="comment">git
+</pre></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>如果返回“fatal: no matching remote head”，说明代码库里没有文件或者没有commit过。</li>
+<li>在.git目录下应该有git-daemon-export-ok这个文件，否则必须使用export-all参数来强制共享</li>
+<li>如果允许远程提交代码，需要加上 —enable=receive-pack 参数</li>
+</ul>
+<h3>2.从版本库中删除文件</h3>
+<figure class="highlight"><pre><span class="comment">在git</span> <span class="comment">rm</span> <span class="literal">-</span><span class="comment">rf</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">cached</span>  <span class="comment">CCB</span>.<span class="comment">xcodeproj/project</span>.<span class="comment">xcworkspace/xcuserdata/</span>  
+
+<span class="literal">-</span><span class="literal">-</span><span class="comment">cached</span> <span class="comment">本地保留服务器删除
+</pre></figure>
+
+<h3>3.远程仓库的重命名</h3>
+<p>在新版 Git 中可以用 git remote rename 命令修改某个远程仓库的简短名称，比如想把 pb 改成 paul，可以这么运行：</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git remote rename pb paul
+<span class="variable">$ </span>git remote origin pau
+</pre></figure>
+
+<p><strong>注意</strong><br>对远程仓库的重命名，也会使对应的分支名称发生变化，原来的 pb/master 分支现在成了paul/master。</p>
+<h3>4.远程仓库的删除</h3>
+<p>碰到远端仓库服务器迁移，或者原来的克隆镜像不再使用，又或者某个参与者不再贡献代码，那么需要移除对应的远端仓库，可以运行 git remote rm 命令：</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git remote rm branchA
+</pre></figure>
+
+<p>或者使用    </p>
+<figure class="highlight"><pre> $ git push origin :xx <span class="comment">//删除远程</span>
+ 
+ $ git branch -d xx <span class="comment">//删除本地</span>
+</pre></figure>
+
+<h3>5.更新指定分支指定文件</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git checkout 指定分支 指定文件
+
+<span class="variable">$ </span>git checkout master <span class="constant">HFFrame</span>/<span class="constant">Global</span>/<span class="constant">Global_macro</span>.h
+</pre></figure>
+
+<h3>6.复制一个远程代码库</h3>
+<figure class="highlight"><pre><span class="variable">$ </span>git clone <span class="symbol">git:</span>/<span class="regexp">/10.150.150.136/test</span>.git test
+</pre></figure>
+
+<h3>7.从远程代码库上的主分支获取最新的代码</h3>
+<p>第一次：</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git pull <span class="symbol">git:</span>/<span class="regexp">/10.150.###.###/test</span>.git master
+或
+<span class="variable">$ </span>git pull <span class="symbol">ssh:</span>/<span class="regexp">/10.150.###.###/test</span>.git master
+</pre></figure>
+
+<p>以后：</p>
+<figure class="highlight"><pre><span class="variable">$git</span> pull origin master
+
+指定好配置文件后可以直接执行pull push 不用跟后面的分支 骨干
+
+具体方法是 仓库跟目录 .git/config 
+
+ [core]
+           repositoryformatversion = <span class="number">0</span>
+           filemode = <span class="keyword">true</span>
+           bare = <span class="keyword">false</span>
+           logallrefupdates = <span class="keyword">true</span>
+           ignorecase = <span class="keyword">true</span>
+   [remote <span class="string">"origin"</span>]
+           fetch = +refs/heads/*<span class="symbol">:refs/remotes/orig</span>    <span class="keyword">in</span>/*
+           url = <span class="symbol">ssh:</span>/<span class="regexp">/git@git.huaxia.com:6521    /cmblife</span>.git
+   [branch <span class="string">"master"</span>]
+          remote = origin
+          merge = refs/heads/master
+   [branch <span class="string">"hufeng"</span>]
+          remote = origin
+          merge = refs/heads/hufeng
+</pre></figure>
+
+<h3>8.将本地代码库的修改传给远程代码库</h3>
+<p>如果是提交到master分支：</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git push origin master
+</pre></figure>
+
+<p><strong>警告</strong> 远程代码库应该是一个空的bare库，否则会搞乱working copy！！如果working copy是干净的，可以使用git checkout -f来同步代码库。如果已经做了修改，则就没有很好的办法恢复同步状态了！</p>
+<h3>9. 在远程代码库创建一个分支</h3>
+<p>有时候在本地创建的分支希望分享到远程代码库的分支里，下面命令会在远程创建一个名为branch的分支，并且和本地的branch分支关联起来</p>
+<figure class="highlight"><pre><span class="variable">$ </span>git push origin branch
+</pre></figure>
+
+<p>以后，即可使用 git push 来分享代码到远程库。</p>
+<h3>10.在本地关联一个远程库的分支</h3>
+<p>有时候需要在本地获取一个远程分支，使用这个命令：</p>
+<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">branch</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">track</span> <span class="comment">origin/branch
+</pre></figure>
+
+<p>以后即可使用 git pull 来获取远程的更新</p>
+
+        <hr />
+        <span class="label label-warning">W</span>
+        本站文章如果没有特殊说明，均为原创，转载请以链接方式注明本文地址：<a href="http://hufeng825.github.com/2013/09/03/git8/">http://hufeng825.github.com/2013/09/03/git8/
+         <hr />
+        
+  
+  <div class="tags">
+    <a  href="/tags/技术/">技术</a> ----
+    <a  href="/categories/git/">git</a>
+  </div>
+
+    </div>
+</div>
+           <!--  -->
+            
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"hufeng825"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+
+
+        </div>
+        <div class="span3 hidden-phone">
+            <div id="menuIndex"></div>
+<script src="/js/jquery.menuindex.js"></script>
+<script type="text/javascript">
+
+    $('#menuIndex').menuIndex({content: '#post'
+        ,ulClass: "span3 nav nav-list widget affix"});
+    $('body').scrollspy({offset:100});
+
+</script>
+            <div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer id="footer" >
+ <div class="navbar navbar-bottom" >
+ <div class="navbar-inner">
+ <br />
+ <div class="row">
+ <div class="span12">  
+ <center>
+<!--版权声明 -->
+<p>
+    
+    &copy; - 2013 Jason Hu - - 欢迎转载，转载请携带 <a href="http://hufeng825.github.com">http://hufeng825.github.com </a>及作者新浪微博地址 <a href="http://weibo.com/hufengvip" target="_blank"> @神一样的我啊 </a>
+    
+</p>
+ </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

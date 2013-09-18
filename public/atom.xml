@@ -4,7 +4,7 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-09-18T06:21:37.631Z</updated>
+  <updated>2013-09-18T06:32:52.941Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
@@ -16,8 +16,8 @@
     <link href="http://hufeng825.github.com/2013/09/18/ios26/"/>
     <id>http://hufeng825.github.com/2013/09/18/ios26/</id>
     <published>2013-09-18T05:31:04.000Z</published>
-    <updated>2013-09-18T06:20:37.000Z</updated>
-    <content type="html"><![CDATA[<p>今天早上接到了阿里从杭州打过来的电话面试.虽然近期面试了一些大中型的互联网企业,但是跟素有“IT界的黄浦军校”的阿里面试官接触还是不免紧张.<br><a id="more"></a><br>面试持续了三四十分钟吧,期间我手机信号不好的大部分问题都是更加简历上的项目检验而来的,个人感觉问的不算太难但是却很深入,很明显不是能够背几道面试题能够搞定的.而且每个题基本上都跟优化设计和性能相关.</p>
+    <updated>2013-09-18T06:32:31.000Z</updated>
+    <content type="html"><![CDATA[<p>今天早上接到了阿里从杭州打过来的电话面试.虽然近期面试了一些大中型的互联网企业,但是跟素有“IT界的黄浦军校”的阿里面试官接触还是不免紧张.<br><a id="more"></a><br>面试持续了三四十分钟吧,期间我手机信号不好挂断了一次,大部分问题都是更加简历上的项目经验而来的,个人感觉问的不算太难但是却很深入,很明显不是能够背几道面试题能够搞定的.而且每个题基本上都跟优化设计和性能相关.</p>
 <p>其中有一道是关于是问“你平时上国外的一些网站吗?上那些网站呢?”</p>
 <p>我平时大部分时间就是上stackoverflow.和cocoscontrol github 还有apple 的dev论坛.</p>
 <p>“你们项目中为什么多线程用GCD 而不用NSOperation呢? 你有没有发现国外的大牛他们多线程都是用NSOperation? 你能告诉我他们这样做的理由吗?”</p>
@@ -478,7 +478,7 @@ dispatch_release(serilQueue);
       <span class="comment">// 并行执行的线程二</span>
  });
  dispatch_group_notify(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
-      <span class="comment">// 汇总结果</span>
+      <span class="comment">// ���总结果</span>
  });
 </pre></figure>
 

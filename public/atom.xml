@@ -4,13 +4,30 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-09-17T17:07:02.553Z</updated>
+  <updated>2013-09-18T06:21:37.631Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
     <email><![CDATA[hufeng@hufengvip.cn]]></email>
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[阿里IOS面试题之多线程选用NSOperation or GCD]]></title>
+    <link href="http://hufeng825.github.com/2013/09/18/ios26/"/>
+    <id>http://hufeng825.github.com/2013/09/18/ios26/</id>
+    <published>2013-09-18T05:31:04.000Z</published>
+    <updated>2013-09-18T06:20:37.000Z</updated>
+    <content type="html"><![CDATA[<p>今天早上接到了阿里从杭州打过来的电话面试.虽然近期面试了一些大中型的互联网企业,但是跟素有“IT界的黄浦军校”的阿里面试官接触还是不免紧张.<br><a id="more"></a><br>面试持续了三四十分钟吧,期间我手机信号不好的大部分问题都是更加简历上的项目检验而来的,个人感觉问的不算太难但是却很深入,很明显不是能够背几道面试题能够搞定的.而且每个题基本上都跟优化设计和性能相关.</p>
+<p>其中有一道是关于是问“你平时上国外的一些网站吗?上那些网站呢?”</p>
+<p>我平时大部分时间就是上stackoverflow.和cocoscontrol github 还有apple 的dev论坛.</p>
+<p>“你们项目中为什么多线程用GCD 而不用NSOperation呢? 你有没有发现国外的大牛他们多线程都是用NSOperation? 你能告诉我他们这样做的理由吗?”</p>
+<p>一下子把我问懵了.我之所以用GCD 是因为GCD用起来比较简单.代码不用分散 比较集中维护度比较高.而且代码的执行效率也要比NSOperation快些. 但是至于国外的大牛们为什么那样做 我还真的不清楚. 后来挂完电话 正好搜狐的家明哥打电话过来 我问了下他.家明哥跟我说他包括他之前在新浪做项目时也是能用GCD的地方就用GCD 尽量减少NSOperation的使用,因为GCD在多核CPU上线程切换的时间比较短 效率相对高些,至于阿里为什么那样,可能每个公司对某个技术有着不同的理解吧.</p>
+<p>跟明哥挂了电话 我给对方回过去,到底为什么? 对方笑着问我:“你用GCD在ASI上封装的那层网络请求 为什么后来有创建了自己的一个队列对维护这些请求?NSOperation是建立在GCD之上的 虽然使用起来比较复杂 但是在线程并发管理 优先级 上有着GCD 无法比拟的优势.”</p>
+<p>但是对我来说 我还是倾向于用GCD,正如家明说的 每个公司对相同的技术有着不同的理解吧.</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
   <entry>
     <title type="html"><![CDATA[再谈涉及模式]]></title>
     <link href="http://hufeng825.github.com/2013/09/17/ios25/"/>
@@ -650,7 +667,7 @@ myBlock();
 <ol>
 <li><p>市场上能够承接到的合同项目，利润很小。而高利润的项目则被有权势的人或机构掌控。 </p>
 </li>
-<li><p>项目需求和验收受制于客户。开发过程中，客户会不断���更需求，导致开发方不断修改软件，项目验收被不断地延后，开发方成本（包括机会成本）越来越高。</p>
+<li><p>项目需求和验收受制于客户。开发过程中，客户会不断变更需求，导致开发方不断修改软件，项目验收被不断地延后，开发方成本（包括机会成本）越来越高。</p>
 </li>
 <li><p>缺乏规模复制效益。由于合同项目都是针对特定客户（甲方）的特定需求而签订的，即使做成功了一个合同项目，也很难“复制这个项目”直接卖给下一个客户。</p>
 </li>
@@ -1151,30 +1168,5 @@ svn <span class="keyword">update</span> test.php(更新，于版本库同步。�
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
     <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
     <category scheme="http://hufeng825.github.com/categories/ios/mac/" term="mac"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[git系类教程之 找出最懒的程序员]]></title>
-    <link href="http://hufeng825.github.com/2013/09/03/git10/"/>
-    <id>http://hufeng825.github.com/2013/09/03/git10/</id>
-    <published>2013-09-03T03:19:34.000Z</published>
-    <updated>2013-09-15T05:04:07.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>场景假设:⼀一个开发⼩小组有10个程序员,他们⽤用 Git 做版本控制,某⼀一天程序员A push了当天的⼏几个 commit之后,突然在想“我在这个项⺫⽬目到底⼀一共进⾏行过多少次commit?谁⽐比我commit更多?多多少?谁是 组⾥里⾯面进⾏行最多commit的?谁是最少的?”<br><a id="more"></a></p>
-</blockquote>
-<p>Git ⾮非常⼈人性化地⽀支持这样⼀一个命令:$ git shortlog<br>这个命令会返回这个 git repository 底下每个⽤用户进⾏行 commit 的次数,以及每次 commit 的注释。 -s 参数省略每次 commit 的注释,仅仅返回⼀一个简单的统计。<br>-n 参数按照 commit 数量从多到少的顺利对⽤用户进⾏行排序</p>
-<figure class="highlight"><pre><span class="comment">$</span> <span class="comment">git</span> <span class="comment">shortlog</span> <span class="literal">-</span><span class="comment">s</span> <span class="literal">-</span><span class="comment">n</span>
-  <span class="comment">135</span>  <span class="comment">Tom</span> <span class="comment">Preston</span>-<span class="comment">Werner</span>
-  <span class="comment">6</span>  <span class="comment">remi</span>
-  <span class="comment">3</span>  <span class="comment">Mikael</span> <span class="comment">Lind</span>
-  <span class="comment">3</span>  <span class="comment">Toby</span> <span class="comment">DiPasquale</span>
-  <span class="comment">2</span>  <span class="comment">Aristotle</span> <span class="comment">Pagaltzis</span>
-  <span class="comment">2</span>  <span class="comment">Basil</span> <span class="comment">Shkara</span>
-  <span class="comment">1</span>  <span class="comment">Marc</span> <span class="comment">Chung</span>
-  <span class="comment">1</span>  <span class="comment">Nick</span> <span class="comment">Gerakines
-</pre></figure>
-
-]]></content>
-    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
-    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
   </entry>
 </feed>

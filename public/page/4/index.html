@@ -143,7 +143,7 @@ $(function () {
                             </li>
                             
                             <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
-                                <small>59</small>
+                                <small>60</small>
                             </a>
 
                             </li>
@@ -191,6 +191,10 @@ $(function () {
   <ul class="entry">
     
       <li>
+        <a href="/2013/09/18/ios26/">阿里IOS面试题之多线程���用NSOperation or GCD</a>
+      </li>
+    
+      <li>
         <a href="/2013/09/17/ios25/">再谈涉及模式</a>
       </li>
     
@@ -204,10 +208,6 @@ $(function () {
     
       <li>
         <a href="/2013/09/11/ios22/">ios笔记--block应该知道的那几件事</a>
-      </li>
-    
-      <li>
-        <a href="/2013/09/09/project0/">读 林锐博士的项目管理 笔记1</a>
       </li>
     
   </ul>
@@ -226,7 +226,7 @@ $(function () {
   
     <li><a href="/categories/hibernate/">hibernate</a><small> (2)</small></li>
   
-    <li><a href="/categories/ios/">ios</a><small> (27)</small></li>
+    <li><a href="/categories/ios/">ios</a><small> (28)</small></li>
   
     <li><a href="/categories/ios/mac/">mac</a><small> (5)</small></li>
   
@@ -250,6 +250,34 @@ $(function () {
 
         </div>
         <div class="span9 panel">
+            
+            <div class="content">
+    <header>
+        <!--div class="icon"></div-->
+        <span class="badge badge-warning">
+        <time datetime="2013-09-02T01:28:52.000Z"><a href="/2013/09/02/ios20/" style="color:#FFFFFF">2013 9月 2</a></time>
+        </span>
+        
+
+<h1 class="title"><a href="/2013/09/02/ios20/">Block 定时器 让我们解放了</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>Block 没有出现前 ios写个定时器太麻烦了,好在Block的让我们小爽了一把,以后写timer 简单的要命了<br>
+        
+    </div>
+    <footer>
+        
+        <div class="alignleft">
+            <a href="/2013/09/02/ios20/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
+        </div>
+        
+    </footer>
+</div>
+
             
             <div class="content">
     <header>
@@ -518,68 +546,6 @@ $(function () {
         <div class="alignleft">
             <a href="/2013/08/31/ios12/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
         </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <!--div class="icon"></div-->
-        <span class="badge badge-warning">
-        <time datetime="2013-08-31T14:05:28.000Z"><a href="/2013/08/31/ios11/" style="color:#FFFFFF">2013 8月 31</a></time>
-        </span>
-        
-
-<h1 class="title"><a href="/2013/08/31/ios11/">银行支付控件之 自动随机(shuffle)密码键盘的实现算法</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <p>为了广大用户的支付安全,输入密码的页面密码键盘要用随机排序,因为有版权问题无法把自己写的代码全部贴出 所以下面只把关键的洗牌算法贴出来</p>
-<h2>算法一</h2>
-<figure class="highlight"><pre>NSMutableArray *randSequence = <span class="string">[[NSMutableArray alloc] initWithCapacity:8];
-for (int ii = 0; ii &lt; 10; ++ii)
-    [randSequence addObject:[NSNumber numberWithInt:ii]]</span>;
-
-<span class="keyword">for</span> (int ii = <span class="number">9</span>; ii &gt; -<span class="number">1</span>; <span class="comment">--ii) {</span>
-    int r = arc4random() % <span class="number">9</span>
-    [randSequence exchangeObjectAtIndex:ii withObjectAtIndex:r];
-</pre></figure>
-
-<h2>算法二</h2>
-<figure class="highlight"><pre>
-@<span class="class"><span class="keyword">interface</span> <span class="title">NSMutableArray</span> (<span class="title">Shuffling</span>)
-- (<span class="title">void</span>)<span class="title">shuffle</span>;
-@<span class="title">end</span>
-
-
-//  <span class="title">NSMutableArray_Shuffling</span>.<span class="title">m</span>
-
-#<span class="title">import</span> "<span class="title">NSMutableArray_Shuffling</span>.<span class="title">h</span>"
-
-@<span class="title">implementation</span> <span class="title">NSMutableArray</span> (<span class="title">Shuffling</span>)
-
-- (<span class="title">void</span>)<span class="title">shuffle</span>
-{</span>
-    NSUInteger <span class="keyword">count</span> = [self <span class="keyword">count</span>];
-    <span class="keyword">for</span> (NSUInteger i = <span class="number">0</span>; i &lt; <span class="keyword">count</span>; ++i) {
-        <span class="comment">// Select a random element between i and end of array to swap with.</span>
-        NSInteger nElements = <span class="keyword">count</span> - i;
-        NSInteger n = (arc4random() % nElements) + i;
-        [self exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
-}
-
-@end
-</pre></figure>
-
-
-        
-    </div>
-    <footer>
         
     </footer>
 </div>

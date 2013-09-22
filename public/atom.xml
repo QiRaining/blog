@@ -4,13 +4,119 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-09-18T06:32:52.941Z</updated>
+  <updated>2013-09-22T06:25:56.109Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
     <email><![CDATA[hufeng@hufengvip.cn]]></email>
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[ios开发之MPNowPlayingInfoCenter 锁屏显示正在播放的音乐]]></title>
+    <link href="http://hufeng825.github.com/2013/09/18/ios28/"/>
+    <id>http://hufeng825.github.com/2013/09/18/ios28/</id>
+    <published>2013-09-18T15:43:50.000Z</published>
+    <updated>2013-09-18T17:33:56.000Z</updated>
+    <content type="html"><![CDATA[<p>今天在床上玩唱吧,听着歌锁屏了,当点亮屏幕的时候,锁屏页面出现了我正在听得歌曲 壁纸也换成了唱吧里面的歌手图片.做ios好几年了,从没有做过这个需求 于是好奇就翻看ios的<a href="https://developer.apple.com/library/ios/documentation/mediaplayer/reference/MPNowPlayingInfoCenter_Class/Reference/Reference.html" target="_blank">API文档</a>找到了这个类.<br><a id="more"></a><br>如下图</p>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e8r3az0tbaj20g50litai.jpg" width="300" height="600">
+
+
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e8r3b00x7aj20gj05wq3e.jpg" width="300" height="200">
+
+
+
+<h2>MPNowPlayingInfoCenter 解释</h2>
+<blockquote>
+<p>即时播放中心能够用于播放APP中正在播放的媒体信息.<br>播放的信息会显示在锁屏页面和多任务管理页面.如果用户是用airplay播放的话 会自动投射到相应的设备上.</p>
+</blockquote>
+<p><a href="https://github.com/hufeng825/LockScreenInfo.git" target="_blank">下载源码</a></p>
+<h2>开始动手</h2>
+<h3>让App支持后台运行</h3>
+<p>先创建工程,因为是audio 类型的app 需要支持后台播放 所以得要在plist 中声明属性.<br>添加如下属性</p>
+<p>Required background modes -&gt; App plays audio<br>如下图</p>
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e8r45ojlcuj20l80a2q4l.jpg" class="left" width="300" height="400">
+
+
+<h3>添加播放的Frame</h3>
+<ol>
+<li>AVFoundation.framework</li>
+<li>MediaPlayer.framework</li>
+</ol>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e8r4757worj208c03vq2z.jpg" class="left" width="300" height="400">
+
+
+
+<h3>开始代码吧</h3>
+<p>首先创建一个ViewController 和一个用于播放的按钮 playButton</p>
+<pre><code>@<span class="class"><span class="keyword">interface</span> <span class="id">ViewController</span> : <span class="id">UIViewController</span> {</span>
+
+<span class="keyword">IBOutlet</span> <span class="built_in">UIButton</span> *playButton;
+
+}
+
+@<span class="keyword">property</span> (<span class="keyword">nonatomic</span>, retain) <span class="keyword">IBOutlet</span> <span class="built_in">UIButton</span> *playButton;
+
+-(<span class="keyword">IBAction</span>)playButtonPress:(<span class="keyword">id</span>)sender;</code></pre>
+<p>加入播放用的控件audioPlayer 和其相应的头文件</p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;MediaPlayer/MPNowPlayingInfoCenter.h&gt;</span></span>
+<span class="preprocessor">#import <span class="title">&lt;MediaPlayer/MPMediaItem.h&gt;</span></span>
+<span class="preprocessor">#import <span class="title">&lt;AVFoundation/AVFoundation.h&gt;</span></span>
+<span class="built_in">MPMoviePlayerController</span> *audioPlayer;
+
+@<span class="keyword">property</span> (<span class="keyword">nonatomic</span>, retain) <span class="built_in">MPMoviePlayerController</span> *audioPlayer;
+
+@<span class="keyword">synthesize</span> playButton, audioPlayer;</code></pre>
+<p>在viewDidLoad 中 我们要把AudioPlayer 进行初始化 此处加载网络上的一首音频</p>
+<pre><code>[[AVAudioSession sharedInstance] setDelegate: <span class="keyword">self</span>];
+
+<span class="built_in">NSError</span> *myErr;
+
+<span class="comment">// Initialize the AVAudioSession here.</span>
+<span class="keyword">if</span> (![[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&amp;myErr]) {
+    <span class="comment">// Handle the error here.</span>
+    <span class="built_in">NSLog</span>(@<span class="string">"Audio Session error %@, %@"</span>, myErr, [myErr userInfo]);
+}
+<span class="keyword">else</span>{
+    <span class="comment">// Since there were no errors initializing the session, we'll allow begin receiving remote control events</span>
+    [[<span class="built_in">UIApplication</span> sharedApplication] beginReceivingRemoteControlEvents];
+}
+
+    <span class="comment">//initialize our audio player</span>
+    audioPlayer = [[<span class="built_in">MPMoviePlayerController</span> alloc] initWithContentURL:[<span class="built_in">NSURL</span> URLWithString:@<span class="string">"http://www.cocoanetics.com/files/Cocoanetics_031.mp3"</span>]];
+
+    [audioPlayer setShouldAutoplay:<span class="literal">NO</span>];
+    [audioPlayer setControlStyle: MPMovieControlStyleEmbedded];
+    audioPlayer<span class="variable">.view</span><span class="variable">.hidden</span> = <span class="literal">YES</span>;
+
+    [audioPlayer prepareToPlay];</code></pre>
+<p>点击按钮开始播放,注意因为MPNowPlayingInfoCenter只支持5.0+ 所以为了防止低版本使用 巧妙的应用了NSClassFromString进行了判断</p>
+<pre><code>- (<span class="class">IBAction</span>)<span class="method">playButtonPress:</span>(id)sender {
+
+    [audioPlayer play];
+
+    <span class="class">Class</span> playingInfoCenter = <span class="class">NSClassFromString</span>(@<span class="comment">"MPNowPlayingInfoCenter"</span>);
+
+    if (playingInfoCenter) {
+
+
+        <span class="class">NSMutableDictionary</span> *songInfo = [ [<span class="class">NSMutableDictionary</span> alloc] init];
+
+
+        <span class="class">MPMediaItemArtwork</span> *albumArt = [ [<span class="class">MPMediaItemArtwork</span> alloc] <span class="method">initWithImage:</span> [<span class="class">UIImage</span> <span class="method">imagedNamed:</span>@<span class="comment">"AlbumArt"</span>] ];
+
+        [ songInfo <span class="method">setObject:</span> @<span class="comment">"Audio Title"</span> <span class="method">forKey:</span><span class="class">MPMediaItemPropertyTitle</span> ];
+        [ songInfo <span class="method">setObject:</span> @<span class="comment">"Audio Author"</span> <span class="method">forKey:</span><span class="class">MPMediaItemPropertyArtist</span> ];
+        [ songInfo <span class="method">setObject:</span> @<span class="comment">"Audio Album"</span> <span class="method">forKey:</span><span class="class">MPMediaItemPropertyAlbumTitle</span> ];
+        [ songInfo <span class="method">setObject:</span> albumArt <span class="method">forKey:</span><span class="class">MPMediaItemPropertyArtwork</span> ];
+        [ [<span class="class">MPNowPlayingInfoCenter</span> defaultCenter] <span class="method">setNowPlayingInfo:</span>songInfo ];
+    }
+}</code></pre>
+<hr>
+<p><a href="http://jaysonlane.net/tech-blog/2012/04/lock-screen-now-playing-with-mpnowplayinginfocenter/" target="_blank">参考 <a href="http://jaysonlane.net/tech-blog/2012/04/lock-screen-now-playing-with-mpnowplayinginfocenter/">http://jaysonlane.net/tech-blog/2012/04/lock-screen-now-playing-with-mpnowplayinginfocenter/</a></a></p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
   <entry>
     <title type="html"><![CDATA[阿里IOS面试题之多线程选用NSOperation or GCD]]></title>
     <link href="http://hufeng825.github.com/2013/09/18/ios26/"/>
@@ -347,7 +453,7 @@ NSInvocationOperation *operation = <span class="string">[[NSInvocationOperation 
 <p><a href="http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html" target="_blank">注释2</a></p>
 <p>在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题：</p>
 <ul>
-<li>方法一，@synchronized(id anObject),(最简单的方法)<br>会自动对参数对象加锁，保证临界区内的代码线程安全</li>
+<li>方法一，@synchronized(id anObject),(最简单的方法)<br>会自动对���数对象加锁，保证临界区内的代码线程安全</li>
 </ul>
 <figure class="highlight"><pre>@<span class="keyword">synchronized</span>(<span class="keyword">self</span>) {
         <span class="comment">// 这段代码对其他 @synchronized(self) 都是互斥的</span>
@@ -478,7 +584,7 @@ dispatch_release(serilQueue);
       <span class="comment">// 并行执行的线程二</span>
  });
  dispatch_group_notify(<span class="keyword">group</span>, dispatch_get_global_queue(<span class="number">0</span>,<span class="number">0</span>), ^{
-      <span class="comment">// ���总结果</span>
+      <span class="comment">// 汇总结果</span>
  });
 </pre></figure>
 
@@ -494,7 +600,7 @@ dispatch_group_async(<span class="keyword">group</span>, queue, ^{
     <span class="comment">//1.先去网上下载图片</span>
     });
 
-<span class="comment">// 2.等下载好了再在刷新主线程</span>
+<span class="comment">// 2.等下载好了再在刷���主线程</span>
 dispatch_group_notify(<span class="keyword">group</span>, queue, ^{
 
     <span class="comment">//在主线程展示到界面里</span>
@@ -1115,58 +1221,5 @@ svn <span class="keyword">update</span> test.php(更新，于版本库同步。�
 ]]></content>
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
     <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[MAC OS X 下快速切换代理]]></title>
-    <link href="http://hufeng825.github.com/2013/09/03/mac3/"/>
-    <id>http://hufeng825.github.com/2013/09/03/mac3/</id>
-    <published>2013-09-03T05:20:05.000Z</published>
-    <updated>2013-09-15T05:04:07.000Z</updated>
-    <content type="html"><![CDATA[<p>因为行业原因 在公司上网必须通过代理安装，所以每天上下班开电脑第一件事 就是开关代理。于是做了一个软件 利用shell进行切换代理。</p>
-<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e898v6vmwdj20dk06bwep.jpg" class="left " width="300" height="400" title="运行效果图">
-
-
-  <a id="more"></a>
-
-<img src="http://ww4.sinaimg.cn/mw690/a43af4ffjw1e898wixkiej207q020dfu.jpg" class="left" width="200" height="300" title="软件">
-
-
-
-
-<p>下面是主要源码</p>
-<figure class="highlight"><pre><span class="keyword">tell</span> <span class="type">application</span> <span class="string">"System Events"</span>
-
-<span class="keyword">set</span> proxy_dialog <span class="keyword">to</span> <span class="command">display dialog</span> <span class="string">"代理模块(Ethernet版本):"</span> buttons {<span class="string">"打开代理模式1"</span>, <span class="string">"打开代理模式2"</span>, <span class="string">"关闭代理"</span>} default button <span class="string">"打开代理模式1"</span> <span class="keyword">with</span> title <span class="string">"华夏基金开发环境快速切换代理App"</span>
-
-<span class="keyword">set</span> proxy_interface <span class="keyword">to</span> button returned <span class="keyword">of</span> proxy_dialog
-
-<span class="keyword">end</span> <span class="keyword">tell</span>
-
-
-<span class="keyword">if</span> proxy_interface <span class="keyword">is</span> <span class="string">"打开代理模式1"</span> <span class="keyword">then</span>
-
-<span class="command">do shell script</span> <span class="string">"networksetup -setwebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setsecurewebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setwebproxystate Ethernet on&&networksetup -setsecurewebproxystate Ethernet on"</span> <span class="keyword">with</span> administrator privileges
-
-<span class="keyword">end</span> <span class="keyword">if</span>
-
-
-<span class="keyword">if</span> proxy_interface <span class="keyword">is</span> <span class="string">"打开代理模式2"</span> <span class="keyword">then</span>
-
-<span class="command">do shell script</span> <span class="string">"networksetup -setwebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setsecurewebproxy Ethernet XXX.XXX.XXX.XX XXXX&&networksetup -setwebproxystate Ethernet on&&networksetup -setsecurewebproxystate Ethernet on"</span> <span class="keyword">with</span> administrator privileges
-
-<span class="keyword">end</span> <span class="keyword">if</span>
-
-
-<span class="keyword">if</span> proxy_interface <span class="keyword">is</span> <span class="string">"关闭代理"</span> <span class="keyword">then</span>
-
-<span class="command">do shell script</span> <span class="string">"networksetup -setwebproxystate Ethernet off&&networksetup -setsecurewebproxystate Ethernet off"</span> <span class="keyword">with</span> administrator privileges
-
-<span class="keyword">end</span> <span class="keyword">if</span>
-</pre></figure>
-
-]]></content>
-    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
-    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
-    <category scheme="http://hufeng825.github.com/categories/ios/mac/" term="mac"/>
   </entry>
 </feed>

@@ -5,6 +5,10 @@ categories: ios
 ---
 >Xcode5正式版发布了，全新的ui当然带来了全新的功能。今天阿峰就给大家来介绍下Sprite Kit。
 
+{%img center 500 400 http://ww1.sinaimg.cn/mw690/a43af4ffjw1e8vnf9f1k4j20jt0d3abu.jpg %}
+
+<!-- more --> 
+
 ##一、什么是Sprite Kit
 
 打开app store 下载最多的的是2D 游戏。比较有名不如 愤怒的小鸟 割绳子啦。 这些游戏之所以能够如此受欢迎跟他们 出色的粒子特效 物理引擎 炫酷的动画 还有漂亮的界面和声音效果离不开。
@@ -72,6 +76,7 @@ Camera | `No` | Yes
 
 
 ---
+
 ##四、项目对比
 
 对比 Sprite Kit  和  Cocos2D 区别 还是看代码比较合适
@@ -332,7 +337,16 @@ Cocos2D中并没例子编辑器。必须使用外部应用程序创建例子 然
 	particleExplosion.position = ccp(_size.width/5, _size.height/5);
 	[particleExplosion resetSystem];
 
-发射器使用Sprite Kite粒子套件产生。 为了使用他们 你需要在项目中添加粒子。New -> File -> Resource -> Sprite Kit Particle File 命名并且选择粒子类型（火 烟 雪 等等）。 现在你会看到有两个新文件在xcode 中：
+发射器使用Sprite Kite粒子套件产生。 为了使用他们 你需要在项目中添加粒子。New -> File -> Resource -> Sprite Kit Particle File 命名并且选择粒子类型（火 烟 雪 等等）。
+如下图
+{%img  http://ww3.sinaimg.cn/mw690/a43af4ffjw1e8vnfhjmlgj20en07a3yz.jpg 400 500 %}
+
+{%img http://ww2.sinaimg.cn/mw690/a43af4ffjw1e8vnflpm16j206o05ft8q.jpg 300 500  %}
+
+ 现在你会看到有两个新文件在xcode 中：
+
+{%img 200 300 http://ww4.sinaimg.cn/mw690/a43af4ffjw1e8vnls9m7bj203q018a9v.jpg%}
+  
 
 	SKEmitterNode* smokeTrail;
 	NSString *smokePath = [[NSBundle mainBundle] pathForResource:@"MyParticle" ofType:@"sks"];
@@ -356,6 +370,9 @@ Cocos2D中并没例子编辑器。必须使用外部应用程序创建例子 然
 
 	SKAction* soundAction = [SKAction playSoundFileNamed:@"preview.mp3" waitForCompletion:NO];
 	[self runAction:soundAction];
+
+下面是实现的一个火焰效果图
+{% img  http://ww4.sinaimg.cn/mw690/a43af4ffjw1e8vnfvcmmdj20d80k8jro.jpg 200 400 %}
 
 ## 结束语
 

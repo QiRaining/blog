@@ -4,13 +4,365 @@
   <subtitle><![CDATA[专注于移动互联网]]></subtitle>
   <link href="http://hufeng825.github.com/atom.xml" rel="self"/>
   <link href="http://hufeng825.github.com"/>
-  <updated>2013-09-22T06:25:56.109Z</updated>
+  <updated>2013-09-22T15:00:01.385Z</updated>
   <id>http://hufeng825.github.com/</id>
   <author>
     <name><![CDATA[Jason Hu]]></name>
     <email><![CDATA[hufeng@hufengvip.cn]]></email>
   </author>
   <generator uri="http://zespia.tw/hexo">Hexo</generator>
+  <entry>
+    <title type="html"><![CDATA[ios7之Sprite Kit vs Cocos2D]]></title>
+    <link href="http://hufeng825.github.com/2013/09/22/ios29/"/>
+    <id>http://hufeng825.github.com/2013/09/22/ios29/</id>
+    <published>2013-09-22T11:50:03.000Z</published>
+    <updated>2013-09-22T14:47:47.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>Xcode5正式版发布了，全新的ui当然带来了全新的功能。今天阿峰就给大家来介绍下Sprite Kit。</p>
+</blockquote>
+<img src="http://ww1.sinaimg.cn/mw690/a43af4ffjw1e8vnf9f1k4j20jt0d3abu.jpg" class="center 500 400">
+
+
+<a id="more"></a> 
+
+<h2>一、什么是Sprite Kit</h2>
+<p>打开app store 下载最多的的是2D 游戏。比较有名不如 愤怒的小鸟 割绳子啦。 这些游戏之所以能够如此受欢迎跟他们 出色的粒子特效 物理引擎 炫酷的动画 还有漂亮的界面和声音效果离不开。</p>
+<p>在ios7 发布之前 想要做出这样的游戏 只能依靠第三方的游戏引擎库，比较有名的就是Cocos2d 以及衍生的Cocos2d-X。现在ios7发布了 我们可以不借助第三方工具就可以实现了。Sprite Kit 提供了 包括 动画精灵，形状，粒子（火焰，烟雾），动画，物理效果，音频 视频等。Xcode5 还提供支持了纹理包和粒子设计哦。</p>
+<p>Sprite Kit 可以在逻辑上分为以下的三个部分</p>
+<h3>Scenes(场景)</h3>
+<p>在cocos2d的游戏场景的视觉层。他提供了物体（如树木，汽车，飞机，头像等）的背景。</p>
+<h3>Actions(动作)</h3>
+<p>流畅的动画是游戏的重要组成部分。苹果设计的Actions非常简洁。他可以让你实现你想要做的任何事情。比如说一些常见的动作:移动 淡入淡出 缩放 旋转 动画纹理 组动画等等。 如果这些你还不满足，你可以自己创建一个代码块来实现自己想要的动作来操控对象。</p>
+<h3>Physics(物理引擎)</h3>
+<p>你想让你一个游戏具有很强的现实感，那物理引擎你一定用的到。 不然射出的子弹永远不会落地，橡胶球落地不会弹起来哈。</p>
+<hr>
+<h2>二、选择Sprite Kit的理由</h2>
+<h3>性能</h3>
+<p>苹果自家推出的东西在自家平台上肯定有着得天独厚的优势（尽管很多游戏开发商需要让他们的游戏在不同的系统上运行）。但是苹果在系统和硬件上累计的经验足够说服开发商选用自家的游戏引擎了。</p>
+<h3>平台集成</h3>
+<p>如上所述。Sprite Kit 跟Xcode 5 集成的天衣无缝。Xcode5 为游戏提供了很多开发组件。</p>
+<h3>版本升级</h3>
+<p>使用第三方库或者游戏引擎编写游戏肯定会有这方面的担忧。我们永远不知道将来的对系统的兼容性如何。不如说已死的Tree20 等等。 ios 每出一个版本都会有API的变动。虽然会有开源社区对其第三方库进行维护 但是这需要时间哈。用苹果自家的东西 就不用担心这方面了。</p>
+<p>随着Sprite Kit的退出。苹果已经提供了一套工具，以确保开发的游戏代码能够在任何苹果版本和机型正常运行。 注意的是Sprite Kit 并不只是ios的框架。 开发人员也可以来开发OS X 上的游戏。</p>
+<h3>友好的开发接口</h3>
+<p>cocos2d之所以成功离不开其较低的门槛。相比起OpenGL ES 那些晦涩的接口 恼人的实现来说cocos2d ,简直太方便了。</p>
+<p>Sprite Kit遵循了这点。其提供的接口非常简洁方便。另外其文档也非常详细 设计工具也很棒。甚至连cocos2d的首席开发工程师也在”此处和谐 国外被墙聊天工具“上感慨说</p>
+<blockquote>
+<p>prite Kit is very good. With less features than Cocos2D, but better. I like the physics integration.</p>
+</blockquote>
+<hr>
+<h2>三、Sprite Kit &amp; Cocos2D Features</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Sprite Kit</th>
+<th>Cocos2D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open Source</td>
+<td><code>No</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Objective-C  Native Support</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Graphics Engine</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Animations</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Physics Simulation</td>
+<td>Yes (Integrated)</td>
+<td><code>No (Requires Box2D or Chipmunk)</code></td>
+</tr>
+<tr>
+<td>Particle Effects</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Xcode Native Integration</td>
+<td>Yes</td>
+<td><code>No</code></td>
+</tr>
+<tr>
+<td>Automatic Atlas Creation</td>
+<td>Yes</td>
+<td><code>No</code></td>
+</tr>
+<tr>
+<td>Built-In Particle Editor</td>
+<td>Yes</td>
+<td><code>No</code></td>
+</tr>
+<tr>
+<td>Shaders</td>
+<td><code>No</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Camera</td>
+<td><code>No</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>四、项目对比</h2>
+<p>对比 Sprite Kit  和  Cocos2D 区别 还是看代码比较合适<br><a href="http://cdn.tutsplus.com/mobile.tutsplus.com/uploads/2013/09/ios7SpriteKit.zip" target="_blank">Sprite Kit 工程</a><br><a href="http://cdn.tutsplus.com/mobile.tutsplus.com/uploads/2013/09/ios7cocos2d.zip" target="_blank">Cocos2D 工程</a></p>
+<h2>五、代码比较</h2>
+<p>下面我们将从概念上来比较两者的不同</p>
+<h3>CClayer vs. SKScene</h3>
+<p>CCLayer或SkScene 是最主要的对象用来绘制其他的对象。 你可以把他想象成默认的一个view，这个view 可以接收所有的对象，动画或者touch 事件。</p>
+<p>在Cocos2d进行场景切换 需要下面几步：</p>
+<pre><code>GameScene* gameScene = <span class="string">[[GameScene alloc] init];
+[ [CCDirector sharedDirector] replaceScene:gameScene ];</code></pre>
+<p>注意GameScene.h 中 必须继承CCLayer 且初始化一个CCScene</p>
+<pre><code>@<span class="class"><span class="keyword">interface</span> <span class="title">GameScene</span> : <span class="title">CCLayer</span> {</span>}
++(CCScene *) scene;</code></pre>
+<p>在 GameScene.m, 初始化:</p>
+<pre><code>+(CCScene *)scene
+{
+    CCScene *scene = [CCScene node];
+    GameScene *layer = [GameScene node];
+    [scene addChild: layer];
+    <span class="keyword">return</span> scene;
+}
+-(<span class="keyword">id</span>) init{
+    <span class="keyword">if</span>( (<span class="keyword">self</span>=[<span class="keyword">super</span> init] )) {
+        <span class="comment">// Your code here</span>
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}</code></pre>
+<p>在 Sprite Kit 中只需要如下</p>
+<pre><code>GameScene* gameScene = [ [GameScene alloc] initWithSize:CGSizeMake(<span class="number">1024</span>, <span class="number">768</span>) ]<span class="comment">;</span>
+[ self<span class="preprocessor">.scene</span><span class="preprocessor">.view</span> presentScene:gameScene ]<span class="comment">;</span>
+}</code></pre>
+<p>GameScene 必须继承 SKScene , 调用如下 -(id)initWithSize:(CGSize)size 初始化:</p>
+<pre><code>-(<span class="keyword">id</span>)initWithSize:(<span class="built_in">CGSize</span>)size
+{
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithSize:size])
+    {
+        <span class="comment">// Your code</span>
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}</code></pre>
+<h3>CCSprite vs. SKSpriteNode</h3>
+<p>精灵对象通常用来显示某种图形。他有如下几种属性：旋转 缩放 位移 框架 等等。Cocos2D 实现如下：</p>
+<pre><code>CCSprite* aSprite<span class="comment">;</span>
+aSprite = [CCSprite spriteWithFile:@<span class="string">"player.png"</span>]<span class="comment">;</span>
+aSprite<span class="preprocessor">.scale</span> = <span class="number">.5</span><span class="comment">;</span>
+aSprite<span class="preprocessor">.position</span> = ccp(_size<span class="preprocessor">.width</span>/<span class="number">1.30</span>, _size<span class="preprocessor">.height</span>/<span class="number">1.25</span>)<span class="comment">;</span>
+[self addChild:aSprite]<span class="comment">;</span></code></pre>
+<p>Sprite Kit 实现如下：</p>
+<pre><code>SKSpriteNode* planeShadow = [SKSpriteNode spriteNodeWithImageNamed:@<span class="string">"player.png"</span>]<span class="comment">;</span>
+planeShadow<span class="preprocessor">.scale</span> = <span class="number">0.5</span><span class="comment">;</span>
+planeShadow<span class="preprocessor">.position</span> = CGPointMake(CGRectGetMidX(self<span class="preprocessor">.frame</span>)+<span class="number">100</span>,CGRectGetMidY(self<span class="preprocessor">.frame</span>)+<span class="number">200</span>)<span class="comment">;</span>
+[self addChild:planeShadow]<span class="comment">;</span></code></pre>
+<h3>CCLabelTTF vs. SKLabelNode</h3>
+<p>Label对象用于显示文字。它可以有几个属性，包括文字，文字大小，文字颜色，位置等等。Cocos2D和Sprite Kit是相似的。<br>Cocos2D：</p>
+<pre><code>CCLabelTTF *label = [CCLabelTTF labelWithString:@<span class="string">"Hello World"</span> fontName:@<span class="string">"Marker Felt"</span> fontSize:<span class="number">64</span>];
+// ask director <span class="keyword">for</span> the window size
+CGSize size = <span class="string">[[CCDirector sharedDirector] winSize];
+label.position =  ccp( size.width /2 , size.height/2 );
+[self addChild: label];</code></pre>
+<p>Sprite Kit:</p>
+<pre><code><span class="class">SKLabelNode</span>* gameScene = [<span class="class">SKLabelNode</span> <span class="method">labelNodeWithFontNamed:</span>@<span class="comment">"Chalkduster"</span>];
+[gameScene <span class="method">setText:</span>@<span class="comment">"New Game"</span>];
+[gameScene <span class="method">setFontSize:</span><span class="number">18</span>];
+gameScene <span class="method">setPosition:</span><span class="class">CGPointMake</span>(<span class="class">CGRectGetMidX</span>(<span class="keyword">self</span>.frame)+<span class="number">5</span>,<span class="class">CGRectGetMidY</span>(<span class="keyword">self</span>.frame)-<span class="number">40</span>)];
+[<span class="keyword">self</span> <span class="method">addChild:</span>gameScene];</code></pre>
+<h3>CCMenu and CCMenuItem vs. Sprite Kit Menu</h3>
+<p>Cocos2D中创建菜单需要两个对象：CCMenu 和 CCMenuItem. 下面是创建两个菜单项的例子</p>
+<pre><code><span class="class">CGSize</span> size = [[<span class="class">CCDirector</span> sharedDirector] winSize];
+[<span class="class">CCMenuItemFont</span> <span class="method">setFontSize:</span><span class="number">28</span>];
+<span class="class">CCMenuItem</span> *itemNewGame = [<span class="class">CCMenuItemFont</span> <span class="method">itemWithString:</span>@<span class="comment">"New Game"</span> <span class="method">block:</span>^(id sender) {
+    // <span class="class">Your</span> code
+}];
+<span class="class">CCMenuItem</span> *itemOptions = [<span class="class">CCMenuItemFont</span> <span class="method">itemWithString:</span>@<span class="comment">"Options"</span> <span class="method">block:</span>^(id sender) {
+    <span class="class">NSLog</span>(@<span class="comment">"Second item"</span>);
+}];
+<span class="class">CCMenu</span> *menu = [<span class="class">CCMenu</span> <span class="method">menuWithItems:</span>itemNewGame, itemOptions, <span class="keyword">nil</span>];
+[menu <span class="method">alignItemsHorizontallyWithPadding:</span><span class="number">20</span>];
+[menu <span class="method">setPosition:</span>ccp( size.width/<span class="number">2</span>, size.height/<span class="number">2</span> - <span class="number">50</span>)];
+[<span class="keyword">self</span> <span class="method">addChild:</span>menu];</code></pre>
+<p>Spite Kit不包括任何类型的菜单的特定对象。<br>下面的例子我们用了 SKLabelNode作为 menu item. 首先我们定义 SKLabelNode:</p>
+<pre><code><span class="class">SKLabelNode</span>*  gameScene = [<span class="class">SKLabelNode</span> <span class="method">labelNodeWithFontNamed:</span>@<span class="comment">"Chalkduster"</span>];
+[gameScene <span class="method">setText:</span>@<span class="comment">"New Game"</span>];
+[gameScene <span class="method">setFontSize:</span><span class="number">18</span>];
+[gameScene <span class="method">setPosition:</span><span class="class">CGPointMake</span>(<span class="class">CGRectGetMidX</span>(<span class="keyword">self</span>.frame)+<span class="number">5</span>,<span class="class">CGRectGetMidY</span>(<span class="keyword">self</span>.frame)-<span class="number">40</span>)];
+[<span class="keyword">self</span> <span class="method">addChild:</span>gameScene];</code></pre>
+<p>在 <strong>-(void)touchesBegan:(NSSet <em>)touches withEvent:(UIEvent </em>)event</strong> 方法里面 我们创建截获事件</p>
+<pre><code><span class="keyword">for</span> (UITouch *touch <span class="keyword">in</span> touches)
+{
+    CGPoint location = [touch locationInNode:self];
+    <span class="keyword">if</span> ([gameScene containsPoint:location]) {
+        // Scene Transition Animation
+        SKTransition* reveal = [SKTransition revealWithDirection:SKTransitionDirectionDown duration:<span class="number">1</span>];
+        GameScene* gameScene = <span class="string">[[GameScene alloc] initWithSize:CGSizeMake(1024, 768)];
+        [self.scene.view presentScene:gameScene transition:reveal];
+        NSLog(@"Touched gameScene!!!!");
+    }
+} </code></pre>
+<p>上面代码做了下面几件事情</p>
+<ol>
+<li>激活触摸时间</li>
+<li>将敲击的坐标转换成内部坐标</li>
+<li>验证敲击的坐标是否在SKLabelNode的动画场景内</li>
+<li>创建过渡动画</li>
+<li>转换场景</li>
+</ol>
+<h3>Action vs. SKAction</h3>
+<p>区别最大的是Action 。SKAction是一个较复杂的对象。Action在Cocos2D 仅仅是一个动作。程序员必须定义 调用 创建。<br>但是Sprite Kit中，SKAction 提供了如下的开发比如旋转 缩放 重复, 消失 播放声音 等等。 SKaction是一个抽象类能够处理任何种类的动作。<br>在cocos2d 我们需要定义一个调节调用的自定义方法<br>    [self schedule:@selector(addSprite:) interval:1];<br>然后在自定义的方法中添加我们自定义的动画:</p>
+<pre><code>- (void) addSprite:(ccTime)dt
+{
+    CCSprite* aMovableSprite = [CCSprite spriteWithFile:@<span class="string">"frankenstein.png"</span>]<span class="comment">;</span>
+    aMovableSprite<span class="preprocessor">.scale</span> = <span class="number">.8</span><span class="comment">;</span>
+    [self addChild:aMovableSprite]<span class="comment">;</span>
+    CGSize winSize = [CCDirector sharedDirector]<span class="preprocessor">.winSize</span><span class="comment">;</span>
+    int minX = aMovableSprite<span class="preprocessor">.contentSize</span><span class="preprocessor">.width</span> / <span class="number">2</span><span class="comment">;</span>
+    int maxX = winSize<span class="preprocessor">.width</span> - aMovableSprite<span class="preprocessor">.contentSize</span><span class="preprocessor">.width</span>/<span class="number">2</span><span class="comment">;</span>
+    int rangeX = maxX - minX<span class="comment">;</span>
+    int actualY = (arc4random() % rangeX) + minX<span class="comment">;</span>
+    CCCallBlockN * actionMoveDone = [CCCallBlockN actionWithBlock:^(CCNode *node) {
+        NSLog(@<span class="string">"Sprite free!"</span>)<span class="comment">;</span>
+    }]<span class="comment">;</span>
+    NSMutableArray *arrayBezier = [[NSMutableArray alloc] init]<span class="comment">;</span>
+    ccBezierConfig bezier<span class="comment">;</span>
+    id bezierAction1<span class="comment">;</span>
+    float splitDuration = <span class="number">6</span> / <span class="number">6.0</span><span class="comment">;</span>
+    for(int i = <span class="number">0</span><span class="comment">; i&lt; 6; i++){</span>
+        if(i % <span class="number">2</span> == <span class="number">0</span>){
+            bezier<span class="preprocessor">.controlPoint</span>_1 = ccp(actualY+<span class="number">100</span>,winSize<span class="preprocessor">.height</span>-(<span class="number">100</span>+(i*<span class="number">200</span>)))<span class="comment">;</span>
+            bezier<span class="preprocessor">.controlPoint</span>_2 = ccp(actualY+<span class="number">100</span>,winSize<span class="preprocessor">.height</span>-(<span class="number">100</span>+(i*<span class="number">200</span>)))<span class="comment">;</span>
+            bezier<span class="preprocessor">.endPosition</span> = ccp(actualY,winSize<span class="preprocessor">.height</span>-(<span class="number">200</span>+(i*<span class="number">200</span>)))<span class="comment">;</span>
+            bezierAction1 = [CCBezierTo actionWithDuration:splitDuration bezier:bezier]<span class="comment">;</span>
+        }
+        else{
+            bezier<span class="preprocessor">.controlPoint</span>_1 = ccp(actualY-<span class="number">100</span>,winSize<span class="preprocessor">.height</span>-(<span class="number">100</span>+(i*<span class="number">200</span>)))<span class="comment">;</span>
+            bezier<span class="preprocessor">.controlPoint</span>_2 = ccp(actualY-<span class="number">100</span>,winSize<span class="preprocessor">.height</span>-(<span class="number">100</span>+(i*<span class="number">200</span>)))<span class="comment">;</span>
+            bezier<span class="preprocessor">.endPosition</span> = ccp(actualY,winSize<span class="preprocessor">.height</span>-(<span class="number">200</span>+(i*<span class="number">200</span>)))<span class="comment">;</span>
+            bezierAction1 = [CCBezierTo actionWithDuration:splitDuration bezier:bezier]<span class="comment">;</span>
+        }
+        [arrayBezier addObject:bezierAction1]<span class="comment">;</span>
+    }
+    [arrayBezier addObject:actionMoveDone]<span class="comment">;</span>
+    id seq = [CCSequence actionsWithArray:arrayBezier]<span class="comment">;</span>
+    [aMovableSprite runAction:seq]<span class="comment">;</span>
+}</code></pre>
+<p>在Sprite Kit中 我们使用SKAction来控制对象开始和结束的运行状况</p>
+<pre><code><span class="class">SKSpriteNode</span>* playerSprite = [<span class="class">SKSpriteNode</span> <span class="method">spriteNodeWithImageNamed:</span>@<span class="comment">"player.png"</span>];
+[playerSprite <span class="method">setScale:</span><span class="number">0.4</span>];
+<span class="class">SKAction</span> *movement =[<span class="class">SKAction</span> <span class="method">moveTo:</span><span class="class">CGPointMake</span>(<span class="number">900</span>, <span class="number">500</span>) <span class="method">duration:</span><span class="number">5</span>];
+<span class="class">SKAction</span> *remove = [<span class="class">SKAction</span> removeFromParent];
+[playerSprite <span class="method">runAction:</span>[<span class="class">SKAction</span> <span class="method">sequence:</span>@[movement,remove]]];
+[<span class="keyword">self</span> <span class="method">addChild:</span>playerSprite];</code></pre>
+<p>但是我们定义一个自定义的动画然后用SKAction来激活这个动作。下面的例子说明了贝塞尔运动。</p>
+<pre><code><span class="class">SKAction</span> *wait = [<span class="class">SKAction</span> <span class="method">waitForDuration:</span><span class="number">1</span>];
+<span class="class">SKAction</span> *callEnemies = [<span class="class">SKAction</span> <span class="method">runBlock:</span>^{
+    [<span class="keyword">self</span> sendNewSKSpriteNode];
+}];
+<span class="class">SKAction</span> *updateSKSpriteNodeOnScreen = [<span class="class">SKAction</span> <span class="method">sequence:</span>@[wait,callEnemies]];
+[<span class="keyword">self</span> <span class="method">runAction:</span>[<span class="class">SKAction</span> <span class="method">repeatActionForever:</span>updateSKSpriteNodeOnScreen]]; </code></pre>
+<p>下面的sendNewSKSpriteNode将处理自定义对象的运动。</p>
+<pre><code>-(<span class="keyword">void</span>) sendNewSKSpriteNode{
+    <span class="built_in">CGRect</span> screenRect = [[UIScreen mainScreen] bounds];
+    <span class="comment">// Custom SKAction</span>
+    SKSpriteNode* enemy = [SKSpriteNode spriteNodeWithImageNamed:@<span class="string">"frankenstein.png"</span>];
+    enemy<span class="variable">.scale</span> = <span class="number">0.6</span>;
+    CGMutablePathRef cgpath = CGPathCreateMutable();
+    <span class="comment">//random values</span>
+    <span class="keyword">float</span> xStart = [<span class="keyword">self</span> getRandomNumberBetween:<span class="number">0</span>+enemy<span class="variable">.size</span><span class="variable">.width</span> to:screenRect<span class="variable">.size</span><span class="variable">.width</span>-enemy<span class="variable">.size</span><span class="variable">.width</span> ];
+    <span class="keyword">float</span> xEnd = [<span class="keyword">self</span> getRandomNumberBetween:<span class="number">0</span>+enemy<span class="variable">.size</span><span class="variable">.width</span> to:screenRect<span class="variable">.size</span><span class="variable">.width</span>-enemy<span class="variable">.size</span><span class="variable">.width</span> ];
+    <span class="comment">//ControlPoint1</span>
+    <span class="keyword">float</span> cp1X = [<span class="keyword">self</span> getRandomNumberBetween:<span class="number">0</span>+enemy<span class="variable">.size</span><span class="variable">.width</span> to:screenRect<span class="variable">.size</span><span class="variable">.width</span>-enemy<span class="variable">.size</span><span class="variable">.width</span> ];
+    <span class="keyword">float</span> cp1Y = [<span class="keyword">self</span> getRandomNumberBetween:<span class="number">0</span>+enemy<span class="variable">.size</span><span class="variable">.width</span> to:screenRect<span class="variable">.size</span><span class="variable">.width</span>-enemy<span class="variable">.size</span><span class="variable">.height</span> ];
+    <span class="comment">//ControlPoint2</span>
+    <span class="keyword">float</span> cp2X = [<span class="keyword">self</span> getRandomNumberBetween:<span class="number">0</span>+enemy<span class="variable">.size</span><span class="variable">.width</span> to:screenRect<span class="variable">.size</span><span class="variable">.width</span>-enemy<span class="variable">.size</span><span class="variable">.width</span> ];
+    <span class="keyword">float</span> cp2Y = [<span class="keyword">self</span> getRandomNumberBetween:<span class="number">0</span> to:cp1Y];
+    <span class="built_in">CGPoint</span> s = CGPointMake(xStart, <span class="number">1024.0</span>);
+    <span class="built_in">CGPoint</span> e = CGPointMake(xEnd, -<span class="number">100.0</span>);
+    <span class="built_in">CGPoint</span> cp1 = CGPointMake(cp1X, cp1Y);
+    <span class="built_in">CGPoint</span> cp2 = CGPointMake(cp2X, cp2Y);
+    CGPathMoveToPoint(cgpath,<span class="literal">NULL</span>, s<span class="variable">.x</span>, s<span class="variable">.y</span>);
+    CGPathAddCurveToPoint(cgpath, <span class="literal">NULL</span>, cp1<span class="variable">.x</span>, cp1<span class="variable">.y</span>, cp2<span class="variable">.x</span>, cp2<span class="variable">.y</span>, e<span class="variable">.x</span>, e<span class="variable">.y</span>);
+    SKAction *planeDestroy = [SKAction followPath:cgpath asOffset:<span class="literal">NO</span> orientToPath:<span class="literal">YES</span> duration:<span class="number">5</span>];
+    [<span class="keyword">self</span> addChild:enemy];
+    SKAction *remove2 = [SKAction removeFromParent];
+    [enemy runAction:[SKAction sequence:@[planeDestroy,remove2]]];
+    CGPathRelease(cgpath);
+}</code></pre>
+<h3>CCParticleExplosion vs. Emitter</h3>
+<p>Cocos2D中并没例子编辑器。必须使用外部应用程序创建例子 然后用特定的 CCParticleExplosion来改变其属性行为。在xcode中 你可以这样子来使用了:</p>
+<pre><code>CCParticleExplosion* _particleExplosion<span class="comment">;</span>
+particleExplosion = [[CCParticleExplosion alloc] initWithTotalParticles:<span class="number">800</span>]<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.texture</span> = [[CCTextureCache sharedTextureCache] addImage:@<span class="string">"texture.png"</span>]<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.life</span> = <span class="number">0.0</span>f<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.lifeVar</span> = <span class="number">0.708</span>f<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.startSize</span> = <span class="number">40</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.startSizeVar</span> = <span class="number">38</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.endSize</span> = <span class="number">14</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.endSizeVar</span> = <span class="number">0</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.angle</span> = <span class="number">360</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.angleVar</span> = <span class="number">360</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.speed</span> = <span class="number">243</span><span class="comment">;</span>
+particleExplosion<span class="preprocessor">.speedVar</span> = <span class="number">1</span><span class="comment">;</span>
+CGPoint g = CGPointMake(<span class="number">1.15</span>, <span class="number">1.58</span>)<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.gravity</span> = g<span class="comment">;</span>
+ccColor4F startC =  {<span class="number">0.89</span>f, <span class="number">0.56</span>f, <span class="number">0.36</span>f, <span class="number">1.0</span>f}<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.startColor</span> = startC<span class="comment">;</span>
+ccColor4F endC = {<span class="number">1.0</span>f,<span class="number">0.0</span>f,<span class="number">0.0</span>f,<span class="number">1.0</span>f}<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.endColor</span> = endC<span class="comment">;</span>
+[self addChild:_particleExplosion]<span class="comment">;</span>
+particleExplosion<span class="preprocessor">.position</span> = ccp(_size<span class="preprocessor">.width</span>/<span class="number">5</span>, _size<span class="preprocessor">.height</span>/<span class="number">5</span>)<span class="comment">;</span>
+[particleExplosion resetSystem]<span class="comment">;</span></code></pre>
+<p>发射器使用Sprite Kite粒子套件产生。 为了使用他们 你需要在项目中添加粒子。New -&gt; File -&gt; Resource -&gt; Sprite Kit Particle File 命名并且选择粒子类型（火 烟 雪 等等）。<br>如下图</p>
+<img src="http://ww3.sinaimg.cn/mw690/a43af4ffjw1e8vnfhjmlgj20en07a3yz.jpg" width="400" height="500">
+
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e8vnflpm16j206o05ft8q.jpg" width="300" height="500">
+
+
+<p> 现在你会看到有两个新文件在xcode 中：</p>
+<img src="http://ww4.sinaimg.cn/mw690/a43af4ffjw1e8vnls9m7bj203q018a9v.jpg" class="200 300">
+
+
+
+<pre><code>SKEmitterNode* smokeTrail;
+NSString *smokePath = <span class="string">[[NSBundle mainBundle] pathForResource:@"MyParticle" ofType:@"sks"];
+smokeTrail = [NSKeyedUnarchiver unarchiveObjectWithFile:smokePath];
+smokeTrail.position = CGPointMake(CGRectGetMidX(self.frame)+40,CGRectGetMidY(self.frame)-100);
+[self addChild:smokeTrail];</code></pre>
+<h3>SimpleAudioEngine vs. Sprite Kit Sound</h3>
+<p>任何游戏应该都离不开多媒体吧，在cocos2d 我们要实现 需要两部<br>1：</p>
+<pre><code>#<span class="import"><span class="keyword">import</span> "SimpleAudioEngine.h"</span></code></pre>
+<p>2：</p>
+<pre><code><span class="string">[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"sound.caf" loop:YES];
+[[SimpleAudioEngine sharedEngine] setEffectsVolume:0.4f];</code></pre>
+<p><strong>有时，Xcode中并没有自动包括“Copy Bundle Resources”中的音乐文件。如果发生这种情况，你应该手动添加。</strong></p>
+<p>在Sprite Kit中 你能够很简单的添加声音</p>
+<pre><code><span class="class">SKAction</span>* soundAction = [<span class="class">SKAction</span> <span class="method">playSoundFileNamed:</span>@<span class="comment">"preview.mp3"</span> <span class="method">waitForCompletion:</span><span class="class">NO</span>];
+[<span class="keyword">self</span> <span class="method">runAction:</span>soundAction];</code></pre>
+<p>下面是实现的一个火焰效果图</p>
+<img src="http://ww4.sinaimg.cn/mw690/a43af4ffjw1e8vnfvcmmdj20d80k8jro.jpg" width="200" height="400">
+
+
+<h2>结束语</h2>
+<p>通过上面的分析 你会发现cocos2d 和Sprite kit 有很多相似之处。在易用性上 笔者觉得Spring kit 对ios开发者来说更加具有诱惑性。</p>
+]]></content>
+    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
+    <category scheme="http://hufeng825.github.com/categories/ios/" term="ios"/>
+  </entry>
   <entry>
     <title type="html"><![CDATA[ios开发之MPNowPlayingInfoCenter 锁屏显示正在播放的音乐]]></title>
     <link href="http://hufeng825.github.com/2013/09/18/ios28/"/>
@@ -128,7 +480,7 @@
 <p>我平时大部分时间就是上stackoverflow.和cocoscontrol github 还有apple 的dev论坛.</p>
 <p>“你们项目中为什么多线程用GCD 而不用NSOperation呢? 你有没有发现国外的大牛他们多线程都是用NSOperation? 你能告诉我他们这样做的理由吗?”</p>
 <p>一下子把我问懵了.我之所以用GCD 是因为GCD用起来比较简单.代码不用分散 比较集中维护度比较高.而且代码的执行效率也要比NSOperation快些. 但是至于国外的大牛们为什么那样做 我还真的不清楚. 后来挂完电话 正好搜狐的家明哥打电话过来 我问了下他.家明哥跟我说他包括他之前在新浪做项目时也是能用GCD的地方就用GCD 尽量减少NSOperation的使用,因为GCD在多核CPU上线程切换的时间比较短 效率相对高些,至于阿里为什么那样,可能每个公司对某个技术有着不同的理解吧.</p>
-<p>跟明哥挂了电话 我给对方回过去,到底为什么? 对方笑着问我:“你用GCD在ASI上封装的那层网络请求 为什么后来有创建了自己的一个队列对维护这些请求?NSOperation是建立在GCD之上的 虽然使用起来比较复杂 但是在线程并发管理 优先级 上有着GCD 无法比拟的优势.”</p>
+<p>跟明哥挂了电话 我给对方回过去,到底为什么? 对方笑着问我:“你用GCD在ASI上封装的那层网络请求 为什么后来有创建了自���的一个队列对维护这些请求?NSOperation是建立在GCD之上的 虽然使用起来比较复杂 但是在线程并发管理 优先级 上有着GCD 无法比拟的优势.”</p>
 <p>但是对我来说 我还是倾向于用GCD,正如家明说的 每个公司对相同的技术有着不同的理解吧.</p>
 ]]></content>
     <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
@@ -453,7 +805,7 @@ NSInvocationOperation *operation = <span class="string">[[NSInvocationOperation 
 <p><a href="http://www.cnblogs.com/Quains/archive/2013/07/10/3182823.html" target="_blank">注释2</a></p>
 <p>在iOS中有几种方法来解决多线程访问同一个内存地址的互斥同步问题：</p>
 <ul>
-<li>方法一，@synchronized(id anObject),(最简单的方法)<br>会自动对���数对象加锁，保证临界区内的代码线程安全</li>
+<li>方法一，@synchronized(id anObject),(最简单的方法)<br>会自动对参数对象加锁，保证临界区内的代码线程安全</li>
 </ul>
 <figure class="highlight"><pre>@<span class="keyword">synchronized</span>(<span class="keyword">self</span>) {
         <span class="comment">// 这段代码对其他 @synchronized(self) 都是互斥的</span>
@@ -600,7 +952,7 @@ dispatch_group_async(<span class="keyword">group</span>, queue, ^{
     <span class="comment">//1.先去网上下载图片</span>
     });
 
-<span class="comment">// 2.等下载好了再在刷���主线程</span>
+<span class="comment">// 2.等下载好了再在刷新主线程</span>
 dispatch_group_notify(<span class="keyword">group</span>, queue, ^{
 
     <span class="comment">//在主线程展示到界面里</span>
@@ -1199,23 +1551,6 @@ svn <span class="keyword">update</span> test.php(更新，于版本库同步。�
     <content type="html"><![CDATA[<p>git rebase master<br>First, rewinding head to replay your work on top of it…<br>error: The following untracked working tree files would be overwritten by checkout:<br><a id="more"></a><br>HFFrame.xcodeproj/project.xcworkspace/xcuserdata/apple.xcuserdatad/UserInterfaceState.xcuserstate<br>Please move or remove them before you can switch branches.<br>Aborting<br>could not detach HEAD</p>
 <p>执行</p>
 <figure class="highlight"><pre><span class="comment">~/Desktop/HFFrame(example)</span> <span class="comment">$</span> <span class="comment">git</span> <span class="comment">clean</span> <span class="literal">-</span><span class="comment">d</span> <span class="literal">-</span><span class="comment">fx</span> <span class="comment">""
-</pre></figure>
-
-]]></content>
-    <category scheme="http://hufeng825.github.com/tags/技术/" term="技术"/>
-    <category scheme="http://hufeng825.github.com/categories/git/" term="git"/>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[git错误 fatal: remote origin already exists.]]></title>
-    <link href="http://hufeng825.github.com/2013/09/03/git11/"/>
-    <id>http://hufeng825.github.com/2013/09/03/git11/</id>
-    <published>2013-09-03T05:37:59.000Z</published>
-    <updated>2013-09-15T05:04:07.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>当执行 git remote addorigin git@github.com:hufeng825/test.git</p>
-</blockquote>
-<p>错误提示：fatal: remote origin already exists.<br><a id="more"></a><br>解决办法</p>
-<figure class="highlight"><pre><span class="variable">$ </span>git remote rm origin
 </pre></figure>
 
 ]]></content>

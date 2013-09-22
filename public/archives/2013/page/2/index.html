@@ -143,7 +143,7 @@ $(function () {
                             </li>
                             
                             <li><a href="/tags/技术/"><i class="icon-book"></i> 技术
-                                <small>61</small>
+                                <small>62</small>
                             </a>
 
                             </li>
@@ -173,6 +173,71 @@ $(function () {
 <div class="container-fluid" style="margin-top: 60px">
     <div class="row-fluid">
         <div class="span9 panel">
+            
+            <div class="content">
+    <header>
+        <!--div class="icon"></div-->
+        <span class="badge badge-warning">
+        <time datetime="2013-09-03T08:33:35.000Z"><a href="/2013/09/03/22/" style="color:#FFFFFF">2013 9月 3</a></time>
+        </span>
+        
+
+<h1 class="title"><a href="/2013/09/03/22/">How to get the color of a pixel in an UIView?</a></h1>
+
+
+
+    </header>
+    <div class="entry">
+        
+        <p>记得一年前做���行掌上生活M+的时候 其中有个需求是画一画功能，就是在地图上用手指画个圈 然后得到这个圈里面所有指定商户。<br>当时为了精度 除了利用 </p>
+<figure class="highlight"><pre><span class="built_in">BOOL</span> mapCoordinateIsInPolygon = CGPathContainsPoint(polygonView<span class="variable">.path</span>, <span class="literal">NULL</span>, polygonViewPoint, <span class="literal">NO</span>);
+</pre></figure>
+
+<p>来验证此点是否在画的区域内 同时为了精度 还用到了点位的颜色色值进行校验。</p>
+<p>无法把全部代码给出 下面把 如何得到uiview 某点的函数给出</p>
+<p> UIView+ColorOfPoint.h</p>
+<figure class="highlight"><pre>@<span class="class"><span class="keyword">interface</span> <span class="title">UIView</span> (<span class="title">ColorOfPoint</span>)
+- (<span class="title">UIColor</span> *) <span class="title">colorOfPoint</span>:(<span class="title">CGPoint</span>)<span class="title">point</span>;
+@<span class="title">end</span>
+</pre></figure>
+
+<p> UIView+ColorOfPoint.m</p>
+<figure class="highlight"><pre><span class="preprocessor">#import <span class="title">"UIView+ColorOfPoint.h"</span></span>
+<span class="preprocessor">#import <span class="title">&lt;QuartzCore/QuartzCore.h&gt;</span></span>
+
+@<span class="class"><span class="keyword">implementation</span> <span class="id">UIView</span> (<span class="id">ColorOfPoint</span>)</span>
+
+- (<span class="built_in">UIColor</span> *) colorOfPoint:(<span class="built_in">CGPoint</span>)point
+{
+    <span class="keyword">unsigned</span> <span class="keyword">char</span> pixel[<span class="number">4</span>] = {<span class="number">0</span>};
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(pixel, <span class="number">1</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">4</span>, colorSpace, kCGImageAlphaPremultipliedLast);
+
+    CGContextTranslateCTM(context, -point<span class="variable">.x</span>, -point<span class="variable">.y</span>);
+
+    [<span class="keyword">self</span><span class="variable">.layer</span> renderInContext:context];
+
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+
+    <span class="comment">//NSLog(@"pixel: %d %d %d %d", pixel[0], pixel[1], pixel[2], pixel[3]);</span>
+
+    <span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> colorWithRed:pixel[<span class="number">0</span>]/<span class="number">255.0</span> green:pixel[<span class="number">1</span>]/<span class="number">255.0</span> blue:pixel[<span class="number">2</span>]/<span class="number">255.0</span> alpha:pixel[<span class="number">3</span>]/<span class="number">255.0</span>];
+
+    <span class="keyword">return</span> color;
+}
+</pre></figure>
+
+<p>@end</p>
+<img src="http://ww2.sinaimg.cn/mw690/a43af4ffjw1e89eyhiwqbj20hs0qo769.jpg" class="center" width="300" height="600" title="模拟器">
+
+        
+    </div>
+    <footer>
+        
+    </footer>
+</div>
+
             
             <div class="content">
     <header>
@@ -426,37 +491,6 @@ $(function () {
         
         <div class="alignleft">
             <a href="/2013/09/03/git12/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
-        </div>
-        
-    </footer>
-</div>
-
-            
-            <div class="content">
-    <header>
-        <!--div class="icon"></div-->
-        <span class="badge badge-warning">
-        <time datetime="2013-09-03T05:37:59.000Z"><a href="/2013/09/03/git11/" style="color:#FFFFFF">2013 9月 3</a></time>
-        </span>
-        
-
-<h1 class="title"><a href="/2013/09/03/git11/">git错误 fatal: remote origin already exists.</a></h1>
-
-
-
-    </header>
-    <div class="entry">
-        
-        <blockquote>
-<p>当执行 git remote addorigin git@github.com:hufeng825/test.git</p>
-</blockquote>
-<p>错误提示：fatal: remote origin already exists.<br>
-        
-    </div>
-    <footer>
-        
-        <div class="alignleft">
-            <a href="/2013/09/03/git11/#more" class="more-link">全文<div class="icon-eye-open"></div></a>
         </div>
         
     </footer>

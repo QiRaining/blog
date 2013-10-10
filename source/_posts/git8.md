@@ -296,6 +296,13 @@ $ git branch --track origin/branch
 以后即可使用 git pull 来获取远程的更新
 
 
+### 11.下载所有远程分支
+
+```
+$ get fetch --all
+
+```
+
 
 
 

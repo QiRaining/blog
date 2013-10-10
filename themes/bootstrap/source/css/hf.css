@@ -544,7 +544,8 @@ a.thumbnail small {
 ----------------------------------------------- */
 
 @-webkit-keyframes title-in {
-    0% {
+  /*
+  0% {
         -webkit-transform: translateY(-50px);
     }
     80% { 
@@ -556,6 +557,7 @@ a.thumbnail small {
     100% { 
         -webkit-transform: translateY(0);
     }
+*/
 }
 
 @-webkit-keyframes description-in {

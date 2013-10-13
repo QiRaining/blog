@@ -1,4 +1,4 @@
-date: 2013-10-11 01:05:35.970
+date: 2013-10-13 23:34:21.482
 argv: node /Users/jason/nvm/v0.8.14/bin/hexo server
 os: Darwin 12.5.0 darwin x64
 version:
@@ -12,20 +12,20 @@ version:
   openssl: 1.0.0f
 ---
 
-[debug] 01:05:35.159 Configuration file load successfully
-[debug] 01:05:35.160 Version info checked successfully
-[debug] 01:05:35.162 Plugin loaded successfully: hexo-generator-feed
-[debug] 01:05:35.164 Plugin loaded successfully: hexo-generator-sitemap
-[error] 01:05:35.165 Plugin load failed: hexo-tag-vimhighlight
-[debug] 01:05:35.165 Loading the database...
-[debug] 01:05:35.375 Theme layout loaded
-[debug] 01:05:35.401 Processed: favicon.ico
-[debug] 01:05:35.411 Theme source loaded
-[debug] 01:05:35.412 Start watching theme source...
-[debug] 01:05:35.412 Start watching theme layout...
-[debug] 01:05:35.426 Theme configuration loaded
-[debug] 01:05:35.427 Theme i18n loaded
-[error] 01:05:35.968 TypeError: Cannot read property '1' of undefined
+[debug] 23:34:20.610 Configuration file load successfully
+[debug] 23:34:20.611 Version info checked successfully
+[debug] 23:34:20.613 Plugin loaded successfully: hexo-generator-feed
+[debug] 23:34:20.615 Plugin loaded successfully: hexo-generator-sitemap
+[error] 23:34:20.616 Plugin load failed: hexo-tag-vimhighlight
+[debug] 23:34:20.616 Loading the database...
+[debug] 23:34:20.835 Theme layout loaded
+[debug] 23:34:20.861 Processed: favicon.ico
+[debug] 23:34:20.873 Theme source loaded
+[debug] 23:34:20.873 Start watching theme source...
+[debug] 23:34:20.873 Start watching theme layout...
+[debug] 23:34:20.888 Theme configuration loaded
+[debug] 23:34:20.889 Theme i18n loaded
+[error] 23:34:21.479 TypeError: Cannot read property '1' of undefined
 TypeError: Cannot read property '1' of undefined
     at /Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/plugins/filter/backtick_code_block.js:32:27
     at String.replace (native)

@@ -48,7 +48,7 @@ Dynamic的协议对象
 下面开始动手来做
 比如我们要实现下面的功能
 
-{%image center http://ww1.sinaimg.cn/mw690/a43af4ffjw1eadm5jtkwkg208z0dwb29.gif%}
+{%image center http://ww3.sinaimg.cn/mw690/a43af4ffjw1eadmdoeir3g208z0d8x4h.gif%}
 
 
 1. 首先创建 我们的animatior

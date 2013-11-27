@@ -1,7 +1,7 @@
 title: Xcode的持续集成指南
 date: 2013-08-31 21:11:39
 tags: [技术]
-categories: hexo
+categories: ios
 ---
 
 ##采用持续集成工作流

@@ -1,39 +1,88 @@
-date: 2013-10-13 23:34:21.482
-argv: node /Users/jason/nvm/v0.8.14/bin/hexo server
-os: Darwin 12.5.0 darwin x64
+date: 2013-11-30 21:26:14.247
+argv: node /usr/local/bin/hexo server
+os: Darwin 13.0.0 darwin x64
 version:
-  hexo: 2.1.0
+  hexo: 2.3.0
   http_parser: 1.0
-  node: 0.8.14
-  v8: 3.11.10.25
-  ares: 1.7.5-DEV
-  uv: 0.8
+  node: 0.10.22
+  v8: 3.14.5.9
+  ares: 1.9.0-DEV
+  uv: 0.10.19
   zlib: 1.2.3
-  openssl: 1.0.0f
+  modules: 11
+  openssl: 1.0.1e
 ---
 
-[debug] 23:34:20.610 Configuration file load successfully
-[debug] 23:34:20.611 Version info checked successfully
-[debug] 23:34:20.613 Plugin loaded successfully: hexo-generator-feed
-[debug] 23:34:20.615 Plugin loaded successfully: hexo-generator-sitemap
-[error] 23:34:20.616 Plugin load failed: hexo-tag-vimhighlight
-[debug] 23:34:20.616 Loading the database...
-[debug] 23:34:20.835 Theme layout loaded
-[debug] 23:34:20.861 Processed: favicon.ico
-[debug] 23:34:20.873 Theme source loaded
-[debug] 23:34:20.873 Start watching theme source...
-[debug] 23:34:20.873 Start watching theme layout...
-[debug] 23:34:20.888 Theme configuration loaded
-[debug] 23:34:20.889 Theme i18n loaded
-[error] 23:34:21.479 TypeError: Cannot read property '1' of undefined
-TypeError: Cannot read property '1' of undefined
-    at /Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/plugins/filter/backtick_code_block.js:32:27
-    at String.replace (native)
-    at module.exports (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/plugins/filter/backtick_code_block.js:13:31)
-    at module.exports.async.series.data.content.data.content.replace.tabs (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/post/render.js:73:9)
-    at async.eachSeries.iterate (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:131:13)
-    at Object.async.eachSeries (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:147:9)
-    at module.exports.async.series.data.content.data.content.replace.tabs (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/lib/post/render.js:72:13)
-    at async.series.results (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:548:21)
-    at _asyncMap (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:224:13)
-    at async.eachSeries.iterate (/Users/jason/nvm/v0.8.14/lib/node_modules/hexo/node_modules/async/lib/async.js:131:13)
+[debug] 21:26:12.615 Configuration file load successfully
+[debug] 21:26:12.620 Plugin loaded successfully: hexo-generator-feed
+[debug] 21:26:12.622 Plugin loaded successfully: hexo-generator-sitemap
+[error] 21:26:12.623 Plugin load failed: hexo-tag-vimhighlight
+[debug] 21:26:12.626 Version info checked successfully
+[debug] 21:26:12.627 Loading the database...
+[debug] 21:26:12.829 Theme layout loaded
+[debug] 21:26:12.830 Start watching theme layout...
+[debug] 21:26:12.897 Theme configuration loaded
+[debug] 21:26:12.898 Processed: favicon.ico
+[debug] 21:26:12.908 Theme source loaded
+[debug] 21:26:12.908 Start watching theme source...
+[debug] 21:26:12.980 Theme i18n loaded
+[debug] 21:26:13.833 Processed: _posts/22.md
+[debug] 21:26:13.835 Processed: _posts/23.md
+[debug] 21:26:13.836 Processed: _posts/appstore.md
+[debug] 21:26:13.837 Processed: _posts/git10.md
+[debug] 21:26:13.838 Processed: _posts/git11.md
+[debug] 21:26:13.839 Processed: _posts/git12.md
+[debug] 21:26:13.840 Processed: _posts/git13.md
+[debug] 21:26:13.841 Processed: _posts/git2.md
+[debug] 21:26:13.852 Processed: _posts/git3.md
+[debug] 21:26:13.853 Processed: _posts/git4.md
+[debug] 21:26:13.854 Processed: _posts/git5.md
+[debug] 21:26:13.855 Processed: _posts/git6.md
+[debug] 21:26:13.857 Processed: _posts/git7.md
+[debug] 21:26:13.859 Processed: _posts/git8.md
+[debug] 21:26:13.860 Processed: _posts/git9.md
+[debug] 21:26:13.883 Processed: _posts/hexo1.md
+[debug] 21:26:13.885 Processed: _posts/hibernate0.md
+[debug] 21:26:13.886 Processed: _posts/hibernate1.md
+[debug] 21:26:13.887 Processed: _posts/ios10.md
+[debug] 21:26:13.888 Processed: _posts/ios11.md
+[debug] 21:26:13.901 Processed: _posts/ios12.md
+[debug] 21:26:13.907 Processed: _posts/ios13.md
+[debug] 21:26:13.908 Processed: _posts/ios14.md
+[debug] 21:26:13.912 Processed: _posts/ios15.md
+[debug] 21:26:13.921 Processed: _posts/ios16.md
+[debug] 21:26:13.922 Processed: _posts/ios17.md
+[debug] 21:26:13.923 Processed: _posts/ios18.md
+[debug] 21:26:13.931 Processed: _posts/ios19.md
+[debug] 21:26:13.937 Processed: _posts/ios20.md
+[debug] 21:26:13.939 Processed: _posts/ios21.md
+[debug] 21:26:13.940 Processed: _posts/ios22.md
+[debug] 21:26:13.978 Processed: _posts/ios23.md
+[debug] 21:26:13.996 Processed: _posts/ios24.md
+[debug] 21:26:14.033 Processed: _posts/ios25.md
+[debug] 21:26:14.034 Processed: _posts/ios26.md
+[debug] 21:26:14.067 Processed: _posts/ios28.md
+[debug] 21:26:14.185 Processed: _posts/ios29.md
+[debug] 21:26:14.187 Processed: _posts/ios3.md
+[debug] 21:26:14.197 Processed: _posts/ios30.md
+[debug] 21:26:14.207 Processed: _posts/ios31.md
+[debug] 21:26:14.240 Processed: _posts/ios33.md
+[debug] 21:26:14.241 Processed: _posts/ios4.md
+[debug] 21:26:14.242 Processed: _posts/ios5.md
+[debug] 21:26:14.244 Processed: _posts/ios6.md
+[debug] 21:26:14.244 Processed: _posts/ios7.md
+[error] 21:26:14.245 { rawMessage: 'Unable to parse.',
+  parsedLine: 1,
+  snippet: 'title:ARC下block,weak,unsafe_unretained',
+  parsedFile: null,
+  message: 'Unable to parse.',
+  domain: 
+   { domain: null,
+     _events: { error: [Function] },
+     _maxListeners: 10,
+     members: [],
+     _disposed: true },
+  domainThrown: true }
+[debug] 21:26:14.251 Processed: _posts/ios8.md
+[debug] 21:26:14.256 Processed: _posts/ios9.md
+[debug] 21:26:14.258 Processed: _posts/iosdynamics0.md

@@ -13,6 +13,7 @@ http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode
 
 {%img center http://ww2.sinaimg.cn/mw690/a43af4ffjw1eci9qbiaq7j208v0da3zj.jpg%}   
 
+<!-- more -->
 正如你所见的,这个app很简单.程序其实调用的是Flickr的API,通过app顶部的搜索框执行搜索后在下面的tableview显示你搜索的搜索词,搜索词后面的括号内有搜索结果的个数,点击此行进入一个略所图的结果列表页面 如上图. 点击其中一行 进入图像的大图模式,在这个页面你可以根据需要旋转图像.
 到目前为止页面看起来差不多了,你也许会想应该可以直接提交appstore了吧.接下来这篇文章将会教你instruments工具来提高你app性能和稳定性.
 

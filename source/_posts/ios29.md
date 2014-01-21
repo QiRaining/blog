@@ -1,4 +1,4 @@
-title: ios7之Sprite Kit vs Cocos2D
+title: iOS7之Sprite Kit vs Cocos2D
 date: 2013-09-22 19:50:03
 tags: [技术]
 categories: ios

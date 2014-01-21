@@ -1,4 +1,4 @@
-title: ios开发之MPNowPlayingInfoCenter 锁屏显示正在播放的音乐
+title: iOS开发之MPNowPlayingInfoCenter 锁屏显示正在播放的音乐
 date: 2013-09-18 23:43:50
 tags: [技术]
 categories: ios

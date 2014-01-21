@@ -1,4 +1,4 @@
-title: 阿里IOS面试题之多线程选用NSOperation or GCD
+title: 阿里iOS面试题之多线程选用NSOperation or GCD
 date: 2013-09-18 13:31:04
 tags: [技术]
 categories: ios

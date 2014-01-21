@@ -1,4 +1,4 @@
-title: ios开发之你真的了解了KVC吗？
+title: iOS开发之你真的了解了KVC吗？
 date: 2013-09-23 18:51:01
 tags: [技术]
 categories: ios

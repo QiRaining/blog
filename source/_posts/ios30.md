@@ -1,4 +1,4 @@
-title: IOS 开发之 CocoaPods讲解
+title: iOS 开发之 CocoaPods讲解
 date: 2013-10-11 00:53:01
 tags: [技术]
 categories: ios

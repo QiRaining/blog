@@ -1,4 +1,4 @@
-title: ios系类教程之用instruments来检验你的app
+title: iOS系类教程之用instruments来检验你的app
 date: 2014-01-13 21:44:58
 tags: [技术]
 categories: ios

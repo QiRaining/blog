@@ -1,4 +1,4 @@
-title: ios系列教程之常见开发Tips
+title: iOS系列教程之常见开发Tips
 date: 2014-01-21 00:10:03
 tags: [技术]
 categories: ios

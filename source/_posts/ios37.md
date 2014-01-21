@@ -1,4 +1,4 @@
-title: ios系列教程之TextKit实现图文混排读后记
+title: iOS系列教程之TextKit实现图文混排读后记
 date: 2014-01-21 22:21:56
 tags: [技术]
 categories: ios
